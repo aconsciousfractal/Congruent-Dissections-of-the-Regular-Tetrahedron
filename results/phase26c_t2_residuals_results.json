@@ -1,0 +1,107 @@
+{
+  "sections": [
+    {
+      "title": "0. Setup: integer scaling + canonical-multiset solver",
+      "tests": [
+        {
+          "name": "Integer-scaled A_T = 60 (units of sqrt 3 / 30)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Integer-scaled E = 48",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "1. Per-residual canonical-multiset enumeration",
+      "tests": [
+        {
+          "name": "R_T2_1 k = (4, 2, 2, 2): 0 canonical multisets pass per-T-face contribution test",
+          "passed": true,
+          "detail": "feasible = none"
+        },
+        {
+          "name": "R_T2_2 k = (3, 3, 2, 2): 0 canonical multisets pass per-T-face contribution test",
+          "passed": true,
+          "detail": "feasible = none"
+        }
+      ]
+    },
+    {
+      "title": "2. Forced canonical multiset (18, 30) -- explicit derivation",
+      "tests": [
+        {
+          "name": "Pair-sum 60 from (18, 30): only (30, 30) works",
+          "passed": true,
+          "detail": "options = [(30, 30)]"
+        },
+        {
+          "name": "Among all (m_1, m_2) with m_1 + m_2 = 48, only (18, 30) gives pair-sum 60",
+          "passed": true,
+          "detail": "forced_pairs = [(18, 30)]"
+        }
+      ]
+    },
+    {
+      "title": "3. Face k_j = 3 and k_j = 4 contribution tests for multiset (18, 30)",
+      "tests": [
+        {
+          "name": "Triplet-sum 60 from (18, 30): 0 options",
+          "passed": true,
+          "detail": "all triplet sums = [54, 66, 78, 90]"
+        },
+        {
+          "name": "Quadruple-sum 60 from (18, 30): 0 options",
+          "passed": true,
+          "detail": "all quadruple sums = [72, 84, 96, 108, 120]"
+        }
+      ]
+    },
+    {
+      "title": "4. Synthesis: status of the 2 t = 2 residuals",
+      "tests": [
+        {
+          "name": "R_T2_1 k = (4, 2, 2, 2): UNSAT (no canonical multiset survives)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "R_T2_2 k = (3, 3, 2, 2): UNSAT (no canonical multiset survives)",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    }
+  ],
+  "passed": 10,
+  "failed": 0,
+  "residuals": {
+    "R_T2_1": {
+      "k": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "status": "UNSAT",
+      "feasible_multiset_count": 0
+    },
+    "R_T2_2": {
+      "k": [
+        3,
+        3,
+        2,
+        2
+      ],
+      "status": "UNSAT",
+      "feasible_multiset_count": 0
+    }
+  },
+  "summary": {
+    "total_residuals": 2,
+    "unsat_count": 2
+  }
+}

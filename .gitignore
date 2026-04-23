@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+.idea/
+.vscode/
+*.egg-info/
+.pytest_cache/
+
+# LaTeX build artefacts (we keep .pdf, .tex)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+paper/*.fls
+paper/*.fdb_latexmk

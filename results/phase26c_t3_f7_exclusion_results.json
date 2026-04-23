@@ -1,0 +1,324 @@
+{
+  "sections": [
+    {
+      "title": "0. Setup: f = 7 pieces, K_5 interior adjacency",
+      "tests": [
+        {
+          "name": "f(P) = 7 and boundary-per-piece = 3 gives interior-per-piece = 4",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "5 pieces x 4 interior faces / 2 = |E(K_5)| = 10",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "1. Singleton Sym(P)-orbits on interior faces fail on K_5",
+      "tests": [
+        {
+          "name": "Orbit structures on 4 interior faces with AT LEAST ONE singleton: (1,1,1,1), (2,1,1), (3,1)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Such orbits enforce a perfect matching on 5 pieces via the singleton label, which is impossible (5 is odd)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Singleton-orbit structures (1,1,1,1), (2,1,1), (3,1) are therefore EXCLUDED by CTL on K_5",
+          "passed": true,
+          "detail": "no perfect matching on an odd vertex set"
+        }
+      ]
+    },
+    {
+      "title": "2. Four multisets with distinct boundary areas -> Sym(P) trivial",
+      "tests": [
+        {
+          "name": "Number of multisets with 3 distinct boundary areas: 4",
+          "passed": true,
+          "detail": "[(6, 12, 30), (6, 15, 27), (6, 18, 24), (12, 16, 20)]"
+        },
+        {
+          "name": "Number of multisets with a repeated boundary area: 1",
+          "passed": true,
+          "detail": "[(12, 12, 24)]"
+        },
+        {
+          "name": "A rigid motion fixing 3 non-parallel planes through v_P must be the identity",
+          "passed": true,
+          "detail": "3 non-parallel planes intersect only at v_P, and the only rigid motion fixing each of 3 such planes as a set is identity"
+        },
+        {
+          "name": "Multiset (6, 12, 30): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Multiset (6, 15, 27): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Multiset (6, 18, 24): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Multiset (12, 16, 20): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "3. Multiset (12, 12, 24): Sym(P) = C_2 at most; rules out orbit (4)",
+      "tests": [
+        {
+          "name": "Multiset (12, 12, 24) has one repeated area (12, 12)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Sym(P) for (12,12,24) satisfies |Sym(P)| in {1, 2}",
+          "passed": true,
+          "detail": "bisector-plane reflection sigma is the unique non-trivial candidate"
+        },
+        {
+          "name": "Orbit structure (4) requires |Sym(P)| >= 4: IMPOSSIBLE for (12,12,24)",
+          "passed": true,
+          "detail": "|Sym(P)| <= 2"
+        },
+        {
+          "name": "Only candidate orbit structure for (12, 12, 24): (2, 2)",
+          "passed": true,
+          "detail": "other singleton-containing structures are killed by Section 1; (4) is killed above"
+        }
+      ]
+    },
+    {
+      "title": "4. Orbit structure (4) is impossible for every multiset",
+      "tests": [
+        {
+          "name": "Multiset (6, 12, 30): max |Sym(P)| = 1 < 4  =>  orbit (4) IMPOSSIBLE",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Multiset (6, 15, 27): max |Sym(P)| = 1 < 4  =>  orbit (4) IMPOSSIBLE",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Multiset (6, 18, 24): max |Sym(P)| = 1 < 4  =>  orbit (4) IMPOSSIBLE",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Multiset (12, 12, 24): max |Sym(P)| = 2 < 4  =>  orbit (4) IMPOSSIBLE",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Multiset (12, 16, 20): max |Sym(P)| = 1 < 4  =>  orbit (4) IMPOSSIBLE",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "5. Orbit (2,2) on K_5: triangle cycle-consistency yields contradiction",
+      "tests": [
+        {
+          "name": "A-cycle has 5 edges",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "B-cycle has 5 edges",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "A-cycle and B-cycle are edge-disjoint and cover K_5",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "A-cycle is 2-regular on 5 vertices",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "B-cycle is 2-regular on 5 vertices",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Exhaustive enumeration: 0/1024 assignments satisfy all 10 K_5-triangle constraints",
+          "passed": true,
+          "detail": "by direct enumeration"
+        },
+        {
+          "name": "Every triangle of K_5 contributes a distilled constraint z_{i'} + z_{j'} == 1 on a 2-subset of {1,...,5}",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "The 10 triangles of K_5 cover ALL 10 pairs in {1,...,5} via these distilled constraints",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Constraints demand z_i != z_j for all 10 pairs, but z_i in {0,1}: pigeonhole yields contradiction",
+          "passed": true,
+          "detail": "5 pairwise-distinct values impossible in a 2-element set"
+        },
+        {
+          "name": "Orbit structure (2, 2) on K_5 is therefore IMPOSSIBLE",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "6. Synthesis: f = 7 case is fully excluded",
+      "tests": [
+        {
+          "name": "All 5 surviving multisets are IMPOSSIBLE for f = 7",
+          "passed": true,
+          "detail": "5/5"
+        },
+        {
+          "name": "The f = 7 closure holds UNIFORMLY over the 5 surviving multisets: weak CTL + orbit transport + matching (for 4 multisets, UNCONDITIONAL); weak CTL + orbit transport + triangle cycle-consistency (for (12,12,24), CONDITIONAL on (H-trip) via the paper's \"Reduction of (H-coc) to (H-trip)\" lemma)",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    }
+  ],
+  "passed": 33,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "multiset_(6, 12, 30)",
+      "multiset": [
+        6,
+        12,
+        30
+      ],
+      "verdict": "IMPOSSIBLE",
+      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
+      "reason_type": "CTL + matching (odd vertex count)"
+    },
+    {
+      "name": "multiset_(6, 15, 27)",
+      "multiset": [
+        6,
+        15,
+        27
+      ],
+      "verdict": "IMPOSSIBLE",
+      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
+      "reason_type": "CTL + matching (odd vertex count)"
+    },
+    {
+      "name": "multiset_(6, 18, 24)",
+      "multiset": [
+        6,
+        18,
+        24
+      ],
+      "verdict": "IMPOSSIBLE",
+      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
+      "reason_type": "CTL + matching (odd vertex count)"
+    },
+    {
+      "name": "multiset_(12, 16, 20)",
+      "multiset": [
+        12,
+        16,
+        20
+      ],
+      "verdict": "IMPOSSIBLE",
+      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
+      "reason_type": "CTL + matching (odd vertex count)"
+    },
+    {
+      "name": "multiset_(12, 12, 24)",
+      "multiset": [
+        12,
+        12,
+        24
+      ],
+      "verdict": "IMPOSSIBLE",
+      "reason": "Sym(P) <= C_2, ruling out orbit (4).  Singleton-orbit structures (1,1,1,1), (2,1,1) are killed UNCONDITIONALLY by the matching argument.  Orbit (2,2) is killed UNDER (H-trip): the paper's \"Reduction of (H-coc) to (H-trip)\" lemma yields (H-coc), and then the K_5-triangle cycle-consistency argument reduces the 10 triangle constraints to z_i + z_j == 1 (mod 2) for all 10 pairs, which forces 5 pairwise-distinct binary values -- impossible.",
+      "reason_type": "weak CTL + orbit transport + triangle cycle-consistency on K_5 (conditional on (H-trip))",
+      "conditional_on": "(H-trip) for orbit (2,2) sub-case; other orbit structures UNCONDITIONAL"
+    }
+  ],
+  "multisets": [
+    [
+      6,
+      12,
+      30
+    ],
+    [
+      6,
+      15,
+      27
+    ],
+    [
+      6,
+      18,
+      24
+    ],
+    [
+      12,
+      12,
+      24
+    ],
+    [
+      12,
+      16,
+      20
+    ]
+  ],
+  "conclusion": {
+    "f7_fully_excluded": true,
+    "multisets_killed_by_distinct_boundary": [
+      [
+        6,
+        12,
+        30
+      ],
+      [
+        6,
+        15,
+        27
+      ],
+      [
+        6,
+        18,
+        24
+      ],
+      [
+        12,
+        16,
+        20
+      ]
+    ],
+    "multiset_killed_by_triangle_consistency": [
+      [
+        12,
+        12,
+        24
+      ]
+    ],
+    "number_of_multisets": 5
+  }
+}

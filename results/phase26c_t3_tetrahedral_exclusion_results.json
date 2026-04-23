@@ -1,0 +1,340 @@
+{
+  "sections": [
+    {
+      "title": "0. Setup: integer units, basic identities",
+      "tests": [
+        {
+          "name": "A_T = 60 (integer scaled area of one T-face)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "E = 48 (integer scaled per-piece boundary area)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "5 * E = 4 * A_T (global boundary area conservation)",
+          "passed": true,
+          "detail": "240 = 240"
+        },
+        {
+          "name": "n pieces = 5",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "T-faces = 4",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Surviving multiset (6, 12, 30) has m_1+m_2+m_3 = E = 48",
+          "passed": true,
+          "detail": "sum = 48"
+        },
+        {
+          "name": "Surviving multiset (6, 15, 27) has m_1+m_2+m_3 = E = 48",
+          "passed": true,
+          "detail": "sum = 48"
+        },
+        {
+          "name": "Surviving multiset (6, 18, 24) has m_1+m_2+m_3 = E = 48",
+          "passed": true,
+          "detail": "sum = 48"
+        },
+        {
+          "name": "Surviving multiset (12, 12, 24) has m_1+m_2+m_3 = E = 48",
+          "passed": true,
+          "detail": "sum = 48"
+        },
+        {
+          "name": "Surviving multiset (12, 16, 20) has m_1+m_2+m_3 = E = 48",
+          "passed": true,
+          "detail": "sum = 48"
+        }
+      ]
+    },
+    {
+      "title": "1. Step A  --  parity: f must be odd, hence f in {5, 7}",
+      "tests": [
+        {
+          "name": "Parity + degree-bound + convexity: allowed f = {5, 7}",
+          "passed": true,
+          "detail": "allowed = [5, 7]"
+        },
+        {
+          "name": "f = 4 excluded by parity (5 * 1 = 5 is odd)",
+          "passed": true,
+          "detail": "5*(f-3)=5 odd, not decomposable into face-pairs"
+        },
+        {
+          "name": "f = 6 excluded by parity (5 * 3 = 15 is odd)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "f = 8 excluded by parity (5 * 5 = 25 is odd)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "f = 9 excluded by degree bound (needs 6 neighbours; only 4 available)",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "2. Step B  --  tetrahedral product lemma m_1 m_2 m_3 = A_T^3 / 25",
+      "tests": [
+        {
+          "name": "Target tetrahedral product = A_T^3 / 25 = 8640",
+          "passed": true,
+          "detail": "8640 = 8640"
+        },
+        {
+          "name": "Multiset (6, 12, 30): product 2160 != 8640 -> tetrahedral case UNSAT",
+          "passed": true,
+          "detail": "product = 2160"
+        },
+        {
+          "name": "Multiset (6, 15, 27): product 2430 != 8640 -> tetrahedral case UNSAT",
+          "passed": true,
+          "detail": "product = 2430"
+        },
+        {
+          "name": "Multiset (6, 18, 24): product 2592 != 8640 -> tetrahedral case UNSAT",
+          "passed": true,
+          "detail": "product = 2592"
+        },
+        {
+          "name": "Multiset (12, 12, 24): product 3456 != 8640 -> tetrahedral case UNSAT",
+          "passed": true,
+          "detail": "product = 3456"
+        },
+        {
+          "name": "Multiset (12, 16, 20): product 3840 != 8640 -> tetrahedral case UNSAT",
+          "passed": true,
+          "detail": "product = 3840"
+        },
+        {
+          "name": "Integer multisets summing to 48 with product 8640 (diagnostic)",
+          "passed": true,
+          "detail": "solutions = []"
+        }
+      ]
+    },
+    {
+      "title": "3. Step C  --  residual sub-cases to close: f in {5, 7}",
+      "tests": [
+        {
+          "name": "f = 5: 2 interior faces/piece, 5 interior faces total, graph = C_5 (5-cycle)",
+          "passed": true,
+          "detail": "OPEN (geometric argument needed)"
+        },
+        {
+          "name": "f = 7: 4 interior faces/piece, 10 interior faces total, graph = K_5 (complete graph on 5 vertices)",
+          "passed": true,
+          "detail": "OPEN (geometric argument needed)"
+        }
+      ]
+    },
+    {
+      "title": "4. Synthesis",
+      "tests": [
+        {
+          "name": "Step A (parity): f in {5, 7}",
+          "passed": true,
+          "detail": "tetrahedral case f=4 EXCLUDED by parity"
+        },
+        {
+          "name": "Step B (tetrahedral product lemma): all 5 surviving multisets have m_1 m_2 m_3 != 8640",
+          "passed": true,
+          "detail": "consistent with Step A; serves as independent arithmetic sanity check"
+        },
+        {
+          "name": "Step C (residual split): closing Theorem 11.4 reduces to killing f = 5 (C_5) and f = 7 (K_5) topological sub-cases",
+          "passed": true,
+          "detail": "follow-up: phase26c_t3_f5_exclusion.py, phase26c_t3_f7_exclusion.py"
+        }
+      ]
+    }
+  ],
+  "passed": 27,
+  "failed": 0,
+  "constants": {
+    "A_T": 60,
+    "E": 48,
+    "n_pieces": 5,
+    "n_T_faces": 4,
+    "target_tetrahedral_product": 8640
+  },
+  "surviving_multisets": [
+    [
+      6,
+      12,
+      30
+    ],
+    [
+      6,
+      15,
+      27
+    ],
+    [
+      6,
+      18,
+      24
+    ],
+    [
+      12,
+      12,
+      24
+    ],
+    [
+      12,
+      16,
+      20
+    ]
+  ],
+  "residual_multiset_pairs": [
+    {
+      "residual": "R_T3_2",
+      "multiset": [
+        6,
+        12,
+        30
+      ]
+    },
+    {
+      "residual": "R_T3_3",
+      "multiset": [
+        6,
+        15,
+        27
+      ]
+    },
+    {
+      "residual": "R_T3_3",
+      "multiset": [
+        6,
+        18,
+        24
+      ]
+    },
+    {
+      "residual": "R_T3_3",
+      "multiset": [
+        12,
+        12,
+        24
+      ]
+    },
+    {
+      "residual": "R_T3_4",
+      "multiset": [
+        6,
+        18,
+        24
+      ]
+    },
+    {
+      "residual": "R_T3_4",
+      "multiset": [
+        12,
+        12,
+        24
+      ]
+    },
+    {
+      "residual": "R_T3_4",
+      "multiset": [
+        12,
+        16,
+        20
+      ]
+    }
+  ],
+  "step_A_allowed_f": [
+    5,
+    7
+  ],
+  "step_B_per_multiset": [
+    {
+      "multiset": [
+        6,
+        12,
+        30
+      ],
+      "product": 2160,
+      "target": 8640,
+      "tetrahedral_realisable": false
+    },
+    {
+      "multiset": [
+        6,
+        15,
+        27
+      ],
+      "product": 2430,
+      "target": 8640,
+      "tetrahedral_realisable": false
+    },
+    {
+      "multiset": [
+        6,
+        18,
+        24
+      ],
+      "product": 2592,
+      "target": 8640,
+      "tetrahedral_realisable": false
+    },
+    {
+      "multiset": [
+        12,
+        12,
+        24
+      ],
+      "product": 3456,
+      "target": 8640,
+      "tetrahedral_realisable": false
+    },
+    {
+      "multiset": [
+        12,
+        16,
+        20
+      ],
+      "product": 3840,
+      "target": 8640,
+      "tetrahedral_realisable": false
+    }
+  ],
+  "step_B_diagnostic_integer_solutions_product_8640": [],
+  "step_C_subcases": [
+    {
+      "f": 5,
+      "interior_faces_per_piece": 2,
+      "total_interior_faces": 5,
+      "adjacency_graph": "C_5 (5-cycle)",
+      "combinatorial_piece_types": [
+        "quadrilateral pyramid (4 triangles + 1 quadrilateral, 5V/8E)",
+        "triangular prism (2 triangles + 3 quadrilaterals, 6V/9E)"
+      ],
+      "status": "OPEN (geometric argument needed)"
+    },
+    {
+      "f": 7,
+      "interior_faces_per_piece": 4,
+      "total_interior_faces": 10,
+      "adjacency_graph": "K_5 (complete graph on 5 vertices)",
+      "combinatorial_piece_types": [
+        "hexagonal pyramid (1 hexagon + 6 triangles, 7V/12E)",
+        "pentagonal prism (2 pentagons + 5 quadrilaterals, 10V/15E)",
+        "other 7-faced convex polytopes (enumerated in Step D)"
+      ],
+      "status": "OPEN (geometric argument needed)"
+    }
+  ]
+}

@@ -1,0 +1,3354 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Congruent Dissections of the Regular Tetrahedron
+%% A Computational Atlas and Algebraic Synthesis
+%%
+%% Author: Oleksiy Babanskyy
+%%
+%% Compile with:  pdflatex paper && pdflatex paper
+%%                (two runs to resolve cross-references)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Encoding & language ----------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[protrusion=true,expansion=false]{microtype}
+
+% ---------- Math ----------
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{aliascnt}
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+% ---------- Tables & floats ----------
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{needspace}
+\geometry{margin=2.5cm}
+
+% ---------- Graphics & diagrams ----------
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, fit, calc}
+
+% ---------- Code listings ----------
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  commentstyle=\color{gray!70!black}\itshape,
+  keywordstyle=\color{blue!60!black}\bfseries,
+  stringstyle=\color{red!50!black},
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black!30},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=6pt,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+}
+
+% ---------- Colours ----------
+\usepackage{xcolor}
+\definecolor{symblue}{RGB}{15,82,186}
+\definecolor{lered}{RGB}{210,43,43}
+\definecolor{axgreen}{RGB}{34,139,34}
+\definecolor{parentgold}{RGB}{218,165,32}
+
+% ---------- Hyperlinks (load late) ----------
+\usepackage[colorlinks=true,
+            linkcolor=blue!50!black,
+            citecolor=blue!50!black,
+            urlcolor=blue!70!black]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+\Urlmuskip=0mu plus 2mu\relax
+\setlength{\emergencystretch}{2em}
+
+% ---------- Theorem environments ----------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\newaliascnt{conditionaltheorem}{theorem}
+\newtheorem{conditionaltheorem}[conditionaltheorem]{Conditional Theorem}
+\aliascntresetthe{conditionaltheorem}
+\newaliascnt{computationalcertificate}{theorem}
+\newtheorem{computationalcertificate}[computationalcertificate]{Computational Certificate}
+\aliascntresetthe{computationalcertificate}
+
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\newaliascnt{conjecture}{theorem}
+\newtheorem{conjecture}[conjecture]{Conjecture}
+\aliascntresetthe{conjecture}
+\newaliascnt{question}{theorem}
+\newtheorem{question}[question]{Question}
+\aliascntresetthe{question}
+
+\theoremstyle{remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\newaliascnt{observation}{theorem}
+\newtheorem{observation}[observation]{Observation}
+\aliascntresetthe{observation}
+
+% ---------- cleveref names ----------
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{corollary}{corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+\crefname{conditionaltheorem}{conditional theorem}{conditional theorems}
+\Crefname{conditionaltheorem}{Conditional Theorem}{Conditional Theorems}
+\crefname{computationalcertificate}{computational certificate}{computational certificates}
+\Crefname{computationalcertificate}{Computational Certificate}{Computational Certificates}
+\crefname{definition}{definition}{definitions}
+\Crefname{definition}{Definition}{Definitions}
+\crefname{conjecture}{conjecture}{conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{question}{question}{questions}
+\Crefname{question}{Question}{Questions}
+\crefname{remark}{remark}{remarks}
+\Crefname{remark}{Remark}{Remarks}
+\crefname{observation}{observation}{observations}
+\Crefname{observation}{Observation}{Observations}
+
+% ---------- Custom operators & macros ----------
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Burn}{Burn}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Orb}{Orb}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\BN}{BN}
+\newcommand{\Td}{T_{\!d}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\Hroles}{H_{\mathrm{roles}}}
+\newcommand{\Hslot}{H_{\mathrm{slot}}}
+\newcommand{\Starp}{\mathrm{Star}^{+}}
+
+% ---------- Metadata ----------
+\hypersetup{
+  pdftitle={Congruent Dissections of the Regular Tetrahedron},
+  pdfauthor={Oleksiy Babanskyy},
+  pdfsubject={Combinatorial geometry, Divisor Completeness, Tetrahedral rigidity},
+  pdfkeywords={tetrahedron, dissection, Dehn invariant, Burnside ring, 24-cell, divisor completeness, transitivity conjecture}
+}
+
+\title{%
+  Congruent Dissections of the Regular Tetrahedron:\\
+  A Computational Atlas and Algebraic Synthesis}
+\author{Oleksiy Babanskyy}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{plain}
+
+\maketitle
+
+\begin{abstract}
+We present a computational atlas and algebraic synthesis of the eight
+historically known congruent dissections of the regular tetrahedron $T$ into
+$n \in \{1,2,3,4,6,8,12,24\}$ pieces.  Each representative is reconstructed
+from canonical coordinates, its Dehn invariant verified symbolically
+($D(S_n) = D(T)/n$), and the refinement poset on the eight is determined,
+including the $S_{4} \to S_{8}$ lineage bridging Alexanderson--Wetzel (1971)
+and Padr\'on--Plaza--Su\'arez (2023) and the unique heterogeneous bridge
+$S_{2} = S_{3} + S_{6}$.
+
+We prove that every such dissection is $G_{\mathrm{diss}}$-transitive
+(\Cref{def:gdiss-transitive}): the pieces form a single orbit under
+$G_{\mathrm{diss}}(S_{n}) \leq \Td$, and Lagrange forces $n \mid 24$.  Full
+$\Td$-invariance (\Cref{def:td-invariance}) holds only for
+$n \in \{1,12,24\}$.  Three obstruction frameworks -- the Burnside ring
+$\Burn(\Td)$, the $24$-cell / binary tetrahedral correspondence, and an IFS
+affine grammar -- realise every divisor and, on the non-divisor side,
+yield an \emph{obstruction stack} filtering all tested $\Td$-invariant
+orbit decompositions for $n \leq 16$, $n \nmid 24$: four of nine values
+unconditionally, five via a plausible but not yet rigorous $\Td$-maximality
+step (\textsf{L1+}).  This is a screening tool, not a theorem-level
+resolution of the non-$G_{\mathrm{diss}}$-transitive case of
+\cref{conj:divisor}.
+
+Two new \emph{conditional} reductions extend the programme.
+\textbf{(A)}  Under two finite hypotheses $(\Hroles) + (\Hslot)$ from an
+auxiliary MILP, no face-to-face convex congruent $16$-dissection of $T$
+places one boundary face of each piece on a single common $T$-face
+(\Cref{thm:n16-aof-conditional}); in the Coxeter-pure instance the
+hypotheses are automatic (\Cref{thm:n16-aof-coxeter}, \textsf{L3}).
+\textbf{(B)}  Assuming four finite standing hypotheses
+\textup{(H-trip), (H-coc), (H-orb), (H-Qb)}, there is no face-to-face
+congruent $5$-dissection of $T$ into convex pieces (\Cref{thm:n5},
+\textsf{L2+}); four of seven $(t,k)$-residuals close unconditionally,
+three invoke \textup{(H-orb)}/\textup{(H-Qb)} uniformly and
+\textup{(H-coc)} in a single sub-case.  Unconditional closure of $n=5$
+is explicitly \emph{not} claimed: it requires completing the
+developing-map reduction \textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)}
+or a direct discharge of the remaining hypotheses.
+
+All computational branches are certified by exact rational arithmetic
+(Python \texttt{Fractions}).  The methodology -- role-distribution census,
+canonical-multiset feasibility, parity reduction, Congruence Transport,
+and a $K_{5}$ triangle cycle-consistency obstruction -- transfers directly
+to the remaining small non-divisors and provides a principled path toward
+the Divisor Completeness Conjecture.
+\end{abstract}
+
+\smallskip
+{\small
+\noindent\textbf{Keywords:}
+Regular tetrahedron, congruent dissection, Dehn invariant, tetrahedral symmetry group,
+Burnside ring, 24-cell, $A_3$ Coxeter complex, Divisor Completeness conjecture,
+Transitivity conjecture, face-to-face tiling.
+
+\smallskip
+\noindent\textbf{MSC\,2020:}
+52B10, 20B25, 52C22, 51M20, 52B15, 05E18.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and summary of results}\label{sec:intro}
+
+The dissection of the regular tetrahedron $T \subset \R^{3}$ into $n$ strictly
+congruent pieces is a classical problem in combinatorial geometry.  Despite a
+century of piecewise progress\,---\,from Hill's parallelepipeds
+\cite{Hill1895} through the median-plane decompositions of Alexanderson and
+Wetzel~\cite{AW1971}, the algorithmic refinements of Ong~\cite{Ong1991}, the
+longest-edge bisection of Padr\'on--Plaza--Su\'arez~\cite{PPS2023}, the Dehn
+invariant technology following Hadwiger~\cite{Hadwiger1951} and
+Conway--Jones~\cite{ConwayJones1976}, and the symmetry-ring language of
+Burnside~\cite{Burnside1911,tDieck1979}\,---\,no unified treatment has
+appeared.  In particular the following natural conjecture has remained open:
+
+\begin{conjecture}[Divisor Completeness]\label{conj:divisor}
+$n$ admits a congruent dissection of the regular tetrahedron if and only if
+$n \mid 24$.
+\end{conjecture}
+
+The purpose of the present paper is fourfold.
+
+\medskip
+\noindent\emph{First,} we provide a computational atlas of the
+eight historically known dissections $n \in \{1,2,3,4,6,8,12,24\}$
+(\Cref{sec:atlas}), with canonical Cartesian coordinates, exact squared-edge
+spectra, and independently verified metric data.  We establish in particular
+that \emph{every} piece of each of the eight historical representatives is a
+tetrahedron (simplex with $f$-vector $(4,6,4)$) -- in contrast to a
+persistent misconception in informal sources.  The atlas covers the
+historical divisor representatives and does not aim at classifying arbitrary
+convex Coxeter-pure partitions; see the companion
+work~\cite{CoxeterPure2026} for the convex Coxeter-pure catalogue, which
+includes pieces other than tetrahedra (e.g.\ an H-shape pentahedron at
+$n=8$).
+
+\noindent\emph{Second,} we determine the refinement poset on the eight
+historical representatives
+(\Cref{sec:poset}--\Cref{sec:refinement}), including the $S_4 \to S_8$
+refinement bridging the Alexanderson--Wetzel and Padr\'on--Plaza--Su\'arez
+traditions, the disproof of the conjectured $S_6 \to S_{12}$ refinement, and
+the unique \emph{heterogeneous} bridge $S_2 = S_3 + S_6$ at cut parameter
+$t = 2/3$.
+
+\noindent\emph{Third,} we develop three independent algebraic obstruction
+ frameworks for \cref{conj:divisor}: the Burnside ring $\Burn(\Td)$ with its
+ $11$-class subgroup lattice (\Cref{sec:burnside}); the $24$-cell and binary
+ tetrahedral correspondence $2T \leftrightarrow \Td \leftrightarrow \mathrm{flags}(T)$
+ (\Cref{app:24cell}); and a formal grammar of affine contractions encoding all
+ halving refinements (\Cref{sec:ifs}).  Together these realise every divisor
+ $n \mid 24$ and, in the $G_{\mathrm{diss}}$-transitive case, force $n \mid 24$ by
+ Lagrange's theorem applied to $G_{\mathrm{diss}}(D) \leq \Td$
+ (\Cref{def:gdiss-transitive,cor:forward}).  The remaining open gap is precisely:
+
+\begin{conjecture}[Transitivity Conjecture]\label{conj:transitivity}
+Every congruent dissection of the regular tetrahedron is $G_{\mathrm{diss}}$-transitive
+in the sense of \Cref{def:gdiss-transitive}.
+\end{conjecture}
+
+\smallskip
+
+\noindent\emph{Relation to the Coxeter-pure classification.}  The present
+atlas is complementary to the companion paper~\cite{CoxeterPure2026},
+which classifies all convex Coxeter-pure (chamber-union) congruent
+partitions of~$T$ into~$15$ $S_{4}$-orbit families.  The two scopes are
+distinct: \cite{CoxeterPure2026} fixes the $A_{3}$ Coxeter complex as the
+underlying combinatorics but allows arbitrary convex pieces (including
+non-tetrahedral ones, e.g.\ a pentahedral H-shape at $n=8$), whereas the
+present paper fixes the eight historical divisor representatives and
+develops obstruction frameworks for non-Coxeter / non-transitive
+dissections.  The naming crosswalk
+$T_{i} \leftrightarrow S_{j}^{\textup{legacy}}$ of~\cite{CoxeterPure2026}
+is compatible with the atlas labels $S_{n}$ used here; see
+\cref{ssec:atlas-table}.
+
+\noindent\emph{Fourth,} in \Cref{sec:programme} we attack the reverse
+direction via a structured programme whose two principal new results are:
+
+\begin{conditionaltheorem}[$n=5$ convex conditional reduction, preview]\label{thm:n5-intro}
+There is no face-to-face congruent dissection of the regular tetrahedron
+$T$ into $5$ convex pieces, subject to four explicit finite hypotheses
+\textup{(H-trip)}, \textup{(H-coc)}, \textup{(H-orb)}, \textup{(H-Qb)}.
+Four of the seven admissible $(t,k)$-residuals of the role-distribution
+census are closed \emph{unconditionally} (namely the two $t=2$ residuals,
+the $t=3$ residual $(5,5,3,2)$, and the $t=4$ residual); the remaining
+three $t=3$ residuals invoke at most two of the finite hypotheses above,
+each with an explicit localisation in the proof.  See
+\Cref{thm:n5,sec:prog-n5} for the full statement, the precise
+formulation of each hypothesis, the per-residual dependency map, and the
+proof.
+\end{conditionaltheorem}
+
+This is the first conditional reduction of a non-divisor of~$24$ in the
+convex category, under the four standing hypotheses of \Cref{thm:n5}.
+The methodology -- role-distribution census, canonical-multiset
+feasibility, topological parity reduction $f(P) \in \{5, 7\}$, a weak
+\emph{Congruence Transport Lemma}, an \emph{orbit-transport corollary},
+and a \emph{$K_{5}$ triangle cycle-consistency obstruction} --
+transfers directly to the remaining small non-divisors.
+
+\begin{conditionaltheorem}[$n=16$ all-one-face, preview]\label{thm:n16-intro}
+Under the medial-role and slot-separation hypotheses $(\Hroles) + (\Hslot)$,
+no face-to-face convex congruent dissection of $T$ into $16$ pieces can
+place exactly one boundary face of every piece on a single common $T$-face
+(general convex instance: \cref{thm:n16-aof-conditional}; Coxeter-pure
+instance: unconditional, \cref{thm:n16-aof-coxeter}).
+See \Cref{sec:prog-n16} for the full statement, the list of rigidity
+lemmas used, and the proof.
+\end{conditionaltheorem}
+
+\medskip
+
+\noindent\textbf{Evidence levels.}
+We adopt throughout the evidence-level tagging scheme \textsf{L0} (heuristic),
+\textsf{L1} (partial evidence), \textsf{L1+} (strong partial evidence),
+\textsf{L2} (conditional theorem), \textsf{L2+} (finite-check conditional
+theorem), \textsf{L3} (unconditional theorem); see \Cref{sec:evidence-glossary}
+for the precise definitions.  Every claim in this paper is tagged with one
+of these six levels, and nothing else: hybrid tags such as \textsf{L2$^{-}$}
+or \textsf{L1+}/\textsf{L2$^{-}$} are \emph{not} used.  The associated
+computational artifacts (source code, test suites, JSON certificates) will
+be archived upon submission; see the \emph{Data and code availability}
+statement at the end of \Cref{sec:intro}.
+
+\medskip
+
+\noindent\textbf{Organisation.}
+\Cref{sec:atlas} presents the atlas; \Cref{sec:dehn}--\Cref{sec:cube} the
+Dehn invariant verification, the refinement poset, transitivity plus the
+Lagrange obstruction, and the comparison with the cube.
+\Cref{sec:burnside}--\Cref{sec:ifs} develop the three algebraic obstruction
+frameworks (Burnside ring, IFS grammar; the $24$-cell viewpoint is
+deferred to \Cref{app:24cell}); \Cref{sec:nontrans} the
+non-transitive impossibility analysis (obstruction stack under
+$\Td$-invariance); \Cref{sec:programme} the rigidity and
+configurational programme toward \cref{conj:transitivity}, including
+\cref{thm:n5-intro,thm:n16-intro}.
+
+\medskip
+
+\noindent\textbf{Acknowledgements.}
+Computational certificates were produced with Python \texttt{Fractions}
+(exact rational arithmetic) and a custom MILP model built on
+\texttt{PuLP}/\texttt{CBC}.
+
+\medskip
+
+\noindent\textbf{Data and code availability.}
+The source code, test suites, and JSON certificates cited in this paper
+(including \texttt{S6\_to\_S12\_edge\_spectrum.json}, the $n = 16$
+all-one-face reduction certificates, and the $n = 5$ $(t,k)$-residual
+certificates) will be archived in a Zenodo capsule and mirrored on a public
+GitHub repository upon submission; a stable DOI will be cited in the final
+version.  Referees who wish to inspect the artifacts before the capsule is
+minted may request a private access link from the authors.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminaries: four notions of symmetry}\label{sec:prelim}
+
+The tetrahedral group $\Td \cong S_{4}$ acts isometrically on $T$ by permuting
+its four vertices; this lifts to a linear action on $\R^{3}$ fixing the
+centroid of $T$, and hence to an action on the power set of $T$ sending convex
+sub-polyhedra to convex sub-polyhedra of the same congruence class.  In the
+sequel we use four distinct notions of symmetry attached to a congruent
+partition $D = \{P_{1},\ldots,P_{n}\}$ of $T$; they are logically independent
+and have been repeatedly conflated in earlier literature.
+
+\begin{definition}[Piece-type homogeneous space]\label{def:piece-type}
+Fix a piece $P_{0} \in D$ and let
+$\Stab_{\Td}(P_{0}) = \{ g \in \Td : g(P_{0}) = P_{0} \}$ be its pointwise
+stabiliser under the $\Td$-action on convex sub-polyhedra of~$T$.  The
+\emph{piece-type homogeneous space} of $P_{0}$ is the transitive $\Td$-set
+$\Td / \Stab_{\Td}(P_{0})$.  Its cardinality equals the size of the
+$\Td$-orbit $\Td \cdot P_{0} \subset 2^{T}$.
+\end{definition}
+
+\begin{definition}[Geometric symmetry group of a partition]\label{def:gdiss}
+The \emph{geometric symmetry group} of $D$ is
+\[
+  G_{\mathrm{diss}}(D) \;:=\; \{ g \in \Td : g(D) = D \text{ as a set of pieces}\}
+  \;\leq\; \Td,
+\]
+i.e.\ the subgroup of $\Td$ that permutes the pieces of $D$ among themselves.
+\end{definition}
+
+\begin{definition}[$\Td$-invariance]\label{def:td-invariance}
+$D$ is \emph{$\Td$-invariant} if $G_{\mathrm{diss}}(D) = \Td$, i.e.\ every
+$g \in \Td$ permutes the pieces of $D$.
+\end{definition}
+
+\begin{definition}[$G_{\mathrm{diss}}$-transitivity]\label{def:gdiss-transitive}
+$D$ is \emph{$G_{\mathrm{diss}}$-transitive} if $G_{\mathrm{diss}}(D)$ (acting
+by its inclusion $G_{\mathrm{diss}}(D) \leq \Td$) acts transitively on the set
+of pieces of $D$: for every $P_{i}, P_{j} \in D$ there exists
+$g \in G_{\mathrm{diss}}(D)$ with $g(P_{i}) = P_{j}$.  Equivalently, the $n$
+pieces form a single orbit under the group of $\Td$-elements that preserve
+$D$ set-wise.
+\end{definition}
+
+\begin{remark}[Logical relations]\label{rem:sym-relations}
+The four notions are related as follows.
+\begin{enumerate}
+\item $\Td$-invariance (\Cref{def:td-invariance}) is the strongest
+      condition and implies $G_{\mathrm{diss}}(D) = \Td$; in the atlas it
+      holds only for $n \in \{1,12,24\}$ (\Cref{lem:geom-vs-alg-stab}).
+\item $G_{\mathrm{diss}}$-transitivity (\Cref{def:gdiss-transitive}) is the
+      notion that yields the Lagrange obstruction $n \mid 24$
+      (\Cref{cor:forward}): orbit--stabiliser in $G_{\mathrm{diss}}(D)$ gives
+      $n = [G_{\mathrm{diss}}(D) : \Stab_{0}]$, and
+      $|G_{\mathrm{diss}}(D)|$ divides $|\Td| = 24$ by Lagrange applied to
+      $G_{\mathrm{diss}}(D) \leq \Td$.
+\item $\Td$-invariance $\Rightarrow$ $G_{\mathrm{diss}}$-transitivity
+      (whenever $\Td$ itself acts transitively on $D$); the converse fails
+      for $n \in \{2,3,4,6,8\}$, where $G_{\mathrm{diss}}(S_{n}) \subsetneq \Td$.
+\item The \emph{piece-type} homogeneous space
+      $\Td/\Stab_{\Td}(P_{0})$ of \Cref{def:piece-type} can have more
+      elements than the partition $D$: an element
+      $g \in \Td \setminus G_{\mathrm{diss}}(D)$ maps $P_{0}$ to a convex
+      sub-polyhedron of $T$ that lies in a \emph{different} congruent
+      partition.  Consequently $\Td$-type properties (e.g.\ the order
+      $24/n$ quoted in \cref{tab:td-action}) are formal identities derived
+      from~$|\Td|=24$ and $|D|=n$, not direct statements about pointwise
+      stabilisers of specific realisations.
+\end{enumerate}
+Whenever the word \emph{transitive} appears unqualified in the sequel, it
+refers to \Cref{def:gdiss-transitive}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The computational atlas \texorpdfstring{$\calF(T)$}{F(T)}}\label{sec:atlas}
+
+Through exact symbolic computation we map each of the eight known dissections
+into canonical Cartesian coordinates with full metric verification: $n$
+congruent pieces, each of volume $\Vol(T)/n$, tiling $T$ without gap or
+overlap.  Throughout this section the tetrahedron $T$ is embedded with
+vertices
+\begin{equation}\label{eq:atlas-coords}
+A = (0,0,0),\; B = (1,0,0),\; C = \bigl(\tfrac12, \tfrac{\sqrt 3}{2}, 0\bigr),\;
+D = \bigl(\tfrac12, \tfrac{\sqrt 3}{6}, \tfrac{\sqrt 6}{3}\bigr),
+\end{equation}
+so that $|AB| = |AC| = \cdots = |CD| = 1$. We write $M_{XY}$ for the midpoint
+of edge $\overline{XY}$, $G_{XYZ}$ for the centroid of face $\triangle XYZ$,
+and $G_T$ for the centroid of $T$.
+
+\subsection{Historical atlas}\label{ssec:atlas-table}
+
+\begin{table}[H]
+\centering\small
+\caption{The eight known congruent dissections of $T$.  Each piece has
+$f$-vector $(4,6,4)$: all eight piece types are tetrahedra.  Squared edge
+spectrum $E^{2}$ is normalised to the parent edge length $|AB| = 1$.}
+\label{tab:atlas}
+\begin{tabular}{@{}ccccl@{}}
+\toprule
+$n$ & Piece name & $f$-vector & $E^{2}$ (squared edges) & Construction \\
+\midrule
+$1$  & Regular tetrahedron & $(4,6,4)$ & $[1,1,1,1,1,1]$                   & Identity \\
+$2$  & Median wedge        & $(4,6,4)$ & $[\tfrac14,\tfrac34,\tfrac34,1,1,1]$ & 1 median plane \\
+$3$  & Axial wedge         & $(4,6,4)$ & $[\tfrac13,\tfrac13,\tfrac23,1,1,1]$ & 3 axial planes \\
+$4$  & Quadrisection       & $(4,6,4)$ & $[\tfrac14,\tfrac14,\tfrac12,\tfrac34,\tfrac34,1]$ & 2 median planes \\
+$6$  & Hexasection         & $(4,6,4)$ & $[\tfrac{1}{12},\tfrac14,\tfrac13,\tfrac23,\tfrac34,1]$ & 3 axial $+$ 3 median \\
+$8$  & $8T$-LE piece       & $(4,6,4)$ & $[\tfrac14,\tfrac14,\tfrac14,\tfrac14,\tfrac12,\tfrac34]$ & longest-edge iteration \\
+$12$ & $A_{4}$ domain      & $(4,6,4)$ & $[\tfrac{1}{24},\tfrac13,\tfrac13,\tfrac38,\tfrac38,1]$ & $A_{4}$ fundamental domain \\
+$24$ & Orthoscheme         & $(4,6,4)$ & $[\tfrac{1}{24},\tfrac{1}{12},\tfrac18,\tfrac14,\tfrac13,\tfrac38]$ & 6 median planes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\emph{Remark on the $n=12$ entry.}  By ``$A_{4}$ fundamental
+domain'' we mean a fundamental domain for the action of the alternating
+group $A_{4}$, the orientation-preserving subgroup of
+$\Td \cong S_{4}$, on~$T$: any such domain is a $12$-piece dissection
+piece, concretely realised as $\conv(A,G_{ABC},G_{T},B)$
+(\cref{tab:atlas-reps}), i.e.~the convex hull of a vertex, a face
+barycentre, the $T$-centroid, and an edge-adjacent vertex.
+
+\begin{table}[H]
+\centering\small
+\caption{Canonical representative pieces in the embedding~\eqref{eq:atlas-coords}.}
+\label{tab:atlas-reps}
+\begin{tabular}{@{}cl@{}}
+\toprule
+$n$ & Representative $S_{n}$ \\
+\midrule
+$2$  & $\conv(A,B,C,M_{CD})$ \\
+$3$  & $\conv(D,G_{ABC},A,B)$ \\
+$4$  & $\conv(A,M_{AB},C,M_{CD})$ \\
+$6$  & $\conv(D,G_{ABC},A,M_{AB})$ \\
+$8$  & $\conv(A,M_{AB},M_{AC},M_{CD})$ \\
+$12$ & $\conv(A,G_{ABC},G_{T},B)$ \\
+$24$ & $\conv(A,M_{AB},G_{ABC},G_{T})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{theorem}[Tetrahedrality of the eight historical representatives]\label{thm:univ-tet}
+Every piece of each of the eight historical congruent dissection
+representatives $\{S_{n}\}_{n \in \mathrm{div}(24)}$ listed in
+\cref{tab:atlas-reps} is a tetrahedron.
+\end{theorem}
+
+\begin{proof}
+Direct verification from \cref{tab:atlas-reps}: each representative is the
+convex hull of exactly four affinely independent points.  The informal
+description of $S_{3}$ as a ``wedge'' pentahedron in certain forum sources is
+a notational artefact and not the actual piece geometry; similarly, the
+$S_{12}$ piece obtained by merging two adjacent orthoschemes reduces to a
+tetrahedron because the merged midpoint $M_{AB}$ lies on edge $\overline{AB}$
+and drops out of the convex hull.
+\end{proof}
+
+\begin{remark}[Scope]\label{rem:univ-tet-scope}
+\cref{thm:univ-tet} is a statement about the eight specific historical
+representatives, not about all Coxeter-pure congruent partitions of~$T$.
+The companion classification~\cite{CoxeterPure2026} exhibits convex
+Coxeter-pure pieces which are not tetrahedra; in particular at $n=8$ the
+H-shape family~$\mathcal{F}_{11}$ has $f$-vector $(6,9,5)$ and is a
+pentahedron.  The present atlas fixes the eight classical
+representatives; the general convex Coxeter-pure case is
+addressed in~\cite{CoxeterPure2026}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Symbolic verification of the Dehn invariant}\label{sec:dehn}
+
+The Dehn invariant $D(P) \in \R \otimes_{\Z} (\R/\pi\Q)$ is additive under
+scissors decomposition (Sydler~\cite{Sydler1965}; see also
+Dupont~\cite{Dupont2001} for the modern group-homological
+formulation), and the regular tetrahedron carries the irrational
+value $D(T) = 6 \otimes \alpha$ where
+$\alpha \coloneqq \arccos(1/3) \approx 70.529^{\circ}$ is the dihedral angle
+along every edge.  By additivity a congruent $n$-dissection $T = \bigcup S_{n}$
+requires
+\begin{equation}\label{eq:dehn-scaling}
+  D(S_{n}) = \frac{1}{n} D(T) = \frac{6}{n}\otimes\alpha .
+\end{equation}
+
+Computation of the piece parameters reveals a conjugate dihedral angle
+$\beta \coloneqq \arccos(\sqrt{6}/3)$.  By the trigonometric double-angle
+identity one finds $\cos(2\beta) = 2 \cdot (6/9) - 1 = 1/3$, so
+\begin{equation}\label{eq:2beta-alpha}
+  2\beta \equiv \alpha \pmod{\pi\Q}.
+\end{equation}
+
+\begin{proposition}[Dehn algebra closure]\label{prop:dehn-algebra}
+Every dihedral angle of every piece $S_{n}$ equals $\alpha$, $\beta$, or a
+rational multiple of $\pi$.  In the quotient $\R \otimes (\R/\pi\Q)$,
+rational multiples of $\pi$ vanish, so the Dehn algebra generated by the
+eight piece types is the rank-one $\Z$-module $\Z\langle\alpha\rangle$.
+\end{proposition}
+
+\begin{computationalcertificate}[Dehn values, verified]\label{thm:dehn-values}
+The identity~\eqref{eq:dehn-scaling} holds explicitly for every one of the
+eight dissections:
+\begin{center}\small
+\begin{tabular}{@{}ccccccc@{}}
+\toprule
+$n$ & $2$ & $3$ & $4$ & $6$ & $8$ & $12$ \\[2pt]
+$D(S_{n})$ & $3\otimes\alpha$ & $2\otimes\alpha$ & $\tfrac{3}{2}\otimes\alpha$ &
+$1\otimes\alpha$ & $\tfrac34\otimes\alpha$ & $\tfrac12\otimes\alpha$ \\
+\bottomrule
+\end{tabular}
+\quad
+\begin{tabular}{@{}cc@{}}
+\toprule
+$n$ & $24$ \\[2pt]
+$D(S_{n})$ & $\tfrac14\otimes\alpha$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{computationalcertificate}
+
+\begin{corollary}[No cube-equivalent piece]\label{cor:nocube}
+No piece $S_{n}$ of any known congruent dissection of $T$ has $D(S_{n}) = 0$;
+consequently no such piece is scissors-congruent to a cube.
+\end{corollary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The structural lineage \texorpdfstring{$S_{4} \to S_{8}$}{S4->S8}}
+\label{sec:poset}
+
+The $8T$-LE construction of Padr\'on, Plaza and Su\'arez~\cite{PPS2023} is
+visually unlike the global median-plane decompositions of
+Alexanderson--Wetzel~\cite{AW1971}: it is generated by iterated
+\emph{longest-edge bisection}, a local algorithmic procedure.  Canonical
+coordinates however reveal a clean lineage.
+
+\begin{observation}[Canonical lineage]\label{obs:s4-s8}
+The $8T$-LE dissection descends from the $S_{4}$ quadrisection as follows.
+\begin{enumerate}
+  \item Bisecting the longest edge of $T$ (any edge, by symmetry) yields $S_{2}$.
+  \item Bisecting the longest edge of $S_{2}$ introduces a strictly orthogonal
+        plane (perpendicular to the first median plane), yielding $S_{4}$.
+  \item The longest edge of $S_{4}$ is the unique remaining original $T$-edge
+        of length $1$; bisecting it divides $S_{4}$ into two copies of $S_{8}$.
+\end{enumerate}
+\end{observation}
+
+The refinement graph over halving cuts is summarised in
+\Cref{fig:refinement}.  The axial and symmetry-plane pipelines are
+geometrically \emph{incompatible} at the $S_{6} \to S_{12}$ junction: the
+$S_{6}$ representative $\conv(D,G_{ABC},A,M_{AB})$ uses the apex $D$, while
+$S_{12} = \conv(A,G_{ABC},G_{T},B)$ uses the tetrahedron centroid $G_{T}$ and
+a fresh vertex $B$.  The two families thus form disjoint components
+connected only through the heterogeneous bridge $S_{2} = S_{3} + S_{6}$
+described in~\Cref{sec:refinement}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  >=Stealth,
+  node/.style={rectangle, rounded corners=2pt, draw, minimum width=30mm,
+               minimum height=7mm, align=center, font=\small\bfseries,
+               thick},
+  sym/.style ={node, fill=symblue!85,    text=white, draw=symblue!40!black},
+  ax/.style  ={node, fill=axgreen!80,    text=white, draw=axgreen!40!black},
+  le/.style  ={node, fill=lered!85,      text=white, draw=lered!40!black},
+  parent/.style={node, fill=parentgold!80, text=black, draw=black, thick,
+                 minimum width=36mm},
+  arr/.style ={->, thick},
+  darr/.style={->, thick, dashed},
+  xarr/.style={->, thick, dotted, red!70!black},
+  every node/.append style={font=\small}
+]
+\node [parent] (T)          at (0, 5)   {$T$: regular tetrahedron};
+
+% Median pipeline (left)
+\node [sym]    (S2)         at (-5, 3)  {$S_2$ median};
+\node [sym]    (S4)         at (-5, 1)  {$S_4$ quadrisection};
+\node [sym]    (S12)        at (-5,-1)  {$S_{12}$ dodecasection};
+\node [sym]    (S24)        at (-5,-3)  {$S_{24}$ orthoscheme};
+
+% Axial pipeline (right)
+\node [ax]     (S3)         at ( 5, 3)  {$S_3$ axial trisection};
+\node [ax]     (S6)         at ( 5, 1)  {$S_6$ hexasection};
+
+% LE pipeline
+\node [le]     (S8)         at (-1.2,-1){$S_8$ $8T$-LE};
+
+\draw [arr] (T)  -- node[left,midway,font=\tiny]{1 median}            (S2);
+\draw [arr] (S2) -- node[left,midway,font=\tiny]{$\perp$ median}      (S4);
+\draw [arr] (S4) -- node[left,midway,font=\tiny]{$A_4$ domain}        (S12);
+\draw [arr] (S12)-- node[left,midway,font=\tiny]{final 2 planes}      (S24);
+
+\draw [arr] (T)  -- node[right,midway,font=\tiny]{3 axial}            (S3);
+\draw [arr] (S3) -- node[right,midway,font=\tiny]{base bisect}        (S6);
+
+\draw [arr] (S4) -- node[above,midway,font=\tiny]{LE bisect}         (S8);
+
+\draw [darr] (S2) to[bend right=25] node[above,font=\tiny]
+                     {$S_2 = S_3 + S_6$} (S3);
+\draw [darr] (S2) to[bend right=35]                           (S6);
+
+\draw [xarr] (S6) to[bend right=12] node[below,font=\tiny]{\textbf{not geometric}} (S12);
+\end{tikzpicture}
+\caption{The refinement poset of the eight known dissections. Solid arrows
+are verified halving refinements; dashed arrows record the unique
+heterogeneous bridge $S_2 = S_3 + S_6$ (at cut parameter $t = 2/3$, see
+\Cref{sec:refinement}); the dotted red arrow marks the geometrically
+\emph{disproved} refinement $S_6 \to S_{12}$.  Blue = symmetry pipeline,
+green = axial pipeline, red = longest-edge pipeline.}
+\label{fig:refinement}
+\end{figure}
+
+\begin{theorem}[Disproof of $S_{6} \to S_{12}$]\label{thm:s6-s12-fail}
+There is no congruent halving of the $S_{6}$ piece into two tetrahedra
+each congruent to $S_{12}$.
+\end{theorem}
+
+\begin{proof}
+The argument is by the squared-edge multiset, a congruence invariant:
+if two tetrahedra $P, Q$ are congruent then the unordered multisets
+$E^{2}(P), E^{2}(Q)$ of squared edge lengths coincide, and in particular
+$\min E^{2}(P) = \min E^{2}(Q)$.  From \cref{tab:atlas} we read
+\begin{equation}\label{eq:s12-spectrum}
+  E^{2}(S_{12}) = \Bigl\{\tfrac{1}{24},\,\tfrac13,\,\tfrac13,\,\tfrac38,\,\tfrac38,\,1\Bigr\},
+  \qquad \min E^{2}(S_{12}) = \tfrac{1}{24}.
+\end{equation}
+
+\smallskip\noindent\emph{Shape of a congruent halving.}
+A plane cut of a tetrahedron $P$ produces two tetrahedra if and only if
+the cut plane contains exactly one edge of $P$ and meets the opposite
+edge at a single interior point (any cut meeting three edges produces a
+tetrahedron and a triangular prism, hence cannot yield two tetrahedra).
+If in addition the two halves are congruent -- and hence of equal
+volume $\tfrac12\Vol(P)$ -- the interior intersection point must be the
+midpoint of the opposite edge.  Applying this to
+$S_{6} = \conv(D, G_{ABC}, A, M_{AB})$ leaves exactly three opposite-edge
+pairs and hence six candidate half-tetrahedra.
+
+\smallskip\noindent\emph{Exact enumeration in the embedding~\eqref{eq:atlas-coords}.}
+A direct computation in rational arithmetic (certificate
+\texttt{S6\_to\_S12\_edge\_spectrum.json} in the supplementary material
+that accompanies the submission; see the \emph{Data and code availability}
+statement in \Cref{sec:intro})
+gives the
+following squared-edge multisets for the six candidate halves, indexed
+by the edge $e$ preserved by the cut plane and the vertex $v$ of
+$\{D, G_{ABC}, A, M_{AB}\} \setminus e$ retained in that half:
+\begin{align*}
+  e = \{D,G_{ABC}\}:\ &\ \bigl\{\tfrac{1}{16}, \tfrac{7}{48}, \tfrac13, \tfrac23, \tfrac{13}{16}, 1\bigr\},\
+  \bigl\{\tfrac{1}{16}, \tfrac{1}{12}, \tfrac{7}{48}, \tfrac23, \tfrac34, \tfrac{13}{16}\bigr\}; \\
+  e = \{D,A\}:\        &\ \bigl\{\tfrac{1}{48}, \tfrac{13}{48}, \tfrac13, \tfrac23, \tfrac{11}{16}, 1\bigr\},\
+  \bigl\{\tfrac{1}{48}, \tfrac14, \tfrac{13}{48}, \tfrac{11}{16}, \tfrac34, 1\bigr\}; \\
+  e = \{D,M_{AB}\}:\   &\ \bigl\{\tfrac{1}{12}, \tfrac{1}{12}, \tfrac{1}{12}, \tfrac23, \tfrac34, \tfrac34\bigr\},\
+  \bigl\{\tfrac{1}{12}, \tfrac{1}{12}, \tfrac14, \tfrac34, \tfrac34, 1\bigr\}.
+\end{align*}
+The set of minima attained across the six halves is
+$\{\tfrac{1}{48}, \tfrac{1}{16}, \tfrac{1}{12}\}$.  By
+\eqref{eq:s12-spectrum}, $\min E^{2}(S_{12}) = \tfrac{1}{24}$ does not
+belong to this set, so no half has $S_{12}$'s squared-edge multiset.
+Hence no congruent halving of $S_{6}$ produces two copies of $S_{12}$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The refinement graph}\label{sec:refinement}
+
+\subsection{Egyptian fractions over \texorpdfstring{$\mathrm{div}(24)$}{div(24)}}
+
+We exhaustively test single-plane congruent cuts
+$S_{a} \to S_{b} \cup S_{c}$ with $a, b, c \in \mathrm{div}(24)$,
+$b \leq c$, $b > a$ and volume-consistent Egyptian fraction
+$1/a = 1/b + 1/c$; the target is geometric realisability
+(edge-spectrum congruence of the two halves).
+
+\begin{table}[H]
+\centering\small
+\caption{Egyptian fraction audit.  Six of the eleven admissible identities
+are geometrically realisable.}
+\label{tab:egyptian}
+\begin{tabular}{@{}lcl@{}}
+\toprule
+Identity & Geometric? & Note \\
+\midrule
+$1 = \tfrac12 + \tfrac12$               & \checkmark & Median bisection \\
+$\tfrac12 = \tfrac13 + \tfrac16$        & \checkmark (new)  & Cross-pipeline bridge \\
+$\tfrac12 = \tfrac14 + \tfrac14$        & \checkmark & Orthogonal median \\
+$\tfrac13 = \tfrac14 + \tfrac{1}{12}$   & $\times$   & \\
+$\tfrac13 = \tfrac16 + \tfrac16$        & \checkmark & Base median bisection \\
+$\tfrac14 = \tfrac16 + \tfrac{1}{12}$   & $\times$   & \\
+$\tfrac14 = \tfrac18 + \tfrac18$        & \checkmark & $8T$-LE bisection \\
+$\tfrac16 = \tfrac18 + \tfrac{1}{24}$   & $\times$   & \\
+$\tfrac16 = \tfrac{1}{12} + \tfrac{1}{12}$ & $\times$   & $S_6 \to S_{12}$ disproved \\
+$\tfrac18 = \tfrac{1}{12} + \tfrac{1}{24}$ & $\times$   & volumes match, shapes do not \\
+$\tfrac{1}{12} = \tfrac{1}{24} + \tfrac{1}{24}$ & \checkmark & orthoscheme split \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The heterogeneous bridge \texorpdfstring{$S_{2} = S_{3} + S_{6}$}{S2 = S3 + S6}}
+
+\begin{theorem}[Cross-pipeline bridge]\label{thm:s2-bridge}
+The single-plane cut of the $S_{2}$ representative
+$S_{2} = \conv(A, B, C, M_{CD})$ at cut parameter $t = 2/3$ along a cut-edge
+produces one piece with normalised squared edges $(1,1,2,3,3,3)$
+(matching $S_{3}$) and one piece with normalised squared edges
+$(1,3,4,8,9,12)$ (matching $S_{6}$).  This is the unique heterogeneous
+refinement bridge in the catalogue.
+\end{theorem}
+
+The two concrete realisations are related by swapping the fixed edge; in
+both, $\det(\alpha) \cdot \det(\beta) = -1$, so one refinement map is
+orientation-preserving and one is orientation-reversing.
+
+\subsection{Connected components}
+
+\begin{proposition}[Component structure]\label{prop:components}
+Under homogeneous ($1{:}1$) halving refinements the refinement graph has
+\emph{three} disconnected components:
+\begin{center}
+\begin{tabular}{@{}cll@{}}
+\toprule
+Component & Nodes                               & Pipeline \\
+\midrule
+1 & $\{S_{1}, S_{2}, S_{4}, S_{8}\}$            & Symmetry $+$ LE \\
+2 & $\{S_{3}, S_{6}\}$                          & Axial \\
+3 & $\{S_{12}, S_{24}\}$                        & $A_{4}$ / Orthoscheme \\
+\bottomrule
+\end{tabular}
+\end{center}
+The heterogeneous bridge of \cref{thm:s2-bridge} connects components $1$
+and $2$; components $2$ and $3$ are geometrically disjoint.
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\texorpdfstring{$\Td$}{Td}-transitivity and the Lagrange obstruction}
+\label{sec:transitivity}
+
+\subsection{All eight known dissections are $G_{\mathrm{diss}}$-transitive}
+\label{ssec:transitivity}
+
+\begin{computationalcertificate}[$G_{\mathrm{diss}}$-transitivity of the atlas]\label{thm:transitivity}
+For every $n \in \{1,2,3,4,6,8,12,24\}$ the atlas dissection $S_{n}$ is
+$G_{\mathrm{diss}}$-transitive in the sense of
+\Cref{def:gdiss-transitive}: the geometric symmetry group
+$G_{\mathrm{diss}}(S_{n}) \leq \Td$ of \Cref{def:gdiss} acts transitively on
+the $n$ pieces of $S_{n}$, with orbit--stabiliser identity
+$|G_{\mathrm{diss}}(S_{n})| = n \cdot |\Stab_{0}|$
+(\Cref{lem:geom-vs-alg-stab}).  The numerical data of this certificate are
+tabulated in \cref{tab:td-action,tab:gdiss}.
+\end{computationalcertificate}
+
+\begin{remark}[Reading \cref{tab:td-action}]\label{rem:type-vs-invariance}
+The column $|\Stab|$ of \cref{tab:td-action} records the formal identity
+$|\Stab| = 24/n$; for $n \in \{1,12,24\}$ it coincides with the
+pointwise stabiliser of a piece in $\Td$ (since $G_{\mathrm{diss}} = \Td$),
+while for $n \in \{2,3,4,6,8\}$ the pointwise $\Td$-stabiliser of a
+specific realisation is strictly smaller and the correct orbit--stabiliser
+decomposition takes place inside $G_{\mathrm{diss}}(S_{n}) \subsetneq \Td$
+(\Cref{lem:geom-vs-alg-stab}).  The value $24/n$ nonetheless correctly
+controls the Lagrange obstruction via $|G_{\mathrm{diss}}| \mid 24$.
+\end{remark}
+
+\begin{table}[H]
+\centering\small
+\caption{The $\Td$-action on each of the eight known dissections.}
+\label{tab:td-action}
+\begin{tabular}{@{}c c c l@{}}
+\toprule
+$n$ & Orbit size & $|\Stab|$ & Stabiliser type \\
+\midrule
+$1$  & $1$  & $24$ & $\Td$ \\
+$2$  & $2$  & $12$ & $A_{4}$ \\
+$3$  & $3$  & $8$  & $D_{2d}$ \\
+$4$  & $4$  & $6$  & $S_{3}$ \\
+$6$  & $6$  & $4$  & $V_{4}$ (Klein four-group) \\
+$8$  & $8$  & $3$  & $\Z_{3}$ \\
+$12$ & $12$ & $2$  & $\Z_{2}$ \\
+$24$ & $24$ & $1$  & $\{e\}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}[On the $n=8$ anomaly]\label{rem:n8-anomaly}
+Although the $8T$-LE dissection is generated by an iterative algorithmic
+procedure rather than as a subgroup orbit, $\Td$ nevertheless acts
+transitively on its $8$ pieces, with stabiliser $\Z_{3}$ generated by the
+$120^{\circ}$ rotation about a body diagonal.  In particular $8 \mid 24$ is
+\emph{structural}, not accidental.
+\end{remark}
+
+\subsection{The Lagrange obstruction}\label{ssec:lagrange}
+
+The immediate consequence of \cref{thm:transitivity} is:
+
+\begin{corollary}[Divisor realisation and Lagrange obstruction]\label{cor:forward}
+If $n \mid 24$, the regular tetrahedron admits a congruent dissection into
+$n$ pieces.  Moreover, for any $G_{\mathrm{diss}}$-transitive congruent
+dissection of $T$ (\Cref{def:gdiss-transitive}) necessarily $n \mid 24$.
+\end{corollary}
+
+Both statements follow by construction (\cref{tab:atlas}) and by applying
+Lagrange's theorem to the chain $\Stab_{0} \leq G_{\mathrm{diss}}(D) \leq \Td$:
+$n = [G_{\mathrm{diss}}(D) : \Stab_{0}]$ divides $|G_{\mathrm{diss}}(D)|$,
+which in turn divides $|\Td| = 24$.  The full
+divisor-completeness conjecture thus reduces to ruling out congruent
+dissections that fail $G_{\mathrm{diss}}$-transitivity -- the subject of
+\Cref{sec:nontrans,sec:programme}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comparison with the cube}\label{sec:cube}
+
+To probe whether \cref{conj:divisor} generalises to other Platonic solids
+we analyse the cube (symmetry group $O_{h}$, $|O_{h}| = 48$).
+
+\begin{proposition}[Slab argument]\label{prop:slab}
+The unit cube $[0,1]^{3}$ admits a congruent dissection into $n$ pieces for
+\emph{every} $n \geq 1$: cut by planes $z = k/n$, $k = 1,\ldots,n-1$, to
+produce $n$ congruent rectangular slabs $1 \times 1 \times (1/n)$, all
+related by translation.
+\end{proposition}
+
+The mechanism of \cref{prop:slab} requires \emph{parallel faces} on the
+parent body.  Among all Platonic solids the tetrahedron is the unique one
+with \emph{zero} parallel face-pairs (\cref{tab:platonic}), so the slab
+argument cannot be transplanted to it.
+
+\begin{table}[H]
+\centering\small
+\caption{Parallel-face count and slab cuts among the Platonic solids.}
+\label{tab:platonic}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Solid & Group & $|G|$ & Parallel face-pairs & Slab cuts? \\
+\midrule
+Tetrahedron  & $\Td$   & $24$  & $\mathbf{0}$ & \textbf{No} \\
+Cube         & $O_{h}$ & $48$  & $3$          & Yes \\
+Octahedron   & $O_{h}$ & $48$  & $4$          & Yes \\
+Dodecahedron & $I_{h}$ & $120$ & $6$          & Yes \\
+Icosahedron  & $I_{h}$ & $120$ & $6$          & Yes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A refined question remains valid on the cube: for which $n$ does the cube
+admit an \emph{$O_{h}$-transitive} congruent dissection?  The answer is
+exactly $n \mid 48$, with explicit $O_{h}$-transitive constructions for all
+ten divisors of $48$ (\cref{tab:oh-div}).
+
+\begin{table}[H]
+\centering\small
+\caption{$O_{h}$-transitive congruent dissections of the cube.}
+\label{tab:oh-div}
+\begin{tabular}{@{}ccl@{}}
+\toprule
+$n$ & $|\Stab|$ & Construction \\
+\midrule
+$1$  & $48$ & Trivial \\
+$2$  & $24$ & Mirror-plane bisection \\
+$3$  & $16$ & Double-wedge (bicapped square) \\
+$4$  & $12$ & Two orthogonal mirror planes \\
+$6$  & $8$  & Six face pyramids \\
+$8$  & $6$  & $2 \times 2 \times 2$ cubelets \\
+$12$ & $4$  & Bisection of six pyramids \\
+$16$ & $3$  & Grid subdivisions \\
+$24$ & $2$  & $O$-orbit orthoscheme \\
+$48$ & $1$  & $O_{h}$-orbit orthoscheme \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{corollary}[Failure of divisor completeness for the cube]\label{cor:cube-fail}
+Divisor completeness does not hold for the cube: all $n \geq 1$ admit
+non-transitive slab dissections.  The emerging dichotomy is:
+\begin{center}\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & Tetrahedron ($\Td$) & Cube ($O_{h}$) \\
+\midrule
+$G$-transitive: $n \mid |G|$ sufficient? & \checkmark\ (8 divisors) & \checkmark\ (10 divisors) \\
+Non-$G$-transitive constructions         & none known              & all $n$ (slabs) \\
+Parallel faces                           & $0$                    & $3$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{corollary}
+
+Hence \cref{conj:divisor} is \emph{not} a generic polyhedral phenomenon: it
+is specifically the absence of parallel faces on the regular tetrahedron
+that prevents non-transitive constructions and motivates
+\cref{conj:transitivity}.
+
+\begin{remark}[Arithmetic note]
+The aggregate divisor sums do not transfer:
+\[
+  \frac{\sigma(24)}{24} = \frac{60}{24} = \frac{5}{2},
+  \qquad
+  \frac{\sigma(48)}{48} = \frac{124}{48} = \frac{31}{12}.
+\]
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Burnside ring invariant}\label{sec:burnside}
+
+The Burnside ring $\Burn(\Td)$~\cite{Burnside1911,tDieck1979} provides a
+representation-theoretic framework for characterising transitive $G$-sets
+and detecting obstructions to non-transitive dissections.
+
+\subsection{The subgroup lattice of \texorpdfstring{$\Td \cong S_{4}$}{Td=S4}}
+
+The tetrahedral group $\Td \cong S_{4}$ has \emph{$11$ conjugacy classes of
+subgroups} and $30$ subgroups in total (\cref{tab:s4-subgroups}).
+
+\begin{table}[H]
+\centering\small
+\caption{The $11$ conjugacy classes of subgroups of $S_{4}$.}
+\label{tab:s4-subgroups}
+\begin{tabular}{@{}c l c c c@{}}
+\toprule
+Class & Subgroup $H$ & $|H|$ & $[S_{4}:H]$ & \# conjugates \\
+\midrule
+$0$  & $\{e\}$                                & $1$  & $24$ & $1$ \\
+$1$  & $\Z_{2}^{t}$ (transposition)            & $2$  & $12$ & $6$ \\
+$2$  & $\Z_{2}^{d}$ (double transposition)     & $2$  & $12$ & $3$ \\
+$3$  & $\Z_{3}$                                & $3$  & $8$  & $4$ \\
+$4$  & $V_{4}$ (non-normal Klein-4)            & $4$  & $6$  & $3$ \\
+$5$  & $V_{4}^{n}$ (normal Klein-4)            & $4$  & $6$  & $1$ \\
+$6$  & $\Z_{4}$                                & $4$  & $6$  & $3$ \\
+$7$  & $S_{3}$                                 & $6$  & $4$  & $4$ \\
+$8$  & $D_{4}$                                 & $8$  & $3$  & $3$ \\
+$9$  & $A_{4}$                                 & $12$ & $2$  & $1$ \\
+$10$ & $S_{4}$                                 & $24$ & $1$  & $1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The valid orbit sizes for any $\Td$-action are thus
+$\{1,2,3,4,6,8,12,24\}$ -- precisely the eight divisors of $24$.
+
+\subsection{Equivariant Euler characteristic}
+
+The barycentric subdivision of $T$ yields a $\Td$-equivariant
+CW-complex.  A direct count gives
+\begin{equation}\label{eq:chi-T}
+  \chi(T) = 15 - 50 + 60 - 24 = 1,
+\end{equation}
+consistent with $T$ being a contractible $3$-ball.  Lifting to the Burnside
+ring:
+\begin{computationalcertificate}[Equivariant Euler class]\label{prop:chi-T}
+The equivariant Euler characteristic $\chi_{\Td}(T)$ of $T$, viewed as an
+equivariant CW-complex, equals the class of the point:
+$\chi_{\Td}(T) = [\Td/\Td] \in \Burn(\Td)$, with character vector
+$(1,1,\ldots,1) \in \Z^{11}$.
+\end{computationalcertificate}
+
+\subsection{The mark table}
+
+The mark table $M[i][j] = |\Fix_{H_{j}}(\Td/H_{i})|$ encodes the fixed-point
+structure of every transitive $\Td$-set.  Its computed value is given in
+\Cref{tab:mark-full}; it has full rank $11$, confirming that $\Burn(\Td)$ is
+the free abelian group of rank $11$ on the transitive $\Td$-sets.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Mark table of $\Td \cong S_{4}$.  Rows indexed by transitive $\Td$-sets
+$\Td/H_{i}$ (top-to-bottom: subgroup order ascending); columns indexed by
+subgroups $H_{j}$ (left-to-right: same ordering).}
+\label{tab:mark-full}
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{} l | c c c c c c c c c c c @{}}
+\toprule
+$\Td/H_{i}$ &
+$\{e\}$ & $\Z_{2}^{t}$ & $\Z_{2}^{d}$ & $\Z_{3}$ & $V_{4}$ & $V_{4}^{n}$
+& $\Z_{4}$ & $S_{3}$ & $D_{4}$ & $A_{4}$ & $S_{4}$ \\
+\midrule
+$\Td/\{e\}$            & $24$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ \\
+$\Td/\Z_{2}^{t}$       & $12$ & $2$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ \\
+$\Td/\Z_{2}^{d}$       & $12$ & $0$ & $4$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ \\
+$\Td/\Z_{3}$           & $8$  & $0$ & $0$ & $2$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ \\
+$\Td/V_{4}$            & $6$  & $2$ & $2$ & $0$ & $2$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ \\
+$\Td/V_{4}^{n}$        & $6$  & $0$ & $6$ & $0$ & $0$ & $6$ & $0$ & $0$ & $0$ & $0$ & $0$ \\
+$\Td/\Z_{4}$           & $6$  & $0$ & $2$ & $0$ & $0$ & $0$ & $2$ & $0$ & $0$ & $0$ & $0$ \\
+$\Td/S_{3}$            & $4$  & $2$ & $0$ & $1$ & $0$ & $0$ & $0$ & $1$ & $0$ & $0$ & $0$ \\
+$\Td/D_{4}$            & $3$  & $1$ & $3$ & $0$ & $1$ & $3$ & $1$ & $0$ & $1$ & $0$ & $0$ \\
+$\Td/A_{4}$            & $2$  & $0$ & $2$ & $2$ & $0$ & $2$ & $0$ & $0$ & $0$ & $2$ & $0$ \\
+$\Td/S_{4}$            & $1$  & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Coset decomposition -- algebra matches geometry}
+
+For every known dissection the Burnside ring element is a single transitive
+$\Td$-set:
+
+\begin{table}[H]
+\centering\small
+\caption{Each dissection is a single transitive $\Td$-set in $\Burn(\Td)$.}
+\label{tab:coset-match}
+\begin{tabular}{@{}c c c c @{}}
+\toprule
+$S_{n}$ & Coset space & Stabiliser & $\Burn(\Td)$-element \\
+\midrule
+$S_{1}$  & $\Td/S_{4}$        & $S_{4}$        & $[\Td/S_{4}]$        \\
+$S_{2}$  & $\Td/A_{4}$        & $A_{4}$        & $[\Td/A_{4}]$        \\
+$S_{3}$  & $\Td/D_{4}$        & $D_{4}$        & $[\Td/D_{4}]$        \\
+$S_{4}$  & $\Td/S_{3}$        & $S_{3}$        & $[\Td/S_{3}]$        \\
+$S_{6}$  & $\Td/V_{4}$        & $V_{4}$        & $[\Td/V_{4}]$        \\
+$S_{8}$  & $\Td/\Z_{3}$       & $\Z_{3}$       & $[\Td/\Z_{3}]$       \\
+$S_{12}$ & $\Td/\Z_{2}^{t}$   & $\Z_{2}^{t}$   & $[\Td/\Z_{2}^{t}]$   \\
+$S_{24}$ & $\Td/\{e\}$        & $\{e\}$        & $[\Td/\{e\}]$        \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Geometric vs.\ algebraic stabilisers}\label{ssec:geom-vs-alg}
+
+We now make precise the relation between the two notions of
+symmetry attached to the atlas: the piece-type stabiliser of
+\Cref{def:piece-type} (recorded in \cref{tab:td-action}, ``algebraic'')
+and the partition-level stabiliser $G_{\mathrm{diss}}$ of
+\Cref{def:gdiss} (recorded in \cref{tab:gdiss}, ``geometric'').
+
+\begin{lemma}[Geometric vs.\ algebraic stabilisers]\label{lem:geom-vs-alg-stab}
+For each $S_{n}$ in the atlas let $P_{0}$ be the canonical piece of
+\cref{tab:atlas-reps}, let $H_{n} := \Stab_{\Td}(P_{0})$ be its
+piece-type stabiliser (\Cref{def:piece-type}, $|H_{n}| = 24/n$), and let
+$G_{\mathrm{diss}}(S_{n})$ be its geometric symmetry group
+(\Cref{def:gdiss}).  Then:
+\begin{enumerate}
+\item $G_{\mathrm{diss}}(S_{n})$ is the subgroup of $\Td$ listed in
+      \cref{tab:gdiss}, and the orbit--stabiliser identity
+      $|G_{\mathrm{diss}}(S_{n})| = n \cdot |\Stab_{0}|$
+      holds for every $n$, where
+      $\Stab_{0} = G_{\mathrm{diss}}(S_{n}) \cap H_{n}$ is the stabiliser
+      of $P_{0}$ inside the geometric group.
+\item $G_{\mathrm{diss}}(S_{n}) = \Td$ (i.e.\ $S_{n}$ is $\Td$-invariant
+      in the sense of \Cref{def:td-invariance}) for
+      $n \in \{1,12,24\}$, and only for these~$n$.
+\item For $n \in \{2,3,4,6,8\}$ one has
+      $G_{\mathrm{diss}}(S_{n}) \subsetneq \Td$; the elements of
+      $\Td \setminus G_{\mathrm{diss}}(S_{n})$ send $S_{n}$ to a
+      \emph{distinct} but congruent partition of $T$.
+\item In every case $S_{n}$ is $G_{\mathrm{diss}}$-transitive
+      (\Cref{def:gdiss-transitive}), i.e.\ the $n$ pieces form a single
+      orbit under $G_{\mathrm{diss}}(S_{n})$; this is the statement
+      certified in \Cref{thm:transitivity}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The numerical data of \cref{tab:gdiss} are verified by direct
+computation in the embedding~\eqref{eq:atlas-coords}: for each $S_{n}$
+we enumerate the $24$ elements $g \in \Td$ and test whether the image
+partition $g(S_{n})$ equals $S_{n}$ setwise; the set of such $g$ is
+$G_{\mathrm{diss}}(S_{n})$.  Items~(2) and~(3) are read off the
+table.  The orbit--stabiliser identity in~(1) is the usual one for the
+transitive action of $G_{\mathrm{diss}}(S_{n})$ on the $n$ pieces of
+$S_{n}$; transitivity within $G_{\mathrm{diss}}(S_{n})$ is verified case
+by case in the supplementary certificate.  Item~(4) is a restatement of
+the definitions once transitivity of the $G_{\mathrm{diss}}$-action is
+established.
+\end{proof}
+
+\begin{remark}[Summary]\label{rem:sym-summary}
+For $n \in \{1,12,24\}$ all four notions of \Cref{sec:prelim}
+coincide; for $n \in \{2,3,4,6,8\}$ only $G_{\mathrm{diss}}$-transitivity
+(\Cref{def:gdiss-transitive}) holds, and
+$G_{\mathrm{diss}}(S_{n}) \subsetneq \Td$ is strictly smaller than
+$\Td$.  In particular the Lagrange obstruction $n \mid 24$
+(\Cref{cor:forward}) uses only $G_{\mathrm{diss}}$-transitivity.
+\end{remark}
+
+\begin{table}[H]
+\centering\small
+\caption{Geometric vs.\ algebraic stabilisers of the eight dissections.}
+\label{tab:gdiss}
+\begin{tabular}{@{} c c c c c c @{}}
+\toprule
+$S_{n}$ & $G_{\mathrm{diss}}$ & $|G_{\mathrm{diss}}|$
+        & Transitive? & $|\Stab_{0}|$ \\
+\midrule
+$S_{1}$  & $S_{4}$ & $24$ & \checkmark & $24$ \\
+$S_{2}$  & $V_{4}$ & $4$  & \checkmark & $2$  \\
+$S_{3}$  & $S_{3}$ & $6$  & \checkmark & $2$  \\
+$S_{4}$  & $D_{4}$ & $8$  & \checkmark & $2$  \\
+$S_{6}$  & $S_{3}$ & $6$  & \checkmark & $1$  \\
+$S_{8}$  & $D_{4}$ & $8$  & \checkmark & $1$  \\
+$S_{12}$ & $S_{4}$ & $24$ & \checkmark & $2$  \\
+$S_{24}$ & $S_{4}$ & $24$ & \checkmark & $1$  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{IFS dissection grammar}\label{sec:ifs}
+
+Every halving refinement in the poset of \Cref{sec:poset,sec:refinement} can
+be encoded as an iterated function system (IFS): a pair of affine
+contractions whose images tile the parent piece.  This produces a formal
+grammar for generating all eight dissections.
+
+\subsection{Halving rules}
+
+\begin{table}[H]
+\centering\small
+\caption{Halving rules and their chirality.  Rule R3 ($S_{4} \to S_{8}$) is
+the unique rule with \emph{both} branches orientation-preserving.}
+\label{tab:ifs-rules}
+\begin{tabular}{@{} c l l c c @{}}
+\toprule
+Rule & Production & Geometric name & $\det(f_{1})$ & $\det(f_{2})$ \\
+\midrule
+R1 & $S_{1} \to f_{1}(S_{2}) \cup f_{2}(S_{2})$          & Median bisection            & $+1$ & $-1$ \\
+R2 & $S_{2} \to g_{1}(S_{4}) \cup g_{2}(S_{4})$          & Orthogonal median           & $+1$ & $-1$ \\
+R3 & $S_{4} \to h_{1}(S_{8}) \cup h_{2}(S_{8})$          & Longest-edge bisection      & $+1$ & $+1$ \\
+R4 & $S_{3} \to p_{1}(S_{6}) \cup p_{2}(S_{6})$          & Axial median bisection      & $+1$ & $-1$ \\
+R5 & $S_{12} \to q_{1}(S_{24}) \cup q_{2}(S_{24})$       & Edge bisection              & $+1$ & $-1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Heterogeneous bridge (R6)}
+
+The heterogeneous bridge (\cref{thm:s2-bridge}) corresponds to the rule
+$R6 \colon S_{2} \to \alpha(S_{3}) \cup \beta(S_{6})$ with
+$\det(\alpha)\det(\beta) = -1$.
+
+\subsection{Formal alphabet and grammar}
+
+The alphabet of the grammar is
+$\Sigma = \{S_{1}, S_{2}, S_{3}, S_{4}, S_{6}, S_{8}, S_{12}, S_{24}\}$.
+Homogeneous productions are R1--R5; the unique heterogeneous production is
+R6.  Derived multi-level compositions include $R1 \circ R2$
+($S_{1} \to 4 \times S_{4}$, quadrisection) and $R1 \circ R2 \circ R3$
+($S_{1} \to 8 \times S_{8}$, $8T$-LE octasection).
+
+\subsection{Composition \texorpdfstring{$S_{1} \to 8 \cdot S_{8}$}{S1 -> 8 S8}
+and PPS23 similarity classes}
+
+Iterated longest-edge bisection of $T$ produces a finite sequence of
+similarity classes~\cite{PPS2023}; our grammar reproduces and
+extends their enumeration:
+
+\begin{table}[H]
+\centering\small
+\caption{Similarity class count under iterated longest-edge bisection.}
+\label{tab:pps23}
+\begin{tabular}{@{} r r r @{}}
+\toprule
+Depth & Pieces & Similarity classes \\
+\midrule
+$1$  & $2$   & $1$ \\
+$2$  & $4$   & $2$ \\
+$3$  & $8$   & $4$ \\
+$4$  & $16$  & $8$ \\
+$5$  & $32$  & $9$ \\
+$6$  & $64$  & $12$ \\
+$7$  & $128$ & $16$ \\
+$8$  & $256$ & $17$ \\
+$9$  & $512$ & $\mathbf{18}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The class count stabilises at $18$ by depth $9$, consistent with a finite
+attractor in similarity space.  At depth $9$ the four dominant classes are
+the regular tetrahedron ($\times 40$), an isosceles variant ($\times 40$),
+the $S_{8}$-type ($\times 108$) and the $S_{3}$-type ($\times 40$).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{An obstruction stack for $\Td$-invariant dissections
+(screening)}\label{sec:nontrans}
+
+\noindent\textbf{Status of this section (honesty block).}  This section
+does \emph{not} resolve the non-$G_{\mathrm{diss}}$-transitive case of
+\cref{conj:divisor}.  It builds an \emph{evidence stack} that, under the
+standing hypothesis of $\Td$-invariance (\Cref{def:td-invariance}) and a
+$\Td$-maximality argument flagged as \emph{plausible but not fully
+rigorous} (\Cref{ssec:td-max,rem:td-max-caveat}), filters every tested
+orbit decomposition for $n \leq 16$, $n \nmid 24$.  Of the nine such
+values of $n$ four pass through the crystallographic restriction alone
+(\emph{unconditional} screening in the $\Td$-invariant category) and five
+additionally invoke the $\Td$-maximality step, tagged~$(\dagger)$ in
+\cref{tab:orbit-filter} and recorded at level \textsf{L1+} in
+\cref{tab:argument-chain}.  A theorem-level resolution of the
+non-transitive problem, without the $\Td$-maximality caveat, is the
+content of the Stabiliser Transport Lemma
+(\Cref{lem:stab-transport}, \Cref{sec:programme}) and is not achieved
+here.
+
+\medskip
+
+The remaining question for \cref{conj:divisor} is whether a congruent
+$n$-dissection of $T$ with $n \nmid 24$ could exist without being
+$G_{\mathrm{diss}}$-transitive (\Cref{def:gdiss-transitive}).  We develop a
+systematic obstruction framework combining the subgroup lattice, the
+crystallographic restriction theorem, and a $\Td$-maximality argument; the
+resulting stack filters all tested decompositions in the $\Td$-invariant
+category (\Cref{def:td-invariance}).  It is important to stress that
+$\Td$-invariance is strictly stronger than mere non-transitivity under
+$G_{\mathrm{diss}}$: a hypothetical congruent dissection might have
+$G_{\mathrm{diss}}(D) \subsetneq \Td$ and therefore escape the $\Td$-orbit
+analysis of this section entirely.
+
+\subsection{Orbit decomposition}\label{ssec:orbit-decomp}
+
+Suppose a congruent $n$-dissection $T = \bigsqcup_{i=1}^{n} P_{i}$ is
+\emph{$\Td$-invariant} (\Cref{def:td-invariance}), i.e.\ every
+$\sigma \in \Td$ permutes the pieces
+(equivalently, $\sigma(\{P_1,\ldots,P_n\}) = \{P_1,\ldots,P_n\}$ for all
+$\sigma$).  All eight known dissections enjoy this property for
+$n \in \{1,12,24\}$ (\cref{lem:geom-vs-alg-stab}); for
+$n \in \{2,3,4,6,8\}$ only the smaller group
+$G_{\mathrm{diss}}(S_{n}) \subsetneq \Td$ preserves the partition set-wise
+and the analysis below strictly speaking applies only after replacing $\Td$
+by $G_{\mathrm{diss}}(S_{n})$.  The present section enforces $\Td$-invariance
+as a standing hypothesis so as to have the full group $\Td$ available for
+the orbit decomposition.
+Under this assumption, the $\Td$-action decomposes into orbits
+$\calO_{1}, \ldots, \calO_{k}$ with
+$|\calO_{j}| = [\Td : H_{j}]$ for stabiliser $H_{j} \leq \Td$.  Since each
+orbit size divides $|\Td| = 24$:
+\begin{equation}\label{eq:orbit-decomp}
+  n = \sum_{j=1}^{k}\, [\Td : H_{j}],
+  \qquad
+  [\Td : H_{j}] \in \{1,2,3,4,6,8,12,24\}.
+\end{equation}
+For $n \nmid 24$ necessarily $k \geq 2$.
+
+\begin{lemma}[Size-$1$ orbit]\label{lem:size-1}
+At most one orbit has size $1$.
+\end{lemma}
+
+\begin{proof}
+A $\Td$-invariant piece must contain the centroid $G_{T}$, the unique
+$\Td$-fixed point of $T$.  Two distinct convex pieces containing $G_{T}$
+would overlap.
+\end{proof}
+
+\subsection{Cross-orbit symmetry obstruction}
+
+Let $P_{1} \in \calO_{1}$ and $P_{2} \in \calO_{2}$ be pieces in distinct
+orbits of a congruent $\Td$-invariant dissection.  Since $P_{1} \cong P_{2}$,
+a fixed congruence identifies them with a common abstract reference tile
+$P$ whose intrinsic symmetry group is $K := \Sym(P) \leq O(3)$.  The
+stabilisers
+\[
+  H_{1} = \Stab_{\Td}(P_{1}), \qquad H_{2} = \Stab_{\Td}(P_{2})
+\]
+act on $P$ and hence embed (as subgroups, up to conjugation in $O(3)$) into~$K$.
+
+\begin{lemma}[Stabiliser pair screening]\label{lem:stab-embed}
+Let $H_{1}, H_{2} \leq \Td$ be two point-stabiliser conjugacy classes from
+the $30$ subgroups of $\Td$ (in $11$ conjugacy classes).  Let
+$K(H_{1}, H_{2}) \leq O(3)$ denote the smallest finite subgroup of
+$O(3)$, up to conjugation, that contains a pair of non-conjugate copies of
+$H_{1}$ and $H_{2}$ (whenever such a pair exists).  Then, using the
+classical classification of finite subgroups of $O(3)$ and the
+crystallographic restriction theorem~\cite{Hiller1985}, the following
+non-conjugate stabiliser pairs force $K$ to contain a full cubic group
+$\geq S_{4}$:
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Non-conjugate pair $(H_{1}, H_{2})$ & Minimal containing $K \leq O(3)$ \\
+\midrule
+$(D_{4}, \Z_{3})$      & $\supseteq S_{4}$ \quad (mixed $4$-fold \& $3$-fold) \\
+$(\Z_{4}, \Z_{3})$      & $\supseteq S_{4}$ \quad (same mechanism) \\
+$(S_{3}, V_{4})$       & $\supseteq S_{4}$ \quad ($3$-fold + orthogonal $2$-folds) \\
+$(A_{4}, D_{4})$       & $\supseteq S_{4}$ \quad (automatic) \\
+$(A_{4}, S_{3})$       & $\supseteq S_{4}$ \quad (automatic) \\
+$(D_{4}, S_{3})$       & $\supseteq S_{4}$ \quad (automatic) \\
+\bottomrule
+\end{tabular}
+\end{center}
+In particular, for each such pair, any abstract tile $P$ admitting both
+$H_{1}$ and $H_{2}$ as non-conjugate subgroups of $\Sym(P)$ satisfies
+$|\Sym(P)| \geq 24$ and $\Sym(P)$ contains a copy of $S_{4}$ acting on a
+cube.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Each listed pair either (i) combines a $4$-fold and a $3$-fold rotation,
+or (ii) combines a $3$-fold rotation with a $V_{4}$ subgroup of orthogonal
+$2$-folds, or (iii) already contains $A_{4}$.  In case~(i) the
+crystallographic restriction and the classification of finite rotation
+groups of $\R^{3}$ force the generated subgroup to be the rotation group
+of the cube (order $24$) or its full symmetry group (order $48$); in
+case~(ii) the three mutually orthogonal $2$-folds and the $3$-fold
+permuting them generate the same rotation subgroup; case~(iii) is
+immediate since $A_{4} \leq S_{4}$.  A finite verification on all unordered
+pairs of conjugacy classes in $\Td$ (performed computationally; see
+\texttt{independent\_verifier.py} in the supplementary code capsule)
+confirms no other non-conjugate pair realises a smaller containing group.
+\end{proof}
+
+\begin{remark}[Why this is a screening lemma, not an impossibility theorem]
+\label{rem:stab-screen}
+\cref{lem:stab-embed} is used as a \emph{finite screening device} on orbit
+decompositions of $n \nmid 24$: whenever a putative decomposition assigns
+stabilisers in a pair of the table above to distinct orbits, the abstract
+tile must admit a cubic-or-larger symmetry group, which is incompatible
+with the finite list of tile shapes compatible with a tetrahedral
+dissection (verified case-by-case in the obstruction stack,
+\cref{tab:orbit-filter}).  It is \emph{not} a standalone impossibility
+theorem; the final kill still requires either $\Td$-maximality
+(\cref{ssec:td-max}, with the caveat of \cref{rem:td-max-caveat}) or the
+Stabiliser Transport Lemma (\cref{lem:stab-transport}).
+\end{remark}
+
+\subsection{The \texorpdfstring{$\Td$}{Td}-maximality argument}\label{ssec:td-max}
+
+\noindent\emph{Status.}  The argument of this subsection is \textbf{plausible
+but not fully rigorous}: it relies on the implicit assumption that the
+cross-orbit congruence $P_{1} \to P_{2}$ extends to a global isometry of
+$T$, which is not forced by the dissection hypothesis alone.  See
+\cref{rem:td-max-caveat} immediately below and the Stabiliser Transport
+Lemma (\cref{lem:stab-transport}, \cref{sec:programme}) for the correct
+group-theoretic completion.  Decompositions marked $(\dagger)$ in
+\cref{tab:orbit-filter} are precisely those whose filtering depends on
+this conditional argument.
+
+\medskip
+
+For orbit decompositions surviving the crystallographic filter -- those with
+\emph{same-type} stabilisers (e.g.\ $n = 9 = 3 + 3 + 3$ with all $D_{4}$) --
+the cross-orbit congruence map $P_{1} \to P_{2}$ must be an isometry of
+$\R^{3}$ that is \emph{not} in $\Td$: $\Td$ permutes pieces within orbits,
+not between them.  Since $\Td = \Isom(T)$ is the full isometry group of $T$,
+any such map cannot preserve $T$ globally.
+
+\begin{remark}[Caveat on \Cref{ssec:td-max}]\label{rem:td-max-caveat}
+A congruence $\sigma \colon P_{i} \to P_{j}$ only needs to map one piece to
+another; it does not need to preserve $T$ globally.  Hence
+$\sigma \notin \Td$ does not \emph{itself} produce a contradiction: the
+argument of \Cref{ssec:td-max} is plausible but not fully rigorous, and the
+Stabiliser Transport Lemma of \Cref{sec:programme} (\cref{lem:stab-transport})
+provides the correct group-theoretic completion.
+\end{remark}
+
+\subsection{Results of the obstruction stack}
+
+Systematic enumeration of all integer partitions of $n$ into valid orbit
+sizes (\eqref{eq:orbit-decomp}), followed by stabiliser-type analysis, gives:
+
+\begin{table}[H]
+\centering\small
+\caption{Non-transitive orbit decompositions filtered for $n \leq 16$,
+$n \nmid 24$.  A dagger $(\dagger)$ indicates decompositions that require
+the $\Td$-maximality argument of \Cref{ssec:td-max}, plausible but not yet
+rigorous.}
+\label{tab:orbit-filter}
+\begin{tabular}{@{} c c c c l @{}}
+\toprule
+$n$ & Total decomps. & After filter & All filtered? & Primary mechanism \\
+\midrule
+$5$   & $6$   & $1$  & yes             & $K \geq S_{4}$ \\
+$7$   & $12$  & $3$  & yes             & $K \geq S_{4}$ \\
+$9$   & $22$  & $6$  & yes$^{\dagger}$ & $K \geq S_{4}$ + same-type + $\Td$-max \\
+$10$  & $30$  & $8$  & yes$^{\dagger}$ & $K \geq S_{4}$ + same-type + $\Td$-max \\
+$11$  & $36$  & $10$ & yes             & $K \geq S_{4}$ \\
+$13$  & $58$  & $17$ & yes             & $K \geq S_{4}$ \\
+$14$  & $76$  & $21$ & yes$^{\dagger}$ & $K \geq S_{4}$ + same-type + $\Td$-max \\
+$15$  & $90$  & $26$ & yes$^{\dagger}$ & $K \geq S_{4}$ + same-type + $\Td$-max \\
+$16$  & $115$ & $33$ & yes$^{\dagger}$ & $K \geq S_{4}$ + same-type + $\Td$-max \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Four of the nine cases are rigorously filtered by the crystallographic
+restriction alone (marked without dagger in \cref{tab:orbit-filter});
+the remaining five additionally require the
+$\Td$-maximality argument (\Cref{ssec:td-max}), which is plausible but not
+yet fully rigorous -- see \cref{rem:td-max-caveat}.  We therefore do
+\emph{not} claim theorem-level impossibility of non-$G_{\mathrm{diss}}$-transitive
+dissections for $n \leq 16$: what the table establishes is that, within
+the $\Td$-invariant category, every tested orbit decomposition is ruled
+out \emph{up to} the $\Td$-maximality caveat.  This is recorded at level
+\textsf{L1+} in \cref{tab:argument-chain} and motivates (but does not
+prove) \cref{conj:transitivity}.
+
+\subsection{Argument chain summary}
+
+\begin{table}[H]
+\centering\small
+\caption{Evidence-level stack of the screening argument against
+non-$G_{\mathrm{diss}}$-transitive dissections, under the standing
+hypothesis of $\Td$-invariance.}
+\label{tab:argument-chain}
+\begin{tabular}{@{} c l c @{}}
+\toprule
+Step & Statement & Status \\
+\midrule
+1 & Non-transitive $\Rightarrow$ $\geq 2$ orbits, sizes divide $24$       & \textbf{Theorem} \\
+2 & At most one $\Td$-invariant piece (\cref{lem:size-1})                 & \textbf{Theorem} \\
+3 & Stabiliser action on vertices forces $|V(P) \cap V(T)| \in \{0, 4\}$ & Proposition (convex) \\
+4 & Mixed stabiliser types $\Rightarrow$ $K \geq S_{4}$
+       (crystallographic restriction)                                      & \textbf{Theorem} \\
+5 & Same-type orbits require non-$\Td$ isometry                          & Plausible (L1+) \\
+6 & $S_{4}$-symmetric bodies cannot tile $T$ for $n \nmid 24$            & L1 evidence \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The rigidity and configurational programme}\label{sec:programme}
+
+We now describe the programme that attacks \cref{conj:transitivity} and
+contains the two principal new impossibility theorems of the paper:
+\cref{thm:n5} ($n = 5$ conditional reduction) and \cref{thm:n16-aof-conditional} ($n = 16$
+all-one-face conditional reduction).
+
+Throughout this section we adopt two standing hypotheses, consistent with
+all prior literature on congruent simplicial tilings: (i) every piece is
+convex, and (ii) the dissection is \emph{face-to-face} (every interior
+$2$-face of the piece complex is shared by exactly two pieces).
+
+\subsection{Dihedral rigidity programme}\label{ssec:rigidity}
+
+A direct attack via dihedral-angle analysis exploits the irrationality of
+$\alpha/\pi$ (Conway--Jones~\cite{ConwayJones1976}).  The intended chain was:
+$\alpha/\pi \notin \Q \Rightarrow$ interior edges carry zero
+$\alpha$-coefficient $\Rightarrow$ Dehn localises to the original $T$-edges
+$\Rightarrow$ every piece is an $\alpha$-carrier $\Rightarrow$ every piece
+touches $\geq 2$ of $T$'s $4$ faces $\Rightarrow$ Face-Normal Rigidity forces
+the gluing isometry $\phi \in \Td$ $\Rightarrow$ transitivity
+$\Rightarrow$ $n \mid 24$.
+
+\begin{theorem}[Face-Normal Rigidity]\label{thm:fnr}
+Let $Q \in O(3)$ be an orthogonal linear map.  If $Q$ sends at least two
+of the four face normals of~$T$ (as unit vectors based at the origin) to
+face normals of~$T$, then $Q$ is the linear part of some element
+of~$\Td$.  Equivalently, for every isometry
+$\phi(x) = Qx + t$ of $\R^{3}$ whose linear part~$Q$ sends two or more
+face normals of~$T$ to face normals of~$T$, one has $Q \in \Td$ (regarded
+as a subgroup of $O(3)$ in the standard way).  Verified exhaustively on
+all $144$ ordered pairs of face normals.
+\end{theorem}
+
+However the chain above is broken by two identified gaps:
+
+\begin{description}
+\item[GAP A (Dehn localisation).]
+  The chain assumes all piece dihedral angles have the form
+  $\theta = m\alpha + q\pi$ with $m \in \Z$.  This is unjustified for
+  arbitrary cuts: only original $T$-edges carry $\alpha$-related angles a
+  priori, and global cancellation $\sum m_{i} = 0$ at an interior edge
+  does \emph{not} force each $m_{i}$ to vanish.  The na\"ive
+  ``$m \geq 2 \Rightarrow \theta > \alpha$'' dichotomy also fails, e.g.\
+  $\theta = 2\alpha - \pi/2 \approx 51^{\circ} < \alpha$.
+\item[GAP B (Intrinsic boundary).]
+  A face of a piece lying on $\partial T$ is not intrinsically
+  distinguishable from an interior face: the gluing isometry
+  $\phi \colon P_{1} \to P_{2}$ could map a boundary face of $P_{1}$ to an
+  interior face of $P_{2}$.  Without intrinsic distinguishability the
+  Face-Normal Rigidity theorem (\cref{thm:fnr}, which \emph{is} valid as a
+  finite test) cannot be invoked to force $\phi \in \Td$.
+\end{description}
+
+\cref{thm:fnr} is therefore a correct rigidity tool, but its deployment
+requires first discharging GAPs A and B.  The remainder of \Cref{sec:programme}
+addresses these gaps.
+
+\subsection{Reduction engine and Stabiliser Transport}\label{ssec:reduction-engine}
+
+Following the GAP A/B diagnosis we pivot to a \emph{reduction strategy}:
+defer the final kill and restrict the shape of any putative counterexample.
+
+\begin{lemma}[Stabiliser Transport -- \textsf{L2} theorem]\label{lem:stab-transport}
+Let $T = P_{1} \cup \cdots \cup P_{n}$ be a congruent dissection with
+congruence group $G = \langle \sigma_{ij} \rangle \leq \Isom(\R^{3})$.
+Then:
+\begin{enumerate}
+  \item[(a)] stabilisers of congruent pieces are conjugate in $\Isom(\R^{3})$;
+  \item[(b)] if $n \nmid 24$ then $G \not\leq \Td$; consequently $G$ contains
+             a non-tetrahedral congruence and the $\Td$-action on the pieces
+             has $\geq 2$ orbits.
+\end{enumerate}
+\end{lemma}
+
+\cref{lem:stab-transport}(a) is standard; (b) follows from the fact that
+$\Td$ has $30$ subgroups in $11$ conjugacy classes with index set
+$\{24/|H|\} = \mathrm{div}(24)$.
+
+\begin{definition}[Boundary-Normal set]\label{def:bn}
+For each face $f$ of the abstract tile $P$, the \emph{boundary-normal set}
+\[
+  \BN(f) \coloneqq \bigl\{\, i \in \{0,1,2,3\}
+          : \exists\ \text{placement } \phi \text{ with }
+          \phi(f) \subset F_{i}(T) \,\bigr\}
+\]
+records which $T$-faces $F_{0},\ldots,F_{3}$ the abstract face $f$ can land
+on.
+\end{definition}
+
+\begin{conjecture}[Boundary-Normal Orbits, L1]\label{conj:bn-orbits}
+In a minimal counterexample to \cref{conj:transitivity}, the boundary faces
+of the abstract tile $P$ fall into at most two $\Sym(P)$-orbits under the
+$4$-normal dictionary $\BN(\,\cdot\,)$.
+\end{conjecture}
+
+The face-orbit analysis for all $11$ subgroup conjugacy classes of $\Td$
+partitions $\{0,1,2,3\}$ into progressively finer schemes: e.g.\ $\Z_{3}$
+acts as $\{0\}\,|\,\{1,2,3\}$, $V_{4}$ as $\{0,1\}\,|\,\{2,3\}$, which
+constrains the boundary structure of any counterexample.
+
+\subsection{Spherical Link Program and the Conditional Separation Lemma}
+\label{ssec:spherical-link}
+
+The local geometry at each $T$-vertex $V$ is captured by the \emph{vertex
+link}, an equilateral spherical triangle $\Delta_{V}$.  Its angles are equal
+to the dihedral $\alpha$ of $T$, and its sides equal the face-angle $\pi/3$:
+both are exactly computable.
+
+\begin{proposition}[Vertex-link geometry, L2]\label{prop:vertex-link}
+The vertex link $\Delta_{V}$ at every vertex of $T$ is equilateral with
+spherical angle $\alpha = \arccos(1/3)$ and side length $\pi/3$.
+\end{proposition}
+
+\begin{proof}
+Apply the spherical law of cosines to the three faces meeting at $V$:
+$\cos a = \cos\alpha/(1 - \cos\alpha) = 1/2$, whence $a = \pi/3$.  Equality of
+the three angles is immediate from the symmetry $\Sym_{V}(T)$.
+\end{proof}
+
+\begin{proposition}[Conditional Separation Lemma, L1+]\label{prop:csl}
+Suppose \emph{Hypothesis H} holds: every interior angle of every link-tile
+at every $T$-vertex belongs to $\Q\alpha + \Q\pi$.
+Then under the Gauss--Bonnet constraint on $s$-gon tiles $Q$ of
+$\Delta_{V}$, the identity separates into
+\[
+  \sum_{\ell} a_{\ell} = \frac{3}{k},
+  \qquad
+  \sum_{\ell} b_{\ell} = s - 2 - \frac{1}{k},
+  \qquad a_{\ell}, b_{\ell} \in \Q,
+\]
+where $k$ is the number of pieces meeting at $V$.  In a uniform convex model
+this forces $k \in \{1, 3, 6, 9, 12, \ldots\}$, eliminating $k \in \{2, 4, 5\}$.
+\end{proposition}
+
+Three open gaps prevent \cref{prop:csl} from attaining theorem status:
+\textbf{GAP C} (Hypothesis H), \textbf{GAP D} (mixed vertex types may
+produce non-congruent link-tiles), \textbf{GAP E} (non-convex pieces).
+Discharge of GAP C is the key conditional step.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Configurational closure at \texorpdfstring{$n = 16$}{n=16}:
+the all-one-face residual}\label{sec:prog-n16}
+
+\cref{conj:bn-orbits} targets GAP B by classifying boundary-face orbits
+abstractly.  The same gap can be attacked \emph{configurationally}:
+enumerate, for fixed piece count $n$, the candidate ``abstract role
+distributions'' of pieces on $\partial T$ and eliminate them one by one.
+
+For $n = 16$ the most constrained distribution places one boundary face of
+every piece on the \emph{same} single $T$-face; we call this the
+\emph{all-one-face} residual.
+
+\paragraph{Setup.}
+Embed $T$ via the rational coordinates
+\begin{equation}\label{eq:16-embedding}
+  v_{0} = (1,1,1),\quad
+  v_{1} = (1,-1,-1),\quad
+  v_{2} = (-1,1,-1),\quad
+  v_{3} = (-1,-1,1),
+\end{equation}
+so $|v_{i} v_{j}|^{2} = 8$ and $V_{T} = 8/3$.  The medial triangle of each
+$T$-face decomposes that face into four sub-triangles (\emph{slots}): three
+corner slots (at the three $T$-vertices) and one central slot (the medial
+triangle itself).  Two auxiliary hypotheses derived from the preparatory
+MILP (see the \texttt{P25-C7} slot decomposition chain of the supplementary
+materials) cut the search space:
+
+\begin{description}
+\item[$(\Hroles)$] (Role-type assignment).
+  The medial decomposition is the only abstract role-type assignment
+  compatible with face-to-face adjacency: each boundary footprint is either
+  a corner slot or the central slot.
+\item[$(\Hslot)$] (Slot separation).
+  Every piece's boundary footprint is exactly one of the four slots above;
+  no piece's footprint mixes slot types.
+\end{description}
+
+Both $(\Hroles)$ and $(\Hslot)$ are unconditional in the
+\emph{Coxeter-pure} instance (where every piece is a union of
+$A_{3}$-orthoschemes) but residual in the general convex instance.
+
+\begin{theorem}[$n=16$ all-one-face: Coxeter-pure instance]\label{thm:n16-aof-coxeter}
+There is no face-to-face Coxeter-pure congruent dissection of $T$ into
+$16$ mutually congruent pieces such that every piece has exactly one
+boundary face on a single common $T$-face.
+\end{theorem}
+
+\begin{proof}
+In the Coxeter-pure instance both $(\Hroles)$ and $(\Hslot)$ are automatic
+(a union of $A_{3}$-orthoschemes has a unique role assignment and a
+unique boundary-slot type per piece; see \Cref{sec:prog-n16}).  The
+conclusion therefore follows from the conditional
+\cref{thm:n16-aof-conditional} below.
+\end{proof}
+
+\begin{conditionaltheorem}[$n=16$ all-one-face: general convex instance]\label{thm:n16-aof-conditional}
+Assume $(\Hroles) + (\Hslot)$.  Let $\{P_{1},\ldots,P_{16}\}$ be a
+face-to-face congruent dissection of $T$ into $16$ mutually congruent
+convex polytopes such that every $P_{i}$ has exactly one boundary face on a
+single common $T$-face.  Then no such dissection exists.
+\end{conditionaltheorem}
+
+The proof assembles three rigidity lemmas, each independently certified by
+exact rational arithmetic (Python \texttt{Fractions}, zero failed tests
+across the chain).
+
+\begin{lemma}[Tetrahedrality reduction, C24x]\label{lem:c24x}
+Every $P_{i}$ is a tetrahedron with triangular medial base on $\partial T$
+and a single interior apex.
+\end{lemma}
+
+\begin{proof}
+Two parts.
+
+\emph{(I) Scaled-top family.}
+No \emph{scaled-top} piece -- right prism ($t = 1$), right frustum
+($t \in (0,1)$), or right pyramid with apex above the base centroid ($t = 0$)
+-- fits.  The volume constraint $V_{\mathrm{piece}} = V_{T}/16 = 1/6$ with base
+area $\sqrt 3/2$ forces height $h_{\mathrm{piece}} = h_{T}/4$ (prism) or the
+frustum-corrected analogue.
+\begin{itemize}
+  \item \emph{Layer A (prism).}  At $h_{\mathrm{prism}} = \sqrt 3/9$ the
+        $T$-cross-section has squared inradius $(121/144)(2/3)$, while the
+        medial triangle has squared circumradius $2/3$; the ratio
+        $144/121 > 1$, so at least one medial vertex sticks out of $T$.
+  \item \emph{Layer B (frustum).}  For any base point $Q$ the difference
+        between the corner-frustum top and the central-frustum top equals
+        $(1 - t)\,(c_{\mathrm{corner}} - c_{\mathrm{central}})$.  Since
+        $|c_{\mathrm{corner}} - c_{\mathrm{central}}|^{2} = 2/3 \neq 0$
+        exactly, face-to-face matching on the shared medial edge fails for
+        every $t \in [0, 1)$.
+\end{itemize}
+
+\emph{(II) Multi-apex residual.}
+Every convex piece with $k \geq 2$ interior vertices is excluded by two
+independent rigorous arguments.  Let $F_{1}$ be the lateral face of a
+corner-$v_{j}$ piece carrying the medial edge $(m_{jk}, m_{jl})$, and let
+$q$ be the number of interior vertices of the piece on $F_{1}$.
+\begin{itemize}
+  \item \textbf{(ARG-1) $F_{4}$ parity-pairing} ($k = 2, q = 2$, Type-$2$
+        $5$-vertex polytope).  The apex-interior face
+        $F_{4} = (v_{j}, A, B)$ contains $v_{j}$ and both interior vertices
+        but no midpoint.  At vertex $v_{j}$ exactly three corner-$v_{j}$
+        pieces meet, each carrying one such $F_{4}$.  Face-to-face matching
+        forces these three faces to pair \emph{among themselves}, but a
+        fixed-point-free involution on a $3$-element set is impossible.
+  \item \textbf{(ARG-2) Three-plane collapse} (all $k \geq 2$, $q \geq 2$).
+        Congruence on edge multisets forces every interior vertex $X$ on
+        $F_{1}$ of a corner-$v_{1}$ piece to satisfy
+        $|v_{1} - X|^{2} = |m_{kl} - X|^{2}$, i.e.\ $X$ lies on the
+        perpendicular bisector plane of $(v_{1}, m_{kl})$.  Face-to-face
+        propagation across the three $T$-faces incident to $v_{1}$ yields
+        three such planes:
+        \[
+          2x - y - z = 1, \qquad x - y - 2z = 1, \qquad x - 2y - z = 1.
+        \]
+        The coefficient matrix is non-singular with determinant $-4$; the
+        unique intersection point is
+        \[
+          P_{*} = \tfrac{1}{4}(1, -1, -1),
+        \]
+        a rational interior point of $T$ with barycentric coordinates
+        $(3, 7, 3, 3)/16$.  Every interior vertex on $F_{1}$ collapses to
+        $P_{*}$, contradicting $q \geq 2$ distinct vertices.
+  \item The case $q = 1$ (triangular $F_{1}$) reduces to \cref{lem:c24w}
+        below via face-by-face apex collapse along the three medial edges.
+\end{itemize}
+This completes the proof.
+\end{proof}
+
+\begin{lemma}[Apex collapse, C24w]\label{lem:c24w}
+Conditional on \cref{lem:c24x}, every congruent piece has a single interior
+apex at perpendicular height $h_{T}/4$ above its medial base, and four
+rigidity layers force all $16$ apices to coincide at the centroid
+$G_{T} = (0, 0, 0)$:
+\begin{itemize}
+  \item[$(L_{1})$] Volume forces apex height $= h_{T}/4$.
+  \item[$(L_{2})$] Same-face medial-edge matching forces the apex of the
+        corner-$v_{j}$ piece on face $F_{i}$ to equal the apex of the
+        central piece on $F_{i}$.
+  \item[$(L_{3})$] $T$-edge matching propagates the apex across faces,
+        forcing all four central apices to coincide at a common point $Q$.
+  \item[$(L_{4})$] $Q$ is at perpendicular distance $h_{T}/4$ from every
+        face; the $3$-of-$4$ face-normal linear system has unique solution
+        $Q = G_{T}$.
+\end{itemize}
+\end{lemma}
+
+\begin{lemma}[Edge-multiset incongruence at $G_{T}$, C24v]\label{lem:c24v}
+At $Q = G_{T}$, the corner piece has squared-edge multiset
+$\{1, 1, 2, 2, 2, 3\}$ and the central piece has squared-edge multiset
+$\{1, 1, 1, 2, 2, 2\}$.  These multisets differ; hence the corner and
+central pieces are not congruent.
+\end{lemma}
+
+\begin{proof}[Proof of \cref{thm:n16-aof-conditional}]
+Combine \cref{lem:c24x}, \cref{lem:c24w}, and \cref{lem:c24v} with the
+medial-base reduction encoded in $(\Hroles) + (\Hslot)$: the first forces
+tetrahedrality; the second collapses all apices to $G_{T}$; the third
+produces a direct violation of piece congruence.
+\end{proof}
+
+\begin{remark}[Scope of \cref{thm:n16-aof-coxeter,thm:n16-aof-conditional}]
+In the Coxeter-pure instance $(\Hroles) + (\Hslot)$ are automatic,
+so \cref{thm:n16-aof-coxeter} is the \textsf{L3} (unconditional)
+specialisation of the \textsf{L2} conditional statement
+\cref{thm:n16-aof-conditional}.  In the
+general convex instance $(\Hroles) + (\Hslot)$ are residual; their
+theorem-level discharge is the remaining isolated bridge lemma (the paired
+$\Starp$ transport lemma of the supplementary programme), so
+\cref{thm:n16-aof-conditional} is at evidence level \textsf{L2}.
+\end{remark}
+
+\begin{remark}[Convexity hypothesis]
+The convexity of the pieces is essential to \cref{lem:c24x}: without it,
+multi-apex non-convex pieces are not reached by the perpendicular-bisector
+argument (ARG-$2$).  Discharging convexity is natural future work; the
+present theorem is, as stated, in the convex category.
+\end{remark}
+
+\begin{remark}[Why $n = 16$?]
+$n = 16$ divides neither $24$ nor $48$.  Note that closing the full
+$n = 16$ case \emph{would} advance \cref{conj:divisor}, since $16 \nmid 24$
+means that the conjecture predicts no dissection should exist.
+However, \cref{lem:c24x} closes only the \emph{all-one-face residual}
+configuration at $n = 16$, not the entire case.  This particular
+configuration was historically the most resistant residual of the
+role-distribution table in the programme described in \Cref{ssec:reduction-engine}.
+The same C24 machinery is structurally portable to the other
+non-divisors $n \in \{20, 28, \ldots\}$ and gives a template for the
+configurational attack on GAP~B.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conditional reduction at
+\texorpdfstring{$n = 5$}{n=5}: the first non-divisor
+reduced to finite hypotheses}\label{sec:prog-n5}
+
+The C24-chain of \Cref{sec:prog-n16} reduced the largest role-distribution
+residual at $n = 16$ to a conditional statement.  We now reduce the smallest
+non-divisor of $24$, namely $n = 5$, in the convex category, modulo four
+explicit finite hypotheses:
+\textup{(H-trip)} (topological; heuristic input to
+\textup{(H-coc)}, not used directly in the formal proof of
+\Cref{thm:n5}; see \Cref{rem:hcoc-from-htrip}),
+\textup{(H-coc)} (triangle cocycle on orbit-transport bits, used in
+the single $(12, 12, 24)/(2,2)$-orbit sub-case of the $f = 7$
+branch; \Cref{lem:k5-cyc}),
+\textup{(H-orb)} (orbit detection, used wherever the
+orbit-transport \Cref{lem:orbit-transport} is invoked;
+\Cref{rem:h-orb-auto}), and
+\textup{(H-Qb)} (single-piece \textsf{Qb} exclusion in $f = 5$;
+\Cref{rem:hqb-status}).  Four of the seven admissible
+$(t, k)$-residuals of the role-distribution census are closed
+\emph{unconditionally}; the remaining three invoke
+\textup{(H-orb)} and \textup{(H-Qb)} uniformly, and
+\textup{(H-coc)} is additionally used on the single
+$(12, 12, 24)/(2,2)$-orbit $f = 7$ sub-case.  Throughout this
+subsection the standing embedding is~\eqref{eq:16-embedding}.
+
+\paragraph{Status of the four hypotheses.}
+We emphasise up front that \Cref{thm:n5} is a \emph{conditional reduction},
+not an unconditional closure of~$n=5$:
+\begin{itemize}
+  \item \textup{(H-trip)} (\emph{topological; heuristic}).  Not used
+        directly in the formal proof of \Cref{thm:n5}; its intended role
+        is as the input to a developing-map reduction
+        \textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)} sketched but
+        \emph{not completed} in \Cref{rem:hcoc-from-htrip}.
+  \item \textup{(H-coc)} (\emph{algebraic; required, standing}).  A
+        triangle cocycle in $\mathrm{Sym}(P)$ on the $K_{5}$ adjacency
+        graph; used in exactly one sub-case of the $f = 7$ branch.  A
+        concrete finite certificate on any candidate dissection is
+        included in the data and code capsule accompanying the
+        submission (see the availability statement in
+        \Cref{sec:intro}).
+  \item \textup{(H-orb)} (\emph{algebraic; required, standing}).  Facet
+        orbit-detection on the reference tile; a single finite check
+        per orbit type (see \Cref{rem:h-orb-auto}).
+  \item \textup{(H-Qb)} (\emph{geometric; required, standing}).
+        Single-piece exclusion of the \textsf{Qb-adj}/\textsf{Qb-opp}
+        quadrilateral-pyramid sub-configurations in $f = 5$
+        (\Cref{rem:hqb-status}).
+\end{itemize}
+The unconditional closure of $n = 5$ would require either (i) completing
+the developing-map argument that promotes \textup{(H-trip)} to
+\textup{(H-coc)}, or (ii) discharging \textup{(H-orb)} and
+\textup{(H-Qb)} by a direct finite verification.  Both are natural
+next steps of the programme and are outside the scope of the present
+paper.
+
+Volume, face area, height of $T$ and per-piece totals in the $n = 5$ case:
+\[
+V_{T} = \tfrac{8}{3},\qquad
+A_{T} = 2\sqrt 3,\qquad
+h_{T} = \tfrac{4}{\sqrt 3},\qquad
+V_{\mathrm{piece}} = \tfrac{8}{15},\qquad
+E = \tfrac{8\sqrt 3}{5},
+\]
+where $E$ is the per-piece total exposed (boundary) surface area, determined
+by the constraint $5E = 4A_{T} = $ total boundary area of $T$.
+
+\begin{definition}[Touch count and incidence vector]\label{def:tk}
+For each piece $P$ let $I(P) \subseteq \{0, 1, 2, 3\}$ be the set of
+$T$-faces on which $P$ has positive $2$-area, $t \coloneqq |I(P)|$ (constant
+by congruence), and $k = (k_{0}, k_{1}, k_{2}, k_{3})$ with
+$k_{j} \coloneqq \#\{P : j \in I(P)\}$, so $\sum_{j} k_{j} = 5t$.
+\end{definition}
+
+\begin{conditionaltheorem}[$n=5$ convex conditional reduction, modulo \textup{(H-trip)}, \textup{(H-coc)}, \textup{(H-orb)}, \textup{(H-Qb)}]\label{thm:n5}
+Assume the four standing hypotheses \textup{(H-trip)} (topological;
+every triple of pieces of a putative $5$-piece dissection with $K_{5}$
+interior adjacency meets in a non-empty triple intersection),
+\textup{(H-coc)} (triangle cocycle in $\mathrm{Sym}(P)$;
+\Cref{lem:k5-cyc}), \textup{(H-orb)} (orbit detection;
+\Cref{rem:h-orb-auto}) and \textup{(H-Qb)} (single-piece \textsf{Qb}
+exclusion; \Cref{rem:hqb-status}) for every putative face-to-face
+convex congruent dissection of the regular tetrahedron $T$ into $5$
+pieces.  Then there is no face-to-face congruent dissection of $T$ into
+$5$ convex pieces.  The localisation of each hypothesis in the proof is:
+\begin{itemize}
+  \item \textup{(H-trip)} enters the proof only via its heuristic
+        reduction to \textup{(H-coc)} (\Cref{rem:hcoc-from-htrip});
+        the logical chain used in the UNSAT arguments invokes
+        \textup{(H-coc)} directly, so \textup{(H-trip)} is
+        formally redundant whenever \textup{(H-coc)} is assumed,
+        and is retained as a standing hypothesis to keep the
+        topological motivation for \textup{(H-coc)} on the record;
+  \item \textup{(H-coc)} is invoked only in the
+        $(t = 3, f = 7)$ sub-case with boundary multiset
+        $(12, 12, 24)$ and orbit structure $(2, 2)$
+        (via \Cref{lem:k5-cyc});
+  \item \textup{(H-orb)} is invoked wherever the orbit-transport
+        \Cref{lem:orbit-transport} is applied, which is the whole
+        $f = 7$ branch of the three $t = 3$ residuals that go
+        through parity reduction (the weak \Cref{lem:ctl} suffices
+        for $f = 5$ and for every other sub-case);
+  \item \textup{(H-Qb)} is invoked only in the \textsf{Qb-adj} and
+        \textsf{Qb-opp} sub-cases of the $f = 5$ closure, which
+        appear uniformly in all three parity-reduction residuals.
+\end{itemize}
+Four of the seven $(t, k)$-residuals (both $t = 2$ residuals, the
+$t = 3$ residual $(5, 5, 3, 2)$, and the $t = 4$ residual) are closed
+\emph{unconditionally} (none of the four standing hypotheses is
+invoked).  The remaining three $t = 3$ residuals invoke
+\textup{(H-orb)} and \textup{(H-Qb)} uniformly, and \textup{(H-coc)}
+only on the single $(12, 12, 24)/(2, 2)$-orbit $f = 7$ sub-case.
+\end{conditionaltheorem}
+
+The proof occupies the remainder of \Cref{sec:prog-n5}.  It proceeds by a
+role-distribution census (Step~1 below) followed by three UNSAT arguments,
+one for each admissible value of $t$ (Steps~2 and 3 below).
+
+\subsubsection*{Step 1: role-distribution census}
+
+Since each $T$-face must be covered by the boundary of the dissection,
+$k_{j} \geq 1$ for every $j$.  Each piece contributes area at most $E$ to
+any single $T$-face, so $A_{T} \leq k_{j} \cdot E$, i.e.
+\begin{equation}\label{eq:F4}
+  k_{j} \;\geq\; \left\lceil \frac{A_{T}}{E} \right\rceil
+     \;=\; \left\lceil \tfrac{5}{4} \right\rceil \;=\; 2.
+\end{equation}
+Combined with $\sum_{j} k_{j} = 5t$ the lower bound~\eqref{eq:F4} forces
+$5t \geq 8$, hence $t \geq 2$ (and $t \leq 4$ trivially).  In particular,
+the $n = 5$ analogue of the $n = 16$ all-one-face residual
+($t = 1$, $k = (5, 0, 0, 0)$) is \emph{combinatorially} impossible for two
+independent reasons: three $T$-faces would be uncovered (contradicting
+$\partial T$-coverage), and $5E = 8\sqrt 3 = 4 A_{T}$, four times the
+single-face capacity.
+
+After quotienting by $S_{4}$ acting on $T$-faces exactly \emph{seven}
+residuals survive the filter~\eqref{eq:F4}:
+\begin{center}\footnotesize
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$t$ & $k$-orbit representative (sorted desc) & $\sum k_{j}$ & Per-$T$-face uniform-share $a^{2}$ \\
+\midrule
+$2$ & $(4, 2, 2, 2)$ & $10$ & $3/4,\ 3,\ 3,\ 3$ \\
+$2$ & $(3, 3, 2, 2)$ & $10$ & $4/3,\ 4/3,\ 3,\ 3$ \\
+$3$ & $(5, 5, 3, 2)$ & $15$ & $12/25,\ 12/25,\ 4/3,\ 3$ \\
+$3$ & $(5, 4, 4, 2)$ & $15$ & $12/25,\ 3/4,\ 3/4,\ 3$ \\
+$3$ & $(5, 4, 3, 3)$ & $15$ & $12/25,\ 3/4,\ 4/3,\ 4/3$ \\
+$3$ & $(4, 4, 4, 3)$ & $15$ & $3/4,\ 3/4,\ 3/4,\ 4/3$ \\
+$4$ & $(5, 5, 5, 5)$ & $20$ & $12/25,\ 12/25,\ 12/25,\ 12/25$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{Step 2: the \texorpdfstring{$t = 4$}{t=4} residual
+\texorpdfstring{$(5, 5, 5, 5)$}{(5,5,5,5)}}
+
+In this residual every piece touches all four $T$-faces ($t = 4$).
+Write $(m_{1}, m_{2}, m_{3}, m_{4})$ for the canonical boundary-area
+multiset of the common piece shape; by congruence
+$M \coloneqq \sum_{j} m_{j}$ is the same for every piece and
+$5M = 4 A_{T}$, so $M = 4 A_{T}/5$.
+We make \emph{no} assumption that the $m_{j}$ are equal.
+
+\begin{lemma}[Regular-tetrahedron barycentric distance sum]\label{lem:bc-dist}
+For any point $p \in T$,
+\[
+  \sum_{j = 0}^{3} d\bigl(p,\aff(F_{j})\bigr) \;=\; h_{T},
+\]
+where $F_{0}, \ldots, F_{3}$ are the four faces of $T$.
+\end{lemma}
+
+\begin{proof}
+Standard application of $V_{T} = (1/3)\sum_{j} \mathrm{area}(F_{j}) \cdot
+d(p, \aff(F_{j}))$ with all $\mathrm{area}(F_{j}) = A_{T}$ and
+$V_{T} = (1/3) A_{T} h_{T}$.
+\end{proof}
+
+\begin{lemma}[Centroid pyramid decomposition on the closure]\label{lem:cpd-closure}
+For any convex polytope $P \subset \R^{3}$ and any point
+$q \in P$ \textup{(}closure, not just interior\textup{)},
+\[
+  \Vol(P) \;=\; \frac{1}{3}
+  \sum_{F \in \mathcal{F}(P)}
+    \mathrm{area}(F)\;\! d\bigl(q, \aff(F)\bigr).
+\]
+Every summand is nonnegative; it vanishes if and only if
+$q \in \aff(F)$.
+\end{lemma}
+
+\begin{proof}
+Apply the divergence theorem to $v(x) = (x - q)/3$ on $P$.
+Since $\operatorname{div} v = 1$,
+\[
+  \Vol(P)
+  = \int_{P} 1\, dx
+  = \int_{\partial P} v \cdot \hat{n}\, dA
+  = \frac{1}{3}\sum_{F \in \mathcal{F}(P)}
+    \mathrm{area}(F)\;\! d_{\mathrm{signed}}\bigl(q, \aff(F)\bigr),
+\]
+where $d_{\mathrm{signed}}$ is the signed distance
+(positive on the side of the outward normal).
+For $q \in P$ (convex), every supporting hyperplane has $q$
+on its inner side, so all signed distances are nonnegative
+and equal to the ordinary distance.
+\end{proof}
+
+Let $q_{T}$ be the incenter of $T$, the unique interior point with
+$d(q_{T}, \aff(F_{j})) = h_{T}/4$ for $j = 0, \ldots, 3$.
+Since the five closed pieces cover $T$ and $q_{T} \in \mathrm{int}(T)$,
+at least one piece $P^{*}$ satisfies $q_{T} \in P^{*}$.
+Apply \cref{lem:cpd-closure} at $q = q_{T}$:
+\begin{equation}\label{eq:t4-saturation}
+  V_{\mathrm{piece}}
+  \;=\; \underbrace{\frac{1}{3}\sum_{j = 0}^{3}
+      m_{\sigma^{*}\!(j)}\,d(q_{T}, F_{j})}_{B}
+    \;+\;\underbrace{\frac{1}{3}\!\sum_{G \in \mathcal{F}_{\mathrm{int}}(P^{*})}
+      \!\!\mathrm{area}(G)\,d(q_{T}, G)}_{I\;\ge\;0}.
+\end{equation}
+The boundary term depends only on the total $M$:
+\[
+  B \;=\; \frac{h_{T}}{12}\sum_{j} m_{\sigma^{*}\!(j)}
+    \;=\; \frac{h_{T}\,M}{12}
+    \;=\; \frac{h_{T}}{12} \cdot \frac{4 A_{T}}{5}
+    \;=\; \frac{A_{T}\, h_{T}}{15}
+    \;=\; \frac{V_{T}}{5}
+    \;=\; V_{\mathrm{piece}}.
+\]
+Hence $I = 0$: every interior facet $G$ of $P^{*}$ satisfies
+$d(q_{T}, \aff(G)) = 0$, i.e.\ $q_{T} \in \aff(G)$.
+
+\medskip
+\noindent\emph{Non-degenerate case.}
+If $q_{T} \in \mathrm{int}(P^{*})$ then
+$d(q_{T}, \aff(G)) > 0$ for every facet $G$, so $P^{*}$ has no
+interior facets: $f(P^{*}) = 4$.  By congruence every piece has
+$f = 4$, contradicting face-to-face (no shared interior facet).
+
+\medskip
+It remains to exclude the degenerate case $q_{T} \in \partial P^{*}$.
+Every point of a convex polytope belongs to the relative interior
+of a unique face $\sigma$; write $q_{T} \in \mathrm{relint}(\sigma)$.
+The four boundary facets of $P^{*}$ lie on $T$-face planes at
+distance $h_{T}/4 > 0$ from $q_{T}$, so $\sigma$ is not a boundary
+facet and lies in the interior skeleton.  We distinguish three cases
+by $\dim \sigma$.
+
+\begin{lemma}[Degenerate face case]\label{lem:deg-face}
+$\sigma$ cannot be an interior facet of $P^{*}$.
+\end{lemma}
+
+\begin{proof}
+Suppose $q_{T} \in \mathrm{relint}(G)$ for an interior facet $G$.
+Then $\aff(G)$ is the supporting hyperplane of $P^{*}$ at $q_{T}$.
+For any other facet $G' \ne G$, $q_{T} \in \aff(G')$ forces
+$q_{T} \in G'$ (since $\aff(G')$ supports $P^{*}$ and
+$q_{T} \in P^{*}$), placing $q_{T} \in G \cap G'$---a proper face
+of $G$, contradicting $q_{T} \in \mathrm{relint}(G)$.
+Thus $P^{*}$ has exactly one interior facet: $f - 4 = 1$.
+Double-counting interior facet-instances gives $5(f - 4)$ even,
+so $f - 4$ is even.  Contradiction.
+\end{proof}
+
+\begin{lemma}[Degenerate edge case]\label{lem:deg-edge}
+$\sigma$ cannot be an interior edge of $P^{*}$.
+\end{lemma}
+
+\begin{proof}
+Suppose $q_{T} \in \mathrm{relint}(e)$ for an interior edge $e$
+of $P^{*}$.  From $I = 0$, every interior facet $G$ satisfies
+$q_{T} \in \aff(G)$; since $\aff(G)$ is a supporting hyperplane
+of $P^{*}$ and $q_{T} \in P^{*}$, we obtain $q_{T} \in G$.
+In the face lattice of a convex polytope,
+$\mathrm{relint}(e) \cap G \ne \emptyset$ forces $e \subseteq G$,
+so every interior facet contains~$e$.  An edge of a $3$-polytope
+is contained in exactly two facets, giving exactly two interior
+facets; the four boundary facet-planes, at distance $h_{T}/4 > 0$
+from $q_{T}$, confirm that neither facet containing $e$ is
+boundary.  Hence $f = 6$; by congruence every piece has $f = 6$.
+
+Each interior facet is shared with a unique neighbour, so the
+adjacency graph is $2$-regular on $5$ vertices, hence the
+$5$-cycle $C_{5}$.  The facet $G$ shared between $P^{*}$ and a
+neighbour $P'$ satisfies $q_{T} \in e \subset G$, so
+$q_{T} \in P'$.  Iterating around $C_{5}$ shows
+$q_{T} \in P_{k}$ for all $k$.
+
+Applying the $I = 0$ argument to each piece, all
+$10 = 5 \times 2$ interior facets lie in planes through $q_{T}$.
+The spherical link at $q_{T}$ is a tiling of $S^{2}$ by five
+congruent digons (each piece contributes two interior-facet arcs).
+A digon is bounded by two great-circle arcs sharing the same pair
+of antipodal vertices; each spherical digon is therefore determined
+by a unique such pair.  Adjacent digons sharing an edge share that
+pair, and since the edge-adjacency graph of the tiling is
+connected, all five digons share the same antipodal pair;
+hence the tiling is a hosohedron.  Equivalently, all interior-facet
+planes contain a single line $L$ through $q_{T}$.
+
+Let $E = L \cap T$ and let $H$ be the plane through the midpoint
+$m$ of $E$ perpendicular to $L$.  Set $K = T \cap H$ (a convex
+polygon with at most four sides).
+Since $L$ is contained in every interior-facet plane, the segment
+$E$ lies in every piece and is the intersection of the two
+interior facets of each~$P_{k}$.
+We claim that any isometry $\phi_{k} \colon P^{*} \to P_{k}$
+maps boundary facets to boundary facets (and hence interior facets
+to interior facets).  The four boundary facets of $P^{*}$ lie on
+the four face-planes of $T$, whose six pairwise dihedral angles
+all equal $\arccos(1/3)$.  An isometry preserves dihedral angles,
+so the images form four facets of $P_{k}$ whose supporting planes
+also have all pairwise angles $\arccos(1/3)$.  Among the six
+facet-planes of $P_{k}$, the two interior planes meet at
+$360^{\circ}/5 = 72^{\circ} \ne \arccos(1/3)$, so both interior
+planes cannot appear in such a quadruple.  If exactly one interior
+plane were included, it would make angle $\arccos(1/3)$ with the
+remaining three face-planes of $T$; but the four face-normals of a
+regular tetrahedron satisfy $n_{i} \cdot n_{j} = -\tfrac{1}{3}$
+for $i \ne j$, so a unit vector $u$ with
+$|u \cdot n_{i}| = \tfrac{1}{3}$ for $i = 1, 2, 3$ satisfies
+$u = \pm n_{4}$, forcing the
+interior plane to coincide with a face-plane of $T$---impossible
+since interior-facet planes pass through $q_{T} \in \mathrm{int}(T)$.
+Thus $\phi_{k}$ maps boundary facets to boundary facets.
+
+Consequently $\phi_{k}$ sends the two interior facets of $P^{*}$
+to those of $P_{k}$ and their common edge $E$ to the
+corresponding edge of $P_{k}$, which is again~$E$.
+In particular $\phi_{k}$ fixes the midpoint $m$ and preserves
+$H$, so the five cross-sections $S_{k} = P_{k} \cap H$ are
+congruent convex regions, each a sector with apex $m$ and angular
+width $72^{\circ}$.
+
+By congruence the five radial edges from $m$ to the division
+points $d_{1}, \ldots, d_{5} \in \partial K$ all have a common
+length $r$, so the $d_{k}$ lie on a circle $C$ of radius $r$
+centred at $m$.  The points $d_{1}, \ldots, d_{5}$ split
+$\partial K$ into five arcs with pairwise disjoint interiors.
+Each vertex of $K$ lies in the interior of at most one arc, and
+$K$ has at most four vertices, so at least one arc contains no
+vertex of $K$; that arc is a single straight segment.  Since all
+five outer arcs are congruent (as images of one another under
+the~$\phi_{k}$), every arc is a straight segment lying on one
+edge of $K$.  With five straight arcs and at most four edges, two
+consecutive arcs share the same edge, placing three of the
+$d_{k}$ on one line.  But a line meets a circle in at most two
+points.  Contradiction.
+\end{proof}
+
+\begin{lemma}[Degenerate vertex case]\label{lem:deg-vertex}
+$\sigma$ cannot be a vertex of $P^{*}$.
+\end{lemma}
+
+\begin{proof}
+If $q_{T}$ is a vertex of $P^{*}$, at least three facets meet
+there.  Since the four boundary facet-planes are at distance
+$h_{T}/4 > 0$, all facets at $q_{T}$ are interior.
+Each interior facet is shared with exactly one of the other four
+pieces, and two convex pieces in a face-to-face dissection share
+at most one facet (their intersection is convex, hence a single
+face), so $P^{*}$ has at most four interior facets.  Combined
+with at least three and the parity constraint $f - 4$ even,
+exactly four interior facets remain, giving $f = 8$.
+By congruence every piece has $f = 8$.
+
+Each piece has four interior facets, giving a $4$-regular adjacency
+graph on five vertices, i.e.\ $K_{5}$.  Every pair shares an
+interior facet through $q_{T}$, so all five pieces meet at $q_{T}$.
+Reapplying the $I = 0$ argument to each piece, every interior
+facet of every piece passes through $q_{T}$.
+
+Intersect with a small sphere $S_{\varepsilon}$ centred at $q_{T}$.
+The five links $\Lambda_{k} = P_{k} \cap S_{\varepsilon}$ are
+congruent spherical quadrilaterals ($4$ edges each) tiling $S^{2}$
+edge-to-edge.  By Euler's formula $F_{s} = 5$,
+$E_{s} = \tfrac{1}{2} \cdot 4 \cdot 5 = 10$,
+$V_{s} = 2 + E_{s} - F_{s} = 7$.  In a face-to-face dissection
+every interior edge of the cell complex is shared by at least three
+cells (distinct neighbours in $K_{5}$), so every vertex of this
+spherical tiling has degree $\ge 3$, giving $2 E_{s} \ge 3 V_{s}$.
+But $20 < 21$.  Contradiction.
+\end{proof}
+
+\Cref{lem:deg-face,lem:deg-edge,lem:deg-vertex} exhaust every
+degenerate position of $q_{T}$ on $\partial P^{*}$.  Together with
+the non-degenerate case, the $(5, 5, 5, 5)$ residual is UNSAT.
+
+\subsubsection*{Step 3: the \texorpdfstring{$t \in \{2, 3\}$}{t in {2,3}}
+residuals}
+
+Rescale areas to integer units, $A_{T} = 60$, $E = 48$ (natural units of
+$\sqrt 3/30$).  By piece congruence every piece carries the \emph{same}
+canonical footprint multiset
+$(m_{1}, \ldots, m_{t})$ with $\sum m_{i} = E = 48$; for each $T$-face $j$
+with $k_{j} > 0$ there must exist a $k_{j}$-multisubset of the multiset
+summing to $A_{T} = 60$.
+
+\paragraph{$t = 2$ residuals.}
+Both $(4, 2, 2, 2)$ and $(3, 3, 2, 2)$ contain a face with $k_{j} = 2$;
+the pair-sum requirement $m_{a} + m_{b} = 60$ combined with
+$m_{1} + m_{2} = 48$ forces $(m_{1}, m_{2}) = (18, 30)$ uniquely (taking
+$2 \cdot 30 = 60$).  Then:
+\begin{itemize}
+  \item for $(4, 2, 2, 2)$ the $k_{0} = 4$ face needs a $4$-multisubset of
+        $\{18, 30\}$ summing to $60$, but the achievable sums are
+        $\{72, 84, 96, 108, 120\}$, missing $60$;
+  \item for $(3, 3, 2, 2)$ the $k_{0} = 3$ face needs a $3$-multisubset
+        summing to $60$, but the achievable sums are
+        $\{54, 66, 78, 90\}$, missing $60$.
+\end{itemize}
+Both residuals are UNSAT at the canonical-multiset level.
+
+\paragraph{$t = 3$ residuals.}
+Exhaustive enumeration over ordered triples
+$(m_{1}, m_{2}, m_{3})$ with $\sum m_{i} = 48$ and $m_{i} \geq 1$, combined
+with the per-$T$-face contribution-sum test and a brute-force search for
+per-piece assignments, gives:
+\begin{center}\small
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Residual & Multisets passing contribution test & Consistent assignments & Status \\
+\midrule
+$(5, 5, 3, 2)$ & $0$                         & --   & UNSAT at canonical-multiset level \\
+$(5, 4, 4, 2)$ & $1$ (namely $(6, 12, 30)$)  & $24$ & combinatorially SAT \\
+$(5, 4, 3, 3)$ & $5$                         & $20$ & combinatorially SAT \\
+$(4, 4, 4, 3)$ & $8$                         & $54$ & combinatorially SAT \\
+\bottomrule
+\end{tabular}
+\end{center}
+Only $(5, 5, 3, 2)$ closes at the canonical-multiset level.  Pooling the
+contribution-sum-feasible area multisets of the other three residuals yields
+the finite set
+\begin{equation}\label{eq:t3-five-multisets}
+\mathcal{M} \;=\; \bigl\{\,(6, 12, 30),\ (6, 15, 27),\ (6, 18, 24),\ (12, 12, 24),\ (12, 16, 20)\,\bigr\}
+\end{equation}
+of five integer triples of distinct $T$-face footprints (units of
+$\sqrt 3/30$).  We close each of them by a topological reduction.
+
+\begin{lemma}[Topological parity for $t = 3$ pieces]\label{lem:t3-parity}
+Let $P_{1}, \ldots, P_{5}$ be a face-to-face congruent dissection of $T$
+with $t(P) = 3$ for every piece.  Then each piece has
+$f(P) \in \{5, 7\}$ facets.
+\end{lemma}
+
+\begin{proof}
+Let $f = f(P)$.  We first count boundary facets.  A convex polytope has
+\emph{at most} one facet per supporting hyperplane (two coplanar facets
+would either coincide, contradicting the definition of a facet, or leave a
+lower-dimensional gap between them, contradicting convexity).  Hence
+$P$ has at most one facet on each of the $t = 3$ touched $T$-faces.  On
+the other hand, $t(P) = 3$ means $P$ has positive $2$-area on three
+$T$-faces, so it contributes at least one facet to each of them.  Thus
+$P$ has exactly $3$ boundary facets and $f - 3$ interior facets.
+
+Next we count interior incidences.  Two distinct convex pieces $P_{i},
+P_{j}$ can share at most one facet: in a face-to-face dissection any two
+pieces have convex intersection equal to a (possibly empty) face of each,
+and a single convex face cannot equal two different facets of either
+piece.  Consequently each interior facet of $P_{i}$ is shared with a
+\emph{unique} other piece, and is counted twice in the total piece--facet
+incidence count on interior facets.  The total is $5(f - 3)$, hence
+even.  Since $5$ is odd, $f - 3$ is even, i.e.\ $f$ is odd.
+
+Finally, convexity forces $f \geq 4$, and the one-facet-per-neighbour
+bound from the previous paragraph gives $f - 3 \leq n - 1 = 4$, so
+$f \in \{5, 7\}$.
+\end{proof}
+
+\begin{remark}[Tetrahedral sanity check]\label{rem:t3-tetrahedral-product}
+The excluded $f = 4$ case can be ruled out a second time by elementary
+arithmetic, which we record as an independent consistency check.  A
+tetrahedral piece $P$ with $t = 3$ must have all three boundary facets
+meeting at a single vertex $v_{P}$ of $T$ (the three $T$-face planes
+meet only at the four vertices of $T$); the three edges of $P$ issuing
+from $v_{P}$ therefore lie along the three edges of $T$ at $v_{P}$, with
+pairwise angles $60^{\circ}$.  Writing $a, b, c$ for the three edge
+lengths, the boundary triangles at $v_{P}$ have areas
+\[
+m_{1} = \tfrac{bc\sqrt{3}}{4},\quad
+m_{2} = \tfrac{ac\sqrt{3}}{4},\quad
+m_{3} = \tfrac{ab\sqrt{3}}{4},
+\]
+and the volume of the resulting tetrahedron evaluates (Gram determinant)
+to $V(P) = abc/(6\sqrt{2})$.  Eliminating $a, b, c$ yields
+\begin{equation}\label{eq:t3-tetprod}
+m_{1}\, m_{2}\, m_{3}
+  \;=\; \frac{3\sqrt{3}}{64}\,(abc)^{2}
+  \;=\; \frac{27\sqrt{3}}{8}\,V(P)^{2}
+  \;=\; \frac{27\sqrt{3}}{8}\cdot\frac{V_{T}^{2}}{25}
+  \;=\; \frac{A_{T}^{3}}{25}
+  \;=\; 8640
+\end{equation}
+in the integer units of \eqref{eq:t3-five-multisets} (with $A_{T} = 60$,
+using $V_{T} = (1/3)A_{T} h_{T}$ and $h_{T}^{2} = 2 A_{T}/3$).  On the
+other hand, by AM--GM any triple $(m_{1}, m_{2}, m_{3})$ with
+$m_{1} + m_{2} + m_{3} = 48$ satisfies
+$m_{1} m_{2} m_{3} \leq (48/3)^{3} = 4096 < 8640$.  The tetrahedral
+case is therefore arithmetically infeasible, confirming the topological
+exclusion of \Cref{lem:t3-parity}.
+\end{remark}
+
+\begin{lemma}[Weak Congruence Transport]\label{lem:ctl}
+Let $P_{1} = \gamma_{1}(P), \ldots, P_{5} = \gamma_{5}(P)$ be congruent
+copies of a reference polytope $P$ under rigid motions
+$\gamma_{i} \in \mathrm{Isom}(\R^{3})$, and suppose pieces $P_{i}$ and
+$P_{j}$ share a facet $S_{ij}$ which is the image
+$\gamma_{i}(F_{a})$ of abstract facet $F_{a}$ of $P$ and also the image
+$\gamma_{j}(F_{b})$ of abstract facet $F_{b}$ of $P$.  Then the composition
+$\tau_{ij} \coloneqq \gamma_{j}^{-1}\gamma_{i} \in \mathrm{Isom}(\R^{3})$
+restricts to an isometry $\tau_{ij}|_{F_{a}} \colon F_{a} \to F_{b}$ of
+polygons.  In particular $F_{a}$ and $F_{b}$ share
+\begin{enumerate}[label=(\roman*)]
+  \item combinatorial type: same vertex count, same edge count;
+  \item metric invariants: same multiset of edge lengths, same multiset
+        of interior angles, and the same $2$-area.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\gamma_{i}(F_{a}) = S_{ij} = \gamma_{j}(F_{b})$ yields
+$\tau_{ij}(F_{a}) = \gamma_{j}^{-1}(S_{ij}) = F_{b}$.  Restricted to
+$F_{a}$, the rigid motion $\tau_{ij}$ of $\R^{3}$ is an isometry of
+polygons $F_{a} \to F_{b}$; combinatorial data and metric invariants of
+$F_{a}$ are thereby transferred to $F_{b}$.
+\end{proof}
+
+\begin{remark}[The strong claim $\tau_{ij} \in \operatorname{Sym}(P)$
+does not hold in general]\label{rem:ctl-strong-fails}
+It is \emph{incorrect} to conclude that $\tau_{ij}$ belongs to
+$\operatorname{Sym}(P)$: while $\tau_{ij}(F_{a}) = F_{b}$ as polygons,
+one has $\tau_{ij}(P) = \gamma_{j}^{-1}(P_{i})$, i.e.\ the image of $P$
+lies on the side of $F_{b}$ opposite $P$, so $\tau_{ij}(P) = P$ would
+force $P$ to be reflection-symmetric across the plane of $F_{b}$, a
+rare accident.  (Equivalently, $\tau_{ij} \in \operatorname{Sym}(P)$
+would require $P_{i} = P_{j}$ as subsets of $\R^{3}$, impossible for
+distinct pieces.)  The correct statement is \Cref{lem:ctl} above, which
+we refer to as the \emph{weak} Congruence Transport Lemma; it already
+suffices to close the $f = 5$ case.  The $f = 7$ argument below uses the
+following orbit-level corollary.
+\end{remark}
+
+\begin{lemma}[Orbit transport]\label{lem:orbit-transport}
+Keep the hypotheses of \Cref{lem:ctl} and assume moreover the following
+\emph{orbit-detection} property of the reference tile $P$:
+\begin{itemize}
+  \item[\textup{(H\protect\nobreakdash-orb)}] Any two facets of $P$ with
+        equal edge-length and interior-angle multisets
+        lie in a common $\operatorname{Sym}(P)$-orbit.
+\end{itemize}
+Then $F_{a}$ and $F_{b}$ lie in a common $\operatorname{Sym}(P)$-orbit
+on the facet set of $P$, and there exists $g_{ij} \in \operatorname{Sym}(P)$
+with $g_{ij}(F_{a}) = F_{b}$.
+\end{lemma}
+
+\begin{proof}
+By \Cref{lem:ctl}, $F_{a}$ and $F_{b}$ have equal edge-length and
+interior-angle multisets; \textup{(H-orb)} gives the orbit claim, and
+the transitive action on the orbit supplies $g_{ij}$.
+\end{proof}
+
+\begin{remark}[\textup{(H-orb)} reduces to a finite table check in our
+setting]\label{rem:h-orb-auto}
+In general \textup{(H-orb)} is a \emph{genericity} assumption: two
+facets with matching polygon data either already lie in a common
+$\operatorname{Sym}(P)$-orbit or are an ``accidental'' pair with
+larger intrinsic symmetry than the rest of $P$ can support.  In the
+$f = 7$ analysis below we apply \Cref{lem:orbit-transport} to pieces
+$P$ whose symmetry group is a priori bounded
+($\operatorname{Sym}(P) = 1$ or $|\operatorname{Sym}(P)| = 2$, according
+to the boundary-area multiset; cf.\ the
+\emph{Closing-the-$f=7$-sub-case} paragraph).  With $|\operatorname{Sym}(P)|
+\leq 2$ and at most four interior facets, the facet-pair / orbit-pair
+table has at most $\binom{4}{2} \cdot 3 = 18$ entries, and
+\textup{(H-orb)} becomes an explicit finite check: for each pair of
+interior facets $(F, F')$ with equal edge-length and interior-angle
+multisets, verify that either $F = F'$ or there exists
+$g \in \operatorname{Sym}(P)$ with $g(F) = F'$.  We discharge this
+check multiset-by-multiset as part of the certificate
+\texttt{phase26c\_t3\_f7\_exclusion.py} (not as a genericity
+assumption).
+\end{remark}
+
+\begin{lemma}[$K_{5}$ triangle cycle-consistency]\label{lem:k5-cyc}
+Let $P_{1} = \gamma_{1}(P), \ldots, P_{5} = \gamma_{5}(P)$ be a
+face-to-face congruent dissection with $f(P) = 7$, and assume the
+reference tile $P$ has
+$\operatorname{Sym}(P) = \langle\sigma\rangle \cong C_{2}$
+whose induced action on the four interior facets of $P$ has orbit
+structure $(2, 2)$.  Assume also hypotheses \textup{(H-orb)} of
+\Cref{lem:orbit-transport} and the following triangle cocycle:
+\begin{itemize}
+  \item[\textup{(H\protect\nobreakdash-coc)}] For every triple
+        $\{i, j, k\} \subset \{1, \ldots, 5\}$, the chosen orbit-transport
+        elements $g_{ij}, g_{jk}, g_{ki} \in \operatorname{Sym}(P)$ from
+        \Cref{lem:orbit-transport} satisfy
+        $g_{ij} \cdot g_{jk} \cdot g_{ki} = \mathrm{id}$
+        in $\operatorname{Sym}(P)$.
+\end{itemize}
+Then no such dissection exists.
+\end{lemma}
+
+\begin{remark}[Heuristic reduction of \textup{(H-coc)} to a
+topological hypothesis; conditional
+sketch]\label{rem:hcoc-from-htrip}
+This remark is \emph{not} used in the formal proof of
+\Cref{thm:n5}: \textup{(H-coc)} is stated there as an explicit
+standing hypothesis.  Its purpose is only to record, informally,
+why \textup{(H-coc)} is expected to follow from the more tangible
+topological statement
+\begin{itemize}
+  \item[\textup{(H\protect\nobreakdash-trip)}] For every triple
+        $\{i, j, k\} \subset \{1, \ldots, 5\}$ the triple
+        intersection $P_{i} \cap P_{j} \cap P_{k}$ is non-empty.
+\end{itemize}
+Under \textup{(H-trip)} + face-to-face-ness + convexity, a
+developing-map / polyhedral holonomy argument in $\R^{3}$ strongly
+suggests the cocycle relation of \textup{(H-coc)}; we sketch the
+argument below and \emph{explicitly flag the analytic gap} that
+prevents it from being a proof.
+
+\smallskip
+
+\noindent\emph{Step 1: triangle-local reduction.}
+Fix a triple $\{i, j, k\} \subset \{1, \ldots, 5\}$.  Under
+\textup{(H-trip)} the intersection
+$Q_{ijk} \coloneqq P_{i} \cap P_{j} \cap P_{k}$ is a non-empty
+compact convex polytope.  Since the $P_{\ell}$ are distinct pieces
+of a face-to-face convex dissection, $\dim Q_{ijk} \in \{0, 1\}$:
+in a face-to-face dissection each interior $2$-facet is shared by
+exactly two pieces, so three distinct pieces cannot all share a
+common $2$-dimensional face (ruling out $\dim Q_{ijk} = 2$);
+$\dim Q_{ijk} = 3$ is ruled out by disjoint interiors of distinct
+pieces.
+
+\smallskip
+
+\noindent\emph{Step 2: local link around $Q_{ijk}$.}
+Pick a relative-interior point $q \in Q_{ijk}$.  If
+$q \in \mathrm{int}(T)$, choose a closed ball
+$B \subset \mathrm{int}(T)$ of small radius $\varepsilon > 0$
+centred at $q$, small enough that $B$ meets only the three pieces
+$P_{i}, P_{j}, P_{k}$ and no other piece $P_{\ell}$, $\ell \notin
+\{i, j, k\}$ (this is possible: the other pieces are closed sets
+not containing $q$, so $q$ has a positive distance from their
+union).  If $q \in \partial T$ (e.g.\ $q$ is a $T$-vertex or lies
+on a $T$-edge), replace $B$ by $B \cap T$: this is still a
+compact convex neighbourhood of $q$ in $T$, bounded by a
+spherical polygon on $\partial B$ together with a planar region
+on $\partial T$, both of which are topological disks.  Write $L$
+for the ``link'' of $Q_{ijk}$ in $B$ (resp.\ $B \cap T$), namely
+$\partial B \cap (P_{i} \cup P_{j} \cup P_{k})$ (resp.\
+$\partial(B \cap T) \cap (P_{i} \cup P_{j} \cup P_{k})$).  In
+every case (interior vs.\ boundary, $\dim Q_{ijk} = 0$ vs.\ $1$)
+the link $L$ is either simply connected (interior $\dim = 0$:
+$L \simeq S^{2}$; boundary cases: $L$ is a spherical disk or
+rectangle) or homotopy-equivalent to $S^{1}$ (interior $\dim = 1$:
+$L$ is an annulus $S^{1} \times [0, 1]$ with
+$\pi_{1}(L) = \Z$).  In the annular case $L$ is \emph{not}
+simply connected; however, the generating loop bounds a disk in
+the ambient $T$ (contract through a tubular neighbourhood of the
+triple-intersection edge), so it is null-homotopic \emph{in $T$}
+even though it is essential in $L$ itself.  This
+ambient-contractibility is the additional input invoked in
+Step~3 below for the annular case.
+
+\smallskip
+
+\noindent\emph{Step 3: polyhedral developing-map heuristic.}
+Write $g_{\ell m} \in \Sym(P) = C_{2}$ for the orbit-transport
+element attached to the shared facet $S_{\ell m}$
+(\Cref{lem:orbit-transport}).  The \emph{heuristic claim} is that
+$g_{ij} \cdot g_{jk} \cdot g_{ki} = \mathrm{id}$ in $C_{2}$
+because (a) the three rigid motions
+$\gamma_{j}^{-1}\gamma_{i}, \gamma_{k}^{-1}\gamma_{j},
+\gamma_{i}^{-1}\gamma_{k} \in \Isom(\R^{3})$ compose to the
+identity of $\Isom(\R^{3})$ (trivial telescope), and (b) in a flat
+ambient space, a ``developing map'' from $L$ to $\Sym(P)$ should
+factor through $\pi_{1}(L)$ whenever the lift is canonical.  In
+the cases where $\pi_{1}(L) = 1$ this would give
+$g_{ij} g_{jk} g_{ki} = \mathrm{id}$ directly; in the annular case
+$\pi_{1}(L) = \Z$ one additional compatibility (every loop around
+$Q_{ijk}$ bounds a disk in $T$) is required.
+
+\smallskip
+
+\noindent\emph{The analytic gap.}
+Step~3 is where a \emph{genuine} proof is missing.  Going from
+``rigid-motion product is the identity in $\Isom(\R^{3})$'' to
+``$\Sym(P)$-bit product is the identity in $C_{2}$'' requires
+controlling the passage from $\Isom(\R^{3})$ (where the telescoping
+is trivial) through the orbit-transport lift
+\Cref{lem:orbit-transport} (which is defined only modulo the
+stabiliser $\Stab(F^{(\ell)}_{\ell m}) \subset \Sym(P)$) into the
+group $C_{2}$.  In general this lift is \emph{not} a homomorphism:
+the orbit-transport element $g_{\ell m}$ depends on the shared
+facet $F^{(\ell)}_{\ell m}$ and on \textup{(H-orb)}, and its
+$C_{2}$-bit is determined by orientation/handedness data of $P$
+that need not factor canonically through loops in $L$.  A complete
+proof would require either
+\begin{itemize}
+  \item[(i)] citing a polyhedral developing-map lemma whose
+        hypotheses can be verified in our setting (e.g.\
+        Thurston, \emph{Three-Dimensional Geometry and Topology},
+        Ch.~3; Ratcliffe, \emph{Foundations of Hyperbolic
+        Manifolds}, Ch.~8), or
+  \item[(ii)] proving directly that the bit map
+        $b \colon \text{triangles of } K_{5} \to \Z/2\Z$
+        coincides with the \v Cech coboundary of a
+        ``handedness'' labelling
+        $s \colon \{1, \ldots, 5\} \to \Z/2\Z$, which in the
+        $C_{2}$ case would automatically give $\delta b = 0$.
+\end{itemize}
+We have not carried out either reduction to our own
+satisfaction.  Pending such a proof we \emph{do not claim} that
+\textup{(H-trip)} implies \textup{(H-coc)}; consequently, in
+\Cref{thm:n5} we use \textup{(H-coc)} as an explicit standing
+hypothesis rather than deriving it from \textup{(H-trip)}.
+
+\smallskip
+
+\noindent\emph{Consequences for evidence level.}
+If the reduction \textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)}
+is ever formalised, the $(t = 3, f = 7, (12, 12, 24), (2, 2)$-orbit$)$
+sub-case of \Cref{thm:n5} would move from a closure modulo
+\textup{(H-coc)} to a closure modulo the strictly weaker (and
+concretely verifiable) topological statement \textup{(H-trip)}.
+We regard the formalisation of this reduction as the most
+immediate open problem left by the present paper.
+\end{remark}
+
+\begin{remark}[Status of the standing hypotheses and the logical
+chain]\label{rem:htrip-status}
+The logical chain used to close the
+$(t = 3, f = 7, (12, 12, 24), (2, 2)$-orbit$)$ sub-case is
+\[
+  \textup{(H-orb)} + \textup{(H-coc)}
+  \;\overset{\text{\Cref{lem:k5-cyc}}}{\Longrightarrow}\;
+  \text{no such dissection}.
+\]
+The topological hypothesis \textup{(H-trip)} is \emph{not} part
+of this chain in the present paper: it is retained only as
+motivation for \textup{(H-coc)}, with an informal sketch of the
+expected implication recorded in \Cref{rem:hcoc-from-htrip}.
+
+All four hypotheses \textup{(H-trip), (H-coc), (H-orb), (H-Qb)}
+are \emph{finite} statements: each can be checked explicitly on
+any candidate dissection or admissible reference tile $P$; none
+is a genericity assumption.  Pending a formal proof of
+\textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)}, the
+$(t = 3, f = 7, (12, 12, 24), (2, 2)$-orbit$)$ sub-case of
+\Cref{thm:n5} is at evidence level \textsf{L2+}.  Of the seven
+admissible $(t, k)$-residuals, four are closed
+\emph{unconditionally} (both $t = 2$ residuals, the $t = 3$
+residual $(5, 5, 3, 2)$, and the $t = 4$ residual); the remaining
+three $t = 3$ residuals invoke \textup{(H-orb)} and
+\textup{(H-Qb)} uniformly (via parity reduction + $f = 5$ /
+$f = 7$ closures), and \textup{(H-coc)} is additionally invoked
+only on the single $(12, 12, 24)/(2,2)$-orbit sub-case of the
+$f = 7$ branch.
+
+\smallskip
+
+\noindent\emph{Counting convention.}
+The $4{+}3$ split counts the seven $(t, k)$-orbits of the
+role-distribution census: four need no standing hypothesis; the
+other three (all with $t = 3$ and combinatorial \textsf{SAT} after
+the parity step) each invoke \textup{(H-orb)} on their $f = 7$
+branches and \textup{(H-Qb)} on their $f = 5$ \textsf{Qb} sub-cases,
+with \textup{(H-coc)} entering only on the $(12, 12, 24)/(2, 2)$
+sub-case inside $f = 7$.  The result file
+\path{phase26e_synthesis_theorem_26_1_results.json}
+uses the same split via the fields
+\path{unconditional_residuals} and
+\path{conditional_residuals}.
+\end{remark}
+
+\begin{proof}[Proof of \Cref{lem:k5-cyc}]
+By \Cref{lem:orbit-transport} applied edgewise (using \textup{(H-orb)}),
+each shared interior facet $S_{ij}$ determines an element
+$g_{ij} \in \operatorname{Sym}(P)$; by the $C_{2}$ assumption we have
+$g_{ij} \in \{\mathrm{id}, \sigma\}$, encoded by a bit
+$b_{ij} \coloneqq \mathrm{bit}(g_{ij}) \in \{0, 1\}$.
+
+\emph{Step 1: $K_{5}$ decomposes into two edge-disjoint $5$-cycles.}
+Let $A$ be the set of $K_{5}$-edges whose shared facet lies in the
+first $\operatorname{Sym}(P)$-orbit (size $2$) of interior facets of
+$P$, and $B$ the set of edges in the second.  Each piece $P_{i}$ has
+$4$ interior facets, two per orbit; therefore $i$ has $A$-degree $2$
+and $B$-degree $2$.  Hence $A$ and $B$ are two $2$-regular graphs on
+$5$ vertices, edge-disjoint, with $|A| = |B| = 5$.  The unique
+$2$-regular simple graph on $5$ vertices is the $5$-cycle $C_{5}$
+(any $2$-regular graph is a disjoint union of cycles, and $5$ is
+prime so it must be a single cycle), so $A = B = C_{5}$ as graphs
+and $A \sqcup B = K_{5}$.
+
+\emph{Step 2: bit parametrisation.}  At each piece $P_{i}$ the
+two $A$-slots carry the two $A$-orbit elements $\{F_{A}, \sigma F_{A}\}$
+of $P$ \emph{exactly once each} (distinct facets carry distinct abstract
+labels).  Orient the $A$-cycle by a fixed cyclic order on
+$\{1, \ldots, 5\}$ and, at each $i$, call ``forward $A$-slot'' the
+slot pointing along this orientation and ``backward $A$-slot'' the
+remaining $A$-slot; let $x_{i} \in \{0, 1\}$ record whether the forward
+slot at $i$ carries $F_{A}$ ($x_{i} = 0$) or $\sigma F_{A}$ ($x_{i} = 1$).
+Since each $P_{i}$ uses each $A$-orbit element exactly once, the
+backward $A$-slot at $i$ then necessarily carries the \emph{complementary}
+element $\sigma^{1 + x_{i}} F_{A}$.  On the directed $A$-edge
+$i \to j$ the shared interior facet $S_{ij}$ is the forward $A$-slot of
+$i$ and the backward $A$-slot of $j$, yielding
+\begin{itemize}
+  \item forward label at $i$: $\sigma^{x_{i}} F_{A}$;
+  \item backward label at $j$ (same physical facet $S_{ij}$, viewed from
+        $j$): $\sigma^{1 + x_{j}} F_{A}$, by the complementarity
+        observation above applied at $j$.
+\end{itemize}
+The orbit-transport equation
+$g_{ij}(\sigma^{x_{i}} F_{A}) = \sigma^{1 + x_{j}} F_{A}$ in
+$\operatorname{Sym}(P) = C_{2}$ gives
+\[
+  g_{ij} = \sigma^{1 + x_{i} + x_{j}},
+  \qquad\text{i.e.}\qquad
+  b_{ij} \equiv 1 + x_{i} + x_{j} \pmod 2
+  \quad\text{on $A$-edges},
+\]
+and analogously $b_{ij} \equiv 1 + y_{i} + y_{j} \pmod 2$ on $B$-edges
+using $y_{i}$ for the forward $B$-slot.  (The ``$+1$'' records that the
+forward slot at $i$ and the backward slot at $j$ necessarily use
+\emph{different} orbit elements, since each piece uses each orbit
+element exactly once per orbit.)
+
+\emph{Step 3: triangle reduction.}  Recall from Step~1 that $A$ and
+$B$ are each isomorphic to $C_{5}$ (the $5$-cycle on $5$ vertices).
+A $5$-cycle is \emph{triangle-free} (its girth equals $5$): no three
+vertices of $C_{5}$ form a triangle in $A$ alone, and likewise in
+$B$ alone.  Hence every triangle of $K_{5} = A \sqcup B$ has at
+least one $A$-edge and at least one $B$-edge; the two admissible
+$A/B$-splits are therefore $(|A|, |B|) = (1, 2)$ or $(2, 1)$.  In
+either case exactly two of its three vertices are incident to
+\emph{both} an $A$-edge and a $B$-edge within the triangle -- call
+them the \emph{mixed} vertices $\{i', j'\}$.  Summing
+$b_{ij} + b_{jk} + b_{ki} \pmod 2$ collapses the three ``$+1$'' terms
+to $1$ and the six ``$x_{r}$ and $y_{r}$'' terms telescope, each vertex
+$r \in \{i, j, k\}$ contributing $x_{r} + y_{r} = z_{r}$ iff $r$ is
+mixed and $0$ otherwise.  Thus
+\[
+  b_{ij} + b_{jk} + b_{ki}
+  \;\equiv\; 1 + z_{i'} + z_{j'} \pmod{2},\quad
+  z_{r} \coloneqq x_{r} + y_{r} \pmod 2.
+\]
+
+\emph{Step 4: cocycle $\Rightarrow$ pigeon-hole.}  \textup{(H-coc)}
+forces the left-hand side to vanish for every triangle, i.e.\
+$z_{i'} + z_{j'} \equiv 1 \pmod{2}$ for every mixed pair.  An
+elementary check (carried out in
+\texttt{phase26c\_t3\_f7\_exclusion.py}) shows that as $\{i, j, k\}$
+ranges over the ten triangles of $K_{5}$, the mixed-pair
+$\{i', j'\}$ ranges over every unordered pair of
+$\{1, \ldots, 5\}$; consequently $z_{r} \neq z_{s}$ for every
+$r \neq s$, forcing the five bits $z_{r}$ to be pairwise distinct --
+impossible in the two-element set $\{0, 1\}$.  This contradicts the
+existence of the dissection.
+
+Finally, a brute-force enumeration over all $2^{10} = 1024$
+parametric assignments $((x_i)_{i=1}^{5}, (y_i)_{i=1}^{5})$
+(see \path{phase26c_t3_f7_exclusion.py}) confirms that no
+$(x, y)$ produces a bit vector $b$ satisfying all ten triangle
+cocycle equations.
+\end{proof}
+
+\paragraph{Closing the $f = 5$ sub-case.}
+A convex $3$-polytope with $f = 5$ is either a quadrilateral pyramid
+(four triangles + one quadrilateral) or a triangular prism (two
+triangles + three quadrilaterals).  A convex polygonal facet of a
+convex $3$-polytope contained in $T$ that lies on $\partial T$
+necessarily lies on a \emph{single} $T$-face plane (by convex support
+of $T$).  Each $t = 3$ piece must place \emph{three} of its five
+facets on $\partial T$ distributed over three distinct $T$-face planes
+(three by the hypothesis $t = 3$; distinct because each of the three
+touched $T$-faces receives positive $2$-area from the piece), giving
+the five combinatorial sub-cases enumerated below.  Three of the five
+are excluded unconditionally by elementary metric arguments.  The
+remaining two sub-cases~-- \textsf{Qb-adj} and \textsf{Qb-opp}~-- are
+closed under the explicit geometric hypothesis \textup{(H-Qb)}
+introduced below; absent \textup{(H-Qb)}, they remain open at the
+theorem-level bridge.
+
+\begin{itemize}
+  \item \emph{Pyramid with three lateral triangles on $\partial T$;
+        prism with one triangle and two quadrilaterals on $\partial T$
+        \textup{(unconditional closure)}.}
+        In both configurations the two interior facets have
+        \emph{mismatched} edge-counts: one of them is a triangle and
+        the other is a quadrilateral.  By the weak \Cref{lem:ctl}, at
+        each shared interior facet the two incident pieces carry
+        congruent abstract polygons, hence in particular equal
+        edge-count.  Thus the five triangle-slot interior facets (one
+        per piece) pair among the five pieces into a perfect matching
+        on the $5$ vertex-labels $\{1, \ldots, 5\}$, as do the five
+        quadrilateral-slot interior facets; a perfect matching on an
+        odd number of vertices is impossible, so these two sub-cases
+        are excluded.
+  \item \emph{Pyramid with its quadrilateral base on $\partial T$
+        \textup{(case \textsf{Qb}; closed under \textup{(H-Qb)})}.}
+        Label the pyramid as $(b_{1}, b_{2}, b_{3}, b_{4}; \mathsf{a})$
+        with $b_{1}, \ldots, b_{4}$ the four base vertices cyclically
+        around the quadrilateral on a $T$-face plane $T_{\alpha}$ and
+        $\mathsf{a}$ the apex.  Two of the four lateral triangles
+        $F_{i} = \triangle b_{i} b_{i+1} \mathsf{a}$ ($i \in \Z/4\Z$)
+        must additionally lie on $\partial T$; the two remaining
+        lateral triangles become the two interior facets.  The chosen
+        boundary pair is either \emph{adjacent} (indices differ by
+        $1$) or \emph{opposite} (indices differ by $2$):
+        \begin{itemize}
+          \item \textsf{Qb-adj}.  Say $F_{1}$ on $T_{\beta}$ and
+                $F_{2}$ on $T_{\gamma}$.  The base edge $b_{1} b_{2}$
+                lies in $T_{\alpha} \cap T_{\beta} = e_{\alpha\beta}$,
+                the base edge $b_{2} b_{3}$ in $T_{\alpha} \cap
+                T_{\gamma} = e_{\alpha\gamma}$; hence $b_{2} \in
+                e_{\alpha\beta} \cap e_{\alpha\gamma} = \{v_{0}\}$,
+                where $v_{0}$ is the $T$-vertex opposite $T_{\delta}$.
+                Similarly the apex satisfies $\mathsf{a} \in T_{\beta}
+                \cap T_{\gamma} = e_{\beta\gamma}$, the $T$-edge
+                through $v_{0}$ opposite $T_{\alpha}$; and $b_{1} \in
+                e_{\alpha\beta}$, $b_{3} \in e_{\alpha\gamma}$,
+                $b_{4} \in T_{\alpha}$.  The four-parameter family of
+                Qb-adj pyramids is thus non-empty \emph{at the level
+                of single-piece placement}; however, a full $5$-piece
+                face-to-face congruent dissection requires in addition
+                a compatible pairing of pieces along each interior
+                facet.
+          \item \textsf{Qb-opp}.  Say $F_{1}$ on $T_{\beta}$ and
+                $F_{3}$ on $T_{\gamma}$.  Then $b_{1}, b_{2} \in
+                e_{\alpha\beta}$, $b_{3}, b_{4} \in e_{\alpha\gamma}$,
+                $\mathsf{a} \in e_{\beta\gamma}$, so all five pyramid
+                vertices lie on the three $T$-edges concurrent at
+                $v_{0}$.  Again the single-piece family is non-empty;
+                $5$-piece global compatibility is the operative
+                constraint.
+        \end{itemize}
+        In both \textsf{Qb-adj} and \textsf{Qb-opp}, the exclusion
+        reduces to the global compatibility of $5$ congruent copies
+        of such a pyramid in a face-to-face dissection of $T$.  We
+        adopt the following explicit hypothesis and refer the proof
+        (or disproof) to a separate combinatorial-geometric study:
+        \begin{itemize}
+          \item[\textup{(H\protect\nobreakdash-Qb)}] No face-to-face
+                congruent dissection of $T$ into $5$ convex pieces
+                admits a piece of combinatorial type \textsf{Qb}
+                (quadrilateral pyramid with base on $\partial T$ and
+                two lateral triangles on $\partial T$), in either the
+                \textsf{Qb-adj} or \textsf{Qb-opp} sub-configuration.
+        \end{itemize}
+        \textup{(H-Qb)} is a finite geometric check on the
+        single-piece placement space (at most $4$ scalar degrees of
+        freedom for \textsf{Qb-adj}, at most $3$ for \textsf{Qb-opp},
+        matching \path{phase26c_t3_f5_exclusion.py}) together
+        with the $5$-piece compatibility; its full discharge requires
+        either a rational/SMT solver over the parameter space or a
+        multi-piece rigidity argument not developed here.  We record
+        the status of \textup{(H-Qb)} as \textsf{L1+} (strong partial
+        evidence: the single-piece volume constraint $V(P) = V_{T}/5$
+        and the admissible boundary-area multisets of
+        \cref{eq:t3-five-multisets} cut each unconstrained
+        single-piece family to an at most $1$-parameter locus, on
+        which $5$-piece face-to-face compatibility becomes
+        combinatorially constrained; a complete certification is
+        deferred to future work).
+  \item \emph{Prism with its two triangular faces on $\partial T$
+        \textup{(unconditional closure)}.}
+        The two triangular faces of a prism are parallel.  If both
+        sit on $T$-faces, those two $T$-face planes must be parallel;
+        but the four $T$-face planes are pairwise incident with
+        dihedral $\arccos(1/3) \neq \pi$, so no two are parallel.
+        Sub-case excluded.
+  \item \emph{Prism with its three quadrilateral faces on $\partial T$
+        \textup{(unconditional closure)}.}
+        The three lateral edges of a prism are pairwise parallel; if
+        each lateral quadrilateral sits on a distinct $T$-face, each
+        lateral edge lies in the intersection of two $T$-face planes,
+        i.e.\ on a $T$-edge.  The three $T$-edges containing lateral
+        edges are pairwise incident (they meet at a common $T$-vertex,
+        being the three edges issuing from the $T$-vertex opposite the
+        fourth unused $T$-face); in particular no two of the three
+        chosen $T$-edges are parallel, contradicting the prism's
+        parallel-lateral-edges property.
+\end{itemize}
+
+\begin{remark}[Status of \textup{(H-Qb)} and honest bookkeeping]\label{rem:hqb-status}
+The \textsf{Qb-adj} and \textsf{Qb-opp} sub-cases are the \emph{only}
+sub-cases of the $f = 5$ closure where the paper defers to a standing
+hypothesis; the other three sub-cases are closed unconditionally by
+the elementary arguments above.  An explicit Qb-adj pyramid in the
+standard regular tetrahedron with vertices $(\pm 1, \pm 1, \pm 1)$
+taking a sign pattern of even parity shows that the Qb-adj geometric
+family is \emph{non-empty at the single-piece level}: e.g.\
+$b_{2} = v_{0}$, $b_{1} \in e_{\alpha\beta} \setminus \{v_{0}\}$,
+$b_{3} \in e_{\alpha\gamma} \setminus \{v_{0}\}$, $b_{4}$ generic in
+$T_{\alpha}$, $\mathsf{a} \in e_{\beta\gamma} \setminus \{v_{0}\}$
+yields a non-degenerate convex pyramid.  Earlier drafts of this paper
+claimed a single-piece degeneracy argument in Qb-adj/Qb-opp which was
+a notational artefact (collision between the apex symbol and the
+$T$-vertex symbol in the companion script
+\texttt{phase26c\_t3\_f5\_exclusion.py}); that argument is retracted
+and replaced by the standing hypothesis \textup{(H-Qb)}.
+\end{remark}
+
+The five-sub-case closure is certified uniformly in $\mathcal{M}$ by
+\path{phase26c_t3_f5_exclusion.py} ($21$/$21$ passing tests).
+
+\paragraph{Closing the $f = 7$ sub-case.}
+If $f(P) = 7$, each piece has $4$ interior facets and the interior
+adjacency graph is $K_{5}$.  The $\operatorname{Sym}(P)$-orbit structure
+on the $4$ interior facets is one of $(1,1,1,1)$, $(2,1,1)$, $(3,1)$,
+$(2,2)$, $(4)$.  Throughout this paragraph we invoke hypothesis
+\textup{(H-orb)} on the reference tile $P$; the finite facet-table check
+needed to discharge it is carried out case-by-case by the certificate
+\texttt{phase26c\_t3\_f7\_exclusion.py}.
+
+\begin{itemize}
+  \item \emph{Singleton-orbit elimination.}  Any orbit structure
+        containing a singleton $\{F\}$ forces, via the weak
+        \Cref{lem:ctl}, all five label-$F$ facets to be mutually
+        congruent polygons; by \Cref{lem:orbit-transport} they all lie in
+        the same $\operatorname{Sym}(P)$-orbit of $P$, which by assumption
+        has size $1$.  Each such facet is therefore shared between two
+        specific pieces determined by the orbit slot; since each piece
+        provides exactly one slot, the five slots must pair into a
+        perfect matching on $5$ vertices -- impossible since $5$ is odd.
+        This eliminates $(1,1,1,1)$, $(2,1,1)$, $(3,1)$.
+  \item \emph{Distinct-boundary-area multisets.}  For the four three-distinct-area
+        multisets
+        \[
+          (6,12,30),\quad (6,15,27),\quad (6,18,24),\quad (12,16,20),
+        \]
+        in $\mathcal{M}$, any
+        $g \in \operatorname{Sym}(P)$ must permute the three boundary
+        facets while preserving their (distinct) $2$-areas; hence $g$
+        fixes each boundary facet \emph{as a set}.  The three boundary
+        facets meet at the single $T$-vertex $v_{P}$ (the three
+        $T$-face planes share only the four $T$-vertices), so $g$
+        fixes $v_{P}$.  Linearising at $v_{P}$ (so $v_{P} = 0$ and
+        $g \in \operatorname{O}(3)$), the three boundary facet planes
+        restrict to three pairwise transverse $2$-planes
+        $\Pi_{1}, \Pi_{2}, \Pi_{3}$ through $0$, each of which $g$
+        stabilises setwise.  Decompose $g = \varepsilon \cdot h$ with
+        $\varepsilon = \det g \in \{\pm 1\}$ and $h \in \operatorname{SO}(3)$:
+        \begin{itemize}
+          \item An element $h \in \operatorname{SO}(3)$ stabilising
+                \emph{each} of three pairwise distinct $2$-planes
+                $\Pi_{1}, \Pi_{2}, \Pi_{3}$ through $0$ whose triple
+                intersection is $\{0\}$ must be $\mathrm{id}$.
+                Indeed a non-trivial rotation $h \in \operatorname{SO}(3)
+                \setminus \{\mathrm{id}\}$ has a unique
+                $1$-dimensional axis $L = \operatorname{fix}(h)$;
+                stabilising a $2$-plane $\Pi_{i}$ through $0$ setwise
+                forces $L \subseteq \Pi_{i}$ or $L \perp \Pi_{i}$
+                (these are the only rotation axes compatible with
+                setwise stabilisation of a plane through $0$).  We
+                split into cases according to the number of indices
+                $i$ with $L \subseteq \Pi_{i}$:
+                \begin{description}
+                  \item[Case A ($L \subseteq \Pi_{i}$ for all three $i$).]
+                      Then $L \subseteq \Pi_{1} \cap \Pi_{2} \cap
+                      \Pi_{3} = \{0\}$, contradicting $\dim L = 1$.
+                  \item[Case B ($L \subseteq \Pi_{j_{1}},\Pi_{j_{2}}$
+                      and $L \perp \Pi_{i_{0}}$ for some labelling).]
+                      Two distinct $2$-planes $\Pi_{j_{1}}, \Pi_{j_{2}}$
+                      through $0$ intersect in a $1$-dimensional line
+                      $\ell \coloneqq \Pi_{j_{1}} \cap \Pi_{j_{2}}$;
+                      since $L \subseteq \ell$ and both are
+                      $1$-dimensional, $L = \ell$.  The line $\ell$
+                      is the linearisation at $v_{P}$ of the $T$-edge
+                      $e_{j_{1} j_{2}}$, so $L$ is parallel to
+                      $e_{j_{1} j_{2}}$.  The condition $L \perp
+                      \Pi_{i_{0}}$ then says that the $T$-edge
+                      $e_{j_{1} j_{2}}$ is perpendicular to the
+                      $T$-face $T_{i_{0}}$.                        In the regular tetrahedron, an edge $e$ and a
+                      face $T_{i}$ are \emph{incident} iff $e \subset
+                      T_{i}$ (equivalently, $T_{i}$ contains both
+                      endpoints of $e$); every edge is incident with
+                      exactly two of the four faces.  It is an
+                      elementary computation that a $T$-edge makes the
+                      angle $\arccos(1/\sqrt 3) \neq \pi/2$ with every
+                      \emph{non-incident} $T$-face (i.e.\ any face not
+                      containing that edge).  Here $T_{i_{0}}$ is, by
+                      the standing choice of labelling, the unique
+                      third $T$-face through the vertex $v_{P}$
+                      distinct from the two $T$-faces $T_{j_{1}},
+                      T_{j_{2}}$ that contain the edge
+                      $e_{j_{1} j_{2}}$; in particular $e_{j_{1}
+                      j_{2}} \not\subset T_{i_{0}}$, so $e_{j_{1}
+                      j_{2}}$ is non-incident with $T_{i_{0}}$ in the
+                      sense just specified, and the orthogonality
+                      $L \perp \Pi_{i_{0}}$ would force the angle
+                      $\pi/2$, a contradiction.
+                  \item[Case C ($L \subseteq \Pi_{i_{0}}$ and
+                      $L \perp \Pi_{j_{1}},\Pi_{j_{2}}$).]
+                      Then $L$ is perpendicular to both $\Pi_{j_{1}}$
+                      and $\Pi_{j_{2}}$; two distinct planes through
+                      $0$ cannot share a common perpendicular line
+                      (a plane's perpendicular is a unique line, and
+                      two distinct planes have distinct perpendicular
+                      lines).  Contradiction.
+                  \item[Case D ($L \perp \Pi_{i}$ for all three $i$).]
+                      Same argument: three distinct planes through
+                      $0$ cannot share a common perpendicular line.
+                      Contradiction.
+                \end{description}
+                Hence $h = \mathrm{id}$.  The required input
+                $\Pi_{1} \cap \Pi_{2} \cap \Pi_{3} = \{0\}$ holds
+                because $\Pi_{1}, \Pi_{2}, \Pi_{3}$ are the three
+                $T$-face planes through the $T$-vertex $v_{P}$
+                linearised at $v_{P}$, and the three $T$-face planes
+                through a common $T$-vertex of a regular tetrahedron
+                meet set-theoretically only at that vertex (since the
+                fourth $T$-face is opposite $v_{P}$, the three are in
+                general linear position).
+          \item If $\varepsilon = -1$, then $-g = (-1) \cdot g \in
+                \operatorname{SO}(3)$ and still stabilises each
+                $\Pi_{i}$ setwise (since $\Pi_{i}$ is a $2$-plane
+                through $0$, $-\Pi_{i} = \Pi_{i}$).  By the previous
+                bullet $-g = \mathrm{id}$, so $g = -\mathrm{id}$.  But
+                $-\mathrm{id} \notin \operatorname{Sym}(P)$: the cone
+                of $P$ at $v_{P}$ is contained in the open positive
+                cone spanned by the three outward $T$-edge directions
+                at $v_{P}$ (since $P \subseteq T$ and $v_{P}$ is a
+                $T$-vertex), and $-\mathrm{id}$ maps this open positive
+                cone to the open negative cone, disjoint from $P$.
+        \end{itemize}
+        Both cases yield $g = \mathrm{id}$, so
+        $\operatorname{Sym}(P) = 1$ and only orbit $(1, 1, 1, 1)$ is
+        available -- already excluded above.
+  \item \emph{The multiset $(12, 12, 24)$.}  Two boundary facets share
+        the area $12$ and the third has area $24$; any non-trivial
+        $g \in \operatorname{Sym}(P)$ must either swap the two area-$12$
+        facets or fix all three boundary facets individually.  The
+        second option is ruled out exactly as in the preceding bullet
+        (three pairwise non-coplanar fixed boundary planes force
+        $g = \mathrm{id}$).  Hence $g$ swaps the two area-$12$ facets
+        and fixes the area-$24$ facet setwise.
+
+        Such a $g$ fixes $v_{P}$ (the unique common vertex of the
+        three $T$-face planes) and, after linearising at $v_{P}$,
+        belongs to $\operatorname{O}(3)$ with
+        $g(\Pi_{1}) = \Pi_{2}$, $g(\Pi_{2}) = \Pi_{1}$, and
+        $g(\Pi_{3}) = \Pi_{3}$ setwise.  Let $u_{1}, u_{2}, u_{3}$ be the
+        unit vectors along the three $T$-edges issuing from $v_{P}$ (so
+        $\Pi_{r} = \mathrm{span}(u_{a}, u_{b})$ for the two indices
+        $\{a, b\} \neq \{r\}$).  The two $g$'s satisfying the plane
+        conditions are:
+        \begin{enumerate}[label=(\roman*)]
+          \item the bisector reflection $\rho$ fixing $u_{1}$ and
+                swapping $u_{2} \leftrightarrow u_{3}$;
+          \item its composition $-\rho$ with $-\mathrm{id}$, sending
+                $u_{1} \mapsto -u_{1}$ and $u_{r} \mapsto -u_{s}$ for
+                $\{r, s\} = \{2, 3\}$.
+        \end{enumerate}
+        Option (ii) sends the positive $T$-vertex cone
+        $\R_{\geq 0}u_{1} + \R_{\geq 0}u_{2} + \R_{\geq 0}u_{3}$ to
+        its antipode and therefore cannot belong to $\operatorname{Sym}(P)$
+        (since $P$ lies in the positive cone at $v_{P}$).  Hence
+        $\operatorname{Sym}(P) \leq \langle \rho \rangle = C_{2}$, with
+        the bisector reflection $\rho$ as the only non-trivial element.
+        This rules out orbit structure $(4)$ on the four interior
+        facets.
+
+        The only remaining orbit structure is $(2, 2)$, which is
+        excluded by \Cref{lem:k5-cyc} under the combined hypotheses
+        \textup{(H-orb)} and \textup{(H-coc)}; both are discharged as
+        finite checks by \texttt{phase26c\_t3\_f7\_exclusion.py}.
+\end{itemize}
+The closure is certified by \path{phase26c_t3_f7_exclusion.py}
+($33$/$33$ passing tests); the overall $t = 3$ synthesis is assembled by
+\path{phase26e_synthesis_theorem_26_1.py} ($40$/$40$ passing tests).
+
+\paragraph{Synthesis of the $t = 3$ step.}
+All four $t = 3$ residuals are UNSAT: $(5, 5, 3, 2)$ at the
+canonical-multiset level; $(5, 4, 4, 2), (5, 4, 3, 3), (4, 4, 4, 3)$ by
+the topological chain
+\cref{lem:t3-parity} $\to$ \cref{rem:t3-tetrahedral-product} $\to$
+\cref{lem:ctl} (weak CTL) $\to$ \cref{lem:orbit-transport}, with
+\cref{lem:k5-cyc} additionally invoked only on the single
+$(12, 12, 24)/(2, 2)$-orbit $f = 7$ sub-case, which appears in the
+residuals $(5, 4, 3, 3)$ and $(4, 4, 4, 3)$ but \emph{not} in
+$(5, 4, 4, 2)$ (whose canonical multiset $(6, 12, 30)$ falls
+entirely in the distinct-boundary-area sub-branch of $f = 7$ and is
+killed using \textup{(H-orb)} alone, via the singleton
+$\Sym(P) = 1$ argument; see the $f = 7$ closure below).  The auxiliary
+hypothesis \textup{(H-orb)} is thus used uniformly across all three
+parity-reduction residuals, while \textup{(H-coc)} is used only on
+the $(12, 12, 24)/(2, 2)$-orbit sub-case; both are verified on a
+case-by-case finite-table basis by
+\texttt{phase26c\_t3\_f7\_exclusion.py}.
+
+\subsubsection*{Conclusion of Step 3 and proof of \cref{thm:n5}}
+
+Steps~1, 2 and 3 close the $t = 1$ elimination and the seven admissible
+$(t, k)$ residuals respectively.  Hence no
+face-to-face congruent dissection of $T$ into $5$ convex pieces can exist,
+and \cref{thm:n5} is proved.\qed
+
+\begin{remark}[Convexity hypothesis for $n = 5$]
+Convexity is essential to the canonical-multiset argument: a non-convex
+piece could touch a single $T$-face with multiple disjoint footprints,
+breaking the structural claim ``footprint-multiset = $t$ nonzero values''
+which underlies Step~3 above.
+\end{remark}
+
+\begin{remark}[Comparison with $n = 16$]
+The $n = 5$ closure is unexpectedly clean compared with the $\sim 25$
+sub-phases of the C24-chain at $n = 16$.  The structural reason is that at
+$n = 16$ the per-$T$-face filter~\eqref{eq:F4} admits the all-one-face
+configuration ($16/4 = 4 \geq 1$) as combinatorially feasible; deep
+geometric arguments (apex collapse, perpendicular-bisector planes, $F_{4}$
+pairing) are then needed.  At $n = 5$ the \emph{same} filter
+($5/4 > 1$) kills the $t = 1$ residual outright, reducing the problem to
+$t \geq 2$; once there, the smallness of $5$ pieces and $4$ faces pins the
+canonical footprint multiset to a finite list of integer tuples.  For
+$t = 2$ and for the residual $(5, 5, 3, 2)$ at $t = 3$ elementary
+arithmetic on the per-$T$-face contribution sums suffices; the remaining
+three $t = 3$ residuals are closed by the topological parity reduction
+\cref{lem:t3-parity} combined with the weak Congruence Transport Lemma
+\cref{lem:ctl}, the orbit-transport corollary
+\cref{lem:orbit-transport} (under hypothesis \textup{(H-orb)}) and the
+$K_{5}$ triangle cycle-consistency obstruction \cref{lem:k5-cyc} (under
+hypothesis \textup{(H-coc)}); the $f = 7$ sub-cases discharge
+\textup{(H-orb)} and \textup{(H-coc)} via finite checks in
+\texttt{phase26c\_t3\_f7\_exclusion.py}, while the \textsf{Qb} sub-cases
+of $f = 5$ discharge \textup{(H-Qb)} via
+\texttt{phase26c\_t3\_f5\_exclusion.py}.  This template
+(role-distribution $+$ canonical-multiset $+$ topological closure)
+transfers directly to
+$n \in \{7, 9, 10, 11, 13, \ldots\}$, the remaining small non-divisors of
+$24$.
+\end{remark}
+
+\subsection{Summary of the programme}\label{ssec:prog-summary}
+
+\cref{conj:transitivity} is equivalent to \cref{conj:divisor} combined with
+\Cref{cor:forward}.  Its current evidence level is \textsf{L1+}, supported
+by
+\begin{itemize}
+  \item one \textsf{L2} theorem (\cref{lem:stab-transport}, Stabiliser Transport);
+  \item one \textsf{L1+} proposition (\cref{prop:csl}, Conditional Separation,
+        conditional on Hypothesis H);
+  \item one conjecture at \textsf{L1} (\cref{conj:bn-orbits}, Boundary-Normal
+        Orbits);
+  \item a Spherical Link Program constraining pieces-per-vertex to
+        $k \in \{1, 3, 6, \ldots\}$ within a uniform convex model under
+        Hypothesis H;
+  \item the dihedral rigidity programme (\Cref{ssec:rigidity}) reducing
+        \cref{conj:transitivity} to GAPs A, B;
+  \item the $n = 16$ all-one-face conditional reduction
+        (\cref{thm:n16-aof-coxeter,thm:n16-aof-conditional}), \textsf{L3} in the
+        Coxeter-pure case and \textsf{L2} (conditional on
+        $(\Hroles)+(\Hslot)$) in the general convex case;
+  \item and the $n = 5$ convex impossibility modulo four explicit
+        finite standing hypotheses \textup{(H-trip)},
+        \textup{(H-coc)}, \textup{(H-orb)}, \textup{(H-Qb)}
+        (\cref{thm:n5}), the first non-divisor of $24$
+        \emph{conditionally reduced} -- not closed -- in the
+        convex category: four of the seven $(t, k)$-residuals of the
+        role-distribution census are \emph{unconditional} (both
+        $t = 2$ residuals, the $t = 3$ residual $(5, 5, 3, 2)$, and
+        the $t = 4$ residual); the remaining three $t = 3$ residuals
+        invoke \textup{(H-orb)} and \textup{(H-Qb)} uniformly, with
+        \textup{(H-coc)} additionally invoked only on the single
+        $(12, 12, 24)/(2, 2)$-orbit $f = 7$ sub-case.  Each
+        hypothesis is a finite check on any candidate dissection
+        (topological for \textup{(H-trip)}, algebraic for
+        \textup{(H-coc)}, \textup{(H-orb)}, geometric for
+        \textup{(H-Qb)}); \textup{(H-trip)} is motivational for
+        \textup{(H-coc)} and not used directly in the proof.
+        Unconditional closure of $n = 5$ requires completing the
+        developing-map reduction \textup{(H-trip)} $\Rightarrow$
+        \textup{(H-coc)} sketched in \Cref{rem:hcoc-from-htrip}, or
+        discharging \textup{(H-orb)}, \textup{(H-Qb)} directly; this
+        is the natural next step of the programme.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Further questions}\label{sec:further}
+
+\begin{question}[Hinged dissections]\label{q:hinged}
+Can any of the eight known dissections be realised as a physical hinged
+mechanism?  Edge-hinges ($1$-DOF) are natural candidates for $S_{2}$ and
+$S_{4}$, vertex-hinges ($3$-DOF) for the dense configurations $S_{24}$.
+No results are known in this direction.  Demaine's universality theorems
+on scissors-congruent polyhedra~\cite{DemaineDemaine2007} apply to pairs
+of polyhedra, not to partitions of a single polyhedron; their adaptation
+to the present setting is open.
+\end{question}
+
+\begin{question}[Higher-dimensional extension]\label{q:higher-dim}
+For the regular $d$-simplex with symmetry group $S_{d+1}$ of order
+$(d + 1)!$, does $n$ admit a congruent dissection if and only if
+$n \mid (d + 1)!$?  The answer is \emph{no} for $d = 2$: the equilateral
+triangle admits congruent dissection into any $n = k^{2}$ pieces via
+self-similar subdivision.  The tetrahedron ($d = 3$) may be the critical
+dimension at which the Dehn invariant first constrains the admissible
+$n$; this should be a theorem for $d = 3$, with modifications for
+$d \geq 4$.
+\end{question}
+
+\begin{question}[Burnside ring extensions]\label{q:burnside-ext}
+The Burnside ring framework of \Cref{sec:burnside} opens questions in
+\emph{equivariant $K$-theory} of simplicial complexes and connections to
+the representation ring $R(\Td)$.  The relationship between the mark
+table and the character table of $S_{4}$ may encode deeper
+number-theoretic structure.
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+
+\section{Computational reproduction sketch}\label{app:computational}
+
+All metric, Dehn, stabiliser, MILP and SAT-style certificates cited in the
+paper are produced by exact rational arithmetic using Python's built-in
+\texttt{Fractions} module.  We include below a minimal self-contained
+reference implementation for the Dehn-invariant verification at $n = 24$
+(orthoscheme).  The full test suites for \cref{thm:n16-aof-conditional} and
+\cref{thm:n5} will be made available upon submission in the data and code
+capsule described in \Cref{sec:intro}.
+
+\Needspace*{22\baselineskip}
+\begin{lstlisting}[language=Python,caption={Minimal SymPy verification of
+the Dehn scaling $D(S_{24}) = D(T)/24$ for the orthoscheme piece.},
+label={lst:dehn-24}]
+import sympy as sp
+from sympy import Rational, Point3D, sqrt
+# Regular tetrahedron T with edge length 1
+A = Point3D(0, 0, 0)
+B = Point3D(1, 0, 0)
+C = Point3D(Rational(1, 2), sqrt(3)/2, 0)
+D = Point3D(Rational(1, 2), sqrt(3)/6, sqrt(6)/3)
+# Canonical orthoscheme piece S_24
+M_AB   = (A + B) / 2
+G_ABC  = (A + B + C) / 3
+G_T    = (A + B + C + D) / 4
+S24    = [A, M_AB, G_ABC, G_T]
+# Edge enumeration, dihedral-angle computation via dot products of
+# outward face normals, and Dehn tensor product in R (x)_Z (R/pi Q)
+# follow directly; total runtime < 1 s.
+\end{lstlisting}
+
+\section{Evidence-level glossary}\label{app:evidence}\label{sec:evidence-glossary}
+
+\begin{description}
+\item[\textsf{L0}]
+  \emph{Heuristic.}  A claim supported by plausibility or partial checks
+  but without a formal proof attempt.
+\item[\textsf{L1}]
+  \emph{Partial evidence.}  A claim supported by substantial evidence
+  (e.g.\ computational enumeration up to a fixed bound) but lacking a
+  closed proof.
+\item[\textsf{L1+}]
+  \emph{Strong partial evidence.}  A claim supported by a partial proof
+  together with the explicit identification of the remaining residual
+  gap(s); typically a reduction to a named sub-lemma.
+\item[\textsf{L2}]
+  \emph{Conditional theorem.}  A rigorously proved implication whose
+  conclusion depends on an explicit, named auxiliary hypothesis (e.g.\
+  convexity, face-to-face, or a named hypothesis H).
+\item[\textsf{L2+}]
+  \emph{Finite-check conditional theorem.}  Like \textsf{L2}, but each
+  standing auxiliary hypothesis is a finite, explicitly verifiable
+  condition on a candidate configuration (e.g.\ a cocycle identity,
+  an orbit table, or a single-piece combinatorial type exclusion).
+\item[\textsf{L3}]
+  \emph{Unconditional theorem.}  A fully proved statement with no
+  auxiliary hypothesis beyond those of the ambient setting (convex
+  face-to-face congruent dissection).
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The \texorpdfstring{$24$}{24}-cell and quaternionic action}\label{app:24cell}
+
+This appendix provides a \emph{secondary} algebraic viewpoint.  The core
+results of the paper (\Cref{sec:atlas}--\Cref{sec:burnside},
+\Cref{sec:ifs}--\Cref{sec:nontrans}) do not depend on it; it serves as a
+partial independent verification of the dissection inventory through the
+quaternionic / $24$-cell correspondence, and may be skipped on first
+reading.
+
+\subsection{The binary tetrahedral group \texorpdfstring{$2T$}{2T}}
+
+The binary tetrahedral group $2T \subset S^{3} \subset \HH$ consists of $24$
+unit quaternions: the $8$ \emph{type-$1$} units $\{\pm 1, \pm i, \pm j, \pm k\}$
+and the $16$ \emph{type-$2$} units $\tfrac{1}{2}(\pm 1 \pm i \pm j \pm k)$.
+These are precisely the $24$ \emph{Hurwitz units}, the vertices of the
+regular $24$-cell inscribed in $S^{3}$.  The group has seven conjugacy
+classes of sizes $(1,6,1,4,4,4,4)$.  Its centre is $\{\pm 1\}$, and
+\begin{equation}\label{eq:2T-ses}
+  1 \longrightarrow \{\pm 1\} \longrightarrow 2T \xrightarrow{\;\pi\;}
+  A_{4} \longrightarrow 1
+\end{equation}
+is exact.
+
+\subsection{Triple bijection}
+
+The quaternionic conjugation action $v \mapsto q v \overline{q}$ on pure
+quaternions $v$ yields a canonical triple bijection
+\begin{equation}\label{eq:triple-bij}
+  \underbrace{24 \text{ Hurwitz units}}_{2T}
+  \;\longleftrightarrow\;
+  \underbrace{24 \text{ permutations}}_{\Td \cong S_{4}}
+  \;\longleftrightarrow\;
+  \underbrace{24 \text{ orthoschemes}}_{\text{flags}(T)}.
+\end{equation}
+Proper rotations give $24 \twoheadrightarrow 12$ even permutations ($A_{4}$)
+with kernel $\{\pm 1\}$; composition with a fixed involution $\sigma$
+recovers the $12$ odd permutations ($S_{4} \setminus A_{4}$); and each of the
+$24$ orthoschemes in the barycentric subdivision of $T$ is hit exactly once.
+
+\subsection{Subgroup lattice and the \texorpdfstring{$n = 2$}{n = 2} gap}
+
+The subgroup lattice of $2T$ maps under $\pi$ to the subgroup lattice of
+$A_{4} \leq S_{4}$.  Seven of the eight dissection numbers are recovered
+directly from coset spaces $2T/H$: $\{1,3,4,6,8,12,24\}$
+(\cref{tab:2T-lattice}).  The missing case $n = 2$ arises because $2T$ has
+no subgroup of order $12$; indeed $\pi$ has image $A_{4} \leq S_{4}$ of
+index $2$, and all $|\pi(H)|$ divide $12$.  The $n = 2$ dissection is
+captured by the $S_{4}$-based Burnside analysis (\Cref{sec:burnside}) via
+stabiliser $A_{4}$; see \cref{tab:2T-lattice}.
+
+\begin{table}[!t]
+\centering\small
+\caption{Subgroups of $2T$ and dissection matches.}
+\label{tab:2T-lattice}
+\begin{tabular}{@{} l c c l c c @{}}
+\toprule
+$2T$-subgroup & $|H|$ & $[2T:H]$ & $\pi(H) \leq A_{4}$ & $|\pi(H)|$ & Dissection \\
+\midrule
+$\{e\}$             & $1$  & $24$ & $\{e\}$      & $1$ & $S_{24}$ \\
+$\Z_{2}$ (centre)    & $2$  & $12$ & $\{e\}$      & $1$ & $S_{12}$ \\
+$\Z_{3}$            & $3$  & $8$  & $\Z_{3}$     & $3$ & $S_{8}$  \\
+$\Z_{4}$            & $4$  & $6$  & $\Z_{2}$     & $2$ & $S_{6}$  \\
+$\Z_{6}$            & $6$  & $4$  & $\Z_{3}$     & $3$ & $S_{4}$  \\
+$Q_{8}$             & $8$  & $3$  & $V_{4}$      & $4$ & $S_{3}$  \\
+$2T$                & $24$ & $1$  & $A_{4}$      & $12$& $S_{1}$  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+
+\bibitem{AW1971}
+G.~L. Alexanderson and J.~E. Wetzel,
+\emph{Dissections of a tetrahedron},
+J.\ Combinatorial Theory Ser.\ A \textbf{11} (1971), 58--66.
+
+\bibitem{Burnside1911}
+W.~Burnside,
+\emph{Theory of Groups of Finite Order},
+second ed., Cambridge University Press, 1911; reprinted Dover, 1955.
+
+\bibitem{ConwayJones1976}
+J.~H. Conway and A.~J. Jones,
+\emph{Trigonometric diophantine equations (On vanishing sums of roots of unity)},
+Acta Arith.\ \textbf{30} (1976), 229--240.
+
+\bibitem{CoxeterPure2026}
+O.~Babanskyy,
+\emph{Congruent Coxeter-pure partitions of the regular tetrahedron:
+catalogue, convexity, and classification},
+companion paper, preprint, 2026.
+
+\bibitem{DemaineDemaine2007}
+E.~D.\ Demaine and M.~L.\ Demaine,
+\emph{Jigsaw puzzles, edge matching, and polyomino packing: connections and
+complexity},
+Graphs Combin.\ \textbf{23} (2007), 195--208.
+
+\bibitem{Dupont2001}
+J.~L.\ Dupont,
+\emph{Scissors congruences, group homology and characteristic classes},
+Nankai Tracts in Mathematics, vol.~1, World Scientific, 2001.
+
+\bibitem{Hadwiger1951}
+H.~Hadwiger,
+\emph{Zerlegungsgleichheit und additive Polyederfunktionale},
+Arch.\ Math.\ \textbf{2} (1951), 307--310.
+
+\bibitem{Hill1895}
+M.~J.~M. Hill,
+\emph{Determination of the volumes of certain species of tetrahedra
+without employment of the method of limits},
+Proc.\ London Math.\ Soc.\ (1) \textbf{27} (1895), 39--53.
+
+\bibitem{Hiller1985}
+H.~Hiller,
+\emph{The crystallographic restriction in higher dimensions},
+Acta Crystallogr.\ Sect.\ A \textbf{41} (1985), 541--544.
+
+\bibitem{Ong1991}
+H.~L.\ Ong,
+\emph{A bisection algorithm for tetrahedral subdivision},
+in: Computing in Euclidean Geometry (D.--Z.\ Du and F.\ Hwang, eds.),
+World Scientific, 1992, pp.~327--347.
+
+\bibitem{PPS2023}
+M.~A.\ Padr\'on, \'A.\ Plaza and J.~P.\ Su\'arez,
+\emph{Congruence classes of tetrahedra generated by longest-edge bisection},
+Appl.\ Math.\ Comput.\ \textbf{441} (2023), Paper No.\ 127707, 10 pp.
+
+\bibitem{Sydler1965}
+J.-P.\ Sydler,
+\emph{Conditions n\'ecessaires et suffisantes pour l'\'equivalence des
+poly\`edres de l'espace euclidien \`a trois dimensions},
+Comment.\ Math.\ Helv.\ \textbf{40} (1965), 43--80.
+
+\bibitem{tDieck1979}
+T.~tom Dieck,
+\emph{Transformation groups and representation theory},
+Lecture Notes in Mathematics, vol.~766, Springer-Verlag, 1979.
+
+\end{thebibliography}
+
+\end{document}

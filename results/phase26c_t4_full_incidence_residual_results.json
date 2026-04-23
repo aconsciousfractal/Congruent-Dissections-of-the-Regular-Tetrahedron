@@ -1,0 +1,208 @@
+{
+  "sections": [
+    {
+      "title": "0. Setup: invariants of the (t = 4, k = (5,5,5,5)) residual",
+      "tests": [
+        {
+          "name": "n = 5",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "V_piece = 8/15",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "E^2 = 192/25",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "t = 4 (each piece touches all 4 T-faces)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "k = (5, 5, 5, 5) (each T-face touched by all 5 pieces)",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "1. Convex polytope face-count: each piece has f >= 4",
+      "tests": [
+        {
+          "name": "f(P) >= 4 for any convex 3-polytope",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "With t = 4, P needs >= 4 boundary faces, so f(P) >= 4",
+          "passed": true,
+          "detail": "by definition of t-touch"
+        }
+      ]
+    },
+    {
+      "title": "2. f = 4 ELIMINATION: tetrahedral piece with all faces on dT",
+      "tests": [
+        {
+          "name": "f = 4 contradicts face-to-face property (0 interior faces, but pieces meet on positive 2-area)",
+          "passed": true,
+          "detail": "by support hyperplane theorem + pieces tile T"
+        },
+        {
+          "name": "Conclusion: f(P) >= 5 for the (t=4) residual",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "3. f = 5 PARITY elimination",
+      "tests": [
+        {
+          "name": "f = 5 -> interior face-instances = 5",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "5 / 2 is not an integer -> face-to-face PARITY VIOLATION",
+          "passed": true,
+          "detail": "5 mod 2 = 1"
+        },
+        {
+          "name": "Conclusion: f(P) >= 6 with f - 4 even",
+          "passed": true,
+          "detail": "f in {6, 8, 10, ...}"
+        }
+      ]
+    },
+    {
+      "title": "4. f = 6 structure: piece = T \u00d4\u00ea\u00ae H_1 \u00d4\u00ea\u00ae H_2",
+      "tests": [
+        {
+          "name": "f = 6: total interior face-instances = 10",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "f = 6: 10 / 2 = 5 distinct interior 2-faces",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "f = 6 with all triangular faces -> v = 5, e = 9 (Euler: 5 - 9 + 6 = 2)",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "5. Boundary-area equipartition: each footprint area = 2 sqrt 3 / 5",
+      "tests": [
+        {
+          "name": "Per-piece-per-T-face footprint area squared = 12 / 25",
+          "passed": true,
+          "detail": "got 12/25"
+        },
+        {
+          "name": "Sum over T-faces of piece p's footprint area = 4 * (2 sqrt 3 / 5) = 8 sqrt 3 / 5 = E",
+          "passed": true,
+          "detail": "4a-squared = 192/25, E^2 = 192/25"
+        }
+      ]
+    },
+    {
+      "title": "6. T-vertex Coxeter budget under Hypothesis H",
+      "tests": [
+        {
+          "name": "m = 0: sum k_v = 0, but each k_v >= 1 forbids this -> m = 0 IMPOSSIBLE",
+          "passed": true,
+          "detail": "no piece touches any T-vertex, but T-vertices are on \u00d4\u00ea\u00e9T -- contradiction"
+        },
+        {
+          "name": "m = 1: sum k_v = 5; feasible ordered tuples = 0",
+          "passed": true,
+          "detail": "e.g. none"
+        },
+        {
+          "name": "m = 2: sum k_v = 10; feasible ordered tuples = 4",
+          "passed": true,
+          "detail": "e.g. [(1, 3, 3, 3), (3, 1, 3, 3), (3, 3, 1, 3)]"
+        },
+        {
+          "name": "m = 3: sum k_v = 15; feasible ordered tuples = 8",
+          "passed": true,
+          "detail": "e.g. [(1, 1, 1, 12), (1, 1, 12, 1), (1, 12, 1, 1)]"
+        },
+        {
+          "name": "m = 4: sum k_v = 20; feasible ordered tuples = 30",
+          "passed": true,
+          "detail": "e.g. [(1, 1, 3, 15), (1, 1, 6, 12), (1, 1, 9, 9)]"
+        },
+        {
+          "name": "m = 1: NO Hypothesis-H Coxeter 4-tuple sums to 5 -> m = 1 IMPOSSIBLE under H",
+          "passed": true,
+          "detail": "no 4-tuple in {1,3,6,...}^4 sums to 5"
+        }
+      ]
+    },
+    {
+      "title": "7. Centroid pyramid decomposition: V_piece = (a / 3) * h_T forces f = 4",
+      "tests": [
+        {
+          "name": "h_T^2 = 16 / 3",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "V_T = (A_T / 3) * h_T  (squared: V_T^2 = (A_T / 3)^2 * h_T^2)",
+          "passed": true,
+          "detail": "V_T^2 = 64/9, (A_T/3)^2 * h_T^2 = 64/9"
+        },
+        {
+          "name": "Boundary contribution squared (a^2 * h_T^2) / 9 = V_piece^2 = 64 / 225",
+          "passed": true,
+          "detail": "got 64/225, target 64/225"
+        },
+        {
+          "name": "EQUALITY V_piece = (1/3) * a * h_T forces interior-facet contribution = 0",
+          "passed": true,
+          "detail": "centroid pyramid decomposition with strict-interior apex p has all positive distances"
+        },
+        {
+          "name": "Interior-facet contribution = 0 forces f(P) = 4 (no interior facets)",
+          "passed": true,
+          "detail": "but \u252c\u00ba2 rules out f = 4 by face-to-face property"
+        },
+        {
+          "name": "CONTRADICTION: V_piece = 8/15 is NOT achievable by any convex P with f >= 5",
+          "passed": true,
+          "detail": "saturation of pyramid bound + strict positivity of interior distances"
+        }
+      ]
+    },
+    {
+      "title": "8. SYNTHESIS: (t = 4, k = (5,5,5,5)) residual UNSAT",
+      "tests": [
+        {
+          "name": "(t = 4, k = (5,5,5,5)) residual: UNCONDITIONALLY UNSAT",
+          "passed": true,
+          "detail": "via \u252c\u00ba2 (f=4) + \u252c\u00ba3 (f=5) + \u252c\u00ba7 (f>=6) -- no admissible f"
+        }
+      ]
+    }
+  ],
+  "passed": 30,
+  "failed": 0,
+  "residual": "(t=4, k=(5,5,5,5))",
+  "outcome": "UNCONDITIONALLY UNSAT",
+  "unsat_chain": [
+    "S2: f = 4 forces 0 interior facets, violating face-to-face property",
+    "S3: f = 5 forces 5/2 paired interior facets (parity violation)",
+    "S7: f >= 6 violates V_piece = (1/3) * a * h_T equality (centroid pyramid decomposition: interior-facet pyramids have strictly positive volume, contradicting V_piece = 8/15)"
+  ]
+}

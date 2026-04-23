@@ -1,0 +1,1384 @@
+{
+  "sections": [
+    {
+      "title": "1. Load all Phase 26 sub-phase result JSONs",
+      "tests": [
+        {
+          "name": "26-A results JSON exists: phase26a_chamber_skeleton_results.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "26-B results JSON exists: phase26b_role_distribution_n5_results.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "26-C-T4 results JSON exists: phase26c_t4_full_incidence_residual_results.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "26-C-T3 results JSON exists: phase26c_t3_residuals_results.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "26-C-T3-TET results JSON exists: phase26c_t3_tetrahedral_exclusion_results.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "26-C-T3-F5 results JSON exists: phase26c_t3_f5_exclusion_results.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "26-C-T3-F7 results JSON exists: phase26c_t3_f7_exclusion_results.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "26-C-T2 results JSON exists: phase26c_t2_residuals_results.json",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "2. Phase 26-A: foundational chamber-encoding skeleton",
+      "tests": [
+        {
+          "name": "Phase 26-A: 45/45 tests passed",
+          "passed": true,
+          "detail": "got passed=45, failed=0"
+        }
+      ]
+    },
+    {
+      "title": "3. Phase 26-B: 7 residuals after F4 + S_4 quotient",
+      "tests": [
+        {
+          "name": "Phase 26-B: 24/24 tests passed",
+          "passed": true,
+          "detail": "got passed=24, failed=0"
+        },
+        {
+          "name": "Phase 26-B: exactly 7 residuals after F4 + S_4 quotient",
+          "passed": true,
+          "detail": "got 7 residuals"
+        },
+        {
+          "name": "Phase 26-B: residual set matches expected (t, k-orbit) pairs",
+          "passed": true,
+          "detail": "diff = set()"
+        },
+        {
+          "name": "Phase 26-B: t = 1 'all-one-face analogue' eliminated (0 S_4-orbits pass F4)",
+          "passed": true,
+          "detail": "got 0 survivors for t = 1"
+        }
+      ]
+    },
+    {
+      "title": "4. Phase 26-C-T4: (t=4, k=(5,5,5,5)) UNSAT",
+      "tests": [
+        {
+          "name": "Phase 26-C-T4: 30/30 tests passed",
+          "passed": true,
+          "detail": "got passed=30, failed=0"
+        },
+        {
+          "name": "Phase 26-C-T4: outcome = UNCONDITIONALLY UNSAT",
+          "passed": true,
+          "detail": "got outcome = UNCONDITIONALLY UNSAT"
+        }
+      ]
+    },
+    {
+      "title": "5. Phase 26-C-T3: 4 t = 3 residuals UNSAT (4-certificate chain)",
+      "tests": [
+        {
+          "name": "Phase 26-C-T3 (residuals.py): 17/17 tests passed",
+          "passed": true,
+          "detail": "got passed=17, failed=0"
+        },
+        {
+          "name": "Phase 26-C-T3: all 4 expected residuals present",
+          "passed": true,
+          "detail": "got {'R_T3_1', 'R_T3_4', 'R_T3_3', 'R_T3_2'}"
+        },
+        {
+          "name": "Phase 26-C-T3: R_T3_1 UNSAT at canonical-multiset level",
+          "passed": true,
+          "detail": "got status = UNSAT"
+        },
+        {
+          "name": "Phase 26-C-T3: R_T3_2 COMBINATORIAL_SAT (needs topological closure)",
+          "passed": true,
+          "detail": "got status = COMBINATORIAL_SAT"
+        },
+        {
+          "name": "Phase 26-C-T3: R_T3_3 COMBINATORIAL_SAT (needs topological closure)",
+          "passed": true,
+          "detail": "got status = COMBINATORIAL_SAT"
+        },
+        {
+          "name": "Phase 26-C-T3: R_T3_4 COMBINATORIAL_SAT (needs topological closure)",
+          "passed": true,
+          "detail": "got status = COMBINATORIAL_SAT"
+        },
+        {
+          "name": "Phase 26-C-T3 (tetrahedral exclusion): 27/27 tests passed",
+          "passed": true,
+          "detail": "got passed=27, failed=0"
+        },
+        {
+          "name": "Phase 26-C-T3 (tetrahedral exclusion): 5 surviving canonical multisets",
+          "passed": true,
+          "detail": "got [[6, 12, 30], [6, 15, 27], [6, 18, 24], [12, 12, 24], [12, 16, 20]]"
+        },
+        {
+          "name": "Phase 26-C-T3 (tetrahedral exclusion): 0 integer triples sum 48, product 8640 (tetrahedral case arithmetically excluded)",
+          "passed": true,
+          "detail": "got []"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=5 exclusion): 21/21 tests passed",
+          "passed": true,
+          "detail": "got passed=21, failed=0"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=5 exclusion): f5_fully_excluded = True (4 sub-cases unconditional + 1 conditional on (H-Qb))",
+          "passed": true,
+          "detail": "got True"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=5 exclusion): closure is uniform in area multiset",
+          "passed": true,
+          "detail": "got depends_on_area_multiset = False"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=5 exclusion): all 5 combinatorial sub-cases impossible",
+          "passed": true,
+          "detail": "got 5"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=5 exclusion): 4 unconditional + 1 conditional on (H-Qb)",
+          "passed": true,
+          "detail": "got unconditional=4, conditional=1, hyps=['(H-Qb)']"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=7 exclusion): 33/33 tests passed",
+          "passed": true,
+          "detail": "got passed=33, failed=0"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=7 exclusion): f7_fully_excluded = True",
+          "passed": true,
+          "detail": "got True"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=7 exclusion): 4 multisets killed by distinct-boundary -> trivial Sym(P) argument",
+          "passed": true,
+          "detail": "got [[6, 12, 30], [6, 15, 27], [6, 18, 24], [12, 16, 20]]"
+        },
+        {
+          "name": "Phase 26-C-T3 (f=7 exclusion): (12,12,24) killed by K_5 triangle cycle-consistency",
+          "passed": true,
+          "detail": "got [[12, 12, 24]]"
+        },
+        {
+          "name": "Phase 26-C-T3 synthesis: R_T3_1 closed at canonical-multiset level (Step 3a); R_T3_2, R_T3_3, R_T3_4 closed by parity (Step 3b) + f=5 exclusion (Step 3c) + f=7 exclusion (Step 3d)",
+          "passed": true,
+          "detail": "combined certificate chain"
+        }
+      ]
+    },
+    {
+      "title": "6. Phase 26-C-T2: 2 t = 2 residuals UNSAT",
+      "tests": [
+        {
+          "name": "Phase 26-C-T2: 10/10 tests passed",
+          "passed": true,
+          "detail": "got passed=10, failed=0"
+        },
+        {
+          "name": "Phase 26-C-T2: both expected residuals present",
+          "passed": true,
+          "detail": "got {'R_T2_1', 'R_T2_2'}"
+        },
+        {
+          "name": "Phase 26-C-T2: both residuals status = UNSAT",
+          "passed": true,
+          "detail": "got 2 / 2 UNSAT"
+        }
+      ]
+    },
+    {
+      "title": "7. SYNTHESIS: Theorem 26.1 (n = 5 impossibility, convex case)",
+      "tests": [
+        {
+          "name": "All 7 (t, k-orbit) residuals from Phase 26-B are CLOSED across Phase 26-C",
+          "passed": true,
+          "detail": "missing = set()"
+        },
+        {
+          "name": "t = 1 'all-one-face analogue' eliminated in Phase 26-B (F4 filter)",
+          "passed": true,
+          "detail": "no congruent (t=1) configuration is even combinatorially admissible"
+        },
+        {
+          "name": "THEOREM 26.1 PROVED (modulo (H-trip) + (H-coc) + (H-orb) + (H-Qb)): no congruent face-to-face dissection of T into 5 convex pieces, under the four explicit standing hypotheses of paper thm:n5",
+          "passed": true,
+          "detail": "via complete UNSAT chain across all 7 admissible (t, k-orbit) residuals + t=1 elimination; 4 unconditional (t,k)-residuals, 3 conditional; (H-coc) only on (t=3, f=7, (12,12,24), (2,2)-orbit); (H-Qb) on Qb sub-cases of f=5; (H-orb) on all three t=3 parity residuals' f=7 branches"
+        }
+      ]
+    },
+    {
+      "title": "8. Formal theorem statement",
+      "tests": []
+    }
+  ],
+  "passed": 40,
+  "failed": 0,
+  "theorem": "26.1 (n=5 impossibility, convex case)",
+  "outcome": "THEOREM 26.1 PROVED MODULO (H-trip) + (H-coc) + (H-orb) + (H-Qb)",
+  "residual_chain": [
+    {
+      "step": "26-B (F4 + S_4 quotient)",
+      "outcome": "7 residuals + t=1 ELIMINATED",
+      "residuals": [
+        [
+          2,
+          [
+            3,
+            3,
+            2,
+            2
+          ]
+        ],
+        [
+          2,
+          [
+            4,
+            2,
+            2,
+            2
+          ]
+        ],
+        [
+          3,
+          [
+            4,
+            4,
+            4,
+            3
+          ]
+        ],
+        [
+          3,
+          [
+            5,
+            4,
+            3,
+            3
+          ]
+        ],
+        [
+          3,
+          [
+            5,
+            4,
+            4,
+            2
+          ]
+        ],
+        [
+          3,
+          [
+            5,
+            5,
+            3,
+            2
+          ]
+        ],
+        [
+          4,
+          [
+            5,
+            5,
+            5,
+            5
+          ]
+        ]
+      ]
+    },
+    {
+      "step": "26-C-T4 (centroid-pyramid decomposition)",
+      "outcome": "UNCONDITIONALLY UNSAT",
+      "residuals_closed": [
+        [
+          4,
+          [
+            5,
+            5,
+            5,
+            5
+          ]
+        ]
+      ]
+    },
+    {
+      "step": "26-C-T3 (4-certificate chain: residuals + parity + f=5 + f=7)",
+      "outcome": "ALL 4 UNSAT",
+      "residuals_closed": [
+        [
+          3,
+          [
+            5,
+            5,
+            3,
+            2
+          ]
+        ],
+        [
+          3,
+          [
+            4,
+            4,
+            4,
+            3
+          ]
+        ],
+        [
+          3,
+          [
+            5,
+            4,
+            3,
+            3
+          ]
+        ],
+        [
+          3,
+          [
+            5,
+            4,
+            4,
+            2
+          ]
+        ]
+      ],
+      "closure_breakdown": {
+        "R_T3_1": "canonical-multiset level (Step 3a)",
+        "R_T3_2": "Step 3a -> Step 3b (parity, f in {5, 7}) -> Step 3c + 3d",
+        "R_T3_3": "Step 3a -> Step 3b -> Step 3c + 3d",
+        "R_T3_4": "Step 3a -> Step 3b -> Step 3c + 3d"
+      }
+    },
+    {
+      "step": "26-C-T2 (forced canonical multiset (18, 30))",
+      "outcome": "BOTH UNSAT",
+      "residuals_closed": [
+        [
+          2,
+          [
+            4,
+            2,
+            2,
+            2
+          ]
+        ],
+        [
+          2,
+          [
+            3,
+            3,
+            2,
+            2
+          ]
+        ]
+      ]
+    }
+  ],
+  "evidence": {
+    "26-A": {
+      "passed": 45,
+      "failed": 0,
+      "outcome": null,
+      "summary": null,
+      "residuals": null
+    },
+    "26-B": {
+      "passed": 24,
+      "failed": 0,
+      "outcome": null,
+      "summary": {
+        "n": 5,
+        "V_piece_str": "8/15",
+        "per_piece_exposed_area_squared_str": "192/25",
+        "T_face_area_squared_str": "12",
+        "raw_k_vector_count": 259,
+        "residual_count_after_F4_and_S4_quotient": 7,
+        "survivors_per_t": {
+          "1": {
+            "raw_k_vectors_F4_pass": 0,
+            "S4_orbits_F4_pass": 0
+          },
+          "2": {
+            "raw_k_vectors_F4_pass": 10,
+            "S4_orbits_F4_pass": 2
+          },
+          "3": {
+            "raw_k_vectors_F4_pass": 40,
+            "S4_orbits_F4_pass": 4
+          },
+          "4": {
+            "raw_k_vectors_F4_pass": 1,
+            "S4_orbits_F4_pass": 1
+          }
+        }
+      },
+      "residuals": [
+        {
+          "t": 2,
+          "k_orbit_rep": [
+            4,
+            2,
+            2,
+            2
+          ],
+          "sum_k": 10,
+          "per_T_face_uniform_share_squared": [
+            "3/4",
+            "3/1",
+            "3/1",
+            "3/1"
+          ]
+        },
+        {
+          "t": 2,
+          "k_orbit_rep": [
+            3,
+            3,
+            2,
+            2
+          ],
+          "sum_k": 10,
+          "per_T_face_uniform_share_squared": [
+            "4/3",
+            "4/3",
+            "3/1",
+            "3/1"
+          ]
+        },
+        {
+          "t": 3,
+          "k_orbit_rep": [
+            5,
+            5,
+            3,
+            2
+          ],
+          "sum_k": 15,
+          "per_T_face_uniform_share_squared": [
+            "12/25",
+            "12/25",
+            "4/3",
+            "3/1"
+          ]
+        },
+        {
+          "t": 3,
+          "k_orbit_rep": [
+            5,
+            4,
+            4,
+            2
+          ],
+          "sum_k": 15,
+          "per_T_face_uniform_share_squared": [
+            "12/25",
+            "3/4",
+            "3/4",
+            "3/1"
+          ]
+        },
+        {
+          "t": 3,
+          "k_orbit_rep": [
+            5,
+            4,
+            3,
+            3
+          ],
+          "sum_k": 15,
+          "per_T_face_uniform_share_squared": [
+            "12/25",
+            "3/4",
+            "4/3",
+            "4/3"
+          ]
+        },
+        {
+          "t": 3,
+          "k_orbit_rep": [
+            4,
+            4,
+            4,
+            3
+          ],
+          "sum_k": 15,
+          "per_T_face_uniform_share_squared": [
+            "3/4",
+            "3/4",
+            "3/4",
+            "4/3"
+          ]
+        },
+        {
+          "t": 4,
+          "k_orbit_rep": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "sum_k": 20,
+          "per_T_face_uniform_share_squared": [
+            "12/25",
+            "12/25",
+            "12/25",
+            "12/25"
+          ]
+        }
+      ]
+    },
+    "26-C-T4": {
+      "passed": 30,
+      "failed": 0,
+      "outcome": "UNCONDITIONALLY UNSAT",
+      "summary": null,
+      "residuals": null
+    },
+    "26-C-T3": {
+      "passed": 17,
+      "failed": 0,
+      "outcome": null,
+      "summary": {
+        "total_residuals": 4,
+        "unsat_count": 1,
+        "combinatorial_sat_count": 3
+      },
+      "residuals": {
+        "R_T3_1": {
+          "k": [
+            5,
+            5,
+            3,
+            2
+          ],
+          "status": "UNSAT",
+          "feasible_multiset_count": 0,
+          "feasible_multisets": [],
+          "assignment_witness_count": 0,
+          "per_multiset_counts": [],
+          "witness_examples": []
+        },
+        "R_T3_2": {
+          "k": [
+            5,
+            4,
+            4,
+            2
+          ],
+          "status": "COMBINATORIAL_SAT",
+          "feasible_multiset_count": 1,
+          "feasible_multisets": [
+            [
+              6,
+              12,
+              30
+            ]
+          ],
+          "assignment_witness_count": 24,
+          "per_multiset_counts": [
+            {
+              "multiset": [
+                6,
+                12,
+                30
+              ],
+              "witness_count": 24
+            }
+          ],
+          "witness_examples": [
+            {
+              "multiset": [
+                6,
+                12,
+                30
+              ],
+              "first_witness": [
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    2,
+                    12
+                  ],
+                  [
+                    3,
+                    30
+                  ],
+                  [
+                    1,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    1,
+                    12
+                  ],
+                  [
+                    3,
+                    30
+                  ],
+                  [
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    12
+                  ],
+                  [
+                    1,
+                    30
+                  ],
+                  [
+                    2,
+                    6
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    30
+                  ],
+                  [
+                    1,
+                    6
+                  ],
+                  [
+                    2,
+                    12
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    1,
+                    12
+                  ],
+                  [
+                    2,
+                    30
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ]
+              ]
+            }
+          ]
+        },
+        "R_T3_3": {
+          "k": [
+            5,
+            4,
+            3,
+            3
+          ],
+          "status": "COMBINATORIAL_SAT",
+          "feasible_multiset_count": 5,
+          "feasible_multisets": [
+            [
+              6,
+              15,
+              27
+            ],
+            [
+              6,
+              18,
+              24
+            ],
+            [
+              10,
+              18,
+              20
+            ],
+            [
+              12,
+              12,
+              24
+            ],
+            [
+              12,
+              16,
+              20
+            ]
+          ],
+          "assignment_witness_count": 20,
+          "per_multiset_counts": [
+            {
+              "multiset": [
+                6,
+                15,
+                27
+              ],
+              "witness_count": 4
+            },
+            {
+              "multiset": [
+                6,
+                18,
+                24
+              ],
+              "witness_count": 12
+            },
+            {
+              "multiset": [
+                10,
+                18,
+                20
+              ],
+              "witness_count": 0
+            },
+            {
+              "multiset": [
+                12,
+                12,
+                24
+              ],
+              "witness_count": 4
+            },
+            {
+              "multiset": [
+                12,
+                16,
+                20
+              ],
+              "witness_count": 0
+            }
+          ],
+          "witness_examples": [
+            {
+              "multiset": [
+                6,
+                15,
+                27
+              ],
+              "first_witness": [
+                [
+                  [
+                    0,
+                    15
+                  ],
+                  [
+                    2,
+                    27
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    1,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    1,
+                    15
+                  ],
+                  [
+                    3,
+                    27
+                  ],
+                  [
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    1,
+                    15
+                  ],
+                  [
+                    3,
+                    27
+                  ],
+                  [
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    27
+                  ],
+                  [
+                    1,
+                    15
+                  ],
+                  [
+                    2,
+                    6
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    1,
+                    15
+                  ],
+                  [
+                    2,
+                    27
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ]
+              ]
+            },
+            {
+              "multiset": [
+                6,
+                18,
+                24
+              ],
+              "first_witness": [
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    2,
+                    24
+                  ],
+                  [
+                    3,
+                    18
+                  ],
+                  [
+                    1,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    24
+                  ],
+                  [
+                    1,
+                    6
+                  ],
+                  [
+                    3,
+                    18
+                  ],
+                  [
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    18
+                  ],
+                  [
+                    1,
+                    6
+                  ],
+                  [
+                    3,
+                    24
+                  ],
+                  [
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    1,
+                    24
+                  ],
+                  [
+                    2,
+                    18
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    1,
+                    24
+                  ],
+                  [
+                    2,
+                    18
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ]
+              ]
+            }
+          ]
+        },
+        "R_T3_4": {
+          "k": [
+            4,
+            4,
+            4,
+            3
+          ],
+          "status": "COMBINATORIAL_SAT",
+          "feasible_multiset_count": 8,
+          "feasible_multisets": [
+            [
+              3,
+              15,
+              30
+            ],
+            [
+              6,
+              15,
+              27
+            ],
+            [
+              6,
+              18,
+              24
+            ],
+            [
+              9,
+              18,
+              21
+            ],
+            [
+              10,
+              18,
+              20
+            ],
+            [
+              12,
+              12,
+              24
+            ],
+            [
+              12,
+              16,
+              20
+            ],
+            [
+              13,
+              15,
+              20
+            ]
+          ],
+          "assignment_witness_count": 54,
+          "per_multiset_counts": [
+            {
+              "multiset": [
+                3,
+                15,
+                30
+              ],
+              "witness_count": 0
+            },
+            {
+              "multiset": [
+                6,
+                15,
+                27
+              ],
+              "witness_count": 0
+            },
+            {
+              "multiset": [
+                6,
+                18,
+                24
+              ],
+              "witness_count": 18
+            },
+            {
+              "multiset": [
+                9,
+                18,
+                21
+              ],
+              "witness_count": 0
+            },
+            {
+              "multiset": [
+                10,
+                18,
+                20
+              ],
+              "witness_count": 0
+            },
+            {
+              "multiset": [
+                12,
+                12,
+                24
+              ],
+              "witness_count": 12
+            },
+            {
+              "multiset": [
+                12,
+                16,
+                20
+              ],
+              "witness_count": 24
+            },
+            {
+              "multiset": [
+                13,
+                15,
+                20
+              ],
+              "witness_count": 0
+            }
+          ],
+          "witness_examples": [
+            {
+              "multiset": [
+                6,
+                18,
+                24
+              ],
+              "first_witness": [
+                [
+                  [
+                    1,
+                    24
+                  ],
+                  [
+                    2,
+                    6
+                  ],
+                  [
+                    3,
+                    18
+                  ],
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    6
+                  ],
+                  [
+                    2,
+                    24
+                  ],
+                  [
+                    3,
+                    18
+                  ],
+                  [
+                    1,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    18
+                  ],
+                  [
+                    1,
+                    6
+                  ],
+                  [
+                    3,
+                    24
+                  ],
+                  [
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    18
+                  ],
+                  [
+                    1,
+                    24
+                  ],
+                  [
+                    2,
+                    6
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    18
+                  ],
+                  [
+                    1,
+                    6
+                  ],
+                  [
+                    2,
+                    24
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ]
+              ]
+            },
+            {
+              "multiset": [
+                12,
+                12,
+                24
+              ],
+              "first_witness": [
+                [
+                  [
+                    1,
+                    12
+                  ],
+                  [
+                    2,
+                    12
+                  ],
+                  [
+                    3,
+                    24
+                  ],
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    12
+                  ],
+                  [
+                    2,
+                    12
+                  ],
+                  [
+                    3,
+                    24
+                  ],
+                  [
+                    1,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    24
+                  ],
+                  [
+                    1,
+                    12
+                  ],
+                  [
+                    3,
+                    12
+                  ],
+                  [
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    12
+                  ],
+                  [
+                    1,
+                    12
+                  ],
+                  [
+                    2,
+                    24
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    12
+                  ],
+                  [
+                    1,
+                    24
+                  ],
+                  [
+                    2,
+                    12
+                  ],
+                  [
+                    3,
+                    0
+                  ]
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "26-C-T3-TET": {
+      "passed": 27,
+      "failed": 0,
+      "outcome": null,
+      "summary": null,
+      "residuals": null
+    },
+    "26-C-T3-F5": {
+      "passed": 21,
+      "failed": 0,
+      "outcome": null,
+      "summary": null,
+      "residuals": null
+    },
+    "26-C-T3-F7": {
+      "passed": 33,
+      "failed": 0,
+      "outcome": null,
+      "summary": null,
+      "residuals": null
+    },
+    "26-C-T2": {
+      "passed": 10,
+      "failed": 0,
+      "outcome": null,
+      "summary": {
+        "total_residuals": 2,
+        "unsat_count": 2
+      },
+      "residuals": {
+        "R_T2_1": {
+          "k": [
+            4,
+            2,
+            2,
+            2
+          ],
+          "status": "UNSAT",
+          "feasible_multiset_count": 0
+        },
+        "R_T2_2": {
+          "k": [
+            3,
+            3,
+            2,
+            2
+          ],
+          "status": "UNSAT",
+          "feasible_multiset_count": 0
+        }
+      }
+    }
+  },
+  "unconditional_residuals": 4,
+  "conditional_residuals": 3,
+  "conditional_hypotheses": {
+    "(H-trip)": "topological triple intersection (listed in thm:n5; motivational for (H-coc); not used in formal UNSAT chain; see paper rem:hcoc-from-htrip)",
+    "(H-coc)": "triangle cocycle g_ij g_jk g_ki = id in Sym(P); used only on (t=3, f=7, (12,12,24), (2,2)-orbit via lem:k5-cyc",
+    "(H-orb)": "orbit-detection property: any two facets of a reference tile P with equal metric invariants lie in a common Sym(P)-orbit (used wherever orbit-transport Lemma lem:orbit-transport is applied; finite table check; see paper rem:h-orb-auto)",
+    "(H-Qb)": "no face-to-face congruent 5-dissection of T admits a piece of type Qb (quadrilateral pyramid with base + 2 lateral triangles on partial T, in either Qb-adj or Qb-opp sub-configuration); used only in (t=3, f=5, Qb)"
+  },
+  "flag_qb": true,
+  "flag_htrip": true,
+  "flag_hcoc": true,
+  "flag_horb": true
+}

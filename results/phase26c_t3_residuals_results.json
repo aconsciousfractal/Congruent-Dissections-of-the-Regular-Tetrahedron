@@ -1,0 +1,865 @@
+{
+  "sections": [
+    {
+      "title": "0. Setup: integer scaling (units of sqrt 3 / 30)",
+      "tests": [
+        {
+          "name": "Integer-scaled A_T = 60",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Integer-scaled E = 48",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Per-T-face uniform shares: {2: 30, 3: 20, 4: 15, 5: 12}",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "5 * E = 4 * A_T (boundary-area conservation)",
+          "passed": true,
+          "detail": "240 = 240"
+        }
+      ]
+    },
+    {
+      "title": "1. Canonical-multiset solver (per-T-face contribution sums)",
+      "tests": [
+        {
+          "name": "Sample multiset solver: 3 picks from {1,2,5} sum to 8 -> [(1,2,5)]",
+          "passed": true,
+          "detail": "got [(1, 2, 5)]"
+        }
+      ]
+    },
+    {
+      "title": "2. Per-residual canonical-multiset enumeration",
+      "tests": [
+        {
+          "name": "R_T3_1 k = (5, 5, 3, 2): 0 canonical multisets pass per-T-face contribution test",
+          "passed": true,
+          "detail": "first 2 = none"
+        },
+        {
+          "name": "R_T3_2 k = (5, 4, 4, 2): 1 canonical multisets pass per-T-face contribution test",
+          "passed": true,
+          "detail": "first 2 = [(6, 12, 30)]"
+        },
+        {
+          "name": "R_T3_3 k = (5, 4, 3, 3): 5 canonical multisets pass per-T-face contribution test",
+          "passed": true,
+          "detail": "first 2 = [(6, 15, 27), (6, 18, 24)]"
+        },
+        {
+          "name": "R_T3_4 k = (4, 4, 4, 3): 8 canonical multisets pass per-T-face contribution test",
+          "passed": true,
+          "detail": "first 2 = [(3, 15, 30), (6, 15, 27)]"
+        }
+      ]
+    },
+    {
+      "title": "3. Full assignment-feasibility enumeration (per piece per T-face)",
+      "tests": [
+        {
+          "name": "R_T3_1 k = (5, 5, 3, 2): NO assignment feasible -> UNSAT",
+          "passed": true,
+          "detail": "no per-piece permutation set sums to A_T per T-face"
+        },
+        {
+          "name": "R_T3_2 k = (5, 4, 4, 2): 24 witness assignments",
+          "passed": true,
+          "detail": "COMBINATORIAL SAT (geometric realisability TBD in 26-D)"
+        },
+        {
+          "name": "R_T3_3 k = (5, 4, 3, 3): 20 witness assignments",
+          "passed": true,
+          "detail": "COMBINATORIAL SAT (geometric realisability TBD in 26-D)"
+        },
+        {
+          "name": "R_T3_4 k = (4, 4, 4, 3): 54 witness assignments",
+          "passed": true,
+          "detail": "COMBINATORIAL SAT (geometric realisability TBD in 26-D)"
+        }
+      ]
+    },
+    {
+      "title": "4. Synthesis: status of the 4 t = 3 residuals",
+      "tests": [
+        {
+          "name": "R_T3_1 k = (5, 5, 3, 2): status = UNSAT, feasible multisets = 0, witnesses = 0",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "R_T3_2 k = (5, 4, 4, 2): status = COMBINATORIAL_SAT, feasible multisets = 1, witnesses = 24",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "R_T3_3 k = (5, 4, 3, 3): status = COMBINATORIAL_SAT, feasible multisets = 5, witnesses = 20",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "R_T3_4 k = (4, 4, 4, 3): status = COMBINATORIAL_SAT, feasible multisets = 8, witnesses = 54",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    }
+  ],
+  "passed": 17,
+  "failed": 0,
+  "residuals": {
+    "R_T3_1": {
+      "k": [
+        5,
+        5,
+        3,
+        2
+      ],
+      "status": "UNSAT",
+      "feasible_multiset_count": 0,
+      "feasible_multisets": [],
+      "assignment_witness_count": 0,
+      "per_multiset_counts": [],
+      "witness_examples": []
+    },
+    "R_T3_2": {
+      "k": [
+        5,
+        4,
+        4,
+        2
+      ],
+      "status": "COMBINATORIAL_SAT",
+      "feasible_multiset_count": 1,
+      "feasible_multisets": [
+        [
+          6,
+          12,
+          30
+        ]
+      ],
+      "assignment_witness_count": 24,
+      "per_multiset_counts": [
+        {
+          "multiset": [
+            6,
+            12,
+            30
+          ],
+          "witness_count": 24
+        }
+      ],
+      "witness_examples": [
+        {
+          "multiset": [
+            6,
+            12,
+            30
+          ],
+          "first_witness": [
+            [
+              [
+                0,
+                6
+              ],
+              [
+                2,
+                12
+              ],
+              [
+                3,
+                30
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                12
+              ],
+              [
+                3,
+                30
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                12
+              ],
+              [
+                1,
+                30
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                30
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                2,
+                12
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                12
+              ],
+              [
+                2,
+                30
+              ],
+              [
+                3,
+                0
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    "R_T3_3": {
+      "k": [
+        5,
+        4,
+        3,
+        3
+      ],
+      "status": "COMBINATORIAL_SAT",
+      "feasible_multiset_count": 5,
+      "feasible_multisets": [
+        [
+          6,
+          15,
+          27
+        ],
+        [
+          6,
+          18,
+          24
+        ],
+        [
+          10,
+          18,
+          20
+        ],
+        [
+          12,
+          12,
+          24
+        ],
+        [
+          12,
+          16,
+          20
+        ]
+      ],
+      "assignment_witness_count": 20,
+      "per_multiset_counts": [
+        {
+          "multiset": [
+            6,
+            15,
+            27
+          ],
+          "witness_count": 4
+        },
+        {
+          "multiset": [
+            6,
+            18,
+            24
+          ],
+          "witness_count": 12
+        },
+        {
+          "multiset": [
+            10,
+            18,
+            20
+          ],
+          "witness_count": 0
+        },
+        {
+          "multiset": [
+            12,
+            12,
+            24
+          ],
+          "witness_count": 4
+        },
+        {
+          "multiset": [
+            12,
+            16,
+            20
+          ],
+          "witness_count": 0
+        }
+      ],
+      "witness_examples": [
+        {
+          "multiset": [
+            6,
+            15,
+            27
+          ],
+          "first_witness": [
+            [
+              [
+                0,
+                15
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                15
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                15
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                27
+              ],
+              [
+                1,
+                15
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                15
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "multiset": [
+            6,
+            18,
+            24
+          ],
+          "first_witness": [
+            [
+              [
+                0,
+                6
+              ],
+              [
+                2,
+                24
+              ],
+              [
+                3,
+                18
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                24
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                3,
+                18
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                18
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                3,
+                24
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                24
+              ],
+              [
+                2,
+                18
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                24
+              ],
+              [
+                2,
+                18
+              ],
+              [
+                3,
+                0
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    "R_T3_4": {
+      "k": [
+        4,
+        4,
+        4,
+        3
+      ],
+      "status": "COMBINATORIAL_SAT",
+      "feasible_multiset_count": 8,
+      "feasible_multisets": [
+        [
+          3,
+          15,
+          30
+        ],
+        [
+          6,
+          15,
+          27
+        ],
+        [
+          6,
+          18,
+          24
+        ],
+        [
+          9,
+          18,
+          21
+        ],
+        [
+          10,
+          18,
+          20
+        ],
+        [
+          12,
+          12,
+          24
+        ],
+        [
+          12,
+          16,
+          20
+        ],
+        [
+          13,
+          15,
+          20
+        ]
+      ],
+      "assignment_witness_count": 54,
+      "per_multiset_counts": [
+        {
+          "multiset": [
+            3,
+            15,
+            30
+          ],
+          "witness_count": 0
+        },
+        {
+          "multiset": [
+            6,
+            15,
+            27
+          ],
+          "witness_count": 0
+        },
+        {
+          "multiset": [
+            6,
+            18,
+            24
+          ],
+          "witness_count": 18
+        },
+        {
+          "multiset": [
+            9,
+            18,
+            21
+          ],
+          "witness_count": 0
+        },
+        {
+          "multiset": [
+            10,
+            18,
+            20
+          ],
+          "witness_count": 0
+        },
+        {
+          "multiset": [
+            12,
+            12,
+            24
+          ],
+          "witness_count": 12
+        },
+        {
+          "multiset": [
+            12,
+            16,
+            20
+          ],
+          "witness_count": 24
+        },
+        {
+          "multiset": [
+            13,
+            15,
+            20
+          ],
+          "witness_count": 0
+        }
+      ],
+      "witness_examples": [
+        {
+          "multiset": [
+            6,
+            18,
+            24
+          ],
+          "first_witness": [
+            [
+              [
+                1,
+                24
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                18
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                6
+              ],
+              [
+                2,
+                24
+              ],
+              [
+                3,
+                18
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                18
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                3,
+                24
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                18
+              ],
+              [
+                1,
+                24
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                18
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                2,
+                24
+              ],
+              [
+                3,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "multiset": [
+            12,
+            12,
+            24
+          ],
+          "first_witness": [
+            [
+              [
+                1,
+                12
+              ],
+              [
+                2,
+                12
+              ],
+              [
+                3,
+                24
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                12
+              ],
+              [
+                2,
+                12
+              ],
+              [
+                3,
+                24
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                24
+              ],
+              [
+                1,
+                12
+              ],
+              [
+                3,
+                12
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                12
+              ],
+              [
+                1,
+                12
+              ],
+              [
+                2,
+                24
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                12
+              ],
+              [
+                1,
+                24
+              ],
+              [
+                2,
+                12
+              ],
+              [
+                3,
+                0
+              ]
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_residuals": 4,
+    "unsat_count": 1,
+    "combinatorial_sat_count": 3
+  }
+}

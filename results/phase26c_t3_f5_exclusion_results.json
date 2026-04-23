@@ -1,0 +1,232 @@
+{
+  "sections": [
+    {
+      "title": "0. Combinatorial types of 5-faced convex 3-polytopes",
+      "tests": [
+        {
+          "name": "Type QP (quadrilateral pyramid): V=5, E=8, triangles=4, quads=1",
+          "passed": true,
+          "detail": "Euler characteristic + face-incidence check"
+        },
+        {
+          "name": "Type TP (triangular prism): V=6, E=9, triangles=2, quads=3",
+          "passed": true,
+          "detail": "Euler characteristic + face-incidence check"
+        },
+        {
+          "name": "Exactly 2 combinatorial types for f=5 convex 3-polytopes",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "1. QP Case (Qa): 3 lateral triangles on partial T",
+      "tests": [
+        {
+          "name": "Case (Qa) interior faces have DIFFERENT combinatorial types (triangle, quadrilateral)",
+          "passed": true,
+          "detail": "interior face types = ['triangle', 'quadrilateral']"
+        },
+        {
+          "name": "No rigid motion can map a triangle to a quadrilateral (edge-count invariant)",
+          "passed": true,
+          "detail": "3 edges != 4 edges"
+        },
+        {
+          "name": "(Qa) IMPOSSIBLE: weak CTL violated by combinatorial edge-count mismatch",
+          "passed": true,
+          "detail": "triangle F_fwd != quadrilateral F_bwd"
+        }
+      ]
+    },
+    {
+      "title": "2. QP Case (Qb): 2 lateral triangles + base quadrilateral on partial T",
+      "tests": [
+        {
+          "name": "(Qb-adj): single-piece family is NON-EMPTY (e.g. b_2 = T-vertex, apex on a distinct T-edge); single-piece degeneracy claim retracted",
+          "passed": true,
+          "detail": "retraction of earlier bogus argument; see paper Remark rem:hqb-status"
+        },
+        {
+          "name": "(Qb-opp): single-piece family is NON-EMPTY (3-parameter family on 3 concurrent T-edges); single-piece degeneracy claim retracted",
+          "passed": true,
+          "detail": "retraction of earlier bogus argument; see paper Remark rem:hqb-status"
+        },
+        {
+          "name": "(Qb) CONDITIONAL IMPOSSIBLE under (H-Qb): both sub-cases are ruled out by the standing hypothesis (H-Qb); full unconditional discharge is future work",
+          "passed": true,
+          "detail": "see paper Theorem thm:n5 and Remark rem:hqb-status"
+        }
+      ]
+    },
+    {
+      "title": "3. TP Case (Ta): both triangles + 1 quadrilateral on partial T",
+      "tests": [
+        {
+          "name": "Triangular prism: both triangular faces are mutually parallel (prism axis direction)",
+          "passed": true,
+          "detail": "prism top triangle is a translate of bottom triangle"
+        },
+        {
+          "name": "Any two distinct T-faces of the regular tetrahedron meet in a common edge and are NOT parallel",
+          "passed": true,
+          "detail": "T-face dihedral angle = arccos(1/3) != 0, pi"
+        },
+        {
+          "name": "(Ta) IMPOSSIBLE: parallel prism triangles cannot lie on non-parallel T-face planes",
+          "passed": true,
+          "detail": "geometric contradiction on face-plane parallelism"
+        }
+      ]
+    },
+    {
+      "title": "4. TP Case (Tb): 1 triangle + 2 quadrilaterals on partial T",
+      "tests": [
+        {
+          "name": "(Tb) interior faces have DIFFERENT combinatorial types (one triangle T2 + one quadrilateral Q_r)",
+          "passed": true,
+          "detail": "interior face types = ['triangle', 'quadrilateral']"
+        },
+        {
+          "name": "No self-isometry of the triangular prism can map a triangle face to a quadrilateral face (edge-count invariant)",
+          "passed": true,
+          "detail": "3 edges != 4 edges (rigid-motion invariant)"
+        },
+        {
+          "name": "(Tb) IMPOSSIBLE: weak CTL violated by combinatorial edge-count mismatch between T2 and Q_r",
+          "passed": true,
+          "detail": "triangle F_fwd != quadrilateral F_bwd, or vice versa"
+        }
+      ]
+    },
+    {
+      "title": "5. TP Case (Tc): 3 quadrilaterals on partial T, 2 triangles interior",
+      "tests": [
+        {
+          "name": "(Tc) forces the 3 lateral prism edges a_i-c_i to lie on 3 DIFFERENT edges of T, namely (v, u_beta), (v, u_gamma), (v, u_alpha)",
+          "passed": true,
+          "detail": "each a_i-c_i is the intersection of two adjacent lateral quadrilaterals"
+        },
+        {
+          "name": "The 3 edges of T emanating from v are pairwise non-parallel (60-degree angles)",
+          "passed": true,
+          "detail": "regular tetrahedron geometry"
+        },
+        {
+          "name": "(Tc) IMPOSSIBLE: a triangular prism requires 3 parallel lateral edges, which cannot be sub-segments of 3 pairwise non-parallel lines",
+          "passed": true,
+          "detail": "geometric contradiction on lateral-edge parallelism"
+        }
+      ]
+    },
+    {
+      "title": "6. Synthesis: f=5 case closure status",
+      "tests": [
+        {
+          "name": "All 5 sub-cases of f = 5 (QP Qa, QP Qb, TP Ta, TP Tb, TP Tc) are IMPOSSIBLE (unconditional OR conditional on (H-Qb))",
+          "passed": true,
+          "detail": "5/5"
+        },
+        {
+          "name": "Four of the five sub-cases (QP Qa, TP Ta, TP Tb, TP Tc) are closed UNCONDITIONALLY",
+          "passed": true,
+          "detail": "4/4 unconditional"
+        },
+        {
+          "name": "One sub-case (QP Qb, covering both Qb-adj and Qb-opp) is CONDITIONAL on the standing hypothesis (H-Qb) of paper Thm thm:n5",
+          "passed": true,
+          "detail": "1/1 conditional on (H-Qb)"
+        }
+      ]
+    }
+  ],
+  "passed": 21,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "QP_case_Qa",
+      "piece_type": "quadrilateral pyramid (QP)",
+      "partition": {
+        "boundary": "3 lateral triangles on 3 T-faces",
+        "interior": "1 lateral triangle + 1 base quadrilateral"
+      },
+      "verdict": "IMPOSSIBLE",
+      "reason": "Interior faces have different combinatorial types (triangle vs quadrilateral); no rigid motion can map one to the other, violating the weak Congruence Transport Lemma for C_5 adjacency.",
+      "reason_type": "combinatorial (face-type mismatch, weak CTL)"
+    },
+    {
+      "name": "QP_case_Qb",
+      "piece_type": "quadrilateral pyramid (QP)",
+      "partition": {
+        "boundary": "2 lateral triangles + 1 base quadrilateral",
+        "interior": "2 lateral triangles"
+      },
+      "verdict": "IMPOSSIBLE",
+      "reason": "Ruled out by the standing hypothesis (H-Qb) of paper Theorem n = 5 convex impossibility.  Both sub-cases Qb-adj and Qb-opp have non-empty single-piece families; exclusion is at the multi-piece face-to-face compatibility level, not at the single-piece level.  Earlier drafts claimed a single-piece degeneracy obstruction that was a notational artefact (apex symbol clashed with T-vertex symbol); that argument is retracted and replaced by the explicit hypothesis (H-Qb).",
+      "reason_type": "conditional on (H-Qb) [multi-piece compatibility]",
+      "conditional_on": "(H-Qb)"
+    },
+    {
+      "name": "TP_case_Ta",
+      "piece_type": "triangular prism (TP)",
+      "partition": {
+        "boundary": "2 triangles + 1 quadrilateral",
+        "interior": "2 quadrilaterals"
+      },
+      "verdict": "IMPOSSIBLE",
+      "reason": "The two triangular faces of a triangular prism are parallel, but no two T-faces of the regular tetrahedron are parallel.",
+      "reason_type": "geometric (parallel-faces incompatibility)"
+    },
+    {
+      "name": "TP_case_Tb",
+      "piece_type": "triangular prism (TP)",
+      "partition": {
+        "boundary": "1 triangle + 2 quadrilaterals",
+        "interior": "1 triangle + 1 quadrilateral"
+      },
+      "verdict": "IMPOSSIBLE",
+      "reason": "The two interior faces of the prism in Case (Tb) are one triangle and one quadrilateral, of different combinatorial types.  No rigid motion can map one to the other, violating the weak Congruence Transport Lemma for the C_5 congruent adjacency (the shared-face-label matching).",
+      "reason_type": "combinatorial (face-type mismatch, weak CTL)"
+    },
+    {
+      "name": "TP_case_Tc",
+      "piece_type": "triangular prism (TP)",
+      "partition": {
+        "boundary": "3 lateral quadrilaterals",
+        "interior": "2 triangles (top + bottom)"
+      },
+      "verdict": "IMPOSSIBLE",
+      "reason": "Forces the 3 lateral prism edges onto 3 pairwise non-parallel edges of T, incompatible with the prism's defining lateral-edge parallelism.",
+      "reason_type": "geometric (lateral-edge parallelism incompatibility)"
+    }
+  ],
+  "polytope_types_f5": [
+    {
+      "name": "QP",
+      "V": 5,
+      "E": 8,
+      "triangles": 4,
+      "quadrilaterals": 1,
+      "description": "quadrilateral pyramid"
+    },
+    {
+      "name": "TP",
+      "V": 6,
+      "E": 9,
+      "triangles": 2,
+      "quadrilaterals": 3,
+      "description": "triangular prism"
+    }
+  ],
+  "conclusion": {
+    "f5_fully_excluded": true,
+    "depends_on_area_multiset": false,
+    "number_of_subcases": 5,
+    "unconditional_subcases": 4,
+    "conditional_subcases": 1,
+    "conditional_hypotheses": [
+      "(H-Qb)"
+    ]
+  }
+}

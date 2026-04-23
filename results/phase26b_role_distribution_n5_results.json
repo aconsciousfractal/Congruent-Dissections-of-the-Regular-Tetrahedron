@@ -1,0 +1,306 @@
+{
+  "sections": [
+    {
+      "title": "1. n = 5 invariants: volumes, areas, incidence counts",
+      "tests": [
+        {
+          "name": "V_piece = V_T / 5 = 8/15",
+          "passed": true,
+          "detail": "got 8/15"
+        },
+        {
+          "name": "Per-T-face area squared = 12",
+          "passed": true,
+          "detail": "got 12"
+        },
+        {
+          "name": "Total surface area squared (4 * 2 sqrt 3)^2 = 192",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Per-piece total exposed area squared = 192/25",
+          "passed": true,
+          "detail": "got 192/25"
+        },
+        {
+          "name": "Admissible t values = {1, 2, 3, 4}",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "2. T-face incidence vectors k for each t in {1,2,3,4}",
+      "tests": [
+        {
+          "name": "t = 1: enumerated 56 raw k vectors",
+          "passed": true,
+          "detail": "first = (0, 0, 0, 5), last = (5, 0, 0, 0)"
+        },
+        {
+          "name": "t = 2: enumerated 146 raw k vectors",
+          "passed": true,
+          "detail": "first = (0, 0, 5, 5), last = (5, 5, 0, 0)"
+        },
+        {
+          "name": "t = 3: enumerated 56 raw k vectors",
+          "passed": true,
+          "detail": "first = (0, 5, 5, 5), last = (5, 5, 5, 0)"
+        },
+        {
+          "name": "t = 4: enumerated 1 raw k vectors",
+          "passed": true,
+          "detail": "first = (5, 5, 5, 5), last = (5, 5, 5, 5)"
+        },
+        {
+          "name": "Total raw k vectors = 259",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "3. Quotient k vectors by S_4 (T-face permutation) -- T_d orbits",
+      "tests": [
+        {
+          "name": "t = 1: 6 S_4-orbits of k vectors",
+          "passed": true,
+          "detail": "orbit reps = [(5, 0, 0, 0), (4, 1, 0, 0), (3, 2, 0, 0), (3, 1, 1, 0), (2, 2, 1, 0), (2, 1, 1, 1)]"
+        },
+        {
+          "name": "t = 2: 12 S_4-orbits of k vectors",
+          "passed": true,
+          "detail": "orbit reps = [(5, 5, 0, 0), (5, 4, 1, 0), (5, 3, 2, 0), (5, 3, 1, 1), (5, 2, 2, 1), (4, 4, 2, 0), (4, 4, 1, 1), (4, 3, 3, 0), (4, 3, 2, 1), (4, 2, 2, 2), (3, 3, 3, 1), (3, 3, 2, 2)]"
+        },
+        {
+          "name": "t = 3: 6 S_4-orbits of k vectors",
+          "passed": true,
+          "detail": "orbit reps = [(5, 5, 5, 0), (5, 5, 4, 1), (5, 5, 3, 2), (5, 4, 4, 2), (5, 4, 3, 3), (4, 4, 4, 3)]"
+        },
+        {
+          "name": "t = 4: 1 S_4-orbits of k vectors",
+          "passed": true,
+          "detail": "orbit reps = [(5, 5, 5, 5)]"
+        }
+      ]
+    },
+    {
+      "title": "4. Per-T-face area-feasibility filter (F4)",
+      "tests": [
+        {
+          "name": "t = 1: F4 survivors = 0  (k_j >= 2 forces sum >= 8 > 5)",
+          "passed": true,
+          "detail": "got 0"
+        },
+        {
+          "name": "t = 2: F4 survivors = 10",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "t = 3: F4 survivors = 40",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "t = 4: F4 survivors = 1",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "5. Build residual table (t, S_4-orbit of k) after F4",
+      "tests": [
+        {
+          "name": "Total surviving (t, k-orbit) residuals = 7",
+          "passed": true,
+          "detail": "residuals = 7"
+        }
+      ]
+    },
+    {
+      "title": "6. Volume + per-piece-area cross-check (F5, F6)",
+      "tests": [
+        {
+          "name": "Per-piece total exposed area squared E^2 = 192/25",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "Per-piece-area marginal sum identity 5 * E = 4 * A_T",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "7. 'All-one-face' analogue for n = 5",
+      "tests": [
+        {
+          "name": "(5 E)^2 / A_T^2 = 16 = 16, so t = 1 needs 16x the available area",
+          "passed": true,
+          "detail": "5 footprints of total area 4 A_T cannot fit on 1 T-face of area A_T"
+        },
+        {
+          "name": "t = 1 ruled out for n = 5: 'all-one-face' analogue is COMBINATORIALLY IMPOSSIBLE",
+          "passed": true,
+          "detail": "no integer k_0 satisfies k_0 * E = A_T"
+        }
+      ]
+    },
+    {
+      "title": "8. Save residual table for Phase 26-C",
+      "tests": [
+        {
+          "name": "Saved residual table to phase26b_role_distribution_n5_results.json",
+          "passed": true,
+          "detail": "file size = 7166 bytes"
+        }
+      ]
+    }
+  ],
+  "passed": 24,
+  "failed": 0,
+  "residuals": [
+    {
+      "t": 2,
+      "k_orbit_rep": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "sum_k": 10,
+      "per_T_face_uniform_share_squared": [
+        "3/4",
+        "3/1",
+        "3/1",
+        "3/1"
+      ]
+    },
+    {
+      "t": 2,
+      "k_orbit_rep": [
+        3,
+        3,
+        2,
+        2
+      ],
+      "sum_k": 10,
+      "per_T_face_uniform_share_squared": [
+        "4/3",
+        "4/3",
+        "3/1",
+        "3/1"
+      ]
+    },
+    {
+      "t": 3,
+      "k_orbit_rep": [
+        5,
+        5,
+        3,
+        2
+      ],
+      "sum_k": 15,
+      "per_T_face_uniform_share_squared": [
+        "12/25",
+        "12/25",
+        "4/3",
+        "3/1"
+      ]
+    },
+    {
+      "t": 3,
+      "k_orbit_rep": [
+        5,
+        4,
+        4,
+        2
+      ],
+      "sum_k": 15,
+      "per_T_face_uniform_share_squared": [
+        "12/25",
+        "3/4",
+        "3/4",
+        "3/1"
+      ]
+    },
+    {
+      "t": 3,
+      "k_orbit_rep": [
+        5,
+        4,
+        3,
+        3
+      ],
+      "sum_k": 15,
+      "per_T_face_uniform_share_squared": [
+        "12/25",
+        "3/4",
+        "4/3",
+        "4/3"
+      ]
+    },
+    {
+      "t": 3,
+      "k_orbit_rep": [
+        4,
+        4,
+        4,
+        3
+      ],
+      "sum_k": 15,
+      "per_T_face_uniform_share_squared": [
+        "3/4",
+        "3/4",
+        "3/4",
+        "4/3"
+      ]
+    },
+    {
+      "t": 4,
+      "k_orbit_rep": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "sum_k": 20,
+      "per_T_face_uniform_share_squared": [
+        "12/25",
+        "12/25",
+        "12/25",
+        "12/25"
+      ]
+    }
+  ],
+  "summary": {
+    "n": 5,
+    "V_piece_str": "8/15",
+    "per_piece_exposed_area_squared_str": "192/25",
+    "T_face_area_squared_str": "12",
+    "raw_k_vector_count": 259,
+    "residual_count_after_F4_and_S4_quotient": 7,
+    "survivors_per_t": {
+      "1": {
+        "raw_k_vectors_F4_pass": 0,
+        "S4_orbits_F4_pass": 0
+      },
+      "2": {
+        "raw_k_vectors_F4_pass": 10,
+        "S4_orbits_F4_pass": 2
+      },
+      "3": {
+        "raw_k_vectors_F4_pass": 40,
+        "S4_orbits_F4_pass": 4
+      },
+      "4": {
+        "raw_k_vectors_F4_pass": 1,
+        "S4_orbits_F4_pass": 1
+      }
+    }
+  }
+}
