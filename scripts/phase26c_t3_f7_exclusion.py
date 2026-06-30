@@ -20,8 +20,11 @@ Strategy
 --------
 For f = 7 the interior-adjacency graph is K_5: every pair of the 5
 congruent pieces shares exactly one interior face (4 interior faces
-per piece x 5 pieces / 2 = 10, matching |E(K_5)| = 10).  We exclude
-every possibility by a two-layer argument:
+per piece x 5 pieces / 2 = 10, matching |E(K_5)| = 10).  The retired
+auxiliary orbit-transport ledger excluded every possibility under additional
+orbit-detection assumptions.  The active public ledger does not use that
+upgrade and leaves the accidental-even metric cases open.  The audit has two
+layers:
 
     Layer 1 -- Weak Congruence Transport + Orbit Transport on K_5.
         For each edge (i, j) of K_5 the shared interior face S_{i,j}
@@ -39,7 +42,7 @@ every possibility by a two-layer argument:
         that formulation and the facet-gluing data.
 
     Layer 2 -- Orbit-structure case split on {1,1,1,1}, {2,1,1},
-        {3,1}, {2,2}, {4}.  We close each case:
+        {3,1}, {2,2}, {4}.  Within the retired ledger the cases split as follows:
 
         (1,1,1,1): each label is fixed -> same label on both sides of
             every CTL-compatible edge -> 5 'label-k' edges form a
@@ -106,7 +109,7 @@ References
   - phase26c_t3_residuals.py              (residuals; 5 multisets)
   - phase26c_t3_tetrahedral_exclusion.py  (parity -> f in {5,7})
   - phase26c_t3_f5_exclusion.py           (f = 5 closure)
-  - TODO_DRAFT_FINAL.md  section P0 / T3-BUG-04.
+  - docs/n5_residual_status.md              (current public residual status).
 """
 
 from __future__ import annotations

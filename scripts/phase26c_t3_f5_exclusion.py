@@ -42,9 +42,9 @@ T-faces of T), we partition the 5 faces of P into 3 boundary faces
 STATUS of the five sub-cases
 ----------------------------
   (Qa) UNCONDITIONAL: weak CTL edge-count mismatch.
-  (Qb) LEGACY LOCAL REDUCTION: earlier single-piece degeneracy claims
+  (Qb) LOCAL AUDIT REDUCTION: earlier single-piece degeneracy claims
        for Qb-adj and Qb-opp were notational artefacts and have been
-       retracted.  This script records the old local split; the current
+       retracted.  This script records the local split; the current
        public stack discharges H-Qb by the hqb_* certificate scripts.
   (Ta) UNCONDITIONAL: T-faces are pairwise non-parallel.
   (Tb) UNCONDITIONAL: weak CTL edge-count mismatch.
@@ -77,7 +77,7 @@ Each piece has 2 interior faces, namely F_fwd and F_bwd.  If the shared
 face between P_i and P_{i+1} is S, then S = gamma_i(F_fwd) as a face
 of P_i and S = gamma_{i+1}(F_bwd) as a face of P_{i+1}; the two preimages
 gamma_i^{-1}(S) = F_fwd and gamma_{i+1}^{-1}(S) = F_bwd are both faces
-of P, and applying the isometry gamma_i^{-1} Ã”ÃªÃ¿ gamma_{i+1} (which is a
+of P, and applying the isometry gamma_i^{-1} circ gamma_{i+1} (which is a
 rigid motion of R^3, NOT necessarily an element of Sym(P)) to F_bwd
 yields F_fwd as a subset of R^3.  In particular F_fwd and F_bwd are
 isometric polygons, with the same edge-lengths and interior-angle
@@ -86,14 +86,14 @@ multisets (WEAK CTL; paper Lemma lem:ctl).
 If F_fwd and F_bwd have DIFFERENT combinatorial types (different
 numbers of edges, say), no rigid motion can map one to the other,
 giving an immediate contradiction.  NOTE: we deliberately do NOT claim
-that tau = gamma_i^{-1} Ã”ÃªÃ¿ gamma_{i+1} restricts to an element of
+that tau = gamma_i^{-1} circ gamma_{i+1} restricts to an element of
 Sym(P); that is the stronger orbit-transport assertion which requires
 the hypothesis (H-orb) and is NOT invoked in this script.
 
 References
 ----------
   - phase26c_t3_tetrahedral_exclusion.py  (parity reduction).
-  - TODO_DRAFT_FINAL.md  section P0 / T3-BUG-03.
+  - docs/n5_residual_status.md              (current public residual status).
 """
 
 from __future__ import annotations
@@ -134,7 +134,7 @@ def check(name: str, condition: bool, detail: str = "") -> None:
 
 def record_case(name: str, piece_type: str, partition: dict,
                 verdict: str, reason: str, reason_type: str,
-                conditional_on: str = "") -> None:
+                conditional_on: str = "", active_public_verdict: str = "") -> None:
     entry = {
         "name": name,
         "piece_type": piece_type,
@@ -145,6 +145,8 @@ def record_case(name: str, piece_type: str, partition: dict,
     }
     if conditional_on:
         entry["conditional_on"] = conditional_on
+    if active_public_verdict:
+        entry["active_public_verdict"] = active_public_verdict
     RESULTS["cases"].append(entry)
 
 
@@ -291,7 +293,8 @@ record_case(
     piece_type="quadrilateral pyramid (QP)",
     partition={"boundary": "2 lateral triangles + 1 base quadrilateral",
                "interior": "2 lateral triangles"},
-    verdict="IMPOSSIBLE",
+    verdict="DELEGATED_CLOSED_BY_HQB_STACK",
+    active_public_verdict="CLOSED_BY_HQB_STACK",
     reason="Local Qb audit reduction.  Both sub-cases Qb-adj and "
            "Qb-opp have non-empty single-piece families; exclusion "
            "is at the multi-piece face-to-face compatibility level, "
@@ -413,11 +416,11 @@ section("5. TP Case (Tc): 3 quadrilaterals on partial T, 2 triangles interior")
 # All 3 lateral quadrilaterals Q1, Q2, Q3 lie on T_alpha, T_beta, T_gamma
 # respectively.  Any two adjacent quadrilaterals share a lateral edge
 # a_i-c_i; this edge lies on Q_i and Q_{i-1}'s intersection, which is
-# T_alpha Ã”ÃªÂ® T_beta (or another pair), an edge of T emanating from v.
+# T_alpha cap T_beta (or another pair), an edge of T emanating from v.
 # Explicitly:
-#   a_1, c_1 Ã”ÃªÃª Q1 Ã”ÃªÂ® Q3 = T_alpha Ã”ÃªÂ® T_gamma = edge (v, u_beta).
-#   a_2, c_2 Ã”ÃªÃª Q1 Ã”ÃªÂ® Q2 = T_alpha Ã”ÃªÂ® T_beta  = edge (v, u_gamma).
-#   a_3, c_3 Ã”ÃªÃª Q2 Ã”ÃªÂ® Q3 = T_beta  Ã”ÃªÂ® T_gamma = edge (v, u_alpha).
+#   a_1, c_1 in Q1 cap Q3 = T_alpha cap T_gamma = edge (v, u_beta).
+#   a_2, c_2 in Q1 cap Q2 = T_alpha cap T_beta  = edge (v, u_gamma).
+#   a_3, c_3 in Q2 cap Q3 = T_beta  cap T_gamma = edge (v, u_alpha).
 # Hence each of the 3 lateral edges a_i-c_i is a sub-segment of a
 # DIFFERENT edge of T emanating from v.  The 3 edges (v, u_alpha),
 # (v, u_beta), (v, u_gamma) are pairwise non-parallel (they meet at
@@ -461,7 +464,8 @@ record_case(
 
 section("6. Synthesis: f=5 case closure status")
 
-all_cases_impossible = all(c["verdict"] == "IMPOSSIBLE" for c in RESULTS["cases"])
+active_closed_verdicts = {"IMPOSSIBLE", "DELEGATED_CLOSED_BY_HQB_STACK"}
+all_cases_active_closed = all(c["verdict"] in active_closed_verdicts for c in RESULTS["cases"])
 
 unconditional_cases = [c for c in RESULTS["cases"]
                        if not c.get("conditional_on")]
@@ -469,9 +473,9 @@ conditional_cases = [c for c in RESULTS["cases"]
                      if c.get("conditional_on")]
 
 check("All 5 sub-cases of f = 5 (QP Qa, QP Qb, TP Ta, TP Tb, TP Tc) "
-      "are IMPOSSIBLE (unconditional OR conditional on (H-Qb))",
-      all_cases_impossible,
-      f"{sum(1 for c in RESULTS['cases'] if c['verdict'] == 'IMPOSSIBLE')}/5")
+      "are closed in the active public ledger",
+      all_cases_active_closed,
+      f"{sum(1 for c in RESULTS['cases'] if c['verdict'] in active_closed_verdicts)}/5")
 
 check("Four of the five sub-cases (QP Qa, TP Ta, TP Tb, TP Tc) are "
       "closed UNCONDITIONALLY",
@@ -487,7 +491,7 @@ print("\n  f = 5 closure summary:")
 for c in RESULTS["cases"]:
     cond = c.get("conditional_on", "")
     cond_marker = f"  [cond: {cond}]" if cond else ""
-    print(f"    {c['name']:12s}  {c['verdict']:12s}  "
+    print(f"    {c['name']:12s}  {c['verdict']:32s}  "
           f"[{c['reason_type']}]{cond_marker}")
 
 
@@ -499,7 +503,7 @@ RESULTS["passed"] = PASSED
 RESULTS["failed"] = FAILED
 RESULTS["polytope_types_f5"] = polytope_types
 RESULTS["conclusion"] = {
-    "f5_fully_excluded": all_cases_impossible,
+    "f5_fully_excluded": all_cases_active_closed,
     "depends_on_area_multiset": False,
     "number_of_subcases": len(RESULTS["cases"]),
     "unconditional_subcases": len(unconditional_cases),

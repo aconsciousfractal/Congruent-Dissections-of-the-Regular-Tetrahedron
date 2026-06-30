@@ -72,12 +72,12 @@ STATUS (2026-04-16, after T3-BUG-01 fix).
   Phase 26-C-T3 follow-up scripts phase26c_t3_residuals_shape.py
   and/or phase26c_t3_residuals_packing.py, and the TODO file
   09-papers/Congruent Dissections of the Regular Tetrahedron/
-  TODO_DRAFT_FINAL.md).
+  docs/n5_residual_status.md).
 
 References:
   - PHASE_26_PLAN.md, sub-phase 26-C, residuals t = 3.
   - phase26b_role_distribution_n5_results.json (residual table).
-  - TODO_DRAFT_FINAL.md, section P0 / T3-BUG, for the fix trail.
+  - docs/n5_residual_status.md, for the current public residual ledger.
 """
 
 from __future__ import annotations
@@ -250,7 +250,7 @@ for r in T3_RESIDUALS:
 
 section("3. Full assignment-feasibility enumeration (per piece per T-face)")
 
-# For each residual + canonical-multiset combination that survives ┬º2,
+# For each residual + canonical-multiset combination that survives Section 2,
 # we now enumerate all per-piece assignments and check whether they
 # are jointly consistent.  This is the SAT step.
 #

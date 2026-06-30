@@ -269,7 +269,7 @@ section("4. Per-T-face area-feasibility filter (F4)")
 # pieces * A_T/16 = A_T, leaving 3 A_T uncovered -- impossible.
 #
 # Resolution: the n=16 all-one-face residual configuration is in fact
-# not directly comparable; Phase 25 ┬º17.10 / ┬º18 "all-one-face" refers
+# not directly comparable; Phase 25 Sections 17.10 / 18 "all-one-face" refers
 # to the role-MILP role distribution where EACH PIECE'S SINGLE CORNER
 # ROLE is on a single T-face, but pieces also have additional ROLES
 # (central, etc.) on the OTHER 3 T-faces.  The terminology is residual-

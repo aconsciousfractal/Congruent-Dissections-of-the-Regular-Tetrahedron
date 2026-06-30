@@ -97,6 +97,7 @@
     "consistent_c0_0": 64,
     "consistent_c0_1": 0
   },
+  "proof_boundary_note": "The signed-permutation enumeration is an exact sanity model for the coordinate representatives; the all-isometry statement used in the proof is the standard Euclidean lemma that an isometry fixing a planar facet pointwise is either the identity or the reflection in that plane.",
   "c0_proved": 1,
   "conclusion": {
     "hcoc_discharged": true,

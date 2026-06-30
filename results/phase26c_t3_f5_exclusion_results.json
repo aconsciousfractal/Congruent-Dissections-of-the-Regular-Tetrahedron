@@ -124,7 +124,7 @@
       "title": "6. Synthesis: f=5 case closure status",
       "tests": [
         {
-          "name": "All 5 sub-cases of f = 5 (QP Qa, QP Qb, TP Ta, TP Tb, TP Tc) are IMPOSSIBLE (unconditional OR conditional on (H-Qb))",
+          "name": "All 5 sub-cases of f = 5 (QP Qa, QP Qb, TP Ta, TP Tb, TP Tc) are closed in the active public ledger",
           "passed": true,
           "detail": "5/5"
         },
@@ -162,10 +162,11 @@
         "boundary": "2 lateral triangles + 1 base quadrilateral",
         "interior": "2 lateral triangles"
       },
-      "verdict": "IMPOSSIBLE",
+      "verdict": "DELEGATED_CLOSED_BY_HQB_STACK",
       "reason": "Local Qb audit reduction.  Both sub-cases Qb-adj and Qb-opp have non-empty single-piece families; exclusion is at the multi-piece face-to-face compatibility level, not at the single-piece level.  Earlier drafts claimed a single-piece degeneracy obstruction that was a notational artefact (apex symbol clashed with T-vertex symbol); that argument is retracted.  The current public stack discharges H-Qb externally via the hqb_* certificate scripts.",
       "reason_type": "delegated to discharged H-Qb certificate stack",
-      "conditional_on": "hqb_* certificates (closed in current public ledger)"
+      "conditional_on": "hqb_* certificates (closed in current public ledger)",
+      "active_public_verdict": "CLOSED_BY_HQB_STACK"
     },
     {
       "name": "TP_case_Ta",

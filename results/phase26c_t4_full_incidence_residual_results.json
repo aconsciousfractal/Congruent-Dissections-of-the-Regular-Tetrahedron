@@ -81,7 +81,7 @@
       ]
     },
     {
-      "title": "4. f = 6 structure: piece = T \u00d4\u00ea\u00ae H_1 \u00d4\u00ea\u00ae H_2",
+      "title": "4. f = 6 structure: piece = T cap H_1 cap H_2",
       "tests": [
         {
           "name": "f = 6: total interior face-instances = 10",
@@ -121,7 +121,7 @@
         {
           "name": "m = 0: sum k_v = 0, but each k_v >= 1 forbids this -> m = 0 IMPOSSIBLE",
           "passed": true,
-          "detail": "no piece touches any T-vertex, but T-vertices are on \u00d4\u00ea\u00e9T -- contradiction"
+          "detail": "no piece touches any T-vertex, but T-vertices are on dT -- contradiction"
         },
         {
           "name": "m = 1: sum k_v = 5; feasible ordered tuples = 0",
@@ -176,7 +176,7 @@
         {
           "name": "Interior-facet contribution = 0 forces f(P) = 4 (no interior facets)",
           "passed": true,
-          "detail": "but \u252c\u00ba2 rules out f = 4 by face-to-face property"
+          "detail": "but Section 2 rules out f = 4 by face-to-face property"
         },
         {
           "name": "CONTRADICTION: V_piece = 8/15 is NOT achievable by any convex P with f >= 5",
@@ -191,7 +191,7 @@
         {
           "name": "(t = 4, k = (5,5,5,5)) residual: UNCONDITIONALLY UNSAT",
           "passed": true,
-          "detail": "via \u252c\u00ba2 (f=4) + \u252c\u00ba3 (f=5) + \u252c\u00ba7 (f>=6) -- no admissible f"
+          "detail": "via Sections 2 (f=4), 3 (f=5), and 7 (f>=6) -- no admissible f"
         }
       ]
     }

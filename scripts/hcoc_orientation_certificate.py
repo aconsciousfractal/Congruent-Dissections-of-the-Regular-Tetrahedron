@@ -277,6 +277,12 @@ check("isometries (in the signed-permutation model) fixing the facet "
       "plane pointwise: exactly {id, reflection}",
       len(fixers) == 2 and fixer_dets == [-1, 1],
       f"{len(fixers)} such maps, dets = {fixer_dets}")
+RESULTS["proof_boundary_note"] = (
+    "The signed-permutation enumeration is an exact sanity model for the "
+    "coordinate representatives; the all-isometry statement used in the proof "
+    "is the standard Euclidean lemma that an isometry fixing a planar facet "
+    "pointwise is either the identity or the reflection in that plane."
+)
 the_reflection = next(A for A in fixers if det3(A) == -1)
 check("the non-identity facet-fixing isometry is the plane reflection, "
       "eps = -1",

@@ -5,8 +5,9 @@
 After the parity reduction (horb_parity_certificate.py) the ONLY case of
 (H-orb) not yet discharged is:
 
-    a piece P with  f(P) = 7,  t = 3,  Sym(P) = 1  (forced by a
-    distinct-boundary-area multiset), whose four interior facets are
+    a piece P with  f(P) = 7,  t = 3,  Sym(P) = 1  (forced for the
+    four distinct-boundary-area multisets and retained as the accidental-even
+    subcase in the repeated-area multiset), whose four interior facets are
     ACCIDENTALLY congruent in an even metric pattern -- (4) (all four
     congruent) or (2,2) (two congruent pairs) -- not realised by any
     symmetry of P.
@@ -145,6 +146,7 @@ RESULTS["failed"] = FAILED
 RESULTS["scope"] = {
     "residual": "f=7, t=3, Sym(P)=1, interior-facet metric pattern (4) or "
                 "accidental (2,2)",
+    "boundary_multiset_scope": "Sym(P)=1 is forced for the four distinct-boundary-area multisets and retained as the accidental-even subcase for the repeated-area multiset",
     "tool1_parity": "leaves even patterns (2,2),(4)",
     "tool2_orientation": "trivial holonomy without sigma -- no contradiction",
     "tool3_boundary_tiling_feasible": feasible,

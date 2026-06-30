@@ -27,7 +27,7 @@ Sub-sections:
        faces on dT, hence 0 interior faces, hence not face-to-face.
   [S3] f = 5 parity elimination: 5 pieces with 1 interior face each
        => 5/2 paired interior faces, not integer.
-  [S4] f >= 6, f even.  For f = 6, the piece is exactly T Ôê® H_1 Ôê® H_2
+  [S4] f >= 6, f even.  For f = 6, the piece is exactly T cap H_1 cap H_2
        where H_1, H_2 are 2 interior half-spaces.
   [S5] Boundary-area equipartition: each piece's footprint on each
        T-face has area exactly 2 sqrt 3 / 5 (forced by congruence +
@@ -36,7 +36,7 @@ Sub-sections:
        k_v in {1, 3, 6, 9, ...}; analyse 4-tuples summing to 5m for
        m = #T-vertices touched per piece.
   [S7] Geometric convex-polytope incompatibility: if a convex piece
-       P is T Ôê® H_1 Ôê® H_2 with 4 boundary regions of equal area
+       P is T cap H_1 cap H_2 with 4 boundary regions of equal area
        2 sqrt 3 / 5 each, the cuts H_1, H_2 must be specific.  Show
        that such P has 5 vertices, but the boundary-area distribution
        constraint plus piece-volume V = 8/15 yields a contradiction.
@@ -193,13 +193,13 @@ check("Conclusion: f(P) >= 6 with f - 4 even", True,
 # Section 4 -- f = 6 structural characterisation.
 # -----------------------------------------------------------------------------
 
-section("4. f = 6 structure: piece = T Ôê® H_1 Ôê® H_2")
+section("4. f = 6 structure: piece = T cap H_1 cap H_2")
 
 # A convex 3-polytope is the intersection of its supporting closed
 # half-spaces, one per facet.  If 4 of the 6 facets lie on the 4
 # face-planes of T, the corresponding 4 half-spaces are precisely the
-# 4 half-spaces defining T (since P Ôèé T forces each).  Hence
-#       P = T Ôê® H_1 Ôê® H_2
+# 4 half-spaces defining T (since P subset T forces each).  Hence
+#       P = T cap H_1 cap H_2
 # where H_1, H_2 are the half-spaces bounded by the 2 interior facets'
 # supporting planes.
 
@@ -221,7 +221,7 @@ check(
 
 # These 5 distinct interior 2-faces lie on at most 5 distinct planes
 # (cutting planes).  Each cutting plane carries 1 or more interior
-# faces; for the piece structure P = T Ôê® H_1 Ôê® H_2, each piece uses
+# faces; for the piece structure P = T cap H_1 cap H_2, each piece uses
 # exactly 2 of these 5 cutting planes.
 
 # Vertex count of P (from Euler v - e + f = 2 and 2e = sum face-sizes):
@@ -319,7 +319,7 @@ for m in range(5):
 check(
     "m = 0: sum k_v = 0, but each k_v >= 1 forbids this -> m = 0 IMPOSSIBLE",
     len(sums_by_m[0]) == 0,
-    "no piece touches any T-vertex, but T-vertices are on ÔêéT -- contradiction",
+    "no piece touches any T-vertex, but T-vertices are on dT -- contradiction",
 )
 check(
     f"m = 1: sum k_v = 5; feasible ordered tuples = {len(sums_by_m[1])}",
@@ -360,7 +360,7 @@ for m in range(1, 5):
 # sums to 5?
 #   Try (1, 1, 1, 2): 2 not in set.  (1, 1, 3, 0): 0 not in set.
 #   Need 4 values >= 1, all in {1,3,6,...}, summing to 5.  Min if
-#   3 values are 1 and 1 value is 2: 2 Ôêë set.  4 values of 1 sum to 4.
+#   3 values are 1 and 1 value is 2: 2 not in set.  4 values of 1 sum to 4.
 #   1+1+1+3 = 6 > 5.  Hence m = 1 is INFEASIBLE under Hypothesis H.
 
 check(
@@ -377,7 +377,7 @@ check(
 section("7. Centroid pyramid decomposition: V_piece = (a / 3) * h_T forces f = 4")
 
 # RIGOROUS LEMMA (centroid pyramid decomposition).
-#   Let P Ôèå R^3 be any convex polytope and p any point in the interior
+#   Let P subset R^3 be any convex polytope and p any point in the interior
 #   of P.  Decompose P as the union of pyramids with apex p over each
 #   facet F.  Then
 #       V(P) = (1/3) * sum over facets F of  area(F) * d(p, aff(F)),
@@ -399,7 +399,7 @@ check("V_T = (A_T / 3) * h_T  (squared: V_T^2 = (A_T / 3)^2 * h_T^2)",
       V_T * V_T == (A_face_sq / F(9)) * h_T_sq,
       f"V_T^2 = {V_T*V_T}, (A_T/3)^2 * h_T^2 = {(A_face_sq/F(9))*h_T_sq}")
 
-# Now the (t = 4, k = (5,5,5,5)) residual.  Each piece P Ôèå T has 4
+# Now the (t = 4, k = (5,5,5,5)) residual.  Each piece P subset T has 4
 # boundary facets on the 4 T-faces, of equal area a = A_T / 5 = 2 sqrt 3 / 5.
 # Apply centroid pyramid decomposition with apex p = centroid(P) (an
 # interior point of P, hence interior of T):
@@ -417,7 +417,7 @@ check("V_T = (A_T / 3) * h_T  (squared: V_T^2 = (A_T / 3)^2 * h_T^2)",
 # plane has strictly positive distance from p (the strict interior is
 # strictly on one side of every supporting hyperplane).  Hence the
 # only way for the interior-facet contribution to vanish is for there
-# to be NO interior facets at all.  So f(P) = 4.  But ┬º2 already ruled
+# to be NO interior facets at all.  So f(P) = 4.  But Section 2 already ruled
 # this out.  Contradiction.
 
 # Squared volume identity (exact rational).
@@ -436,7 +436,7 @@ check(
 check(
     "Interior-facet contribution = 0 forces f(P) = 4 (no interior facets)",
     True,
-    "but ┬º2 rules out f = 4 by face-to-face property",
+    "but Section 2 rules out f = 4 by face-to-face property",
 )
 check(
     "CONTRADICTION: V_piece = 8/15 is NOT achievable by any convex P with f >= 5",
@@ -481,7 +481,7 @@ section("8. SYNTHESIS: (t = 4, k = (5,5,5,5)) residual UNSAT")
 
 check("(t = 4, k = (5,5,5,5)) residual: UNCONDITIONALLY UNSAT",
       True,
-      "via ┬º2 (f=4) + ┬º3 (f=5) + ┬º7 (f>=6) -- no admissible f")
+      "via Sections 2 (f=4), 3 (f=5), and 7 (f>=6) -- no admissible f")
 
 RESULTS["outcome"] = "UNCONDITIONALLY UNSAT"
 RESULTS["unsat_chain"] = [

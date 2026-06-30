@@ -97,7 +97,7 @@ References
   - PHASE_26_PLAN.md, sub-phase 26-C, residuals t = 3.
   - phase26c_t3_residuals.py (fixed 2026-04-16).
   - 09-papers/Congruent Dissections of the Regular Tetrahedron/
-    TODO_DRAFT_FINAL.md, section P0 / T3-BUG.
+    docs/n5_residual_status.md.
 """
 
 from __future__ import annotations
@@ -264,7 +264,7 @@ for ms in SURVIVING_MULTISETS:
 
 # Sanity: are there ANY integer multisets (m1, m2, m3) with sum = 48
 # and product = 8640?  If yes, the tetrahedral lemma alone is not a
-# universal arithmetic obstruction and we are relying on the ┬º3 area
+# universal arithmetic obstruction and we are relying on the Section 3 area
 # multiset enumeration for correctness.
 any_integer_solution = []
 for m1 in range(1, E):
