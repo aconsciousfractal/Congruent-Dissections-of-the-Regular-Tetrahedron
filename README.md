@@ -131,7 +131,7 @@ pytest scripts/tests/                       # geometric primitives sanity
 - **Theorem 4.2** (edge spectrum) - the squared-edge multisets of the eight canonical pieces S_n fully determine n up to congruence.
 - **Theorem 5.5** (transitivity of known dissections) - each S_n admits a congruence group acting transitively on pieces.
 - **Conditional theorem 12.8** (n = 16 all-one-face) - L3 in the Coxeter-pure case; L2 under (H_roles) + (H_slot) in the general convex case.
-- **Conditional Theorem 12.16 (`thm:n5`) / phase26e synthesis status** (n = 5) - the public certificate stack reduces the first non-divisor of 24 to one open accidental-even metric residual. Full unconditional n = 5 closure is not claimed; see `docs/n5_residual_status.md`.
+- **Computational Certificate 12.16 (`thm:n5`) / phase26e synthesis status** (n = 5) - the public certificate stack reduces the first non-divisor of 24 to one open accidental-even metric residual. Full unconditional n = 5 closure is not claimed; see `docs/n5_residual_status.md`.
 - **Lemma 12.2** (Stabiliser Transport, L2) - rigorous implication under a named auxiliary hypothesis.
 - **Screening stack (Section 10)** - non-G_diss-transitive configurations for n not dividing 24 are ruled out up to an explicit T_d-maximality caveat (L1+).
 
