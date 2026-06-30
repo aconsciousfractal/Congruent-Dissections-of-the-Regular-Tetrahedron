@@ -1,0 +1,71 @@
+{
+  "checks": [
+    {
+      "name": "base area  beta = s1*w + s3*u  (convex branch)",
+      "passed": true,
+      "detail": "beta = dd + s1*s3 = s1*s3 + dd = s1*w + s3*u"
+    },
+    {
+      "name": "phi1 = s1*sa, phi2 = s3*sa",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "volume  Vol = (8/3) * sa * beta",
+      "passed": true,
+      "detail": "Vol = 8*sa*(dd + s1*s3)/3"
+    },
+    {
+      "name": "Vol=8/15 gives beta = 1/(5 sa); with N2 (beta + sa^2 = 4/5) -> 5 sa^3 - 4 sa + 1 = 0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cubic factors as (sa+1)(5 sa^2 - 5 sa + 1)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "two positive roots sa = (5 +- sqrt5)/10, both IRRATIONAL",
+      "passed": true,
+      "detail": "sa in [1/2 - sqrt(5)/10, sqrt(5)/10 + 1/2]"
+    },
+    {
+      "name": "sa=1/2 - sqrt(5)/10: beta=1/(5sa)=sqrt(5)/10 + 1/2 and sa^2=3/10 - sqrt(5)/10 are in Q(sqrt5)\\Q (irrational)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "sa=sqrt(5)/10 + 1/2: beta=1/(5sa)=1/2 - sqrt(5)/10 and sa^2=sqrt(5)/10 + 3/10 are in Q(sqrt5)\\Q (irrational)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "sa=(5+sqrt5)/10: consistent valid per-face distributions = 0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "sa=(5-sqrt5)/10: consistent valid per-face distributions = 0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "TOTAL consistent valid distributions over both sa = 0  =>  asymmetric Qb-adj case (i) is EXCLUDED exactly",
+      "passed": true,
+      "detail": "0 survivors"
+    }
+  ],
+  "passed": 11,
+  "failed": 0,
+  "result": {
+    "identities": "beta=s1*w+s3*u, phi1=s1*sa, phi2=s3*sa, Vol=(8/3)sa*beta",
+    "cubic": "5 sa^3 - 4 sa + 1 = 0 -> sa=(5+-sqrt5)/10 (irrational)",
+    "field": "geometry in Q(sqrt5)\\Q; per-face tiling has integer coeffs",
+    "enumeration_survivors": {
+      "sa_sign_1": 0,
+      "sa_sign_-1": 0
+    },
+    "status": "asymmetric Qb-adj case (i) DISCHARGED exactly; remaining: Qb-adj congruence case (ii) and Qb-opp."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "name": "C1 + C2 is linear in (u, w) (quadratic terms cancel)",
+      "passed": true,
+      "detail": "C1+C2 = 2*s1**2 - s1*sa - 2*s1*u - s1*w - 2*s3**2 + s3*sa + s3*u + 2*s3*w"
+    },
+    {
+      "name": "L = (s3-2s1)u + (2s3-s1)w + (s1-s3)(2s1+2s3-sa)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "rank-2 distributions give 89 candidate (phi1,phi2) points in (0,1)^2",
+      "passed": true,
+      "detail": "89 points"
+    },
+    {
+      "name": "rank-1 consistent distributions give 12 solution lines",
+      "passed": true,
+      "detail": "12 lines"
+    },
+    {
+      "name": "rank-0 distributions force b_j = 5/4 (impossible)",
+      "passed": true,
+      "detail": "56 rank-0 distributions, all inconsistent"
+    },
+    {
+      "name": "rank-2: 0 valid (phi1,phi2) survive the exact (u,w) over-determination",
+      "passed": true,
+      "detail": "0 survivors"
+    },
+    {
+      "name": "all 12 rank-1 lines are infeasible (force phi1, phi2, or phi1+phi2 outside (0, 4/5)) -- excluded elementarily",
+      "passed": true,
+      "detail": "12/12 lines provably infeasible"
+    },
+    {
+      "name": "  line (-3, -3, Fraction(-3, 1)): phi1+phi2=1 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (-3, 0, Fraction(-3, 1)): phi1=1 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (-1, -1, Fraction(1, 5)): phi1+phi2=-1/5 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (-1, 0, Fraction(1, 5)): phi1=-1/5 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (0, -3, Fraction(-3, 1)): phi2=1 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (0, -1, Fraction(1, 5)): phi2=-1/5 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (0, 1, Fraction(1, 1)): phi2=1 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (0, 3, Fraction(-3, 5)): phi2=-1/5 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (1, 0, Fraction(1, 1)): phi1=1 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (1, 1, Fraction(1, 1)): phi1+phi2=1 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (3, 0, Fraction(-3, 5)): phi1=-1/5 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "  line (3, 3, Fraction(-3, 5)): phi1+phi2=-1/5 -> outside feasibility box",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CONCLUSION: case (ii) admits no per-face tiling => asymmetric Qb-adj case (ii) EXCLUDED; with case (i), all of Qb-adj is discharged",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "passed": 20,
+  "failed": 0,
+  "result": {
+    "rank2_points": 89,
+    "rank2_survivors": 0,
+    "rank1_lines": 12,
+    "rank1_infeasible": 12,
+    "rank0": 56,
+    "status": "asymmetric Qb-adj case (ii) DISCHARGED exactly; Qb-adj fully closed (symmetric + case i + case ii). Remaining: Qb-opp."
+  }
+}

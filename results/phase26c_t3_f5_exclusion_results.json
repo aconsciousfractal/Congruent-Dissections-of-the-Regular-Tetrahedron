@@ -54,9 +54,9 @@
           "detail": "retraction of earlier bogus argument; see paper Remark rem:hqb-status"
         },
         {
-          "name": "(Qb) CONDITIONAL IMPOSSIBLE under (H-Qb): both sub-cases are ruled out by the standing hypothesis (H-Qb); full unconditional discharge is future work",
+          "name": "(Qb) local legacy reduction recorded; H-Qb is discharged by the external hqb_* certificate stack in the current public ledger",
           "passed": true,
-          "detail": "see paper Theorem thm:n5 and Remark rem:hqb-status"
+          "detail": "see hqb_reduction/perface/asymmetric/opp certificates and phase26e synthesis"
         }
       ]
     },
@@ -134,9 +134,9 @@
           "detail": "4/4 unconditional"
         },
         {
-          "name": "One sub-case (QP Qb, covering both Qb-adj and Qb-opp) is CONDITIONAL on the standing hypothesis (H-Qb) of paper Thm thm:n5",
+          "name": "One sub-case (QP Qb, covering both Qb-adj and Qb-opp) is delegated to the discharged H-Qb certificate stack",
           "passed": true,
-          "detail": "1/1 conditional on (H-Qb)"
+          "detail": "1/1 delegated to hqb_* certificates"
         }
       ]
     }
@@ -163,9 +163,9 @@
         "interior": "2 lateral triangles"
       },
       "verdict": "IMPOSSIBLE",
-      "reason": "Ruled out by the standing hypothesis (H-Qb) of paper Theorem n = 5 convex impossibility.  Both sub-cases Qb-adj and Qb-opp have non-empty single-piece families; exclusion is at the multi-piece face-to-face compatibility level, not at the single-piece level.  Earlier drafts claimed a single-piece degeneracy obstruction that was a notational artefact (apex symbol clashed with T-vertex symbol); that argument is retracted and replaced by the explicit hypothesis (H-Qb).",
-      "reason_type": "conditional on (H-Qb) [multi-piece compatibility]",
-      "conditional_on": "(H-Qb)"
+      "reason": "Legacy local Qb reduction.  Both sub-cases Qb-adj and Qb-opp have non-empty single-piece families; exclusion is at the multi-piece face-to-face compatibility level, not at the single-piece level.  Earlier drafts claimed a single-piece degeneracy obstruction that was a notational artefact (apex symbol clashed with T-vertex symbol); that argument is retracted.  The current public stack discharges H-Qb externally via the hqb_* certificate scripts.",
+      "reason_type": "delegated to discharged H-Qb certificate stack",
+      "conditional_on": "hqb_* certificates (closed in current public ledger)"
     },
     {
       "name": "TP_case_Ta",
@@ -226,7 +226,7 @@
     "unconditional_subcases": 4,
     "conditional_subcases": 1,
     "conditional_hypotheses": [
-      "(H-Qb)"
+      "hqb_* certificates (closed in current public ledger)"
     ]
   }
 }

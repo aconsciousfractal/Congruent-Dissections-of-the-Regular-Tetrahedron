@@ -1,0 +1,158 @@
+{
+  "parts": [
+    {
+      "title": "A. Even-multiplicity is forced by weak CTL (no (H-orb))",
+      "checks": [
+        {
+          "name": "there are 5 metric-multiplicity patterns of 4 interior facets (integer partitions of 4)",
+          "passed": true,
+          "detail": "['4', '31', '22', '211', '1111']"
+        },
+        {
+          "name": "pattern (4,): every class m-regular on 5 vertices realizable = True  (all-even = True)",
+          "passed": true,
+          "detail": "even <=> a perfect class-matching on the 5*m slots exists"
+        },
+        {
+          "name": "pattern (3, 1): every class m-regular on 5 vertices realizable = False  (all-even = False)",
+          "passed": true,
+          "detail": "even <=> a perfect class-matching on the 5*m slots exists"
+        },
+        {
+          "name": "pattern (2, 2): every class m-regular on 5 vertices realizable = True  (all-even = True)",
+          "passed": true,
+          "detail": "even <=> a perfect class-matching on the 5*m slots exists"
+        },
+        {
+          "name": "pattern (2, 1, 1): every class m-regular on 5 vertices realizable = False  (all-even = False)",
+          "passed": true,
+          "detail": "even <=> a perfect class-matching on the 5*m slots exists"
+        },
+        {
+          "name": "pattern (1, 1, 1, 1): every class m-regular on 5 vertices realizable = False  (all-even = False)",
+          "passed": true,
+          "detail": "even <=> a perfect class-matching on the 5*m slots exists"
+        },
+        {
+          "name": "patterns KILLED unconditionally by parity (odd part present): (1,1,1,1), (2,1,1), (3,1)",
+          "passed": true,
+          "detail": "[(3, 1), (2, 1, 1), (1, 1, 1, 1)]"
+        },
+        {
+          "name": "patterns SURVIVING parity (all even): (2,2) and (4)",
+          "passed": true,
+          "detail": "[(4,), (2, 2)]"
+        },
+        {
+          "name": "no 1-regular and no 3-regular graph on 5 vertices (odd*odd = odd degree sum) -> singleton/triple metric classes impossible",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "C_5 (2-regular) and K_5 (4-regular) on 5 vertices DO exist -> even classes are realizable",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "B. The parity reduction reproduces every (H-orb) singleton case",
+      "checks": [
+        {
+          "name": "orbit (1, 1, 1, 1) [Sym(P)=1 (all 4 distinct-area boundary multisets)]: singleton orbit -> odd metric class -> killed by PARITY (no H-orb)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "orbit (2, 1, 1) [|Sym(P)|=2 with two fixed facets]: singleton orbit -> odd metric class -> killed by PARITY (no H-orb)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "orbit (3, 1) [needs |Sym(P)|>=3 -- excluded a priori]: excluded a priori by |Sym(P)|<=2",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "orbit (2, 2) [|Sym(P)|=2, both interior orbits size 2]: even orbit (2,2) -> survives parity, goes to (H-coc)/residual",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "orbit (4,) [needs |Sym(P)|>=4 -- excluded a priori]: excluded a priori by |Sym(P)|<=2",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "=> the four distinct-boundary-area multisets (Sym(P)=1, orbit (1,1,1,1)) are killed by PARITY whenever the 4 interior facets are metrically distinct -- the paper's (H-orb) singleton step, now UNCONDITIONAL on that genericity",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "C. Residual ledger: where (H-orb) genuinely remains",
+      "checks": [
+        {
+          "name": "genuine (2,2) ORBIT (sigma twist=1): orientation system UNSAT -> closed by (H-coc)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "accidental even pattern (no sigma, twist=0): orientation system SATISFIABLE -> soft tools do NOT close it",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "RESIDUAL of (H-orb) is sharper than the blanket hypothesis: only the accidental even patterns above remain, to be excluded by a finite real-algebraic argument on the constrained piece (shared tooling with (H-Qb))",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    }
+  ],
+  "passed": 19,
+  "failed": 0,
+  "parity_reduction": {
+    "survivors": [
+      [
+        4
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "killed_unconditionally": [
+      [
+        3,
+        1
+      ],
+      [
+        2,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "residual": [
+    "(4)-pattern: all 4 interior facets congruent (one metric class).",
+    "accidental (2,2) with Sym(P)=1: two congruent interior-facet pairs not realised by any symmetry of P."
+  ],
+  "conclusion": {
+    "horb_singleton_cases_discharged_unconditionally": true,
+    "mechanism": "weak-CTL parity: metric-class multiplicity must be even; odd patterns (incl. all singleton orbits) die without (H-orb)",
+    "closed_even_subcase": "(2,2) orbit via (H-coc) orientation cocycle",
+    "open_residual": [
+      "(4)-pattern: all 4 interior facets congruent (one metric class).",
+      "accidental (2,2) with Sym(P)=1: two congruent interior-facet pairs not realised by any symmetry of P."
+    ],
+    "residual_route": "real-algebraic / SMT exclusion of accidental interior-facet congruences (with (H-Qb))"
+  }
+}

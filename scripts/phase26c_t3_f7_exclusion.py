@@ -2,14 +2,16 @@
 Phase 26-C-T3 / f = 7 exclusion.
 ================================
 
-Certifies that no 5-piece convex congruent face-to-face dissection of
-a regular tetrahedron T with every piece having 3 boundary footprints
-(t = 3) and exactly 7 faces (f = 7) exists.
+Records the legacy f = 7 closure under the old blanket orbit-transport
+formulation, and separates it from the current public ledger.  In the
+current ledger this script does NOT certify full f = 7 exclusion: the
+accidental-even H-orb residual remains open.
 
 Context.  In phase26c_t3_tetrahedral_exclusion.py (Step A, parity) we
 proved that f in {5, 7} for such pieces.  phase26c_t3_f5_exclusion.py
-closes f = 5.  This script closes f = 7, which completes the t = 3
-residuals of Theorem 11.4 (n = 5), together with the five canonical
+closes f = 5.  This script keeps the legacy f = 7 calculation for audit,
+but the active phase26e synthesis supersedes the old full-closure claim and
+keeps the accidental-even H-orb residual open.  The relevant five canonical
 area multisets
     M = {(6,12,30), (6,15,27), (6,18,24), (12,12,24), (12,16,20)}
 surviving phase26c_t3_residuals.py.
@@ -27,11 +29,10 @@ every possibility by a two-layer argument:
         b from P_j's side.  The weak CTL (paper, Lemma "Weak
         Congruence Transport") guarantees that a and b are congruent
         polygons (same edge-count, same edge lengths, same interior
-        angles, same 2-area).  Under the orbit-detection hypothesis
-        (H-orb) -- which is a finite facet-table check discharged per
-        multiset -- a and b lie in a common Sym(P)-orbit on the four
-        interior faces of P, and there exists g_{i,j} in Sym(P)
-        mapping a to b.  NOTE: the ambient isometry
+        angles, same 2-area).  The legacy blanket orbit-detection
+        hypothesis (H-orb) further asserted that a and b lie in a common
+        Sym(P)-orbit on the four interior faces of P, with some
+        g_{i,j} in Sym(P) mapping a to b.  NOTE: the ambient isometry
         tau_{i,j} := gamma_j^{-1} gamma_i is NOT in Sym(P) in general
         (cf. paper remark "rem:ctl-strong-fails"); the orbit-transport
         g_{i,j} is a separate combinatorial object determined by
@@ -62,13 +63,16 @@ every possibility by a two-layer argument:
             id in Sym(P) for every triangle; (H-coc) is reduced to a
             topological hypothesis (H-trip) (every triple of pieces
             has non-empty triple intersection) via the Nerve Theorem
-            (cf. paper Lemma "Reduction of (H-coc) to (H-trip)").
-            Under (H-coc) the triangle cycle-product constraint
-            reduces to
+            (cf. the historical H-trip route in the paper).  In the
+            current public ledger H-coc is discharged directly by
+            hcoc_orientation_certificate.py.  Under H-coc the triangle
+            cycle-product constraint reduces to
                 z_i + z_j == 1  (mod 2),  for every pair i != j,
             with z_i := x_i + y_i (mod 2).  In a 2-valued space this
-            forces all 5 z_i pairwise distinct -- pigeonhole fails,
-            so this case is impossible (conditional on (H-trip)).
+            forces all 5 z_i pairwise distinct -- pigeonhole fails.
+            This script remains a legacy conditional closure under
+            blanket orbit-detection assumptions; the active public H-orb
+            status is the narrower accidental-even residual.
 
 Using boundary-area multisets to bound Sym(P):
 
@@ -78,7 +82,10 @@ Using boundary-area multisets to bound Sym(P):
       preserving).  Combined with the fact that the 3 boundary
       T-face planes at v_P meet only at the vertex v_P, any
       symmetry of P that fixes all 3 boundary T-faces is trivial.
-      Hence Sym(P) = 1, forcing orbit structure (1,1,1,1).
+      Hence Sym(P) = 1.  Under the old blanket H-orb upgrade this forced
+      orbit structure (1,1,1,1); in the current ledger, accidental even
+      metric congruences among distinct Sym(P)-orbits are exactly the
+      remaining H-orb residual.
 
       4 of the 5 surviving multisets fall in this class:
          (6,12,30), (6,15,27), (6,18,24), (12,16,20).
@@ -139,12 +146,14 @@ def check(name: str, condition: bool, detail: str = "") -> None:
     )
 
 
-def record_case(name: str, multiset: tuple, verdict: str, reason: str,
-                reason_type: str, conditional_on: str = "") -> None:
+def record_case(name: str, multiset: tuple, legacy_verdict: str,
+                active_public_verdict: str, reason: str, reason_type: str,
+                conditional_on: str = "") -> None:
     entry = {
         "name": name,
         "multiset": list(multiset),
-        "verdict": verdict,
+        "legacy_verdict": legacy_verdict,
+        "active_public_verdict": active_public_verdict,
         "reason": reason,
         "reason_type": reason_type,
     }
@@ -221,7 +230,7 @@ check("Singleton-orbit structures (1,1,1,1), (2,1,1), (3,1) are "
 # Section 2  --  Multisets with distinct boundary areas force trivial Sym(P).
 # -----------------------------------------------------------------------------
 
-section("2. Four multisets with distinct boundary areas -> Sym(P) trivial")
+section("2. Four multisets with distinct boundary areas -> Sym(P) trivial; active accidental-even residual remains")
 
 MULTISETS = [
     (6, 12, 30),
@@ -262,19 +271,24 @@ check("A rigid motion fixing 3 non-parallel planes through v_P must be "
       "fixing each of 3 such planes as a set is identity")
 
 for ms in distinct_multisets:
-    check(f"Multiset {ms}: Sym(P) = trivial  =>  orbit structure "
-          "(1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+    check(f"Multiset {ms}: Sym(P) = trivial; legacy blanket H-orb gives "
+          "orbit structure (1,1,1,1), while active accidental-even "
+          "metric coincidences remain residual",
           True)
     record_case(
         name=f"multiset_{ms}",
         multiset=ms,
-        verdict="IMPOSSIBLE",
-        reason="Three distinct boundary areas force Sym(P) = 1, which forces "
-               "the Sym(P)-orbit structure on the 4 interior faces to be "
-               "(1,1,1,1).  Singleton orbits produce a perfect matching on "
-               "5 pieces via their shared label, impossible on an odd vertex "
-               "set.",
-        reason_type="CTL + matching (odd vertex count)",
+        legacy_verdict="IMPOSSIBLE_UNDER_BLANKET_H_ORB",
+        active_public_verdict="OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL",
+        reason="Three distinct boundary areas force Sym(P) = 1.  Under the "
+               "old blanket H-orb upgrade, congruent interior facets would "
+               "have to lie in singleton Sym(P)-orbits, producing a perfect "
+               "matching on 5 pieces, impossible on an odd vertex set.  The "
+               "current ledger does not make that upgrade for accidental even "
+               "metric coincidences, so this multiset remains within the "
+               "single H-orb residual scope.",
+        reason_type="legacy blanket H-orb + CTL matching; active residual open",
+        conditional_on="legacy blanket H-orb/orbit-detection assumption; active public stack leaves accidental even H-orb residual open",
     )
 
 
@@ -512,20 +526,17 @@ check("Orbit structure (2, 2) on K_5 is therefore IMPOSSIBLE",
 record_case(
     name=f"multiset_{ms_1224}",
     multiset=ms_1224,
-    verdict="IMPOSSIBLE",
-    reason="Sym(P) <= C_2, ruling out orbit (4).  Singleton-orbit "
-           "structures (1,1,1,1), (2,1,1) are killed UNCONDITIONALLY "
-           "by the matching argument.  Orbit (2,2) is killed UNDER "
-           "(H-trip): the paper's \"Reduction of (H-coc) to (H-trip)\" "
-           "lemma yields (H-coc), and then the K_5-triangle "
-           "cycle-consistency argument reduces the 10 triangle "
-           "constraints to z_i + z_j == 1 (mod 2) for all 10 pairs, "
-           "which forces 5 pairwise-distinct binary values -- "
-           "impossible.",
-    reason_type="weak CTL + orbit transport + triangle "
-                "cycle-consistency on K_5 (conditional on (H-trip))",
-    conditional_on="(H-trip) for orbit (2,2) sub-case; other orbit "
-                   "structures UNCONDITIONAL",
+    legacy_verdict="IMPOSSIBLE_UNDER_BLANKET_H_ORB",
+    active_public_verdict="OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL",
+    reason="Sym(P) <= C_2 rules out a genuine symmetry orbit (4), and the "
+           "genuine (2,2) orbit branch is killed by the H-coc orientation "
+           "obstruction.  Singleton/odd metric classes are killed by parity. "
+           "What is not excluded here is the current active accidental-even "
+           "H-orb residual, where metric congruences are not supplied by a "
+           "Sym(P)-orbit transport.",
+    reason_type="legacy blanket H-orb + H-coc; active residual open",
+    conditional_on="legacy blanket H-orb/orbit-transport assumption; active "
+                   "public stack leaves accidental even H-orb residual open",
 )
 
 
@@ -533,25 +544,32 @@ record_case(
 # Section 6  --  Synthesis.
 # -----------------------------------------------------------------------------
 
-section("6. Synthesis: f = 7 case is fully excluded")
+section("6. Synthesis: legacy f = 7 closure under blanket H-orb/H-coc")
 
-all_cases_impossible = all(c["verdict"] == "IMPOSSIBLE" for c in RESULTS["cases"])
+all_cases_legacy_impossible = all(
+    c["legacy_verdict"] == "IMPOSSIBLE_UNDER_BLANKET_H_ORB"
+    for c in RESULTS["cases"]
+)
+all_cases_active_open = all(
+    c["active_public_verdict"] == "OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL"
+    for c in RESULTS["cases"]
+)
 
-check("All 5 surviving multisets are IMPOSSIBLE for f = 7",
-      all_cases_impossible,
-      f"{sum(1 for c in RESULTS['cases'] if c['verdict'] == 'IMPOSSIBLE')}/5")
+check("All 5 surviving multisets are impossible only in the legacy blanket-H-orb/H-coc closure",
+      all_cases_legacy_impossible,
+      f"{sum(1 for c in RESULTS['cases'] if c['legacy_verdict'] == 'IMPOSSIBLE_UNDER_BLANKET_H_ORB')}/5 legacy cases")
 
-check("The f = 7 closure holds UNIFORMLY over the 5 surviving multisets: "
-      "weak CTL + orbit transport + matching (for 4 multisets, "
-      "UNCONDITIONAL); weak CTL + orbit transport + triangle "
-      "cycle-consistency (for (12,12,24), CONDITIONAL on (H-trip) "
-      "via the paper's \"Reduction of (H-coc) to (H-trip)\" lemma)",
+check("This script is legacy: active public synthesis supersedes blanket H-orb/H-coc closure and leaves only the accidental-even H-orb residual open",
       True)
 
-print("\n  f = 7 closure summary:")
+print("\n  f = 7 ledger summary:")
 for c in RESULTS["cases"]:
     ms_str = str(tuple(c["multiset"]))
-    print(f"    multiset {ms_str:<15} IMPOSSIBLE   [{c['reason_type']}]")
+    print(
+        f"    multiset {ms_str:<15} "
+        f"legacy={c['legacy_verdict']}  "
+        f"active={c['active_public_verdict']}"
+    )
 
 
 # -----------------------------------------------------------------------------
@@ -562,9 +580,15 @@ RESULTS["passed"] = PASSED
 RESULTS["failed"] = FAILED
 RESULTS["multisets"] = [list(ms) for ms in MULTISETS]
 RESULTS["conclusion"] = {
-    "f7_fully_excluded": all_cases_impossible,
-    "multisets_killed_by_distinct_boundary": [list(ms) for ms in distinct_multisets],
-    "multiset_killed_by_triangle_consistency": [list(ms_1224)],
+    "f7_fully_excluded": False,
+    "active_public_status": "not fully excluded; accidental-even H-orb residual remains open in phase26e synthesis",
+    "legacy_blanket_horb_hcoc_f7_fully_excluded": all_cases_legacy_impossible,
+    "active_public_all_cases_in_residual_scope": all_cases_active_open,
+    "legacy_scope": "closure under blanket orbit-transport/H-coc assumptions only",
+    "active_public_scope": "accidental-even H-orb residual remains open for these f=7 multisets",
+    "multisets_legacy_closed_by_distinct_boundary_horb": [list(ms) for ms in distinct_multisets],
+    "multiset_legacy_closed_by_triangle_consistency": [list(ms_1224)],
+    "active_residual_multisets": [list(ms) for ms in MULTISETS],
     "number_of_multisets": len(MULTISETS),
 }
 

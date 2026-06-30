@@ -1,0 +1,106 @@
+{
+  "parts": [
+    {
+      "title": "A. K_5 triangle system: UNSAT iff c0 = 1 (closure rests on c0 = 1)",
+      "checks": [
+        {
+          "name": "A- and B-slot cycles are edge-disjoint and cover K_5",
+          "passed": true,
+          "detail": "two edge-disjoint 5-cycles"
+        },
+        {
+          "name": "c0 = 0:  K_5 (H-coc) system is SATISFIABLE (no contradiction)",
+          "passed": true,
+          "detail": "64/1024 label assignments consistent"
+        },
+        {
+          "name": "c0 = 1:  K_5 (H-coc) system is UNSATISFIABLE (contradiction)",
+          "passed": true,
+          "detail": "0/1024 label assignments consistent"
+        },
+        {
+          "name": "=> the entire f=7 (2,2) closure reduces to proving the single orientation bit  c0 = 1",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "B. Orientation character eps = sgn(det): the three forcing facts",
+      "checks": [
+        {
+          "name": "generator Rx is orthogonal (a linear isometry)",
+          "passed": true,
+          "detail": "det = 1"
+        },
+        {
+          "name": "generator Sz is orthogonal (a linear isometry)",
+          "passed": true,
+          "detail": "det = -1"
+        },
+        {
+          "name": "generator Swp is orthogonal (a linear isometry)",
+          "passed": true,
+          "detail": "det = -1"
+        },
+        {
+          "name": "eps(A.B) = eps(A).eps(B) on all generator products (eps is a homomorphism, no stabiliser slack to spoil it)",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "isometries (in the signed-permutation model) fixing the facet plane pointwise: exactly {id, reflection}",
+          "passed": true,
+          "detail": "2 such maps, dets = [-1, 1]"
+        },
+        {
+          "name": "the non-identity facet-fixing isometry is the plane reflection, eps = -1",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "a facet-fixing isometry that swaps the two sides (opposite-side occupancy) is unique and equals the reflection",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "therefore the constant facet correction has eps(c) = -1, i.e. c0 = bit(eps(c)) = 1",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "title": "C. Synthesis: the forced bit and the unconditional contradiction",
+      "checks": [
+        {
+          "name": "forced-bit identity  bit(g_ij) = 1 + s(i) + s(j)  holds for all handedness sign choices",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "with the forced bit, EVERY K_5 triangle sum is odd (= 1) for EVERY handedness assignment: (H-coc) cocycle can never hold",
+          "passed": true,
+          "detail": "3*(1) + 2*(s-terms) = 1 (mod 2)"
+        },
+        {
+          "name": "CONCLUSION: (H-coc) is discharged -- the f=7 (2,2) sub-case is closed UNCONDITIONALLY",
+          "passed": true,
+          "detail": ""
+        }
+      ]
+    }
+  ],
+  "passed": 15,
+  "failed": 0,
+  "dichotomy": {
+    "consistent_c0_0": 64,
+    "consistent_c0_1": 0
+  },
+  "c0_proved": 1,
+  "conclusion": {
+    "hcoc_discharged": true,
+    "mechanism": "orientation character eps=sgn(det) forces bit(g_ij)=1+s(i)+s(j); K_5 non-bipartite => UNSAT",
+    "residual": "none for genuine (2,2) H-coc branch; H-Qb is discharged separately, and only the H-orb accidental-even residual remains in the global synthesis"
+  }
+}

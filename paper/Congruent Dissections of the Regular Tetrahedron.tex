@@ -203,21 +203,20 @@ step (\textsf{L1+}).  This is a screening tool, not a theorem-level
 resolution of the non-$G_{\mathrm{diss}}$-transitive case of
 \cref{conj:divisor}.
 
-Two new \emph{conditional} reductions extend the programme.
+Two certificate-backed reductions extend the programme.
 \textbf{(A)}  Under two finite hypotheses $(\Hroles) + (\Hslot)$ from an
 auxiliary MILP, no face-to-face convex congruent $16$-dissection of $T$
 places one boundary face of each piece on a single common $T$-face
 (\Cref{thm:n16-aof-conditional}); in the Coxeter-pure instance the
 hypotheses are automatic (\Cref{thm:n16-aof-coxeter}, \textsf{L3}).
-\textbf{(B)}  Assuming four finite standing hypotheses
-\textup{(H-trip), (H-coc), (H-orb), (H-Qb)}, there is no face-to-face
-congruent $5$-dissection of $T$ into convex pieces (\Cref{thm:n5},
-\textsf{L2+}); four of seven $(t,k)$-residuals close unconditionally,
-three invoke \textup{(H-orb)}/\textup{(H-Qb)} uniformly and
-\textup{(H-coc)} in a single sub-case.  Unconditional closure of $n=5$
-is explicitly \emph{not} claimed: it requires completing the
-developing-map reduction \textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)}
-or a direct discharge of the remaining hypotheses.
+\textbf{(B)}  The public $n=5$ stack has been sharpened beyond the earlier
+four-hypothesis formulation.  Exact certificates discharge \textup{(H-coc)}
+and \textup{(H-Qb)}, \textup{(H-trip)} is retired as a formal hypothesis,
+and parity kills the singleton/odd \textup{(H-orb)} patterns.  The remaining
+open case is the accidental even \textup{(H-orb)} residual: $f(P)=7$, $t=3$,
+$\Sym(P)=1$, with the four interior facets accidentally congruent in an even
+metric pattern $(4)$ or $(2,2)$.  Thus \Cref{thm:n5} is a reduction to this
+single residual, not an unconditional $n=5$ closure.
 
 All computational branches are certified by exact rational arithmetic
 (Python \texttt{Fractions}).  The methodology -- role-distribution census,
@@ -316,27 +315,24 @@ is compatible with the atlas labels $S_{n}$ used here; see
 \noindent\emph{Fourth,} in \Cref{sec:programme} we attack the reverse
 direction via a structured programme whose two principal new results are:
 
-\begin{conditionaltheorem}[$n=5$ convex conditional reduction, preview]\label{thm:n5-intro}
-There is no face-to-face congruent dissection of the regular tetrahedron
-$T$ into $5$ convex pieces, subject to four explicit finite hypotheses
-\textup{(H-trip)}, \textup{(H-coc)}, \textup{(H-orb)}, \textup{(H-Qb)}.
-Four of the seven admissible $(t,k)$-residuals of the role-distribution
-census are closed \emph{unconditionally} (namely the two $t=2$ residuals,
-the $t=3$ residual $(5,5,3,2)$, and the $t=4$ residual); the remaining
-three $t=3$ residuals invoke at most two of the finite hypotheses above,
-each with an explicit localisation in the proof.  See
-\Cref{thm:n5,sec:prog-n5} for the full statement, the precise
-formulation of each hypothesis, the per-residual dependency map, and the
-proof.
+\begin{conditionaltheorem}[$n=5$ convex residual reduction, preview]\label{thm:n5-intro}
+Every face-to-face congruent dissection of the regular tetrahedron $T$ into
+$5$ convex pieces is reduced to the following single residual case:
+$f(P)=7$, $t=3$, $\Sym(P)=1$, and the four interior facets of $P$ are
+accidentally congruent in an even metric pattern $(4)$ or $(2,2)$.
+All other branches of the role-distribution census are closed either
+unconditionally or by the exact public certificates discharging
+\textup{(H-coc)} and \textup{(H-Qb)}.  \textup{(H-trip)} is retired, and the
+singleton/odd \textup{(H-orb)} branches are killed by parity.  See
+\Cref{thm:n5,sec:prog-n5} for the precise ledger.
 \end{conditionaltheorem}
 
-This is the first conditional reduction of a non-divisor of~$24$ in the
-convex category, under the four standing hypotheses of \Cref{thm:n5}.
-The methodology -- role-distribution census, canonical-multiset
-feasibility, topological parity reduction $f(P) \in \{5, 7\}$, a weak
-\emph{Congruence Transport Lemma}, an \emph{orbit-transport corollary},
-and a \emph{$K_{5}$ triangle cycle-consistency obstruction} --
-transfers directly to the remaining small non-divisors.
+This is the first certificate-backed reduction of a non-divisor of~$24$ in
+the convex category to a single named residual.  The methodology --
+role-distribution census, canonical-multiset feasibility, topological parity
+reduction $f(P) \in \{5, 7\}$, weak Congruence Transport, direct H-coc and
+H-Qb certificates, and H-orb parity/scope ledgers -- transfers directly to
+the remaining small non-divisors.
 
 \begin{conditionaltheorem}[$n=16$ all-one-face, preview]\label{thm:n16-intro}
 Under the medial-role and slot-separation hypotheses $(\Hroles) + (\Hslot)$,
@@ -1500,9 +1496,10 @@ Step & Statement & Status \\
 \section{The rigidity and configurational programme}\label{sec:programme}
 
 We now describe the programme that attacks \cref{conj:transitivity} and
-contains the two principal new impossibility theorems of the paper:
-\cref{thm:n5} ($n = 5$ conditional reduction) and \cref{thm:n16-aof-conditional} ($n = 16$
-all-one-face conditional reduction).
+contains the two principal new configurational reductions of the paper:
+\cref{thm:n5} ($n = 5$ reduction to a single H-orb residual) and
+\cref{thm:n16-aof-conditional} ($n = 16$ all-one-face conditional
+impossibility).
 
 Throughout this section we adopt two standing hypotheses, consistent with
 all prior literature on congruent simplicial tilings: (i) every piece is
@@ -1832,62 +1829,30 @@ configurational attack on GAP~B.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Conditional reduction at
+\subsection{Certificate reduction at
 \texorpdfstring{$n = 5$}{n=5}: the first non-divisor
-reduced to finite hypotheses}\label{sec:prog-n5}
+reduced to one \textup{(H-orb)} residual}\label{sec:prog-n5}
 
 The C24-chain of \Cref{sec:prog-n16} reduced the largest role-distribution
-residual at $n = 16$ to a conditional statement.  We now reduce the smallest
-non-divisor of $24$, namely $n = 5$, in the convex category, modulo four
-explicit finite hypotheses:
-\textup{(H-trip)} (topological; heuristic input to
-\textup{(H-coc)}, not used directly in the formal proof of
-\Cref{thm:n5}; see \Cref{rem:hcoc-from-htrip}),
-\textup{(H-coc)} (triangle cocycle on orbit-transport bits, used in
-the single $(12, 12, 24)/(2,2)$-orbit sub-case of the $f = 7$
-branch; \Cref{lem:k5-cyc}),
-\textup{(H-orb)} (orbit detection, used wherever the
-orbit-transport \Cref{lem:orbit-transport} is invoked;
-\Cref{rem:h-orb-auto}), and
-\textup{(H-Qb)} (single-piece \textsf{Qb} exclusion in $f = 5$;
-\Cref{rem:hqb-status}).  Four of the seven admissible
-$(t, k)$-residuals of the role-distribution census are closed
-\emph{unconditionally}; the remaining three invoke
-\textup{(H-orb)} and \textup{(H-Qb)} uniformly, and
-\textup{(H-coc)} is additionally used on the single
-$(12, 12, 24)/(2,2)$-orbit $f = 7$ sub-case.  Throughout this
-subsection the standing embedding is~\eqref{eq:16-embedding}.
-
-\paragraph{Status of the four hypotheses.}
-We emphasise up front that \Cref{thm:n5} is a \emph{conditional reduction},
-not an unconditional closure of~$n=5$:
+residual at $n = 16$ to a conditional statement.  The current $n=5$ public
+stack is sharper than the earlier four-hypothesis formulation.  The active
+ledger is:
 \begin{itemize}
-  \item \textup{(H-trip)} (\emph{topological; heuristic}).  Not used
-        directly in the formal proof of \Cref{thm:n5}; its intended role
-        is as the input to a developing-map reduction
-        \textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)} sketched but
-        \emph{not completed} in \Cref{rem:hcoc-from-htrip}.
-  \item \textup{(H-coc)} (\emph{algebraic; required, standing}).  A
-        triangle cocycle in $\mathrm{Sym}(P)$ on the $K_{5}$ adjacency
-        graph; used in exactly one sub-case of the $f = 7$ branch.  A
-        concrete finite certificate on any candidate dissection is
-        included in the data and code capsule accompanying the
-        submission (see the availability statement in
-        \Cref{sec:intro}).
-  \item \textup{(H-orb)} (\emph{algebraic; required, standing}).  Facet
-        orbit-detection on the reference tile; a single finite check
-        per orbit type (see \Cref{rem:h-orb-auto}).
-  \item \textup{(H-Qb)} (\emph{geometric; required, standing}).
-        Single-piece exclusion of the \textsf{Qb-adj}/\textsf{Qb-opp}
-        quadrilateral-pyramid sub-configurations in $f = 5$
-        (\Cref{rem:hqb-status}).
+  \item \textup{(H-trip)} is retired: it is no longer a formal input to the
+        public theorem.
+  \item \textup{(H-coc)} is discharged directly by the orientation-bit
+        certificate \texttt{hcoc\_orientation\_certificate.py}.
+  \item \textup{(H-Qb)} is discharged by the Qb certificate stack
+        \texttt{hqb\_*\_certificate.py}.
+  \item \textup{(H-orb)} is not discharged in blanket form.  Its singleton
+        and odd-multiplicity branches are killed by parity, and its only
+        remaining branch is the accidental even metric residual described in
+        \Cref{thm:n5}.
 \end{itemize}
-The unconditional closure of $n = 5$ would require either (i) completing
-the developing-map argument that promotes \textup{(H-trip)} to
-\textup{(H-coc)}, or (ii) discharging \textup{(H-orb)} and
-\textup{(H-Qb)} by a direct finite verification.  Both are natural
-next steps of the programme and are outside the scope of the present
-paper.
+Thus the correct theorem-level claim is not an unconditional impossibility of
+$n=5$, but a reduction of every putative dissection to one explicitly scoped
+H-orb residual.  Throughout this subsection the standing embedding
+is~\eqref{eq:16-embedding}.
 
 Volume, face area, height of $T$ and per-piece totals in the $n = 5$ case:
 \[
@@ -1907,49 +1872,47 @@ by congruence), and $k = (k_{0}, k_{1}, k_{2}, k_{3})$ with
 $k_{j} \coloneqq \#\{P : j \in I(P)\}$, so $\sum_{j} k_{j} = 5t$.
 \end{definition}
 
-\begin{conditionaltheorem}[$n=5$ convex conditional reduction, modulo \textup{(H-trip)}, \textup{(H-coc)}, \textup{(H-orb)}, \textup{(H-Qb)}]\label{thm:n5}
-Assume the four standing hypotheses \textup{(H-trip)} (topological;
-every triple of pieces of a putative $5$-piece dissection with $K_{5}$
-interior adjacency meets in a non-empty triple intersection),
-\textup{(H-coc)} (triangle cocycle in $\mathrm{Sym}(P)$;
-\Cref{lem:k5-cyc}), \textup{(H-orb)} (orbit detection;
-\Cref{rem:h-orb-auto}) and \textup{(H-Qb)} (single-piece \textsf{Qb}
-exclusion; \Cref{rem:hqb-status}) for every putative face-to-face
-convex congruent dissection of the regular tetrahedron $T$ into $5$
-pieces.  Then there is no face-to-face congruent dissection of $T$ into
-$5$ convex pieces.  The localisation of each hypothesis in the proof is:
+\begin{conditionaltheorem}[$n=5$ convex reduction to the accidental-even \textup{(H-orb)} residual]\label{thm:n5}
+Let $\mathcal{D}$ be a putative face-to-face congruent dissection of the
+regular tetrahedron $T$ into $5$ convex pieces.  Then the public certificate
+stack eliminates every branch of the $n=5$ role-distribution census except
+possibly the following residual:
+\[
+  f(P)=7,\qquad t=3,\qquad \Sym(P)=1,
+\]
+and the four interior facets of the reference piece $P$ are accidentally
+congruent in an even metric pattern $(4)$ or $(2,2)$, without being promoted
+to genuine $\Sym(P)$-orbits by orbit transport.
+
+Equivalently, $n=5$ is reduced to the single H-orb accidental-even residual.
+No unconditional impossibility of a $5$-piece convex dissection is claimed at
+this stage.  The certificate ledger is:
 \begin{itemize}
-  \item \textup{(H-trip)} enters the proof only via its heuristic
-        reduction to \textup{(H-coc)} (\Cref{rem:hcoc-from-htrip});
-        the logical chain used in the UNSAT arguments invokes
-        \textup{(H-coc)} directly, so \textup{(H-trip)} is
-        formally redundant whenever \textup{(H-coc)} is assumed,
-        and is retained as a standing hypothesis to keep the
-        topological motivation for \textup{(H-coc)} on the record;
-  \item \textup{(H-coc)} is invoked only in the
-        $(t = 3, f = 7)$ sub-case with boundary multiset
-        $(12, 12, 24)$ and orbit structure $(2, 2)$
-        (via \Cref{lem:k5-cyc});
-  \item \textup{(H-orb)} is invoked wherever the orbit-transport
-        \Cref{lem:orbit-transport} is applied, which is the whole
-        $f = 7$ branch of the three $t = 3$ residuals that go
-        through parity reduction (the weak \Cref{lem:ctl} suffices
-        for $f = 5$ and for every other sub-case);
-  \item \textup{(H-Qb)} is invoked only in the \textsf{Qb-adj} and
-        \textsf{Qb-opp} sub-cases of the $f = 5$ closure, which
-        appear uniformly in all three parity-reduction residuals.
+  \item \textup{(H-trip)} is retired and is not used as a formal hypothesis;
+  \item \textup{(H-coc)} is closed by
+        \texttt{hcoc\_orientation\_certificate.py}, which fixes the
+        orientation bit in the $K_{5}$ triangle system;
+  \item \textup{(H-Qb)} is closed by
+        \texttt{hqb\_reduction\_certificate.py},
+        \texttt{hqb\_perface\_tiling\_certificate.py},
+        \texttt{hqb\_asymmetric\_caseI\_certificate.py},
+        \texttt{hqb\_asymmetric\_caseII\_certificate.py}, and
+        \texttt{hqb\_opp\_certificate.py};
+  \item the singleton and odd-multiplicity \textup{(H-orb)} branches are
+        closed by \texttt{horb\_parity\_certificate.py};
+  \item \texttt{horb\_residual\_scope.py} and
+        \texttt{horb\_residual\_combinatorial.py} identify the remaining
+        branch as genuinely metric rather than a bookkeeping artefact.
 \end{itemize}
-Four of the seven $(t, k)$-residuals (both $t = 2$ residuals, the
-$t = 3$ residual $(5, 5, 3, 2)$, and the $t = 4$ residual) are closed
-\emph{unconditionally} (none of the four standing hypotheses is
-invoked).  The remaining three $t = 3$ residuals invoke
-\textup{(H-orb)} and \textup{(H-Qb)} uniformly, and \textup{(H-coc)}
-only on the single $(12, 12, 24)/(2, 2)$-orbit $f = 7$ sub-case.
+The synthesis certificate is
+\texttt{phase26e\_synthesis\_theorem\_26\_1.py}, whose active outcome is
+``$n=5$ reduced to a single H-orb accidental even residual.''
 \end{conditionaltheorem}
 
-The proof occupies the remainder of \Cref{sec:prog-n5}.  It proceeds by a
-role-distribution census (Step~1 below) followed by three UNSAT arguments,
-one for each admissible value of $t$ (Steps~2 and 3 below).
+The proof of the reduction occupies the remainder of \Cref{sec:prog-n5}.
+It proceeds by a role-distribution census (Step~1 below), exact eliminations
+for $t=1,2,4$ and the canonical $t=3$ residual, and then the $f=5$ and $f=7$
+ledgers that isolate the single accidental-even H-orb branch.
 
 \subsubsection*{Step 1: role-distribution census}
 
@@ -2392,26 +2355,18 @@ interior-angle multisets; \textup{(H-orb)} gives the orbit claim, and
 the transitive action on the orbit supplies $g_{ij}$.
 \end{proof}
 
-\begin{remark}[\textup{(H-orb)} reduces to a finite table check in our
-setting]\label{rem:h-orb-auto}
-In general \textup{(H-orb)} is a \emph{genericity} assumption: two
-facets with matching polygon data either already lie in a common
-$\operatorname{Sym}(P)$-orbit or are an ``accidental'' pair with
-larger intrinsic symmetry than the rest of $P$ can support.  In the
-$f = 7$ analysis below we apply \Cref{lem:orbit-transport} to pieces
-$P$ whose symmetry group is a priori bounded
-($\operatorname{Sym}(P) = 1$ or $|\operatorname{Sym}(P)| = 2$, according
-to the boundary-area multiset; cf.\ the
-\emph{Closing-the-$f=7$-sub-case} paragraph).  With $|\operatorname{Sym}(P)|
-\leq 2$ and at most four interior facets, the facet-pair / orbit-pair
-table has at most $\binom{4}{2} \cdot 3 = 18$ entries, and
-\textup{(H-orb)} becomes an explicit finite check: for each pair of
-interior facets $(F, F')$ with equal edge-length and interior-angle
-multisets, verify that either $F = F'$ or there exists
-$g \in \operatorname{Sym}(P)$ with $g(F) = F'$.  We discharge this
-check multiset-by-multiset as part of the certificate
-\texttt{phase26c\_t3\_f7\_exclusion.py} (not as a genericity
-assumption).
+\begin{remark}[Current status of \textup{(H-orb)}]\label{rem:h-orb-auto}
+The blanket orbit-detection statement \textup{(H-orb)} is no longer used as an
+undischarged standing hypothesis.  The weak Congruence Transport Lemma gives
+metric equality of paired facets.  The certificate
+\texttt{horb\_parity\_certificate.py} then kills every odd-multiplicity
+interior-facet pattern, including the singleton patterns that earlier drafts
+handled through \textup{(H-orb)}.  The only surviving patterns are the even
+ones, $(4)$ and $(2,2)$.  When these are genuine $\Sym(P)$-orbits, the
+orientation certificate and \Cref{lem:k5-cyc} close the branch.  What remains
+is precisely the accidental case with $\Sym(P)=1$, where equal facet metrics
+do not come from a symmetry of $P$; this is the open H-orb residual recorded
+in \texttt{horb\_residual\_scope.py}.
 \end{remark}
 
 \begin{lemma}[$K_{5}$ triangle cycle-consistency]\label{lem:k5-cyc}
@@ -2433,179 +2388,26 @@ structure $(2, 2)$.  Assume also hypotheses \textup{(H-orb)} of
 Then no such dissection exists.
 \end{lemma}
 
-\begin{remark}[Heuristic reduction of \textup{(H-coc)} to a
-topological hypothesis; conditional
-sketch]\label{rem:hcoc-from-htrip}
-This remark is \emph{not} used in the formal proof of
-\Cref{thm:n5}: \textup{(H-coc)} is stated there as an explicit
-standing hypothesis.  Its purpose is only to record, informally,
-why \textup{(H-coc)} is expected to follow from the more tangible
-topological statement
-\begin{itemize}
-  \item[\textup{(H\protect\nobreakdash-trip)}] For every triple
-        $\{i, j, k\} \subset \{1, \ldots, 5\}$ the triple
-        intersection $P_{i} \cap P_{j} \cap P_{k}$ is non-empty.
-\end{itemize}
-Under \textup{(H-trip)} + face-to-face-ness + convexity, a
-developing-map / polyhedral holonomy argument in $\R^{3}$ strongly
-suggests the cocycle relation of \textup{(H-coc)}; we sketch the
-argument below and \emph{explicitly flag the analytic gap} that
-prevents it from being a proof.
-
-\smallskip
-
-\noindent\emph{Step 1: triangle-local reduction.}
-Fix a triple $\{i, j, k\} \subset \{1, \ldots, 5\}$.  Under
-\textup{(H-trip)} the intersection
-$Q_{ijk} \coloneqq P_{i} \cap P_{j} \cap P_{k}$ is a non-empty
-compact convex polytope.  Since the $P_{\ell}$ are distinct pieces
-of a face-to-face convex dissection, $\dim Q_{ijk} \in \{0, 1\}$:
-in a face-to-face dissection each interior $2$-facet is shared by
-exactly two pieces, so three distinct pieces cannot all share a
-common $2$-dimensional face (ruling out $\dim Q_{ijk} = 2$);
-$\dim Q_{ijk} = 3$ is ruled out by disjoint interiors of distinct
-pieces.
-
-\smallskip
-
-\noindent\emph{Step 2: local link around $Q_{ijk}$.}
-Pick a relative-interior point $q \in Q_{ijk}$.  If
-$q \in \mathrm{int}(T)$, choose a closed ball
-$B \subset \mathrm{int}(T)$ of small radius $\varepsilon > 0$
-centred at $q$, small enough that $B$ meets only the three pieces
-$P_{i}, P_{j}, P_{k}$ and no other piece $P_{\ell}$, $\ell \notin
-\{i, j, k\}$ (this is possible: the other pieces are closed sets
-not containing $q$, so $q$ has a positive distance from their
-union).  If $q \in \partial T$ (e.g.\ $q$ is a $T$-vertex or lies
-on a $T$-edge), replace $B$ by $B \cap T$: this is still a
-compact convex neighbourhood of $q$ in $T$, bounded by a
-spherical polygon on $\partial B$ together with a planar region
-on $\partial T$, both of which are topological disks.  Write $L$
-for the ``link'' of $Q_{ijk}$ in $B$ (resp.\ $B \cap T$), namely
-$\partial B \cap (P_{i} \cup P_{j} \cup P_{k})$ (resp.\
-$\partial(B \cap T) \cap (P_{i} \cup P_{j} \cup P_{k})$).  In
-every case (interior vs.\ boundary, $\dim Q_{ijk} = 0$ vs.\ $1$)
-the link $L$ is either simply connected (interior $\dim = 0$:
-$L \simeq S^{2}$; boundary cases: $L$ is a spherical disk or
-rectangle) or homotopy-equivalent to $S^{1}$ (interior $\dim = 1$:
-$L$ is an annulus $S^{1} \times [0, 1]$ with
-$\pi_{1}(L) = \Z$).  In the annular case $L$ is \emph{not}
-simply connected; however, the generating loop bounds a disk in
-the ambient $T$ (contract through a tubular neighbourhood of the
-triple-intersection edge), so it is null-homotopic \emph{in $T$}
-even though it is essential in $L$ itself.  This
-ambient-contractibility is the additional input invoked in
-Step~3 below for the annular case.
-
-\smallskip
-
-\noindent\emph{Step 3: polyhedral developing-map heuristic.}
-Write $g_{\ell m} \in \Sym(P) = C_{2}$ for the orbit-transport
-element attached to the shared facet $S_{\ell m}$
-(\Cref{lem:orbit-transport}).  The \emph{heuristic claim} is that
-$g_{ij} \cdot g_{jk} \cdot g_{ki} = \mathrm{id}$ in $C_{2}$
-because (a) the three rigid motions
-$\gamma_{j}^{-1}\gamma_{i}, \gamma_{k}^{-1}\gamma_{j},
-\gamma_{i}^{-1}\gamma_{k} \in \Isom(\R^{3})$ compose to the
-identity of $\Isom(\R^{3})$ (trivial telescope), and (b) in a flat
-ambient space, a ``developing map'' from $L$ to $\Sym(P)$ should
-factor through $\pi_{1}(L)$ whenever the lift is canonical.  In
-the cases where $\pi_{1}(L) = 1$ this would give
-$g_{ij} g_{jk} g_{ki} = \mathrm{id}$ directly; in the annular case
-$\pi_{1}(L) = \Z$ one additional compatibility (every loop around
-$Q_{ijk}$ bounds a disk in $T$) is required.
-
-\smallskip
-
-\noindent\emph{The analytic gap.}
-Step~3 is where a \emph{genuine} proof is missing.  Going from
-``rigid-motion product is the identity in $\Isom(\R^{3})$'' to
-``$\Sym(P)$-bit product is the identity in $C_{2}$'' requires
-controlling the passage from $\Isom(\R^{3})$ (where the telescoping
-is trivial) through the orbit-transport lift
-\Cref{lem:orbit-transport} (which is defined only modulo the
-stabiliser $\Stab(F^{(\ell)}_{\ell m}) \subset \Sym(P)$) into the
-group $C_{2}$.  In general this lift is \emph{not} a homomorphism:
-the orbit-transport element $g_{\ell m}$ depends on the shared
-facet $F^{(\ell)}_{\ell m}$ and on \textup{(H-orb)}, and its
-$C_{2}$-bit is determined by orientation/handedness data of $P$
-that need not factor canonically through loops in $L$.  A complete
-proof would require either
-\begin{itemize}
-  \item[(i)] citing a polyhedral developing-map lemma whose
-        hypotheses can be verified in our setting (e.g.\
-        Thurston, \emph{Three-Dimensional Geometry and Topology},
-        Ch.~3; Ratcliffe, \emph{Foundations of Hyperbolic
-        Manifolds}, Ch.~8), or
-  \item[(ii)] proving directly that the bit map
-        $b \colon \text{triangles of } K_{5} \to \Z/2\Z$
-        coincides with the \v Cech coboundary of a
-        ``handedness'' labelling
-        $s \colon \{1, \ldots, 5\} \to \Z/2\Z$, which in the
-        $C_{2}$ case would automatically give $\delta b = 0$.
-\end{itemize}
-We have not carried out either reduction to our own
-satisfaction.  Pending such a proof we \emph{do not claim} that
-\textup{(H-trip)} implies \textup{(H-coc)}; consequently, in
-\Cref{thm:n5} we use \textup{(H-coc)} as an explicit standing
-hypothesis rather than deriving it from \textup{(H-trip)}.
-
-\smallskip
-
-\noindent\emph{Consequences for evidence level.}
-If the reduction \textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)}
-is ever formalised, the $(t = 3, f = 7, (12, 12, 24), (2, 2)$-orbit$)$
-sub-case of \Cref{thm:n5} would move from a closure modulo
-\textup{(H-coc)} to a closure modulo the strictly weaker (and
-concretely verifiable) topological statement \textup{(H-trip)}.
-We regard the formalisation of this reduction as the most
-immediate open problem left by the present paper.
+\begin{remark}[Historical \textup{(H-trip)} route to \textup{(H-coc)}]\label{rem:hcoc-from-htrip}
+Earlier drafts recorded a developing-map route intended to derive
+\textup{(H-coc)} from the topological statement \textup{(H-trip)}.  That route
+is no longer an active dependency of \Cref{thm:n5}: the orientation-bit
+certificate \texttt{hcoc\_orientation\_certificate.py} discharges
+\textup{(H-coc)} directly.  We retain the label \textup{(H-trip)} only as
+historical motivation for why the cocycle condition was isolated; it is
+retired from the formal public ledger.
 \end{remark}
 
-\begin{remark}[Status of the standing hypotheses and the logical
-chain]\label{rem:htrip-status}
-The logical chain used to close the
-$(t = 3, f = 7, (12, 12, 24), (2, 2)$-orbit$)$ sub-case is
-\[
-  \textup{(H-orb)} + \textup{(H-coc)}
-  \;\overset{\text{\Cref{lem:k5-cyc}}}{\Longrightarrow}\;
-  \text{no such dissection}.
-\]
-The topological hypothesis \textup{(H-trip)} is \emph{not} part
-of this chain in the present paper: it is retained only as
-motivation for \textup{(H-coc)}, with an informal sketch of the
-expected implication recorded in \Cref{rem:hcoc-from-htrip}.
-
-All four hypotheses \textup{(H-trip), (H-coc), (H-orb), (H-Qb)}
-are \emph{finite} statements: each can be checked explicitly on
-any candidate dissection or admissible reference tile $P$; none
-is a genericity assumption.  Pending a formal proof of
-\textup{(H-trip)} $\Rightarrow$ \textup{(H-coc)}, the
-$(t = 3, f = 7, (12, 12, 24), (2, 2)$-orbit$)$ sub-case of
-\Cref{thm:n5} is at evidence level \textsf{L2+}.  Of the seven
-admissible $(t, k)$-residuals, four are closed
-\emph{unconditionally} (both $t = 2$ residuals, the $t = 3$
-residual $(5, 5, 3, 2)$, and the $t = 4$ residual); the remaining
-three $t = 3$ residuals invoke \textup{(H-orb)} and
-\textup{(H-Qb)} uniformly (via parity reduction + $f = 5$ /
-$f = 7$ closures), and \textup{(H-coc)} is additionally invoked
-only on the single $(12, 12, 24)/(2,2)$-orbit sub-case of the
-$f = 7$ branch.
-
-\smallskip
-
-\noindent\emph{Counting convention.}
-The $4{+}3$ split counts the seven $(t, k)$-orbits of the
-role-distribution census: four need no standing hypothesis; the
-other three (all with $t = 3$ and combinatorial \textsf{SAT} after
-the parity step) each invoke \textup{(H-orb)} on their $f = 7$
-branches and \textup{(H-Qb)} on their $f = 5$ \textsf{Qb} sub-cases,
-with \textup{(H-coc)} entering only on the $(12, 12, 24)/(2, 2)$
-sub-case inside $f = 7$.  The result file
-\path{phase26e_synthesis_theorem_26_1_results.json}
-uses the same split via the fields
-\path{unconditional_residuals} and
-\path{conditional_residuals}.
+\begin{remark}[Current logical chain]\label{rem:htrip-status}
+The active $f=7$ chain no longer depends on four standing hypotheses.  The
+orientation-bit certificate fixes the H-coc sign obstruction directly; H-trip
+is retired.  Parity closes the singleton and odd H-orb branches.  The genuine
+$(2,2)$ orbit branch is closed by the H-coc orientation obstruction, while
+\texttt{horb\_residual\_scope.py} records the one branch not closed by these
+soft tools: accidental even metric congruence with $\Sym(P)=1$.  The synthesis
+result file \path{phase26e_synthesis_theorem_26_1_results.json} records this
+split via \path{closed_modules}, \path{retired_modules}, and
+\path{remaining_modules}.
 \end{remark}
 
 \begin{proof}[Proof of \Cref{lem:k5-cyc}]
@@ -2711,11 +2513,11 @@ facets on $\partial T$ distributed over three distinct $T$-face planes
 (three by the hypothesis $t = 3$; distinct because each of the three
 touched $T$-faces receives positive $2$-area from the piece), giving
 the five combinatorial sub-cases enumerated below.  Three of the five
-are excluded unconditionally by elementary metric arguments.  The
-remaining two sub-cases~-- \textsf{Qb-adj} and \textsf{Qb-opp}~-- are
-closed under the explicit geometric hypothesis \textup{(H-Qb)}
-introduced below; absent \textup{(H-Qb)}, they remain open at the
-theorem-level bridge.
+are excluded unconditionally by elementary metric arguments.  Earlier
+versions isolated the remaining two sub-cases~-- \textsf{Qb-adj} and
+\textsf{Qb-opp}~-- as the explicit geometric bridge \textup{(H-Qb)}.
+The current public certificate stack discharges that bridge, as recorded
+below and in \texttt{hqb\_\*\_certificate.py}.
 
 \begin{itemize}
   \item \emph{Pyramid with three lateral triangles on $\partial T$;
@@ -2733,71 +2535,21 @@ theorem-level bridge.
         odd number of vertices is impossible, so these two sub-cases
         are excluded.
   \item \emph{Pyramid with its quadrilateral base on $\partial T$
-        \textup{(case \textsf{Qb}; closed under \textup{(H-Qb)})}.}
+        \textup{(case \textsf{Qb}; closed by certificates)}.}
         Label the pyramid as $(b_{1}, b_{2}, b_{3}, b_{4}; \mathsf{a})$
         with $b_{1}, \ldots, b_{4}$ the four base vertices cyclically
         around the quadrilateral on a $T$-face plane $T_{\alpha}$ and
-        $\mathsf{a}$ the apex.  Two of the four lateral triangles
-        $F_{i} = \triangle b_{i} b_{i+1} \mathsf{a}$ ($i \in \Z/4\Z$)
-        must additionally lie on $\partial T$; the two remaining
-        lateral triangles become the two interior facets.  The chosen
-        boundary pair is either \emph{adjacent} (indices differ by
-        $1$) or \emph{opposite} (indices differ by $2$):
-        \begin{itemize}
-          \item \textsf{Qb-adj}.  Say $F_{1}$ on $T_{\beta}$ and
-                $F_{2}$ on $T_{\gamma}$.  The base edge $b_{1} b_{2}$
-                lies in $T_{\alpha} \cap T_{\beta} = e_{\alpha\beta}$,
-                the base edge $b_{2} b_{3}$ in $T_{\alpha} \cap
-                T_{\gamma} = e_{\alpha\gamma}$; hence $b_{2} \in
-                e_{\alpha\beta} \cap e_{\alpha\gamma} = \{v_{0}\}$,
-                where $v_{0}$ is the $T$-vertex opposite $T_{\delta}$.
-                Similarly the apex satisfies $\mathsf{a} \in T_{\beta}
-                \cap T_{\gamma} = e_{\beta\gamma}$, the $T$-edge
-                through $v_{0}$ opposite $T_{\alpha}$; and $b_{1} \in
-                e_{\alpha\beta}$, $b_{3} \in e_{\alpha\gamma}$,
-                $b_{4} \in T_{\alpha}$.  The four-parameter family of
-                Qb-adj pyramids is thus non-empty \emph{at the level
-                of single-piece placement}; however, a full $5$-piece
-                face-to-face congruent dissection requires in addition
-                a compatible pairing of pieces along each interior
-                facet.
-          \item \textsf{Qb-opp}.  Say $F_{1}$ on $T_{\beta}$ and
-                $F_{3}$ on $T_{\gamma}$.  Then $b_{1}, b_{2} \in
-                e_{\alpha\beta}$, $b_{3}, b_{4} \in e_{\alpha\gamma}$,
-                $\mathsf{a} \in e_{\beta\gamma}$, so all five pyramid
-                vertices lie on the three $T$-edges concurrent at
-                $v_{0}$.  Again the single-piece family is non-empty;
-                $5$-piece global compatibility is the operative
-                constraint.
-        \end{itemize}
-        In both \textsf{Qb-adj} and \textsf{Qb-opp}, the exclusion
-        reduces to the global compatibility of $5$ congruent copies
-        of such a pyramid in a face-to-face dissection of $T$.  We
-        adopt the following explicit hypothesis and refer the proof
-        (or disproof) to a separate combinatorial-geometric study:
-        \begin{itemize}
-          \item[\textup{(H\protect\nobreakdash-Qb)}] No face-to-face
-                congruent dissection of $T$ into $5$ convex pieces
-                admits a piece of combinatorial type \textsf{Qb}
-                (quadrilateral pyramid with base on $\partial T$ and
-                two lateral triangles on $\partial T$), in either the
-                \textsf{Qb-adj} or \textsf{Qb-opp} sub-configuration.
-        \end{itemize}
-        \textup{(H-Qb)} is a finite geometric check on the
-        single-piece placement space (at most $4$ scalar degrees of
-        freedom for \textsf{Qb-adj}, at most $3$ for \textsf{Qb-opp},
-        matching \path{phase26c_t3_f5_exclusion.py}) together
-        with the $5$-piece compatibility; its full discharge requires
-        either a rational/SMT solver over the parameter space or a
-        multi-piece rigidity argument not developed here.  We record
-        the status of \textup{(H-Qb)} as \textsf{L1+} (strong partial
-        evidence: the single-piece volume constraint $V(P) = V_{T}/5$
-        and the admissible boundary-area multisets of
-        \cref{eq:t3-five-multisets} cut each unconstrained
-        single-piece family to an at most $1$-parameter locus, on
-        which $5$-piece face-to-face compatibility becomes
-        combinatorially constrained; a complete certification is
-        deferred to future work).
+        $\mathsf{a}$ the apex.  The two remaining lateral triangles may be
+        adjacent (\textsf{Qb-adj}) or opposite (\textsf{Qb-opp}).  Earlier
+        versions treated their exclusion as the standing hypothesis
+        \textup{(H-Qb)}.  The present public stack discharges this branch by
+        the exact certificates
+        \texttt{hqb\_reduction\_certificate.py},
+        \texttt{hqb\_perface\_tiling\_certificate.py},
+        \texttt{hqb\_asymmetric\_caseI\_certificate.py},
+        \texttt{hqb\_asymmetric\_caseII\_certificate.py}, and
+        \texttt{hqb\_opp\_certificate.py}.  Thus no $f=5$ sub-case remains
+        open.
   \item \emph{Prism with its two triangular faces on $\partial T$
         \textup{(unconditional closure)}.}
         The two triangular faces of a prism are parallel.  If both
@@ -2818,219 +2570,53 @@ theorem-level bridge.
         parallel-lateral-edges property.
 \end{itemize}
 
-\begin{remark}[Status of \textup{(H-Qb)} and honest bookkeeping]\label{rem:hqb-status}
-The \textsf{Qb-adj} and \textsf{Qb-opp} sub-cases are the \emph{only}
-sub-cases of the $f = 5$ closure where the paper defers to a standing
-hypothesis; the other three sub-cases are closed unconditionally by
-the elementary arguments above.  An explicit Qb-adj pyramid in the
-standard regular tetrahedron with vertices $(\pm 1, \pm 1, \pm 1)$
-taking a sign pattern of even parity shows that the Qb-adj geometric
-family is \emph{non-empty at the single-piece level}: e.g.\
-$b_{2} = v_{0}$, $b_{1} \in e_{\alpha\beta} \setminus \{v_{0}\}$,
-$b_{3} \in e_{\alpha\gamma} \setminus \{v_{0}\}$, $b_{4}$ generic in
-$T_{\alpha}$, $\mathsf{a} \in e_{\beta\gamma} \setminus \{v_{0}\}$
-yields a non-degenerate convex pyramid.  Earlier drafts of this paper
-claimed a single-piece degeneracy argument in Qb-adj/Qb-opp which was
-a notational artefact (collision between the apex symbol and the
-$T$-vertex symbol in the companion script
-\texttt{phase26c\_t3\_f5\_exclusion.py}); that argument is retracted
-and replaced by the standing hypothesis \textup{(H-Qb)}.
+\begin{remark}[Status of \textup{(H-Qb)}]\label{rem:hqb-status}
+The \textsf{Qb-adj} and \textsf{Qb-opp} families are non-empty at the
+single-piece level, so the old single-piece degeneracy argument remains
+retracted.  Their exclusion is now supplied by the multi-script H-Qb
+certificate stack listed in \Cref{thm:n5}.  Consequently \textup{(H-Qb)} is
+not an open standing hypothesis in the current public ledger; it is a closed
+module whose local decomposition is still visible in
+\texttt{phase26c\_t3\_f5\_exclusion.py}.
 \end{remark}
 
 The five-sub-case closure is certified uniformly in $\mathcal{M}$ by
 \path{phase26c_t3_f5_exclusion.py} ($21$/$21$ passing tests).
 
 \paragraph{Closing the $f = 7$ sub-case.}
-If $f(P) = 7$, each piece has $4$ interior facets and the interior
-adjacency graph is $K_{5}$.  The $\operatorname{Sym}(P)$-orbit structure
-on the $4$ interior facets is one of $(1,1,1,1)$, $(2,1,1)$, $(3,1)$,
-$(2,2)$, $(4)$.  Throughout this paragraph we invoke hypothesis
-\textup{(H-orb)} on the reference tile $P$; the finite facet-table check
-needed to discharge it is carried out case-by-case by the certificate
-\texttt{phase26c\_t3\_f7\_exclusion.py}.
-
+If $f(P)=7$, each piece has four interior facets and the interior adjacency
+graph is $K_{5}$.  The old analysis closed this branch under a blanket
+\textup{(H-orb)} assumption plus \textup{(H-coc)}.  The current ledger is more
+precise:
 \begin{itemize}
-  \item \emph{Singleton-orbit elimination.}  Any orbit structure
-        containing a singleton $\{F\}$ forces, via the weak
-        \Cref{lem:ctl}, all five label-$F$ facets to be mutually
-        congruent polygons; by \Cref{lem:orbit-transport} they all lie in
-        the same $\operatorname{Sym}(P)$-orbit of $P$, which by assumption
-        has size $1$.  Each such facet is therefore shared between two
-        specific pieces determined by the orbit slot; since each piece
-        provides exactly one slot, the five slots must pair into a
-        perfect matching on $5$ vertices -- impossible since $5$ is odd.
-        This eliminates $(1,1,1,1)$, $(2,1,1)$, $(3,1)$.
-  \item \emph{Distinct-boundary-area multisets.}  For the four three-distinct-area
-        multisets
-        \[
-          (6,12,30),\quad (6,15,27),\quad (6,18,24),\quad (12,16,20),
-        \]
-        in $\mathcal{M}$, any
-        $g \in \operatorname{Sym}(P)$ must permute the three boundary
-        facets while preserving their (distinct) $2$-areas; hence $g$
-        fixes each boundary facet \emph{as a set}.  The three boundary
-        facets meet at the single $T$-vertex $v_{P}$ (the three
-        $T$-face planes share only the four $T$-vertices), so $g$
-        fixes $v_{P}$.  Linearising at $v_{P}$ (so $v_{P} = 0$ and
-        $g \in \operatorname{O}(3)$), the three boundary facet planes
-        restrict to three pairwise transverse $2$-planes
-        $\Pi_{1}, \Pi_{2}, \Pi_{3}$ through $0$, each of which $g$
-        stabilises setwise.  Decompose $g = \varepsilon \cdot h$ with
-        $\varepsilon = \det g \in \{\pm 1\}$ and $h \in \operatorname{SO}(3)$:
-        \begin{itemize}
-          \item An element $h \in \operatorname{SO}(3)$ stabilising
-                \emph{each} of three pairwise distinct $2$-planes
-                $\Pi_{1}, \Pi_{2}, \Pi_{3}$ through $0$ whose triple
-                intersection is $\{0\}$ must be $\mathrm{id}$.
-                Indeed a non-trivial rotation $h \in \operatorname{SO}(3)
-                \setminus \{\mathrm{id}\}$ has a unique
-                $1$-dimensional axis $L = \operatorname{fix}(h)$;
-                stabilising a $2$-plane $\Pi_{i}$ through $0$ setwise
-                forces $L \subseteq \Pi_{i}$ or $L \perp \Pi_{i}$
-                (these are the only rotation axes compatible with
-                setwise stabilisation of a plane through $0$).  We
-                split into cases according to the number of indices
-                $i$ with $L \subseteq \Pi_{i}$:
-                \begin{description}
-                  \item[Case A ($L \subseteq \Pi_{i}$ for all three $i$).]
-                      Then $L \subseteq \Pi_{1} \cap \Pi_{2} \cap
-                      \Pi_{3} = \{0\}$, contradicting $\dim L = 1$.
-                  \item[Case B ($L \subseteq \Pi_{j_{1}},\Pi_{j_{2}}$
-                      and $L \perp \Pi_{i_{0}}$ for some labelling).]
-                      Two distinct $2$-planes $\Pi_{j_{1}}, \Pi_{j_{2}}$
-                      through $0$ intersect in a $1$-dimensional line
-                      $\ell \coloneqq \Pi_{j_{1}} \cap \Pi_{j_{2}}$;
-                      since $L \subseteq \ell$ and both are
-                      $1$-dimensional, $L = \ell$.  The line $\ell$
-                      is the linearisation at $v_{P}$ of the $T$-edge
-                      $e_{j_{1} j_{2}}$, so $L$ is parallel to
-                      $e_{j_{1} j_{2}}$.  The condition $L \perp
-                      \Pi_{i_{0}}$ then says that the $T$-edge
-                      $e_{j_{1} j_{2}}$ is perpendicular to the
-                      $T$-face $T_{i_{0}}$.                        In the regular tetrahedron, an edge $e$ and a
-                      face $T_{i}$ are \emph{incident} iff $e \subset
-                      T_{i}$ (equivalently, $T_{i}$ contains both
-                      endpoints of $e$); every edge is incident with
-                      exactly two of the four faces.  It is an
-                      elementary computation that a $T$-edge makes the
-                      angle $\arccos(1/\sqrt 3) \neq \pi/2$ with every
-                      \emph{non-incident} $T$-face (i.e.\ any face not
-                      containing that edge).  Here $T_{i_{0}}$ is, by
-                      the standing choice of labelling, the unique
-                      third $T$-face through the vertex $v_{P}$
-                      distinct from the two $T$-faces $T_{j_{1}},
-                      T_{j_{2}}$ that contain the edge
-                      $e_{j_{1} j_{2}}$; in particular $e_{j_{1}
-                      j_{2}} \not\subset T_{i_{0}}$, so $e_{j_{1}
-                      j_{2}}$ is non-incident with $T_{i_{0}}$ in the
-                      sense just specified, and the orthogonality
-                      $L \perp \Pi_{i_{0}}$ would force the angle
-                      $\pi/2$, a contradiction.
-                  \item[Case C ($L \subseteq \Pi_{i_{0}}$ and
-                      $L \perp \Pi_{j_{1}},\Pi_{j_{2}}$).]
-                      Then $L$ is perpendicular to both $\Pi_{j_{1}}$
-                      and $\Pi_{j_{2}}$; two distinct planes through
-                      $0$ cannot share a common perpendicular line
-                      (a plane's perpendicular is a unique line, and
-                      two distinct planes have distinct perpendicular
-                      lines).  Contradiction.
-                  \item[Case D ($L \perp \Pi_{i}$ for all three $i$).]
-                      Same argument: three distinct planes through
-                      $0$ cannot share a common perpendicular line.
-                      Contradiction.
-                \end{description}
-                Hence $h = \mathrm{id}$.  The required input
-                $\Pi_{1} \cap \Pi_{2} \cap \Pi_{3} = \{0\}$ holds
-                because $\Pi_{1}, \Pi_{2}, \Pi_{3}$ are the three
-                $T$-face planes through the $T$-vertex $v_{P}$
-                linearised at $v_{P}$, and the three $T$-face planes
-                through a common $T$-vertex of a regular tetrahedron
-                meet set-theoretically only at that vertex (since the
-                fourth $T$-face is opposite $v_{P}$, the three are in
-                general linear position).
-          \item If $\varepsilon = -1$, then $-g = (-1) \cdot g \in
-                \operatorname{SO}(3)$ and still stabilises each
-                $\Pi_{i}$ setwise (since $\Pi_{i}$ is a $2$-plane
-                through $0$, $-\Pi_{i} = \Pi_{i}$).  By the previous
-                bullet $-g = \mathrm{id}$, so $g = -\mathrm{id}$.  But
-                $-\mathrm{id} \notin \operatorname{Sym}(P)$: the cone
-                of $P$ at $v_{P}$ is contained in the open positive
-                cone spanned by the three outward $T$-edge directions
-                at $v_{P}$ (since $P \subseteq T$ and $v_{P}$ is a
-                $T$-vertex), and $-\mathrm{id}$ maps this open positive
-                cone to the open negative cone, disjoint from $P$.
-        \end{itemize}
-        Both cases yield $g = \mathrm{id}$, so
-        $\operatorname{Sym}(P) = 1$ and only orbit $(1, 1, 1, 1)$ is
-        available -- already excluded above.
-  \item \emph{The multiset $(12, 12, 24)$.}  Two boundary facets share
-        the area $12$ and the third has area $24$; any non-trivial
-        $g \in \operatorname{Sym}(P)$ must either swap the two area-$12$
-        facets or fix all three boundary facets individually.  The
-        second option is ruled out exactly as in the preceding bullet
-        (three pairwise non-coplanar fixed boundary planes force
-        $g = \mathrm{id}$).  Hence $g$ swaps the two area-$12$ facets
-        and fixes the area-$24$ facet setwise.
-
-        Such a $g$ fixes $v_{P}$ (the unique common vertex of the
-        three $T$-face planes) and, after linearising at $v_{P}$,
-        belongs to $\operatorname{O}(3)$ with
-        $g(\Pi_{1}) = \Pi_{2}$, $g(\Pi_{2}) = \Pi_{1}$, and
-        $g(\Pi_{3}) = \Pi_{3}$ setwise.  Let $u_{1}, u_{2}, u_{3}$ be the
-        unit vectors along the three $T$-edges issuing from $v_{P}$ (so
-        $\Pi_{r} = \mathrm{span}(u_{a}, u_{b})$ for the two indices
-        $\{a, b\} \neq \{r\}$).  The two $g$'s satisfying the plane
-        conditions are:
-        \begin{enumerate}[label=(\roman*)]
-          \item the bisector reflection $\rho$ fixing $u_{1}$ and
-                swapping $u_{2} \leftrightarrow u_{3}$;
-          \item its composition $-\rho$ with $-\mathrm{id}$, sending
-                $u_{1} \mapsto -u_{1}$ and $u_{r} \mapsto -u_{s}$ for
-                $\{r, s\} = \{2, 3\}$.
-        \end{enumerate}
-        Option (ii) sends the positive $T$-vertex cone
-        $\R_{\geq 0}u_{1} + \R_{\geq 0}u_{2} + \R_{\geq 0}u_{3}$ to
-        its antipode and therefore cannot belong to $\operatorname{Sym}(P)$
-        (since $P$ lies in the positive cone at $v_{P}$).  Hence
-        $\operatorname{Sym}(P) \leq \langle \rho \rangle = C_{2}$, with
-        the bisector reflection $\rho$ as the only non-trivial element.
-        This rules out orbit structure $(4)$ on the four interior
-        facets.
-
-        The only remaining orbit structure is $(2, 2)$, which is
-        excluded by \Cref{lem:k5-cyc} under the combined hypotheses
-        \textup{(H-orb)} and \textup{(H-coc)}; both are discharged as
-        finite checks by \texttt{phase26c\_t3\_f7\_exclusion.py}.
+  \item odd or singleton interior-facet multiplicity patterns are impossible
+        by the parity certificate, without invoking blanket \textup{(H-orb)};
+  \item genuine $(2,2)$ orbit transport is closed by the direct H-coc
+        orientation certificate together with \Cref{lem:k5-cyc};
+  \item the remaining case is accidental even metric congruence with
+        $\Sym(P)=1$, in pattern $(4)$ or $(2,2)$.
 \end{itemize}
-The closure is certified by \path{phase26c_t3_f7_exclusion.py}
-($33$/$33$ passing tests); the overall $t = 3$ synthesis is assembled by
-\path{phase26e_synthesis_theorem_26_1.py} ($40$/$40$ passing tests).
+The legacy script \path{phase26c_t3_f7_exclusion.py} records the older
+conditional closure under blanket orbit-detection assumptions.  The active
+public synthesis is instead \path{phase26e_synthesis_theorem_26_1.py}
+($46$/$46$ passing tests), supported by
+\path{horb_parity_certificate.py}, \path{horb_residual_scope.py}, and
+\path{horb_residual_combinatorial.py}.
 
 \paragraph{Synthesis of the $t = 3$ step.}
-All four $t = 3$ residuals are UNSAT: $(5, 5, 3, 2)$ at the
-canonical-multiset level; $(5, 4, 4, 2), (5, 4, 3, 3), (4, 4, 4, 3)$ by
-the topological chain
-\cref{lem:t3-parity} $\to$ \cref{rem:t3-tetrahedral-product} $\to$
-\cref{lem:ctl} (weak CTL) $\to$ \cref{lem:orbit-transport}, with
-\cref{lem:k5-cyc} additionally invoked only on the single
-$(12, 12, 24)/(2, 2)$-orbit $f = 7$ sub-case, which appears in the
-residuals $(5, 4, 3, 3)$ and $(4, 4, 4, 3)$ but \emph{not} in
-$(5, 4, 4, 2)$ (whose canonical multiset $(6, 12, 30)$ falls
-entirely in the distinct-boundary-area sub-branch of $f = 7$ and is
-killed using \textup{(H-orb)} alone, via the singleton
-$\Sym(P) = 1$ argument; see the $f = 7$ closure below).  The auxiliary
-hypothesis \textup{(H-orb)} is thus used uniformly across all three
-parity-reduction residuals, while \textup{(H-coc)} is used only on
-the $(12, 12, 24)/(2, 2)$-orbit sub-case; both are verified on a
-case-by-case finite-table basis by
-\texttt{phase26c\_t3\_f7\_exclusion.py}.
+The four $t=3$ residuals now split as follows.  The residual $(5,5,3,2)$ is
+UNSAT at the canonical-multiset level.  In the other three $t=3$ residuals,
+the $f=5$ branch is closed by the H-Qb certificates, and the $f=7$ branch is
+closed except for the accidental even H-orb residual with $\Sym(P)=1$.
 
 \subsubsection*{Conclusion of Step 3 and proof of \cref{thm:n5}}
 
-Steps~1, 2 and 3 close the $t = 1$ elimination and the seven admissible
-$(t, k)$ residuals respectively.  Hence no
-face-to-face congruent dissection of $T$ into $5$ convex pieces can exist,
-and \cref{thm:n5} is proved.\qed
+Steps~1, 2 and 3 eliminate the $t=1$ case, both $t=2$ residuals, the
+canonical $t=3$ residual $(5,5,3,2)$, the $t=4$ residual, all $f=5$ branches,
+and every non-accidental $f=7$ branch.  Therefore any putative face-to-face
+congruent dissection of $T$ into $5$ convex pieces must lie in the single
+H-orb accidental-even residual stated in \Cref{thm:n5}.  This proves the
+reduction theorem; no unconditional $n=5$ impossibility is asserted here.\qed
 
 \begin{remark}[Convexity hypothesis for $n = 5$]
 Convexity is essential to the canonical-multiset argument: a non-convex
@@ -3040,31 +2626,13 @@ which underlies Step~3 above.
 \end{remark}
 
 \begin{remark}[Comparison with $n = 16$]
-The $n = 5$ closure is unexpectedly clean compared with the $\sim 25$
-sub-phases of the C24-chain at $n = 16$.  The structural reason is that at
-$n = 16$ the per-$T$-face filter~\eqref{eq:F4} admits the all-one-face
-configuration ($16/4 = 4 \geq 1$) as combinatorially feasible; deep
-geometric arguments (apex collapse, perpendicular-bisector planes, $F_{4}$
-pairing) are then needed.  At $n = 5$ the \emph{same} filter
-($5/4 > 1$) kills the $t = 1$ residual outright, reducing the problem to
-$t \geq 2$; once there, the smallness of $5$ pieces and $4$ faces pins the
-canonical footprint multiset to a finite list of integer tuples.  For
-$t = 2$ and for the residual $(5, 5, 3, 2)$ at $t = 3$ elementary
-arithmetic on the per-$T$-face contribution sums suffices; the remaining
-three $t = 3$ residuals are closed by the topological parity reduction
-\cref{lem:t3-parity} combined with the weak Congruence Transport Lemma
-\cref{lem:ctl}, the orbit-transport corollary
-\cref{lem:orbit-transport} (under hypothesis \textup{(H-orb)}) and the
-$K_{5}$ triangle cycle-consistency obstruction \cref{lem:k5-cyc} (under
-hypothesis \textup{(H-coc)}); the $f = 7$ sub-cases discharge
-\textup{(H-orb)} and \textup{(H-coc)} via finite checks in
-\texttt{phase26c\_t3\_f7\_exclusion.py}, while the \textsf{Qb} sub-cases
-of $f = 5$ discharge \textup{(H-Qb)} via
-\texttt{phase26c\_t3\_f5\_exclusion.py}.  This template
-(role-distribution $+$ canonical-multiset $+$ topological closure)
-transfers directly to
-$n \in \{7, 9, 10, 11, 13, \ldots\}$, the remaining small non-divisors of
-$24$.
+The $n=5$ reduction is structurally smaller than the C24-chain at $n=16$.
+At $n=5$ the per-$T$-face filter kills $t=1$ outright, the $t=2$ and one
+$t=3$ residual close by integer footprint arithmetic, and the $t=4$ residual
+closes by the full-incidence volume argument.  The only surviving difficulty
+is not combinatorial but metric: accidental even congruence among the four
+interior facets of an $f=7$ piece with trivial symmetry.  This identifies a
+much narrower target than the earlier four-hypothesis stack.
 \end{remark}
 
 \subsection{Summary of the programme}\label{ssec:prog-summary}
@@ -3087,28 +2655,13 @@ by
         (\cref{thm:n16-aof-coxeter,thm:n16-aof-conditional}), \textsf{L3} in the
         Coxeter-pure case and \textsf{L2} (conditional on
         $(\Hroles)+(\Hslot)$) in the general convex case;
-  \item and the $n = 5$ convex impossibility modulo four explicit
-        finite standing hypotheses \textup{(H-trip)},
-        \textup{(H-coc)}, \textup{(H-orb)}, \textup{(H-Qb)}
-        (\cref{thm:n5}), the first non-divisor of $24$
-        \emph{conditionally reduced} -- not closed -- in the
-        convex category: four of the seven $(t, k)$-residuals of the
-        role-distribution census are \emph{unconditional} (both
-        $t = 2$ residuals, the $t = 3$ residual $(5, 5, 3, 2)$, and
-        the $t = 4$ residual); the remaining three $t = 3$ residuals
-        invoke \textup{(H-orb)} and \textup{(H-Qb)} uniformly, with
-        \textup{(H-coc)} additionally invoked only on the single
-        $(12, 12, 24)/(2, 2)$-orbit $f = 7$ sub-case.  Each
-        hypothesis is a finite check on any candidate dissection
-        (topological for \textup{(H-trip)}, algebraic for
-        \textup{(H-coc)}, \textup{(H-orb)}, geometric for
-        \textup{(H-Qb)}); \textup{(H-trip)} is motivational for
-        \textup{(H-coc)} and not used directly in the proof.
-        Unconditional closure of $n = 5$ requires completing the
-        developing-map reduction \textup{(H-trip)} $\Rightarrow$
-        \textup{(H-coc)} sketched in \Cref{rem:hcoc-from-htrip}, or
-        discharging \textup{(H-orb)}, \textup{(H-Qb)} directly; this
-        is the natural next step of the programme.
+  \item and the $n = 5$ convex reduction to one H-orb accidental-even
+        residual (\cref{thm:n5}), the first non-divisor of $24$ reduced in the
+        convex category to a single named open branch.  The current public
+        stack discharges \textup{(H-coc)} and \textup{(H-Qb)}, retires
+        \textup{(H-trip)}, and kills H-orb singleton/odd patterns by parity;
+        the remaining task is the metric accidental-even branch with
+        $f(P)=7$, $t=3$, and $\Sym(P)=1$.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3153,8 +2706,8 @@ paper are produced by exact rational arithmetic using Python's built-in
 \texttt{Fractions} module.  We include below a minimal self-contained
 reference implementation for the Dehn-invariant verification at $n = 24$
 (orthoscheme).  The full test suites for \cref{thm:n16-aof-conditional} and
-\cref{thm:n5} will be made available upon submission in the data and code
-capsule described in \Cref{sec:intro}.
+\cref{thm:n5} are available in the public repository and are summarised by
+the data and code capsule described in \Cref{sec:intro}.
 
 \Needspace*{22\baselineskip}
 \begin{lstlisting}[language=Python,caption={Minimal SymPy verification of

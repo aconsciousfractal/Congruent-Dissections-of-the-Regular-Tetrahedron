@@ -9,12 +9,21 @@ Only uses: chambers, adjacency, convexity, S₄ action, tiling test.
 Question: how many S₄-orbit families of congruent-tiling-admissible convex 
 connected chamber-unions exist?
 
-Expected: 15 (not 12 as in the paper draft).
+Expected: 15 S4-orbit families in the Coxeter-pure companion scope.
+This is not the count of the eight historical representative dissections in
+the main atlas.
 """
+
+import sys
 
 import numpy as np
 from itertools import permutations, combinations
 from collections import defaultdict
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 # ══════════════════════════════════════════════════════════════
 #  1. BUILD THE COXETER COMPLEX (24 chambers of the regular tetrahedron)
@@ -298,27 +307,19 @@ if non_tiling:
     for k, canon, sz, _ in sorted(non_tiling):
         print(f"  {k:3d}  {sz:10d}  {canon} (k∤24)" if 24 % k != 0 else f"  {k:3d}  {sz:10d}  {canon}")
 
-# Paper comparison
-print(f"\n  ┌────────────────────────────────────────────┐")
-print(f"  │  COMPARISON WITH PAPER                      │")
-print(f"  ├─────┬──────────┬──────────┬────────────────┤")
-print(f"  │  k  │ This run │   Paper  │    Status      │")
-print(f"  ├─────┼──────────┼──────────┼────────────────┤")
-paper_count = {1:1, 2:2, 3:2, 4:2, 6:2, 8:1, 12:1, 24:1}
-total_this = 0
-total_paper = 0
-for k in [1, 2, 3, 4, 6, 8, 12, 24]:
-    n_this = sum(1 for kk, _, _, t in all_families if kk == k and t)
-    n_paper = paper_count[k]
-    total_this += n_this
-    total_paper += n_paper
-    status = "✓ match" if n_this == n_paper else f"✗ DIFF (+{n_this - n_paper})"
-    print(f"  │ {k:3d} │    {n_this:2d}    │    {n_paper:2d}    │ {status:14s} │")
-print(f"  ├─────┼──────────┼──────────┼────────────────┤")
-print(f"  │ TOT │    {total_this:2d}    │    {total_paper:2d}    │ {total_this - total_paper:+d} families     │")
-print(f"  └─────┴──────────┴──────────┴────────────────┘")
+# Current-scope comparison
+expected_coxeter_pure = 15
+historical_atlas_representatives = 8
+status = "match" if len(tiling_families) == expected_coxeter_pure else "DIFF"
+print("\n  CURRENT-SCOPE CHECK")
+print(f"    Coxeter-pure companion target: {expected_coxeter_pure} S4-orbit families")
+print(f"    This run:                       {len(tiling_families)} S4-orbit families")
+print(f"    Status:                         {status}")
+print(f"    Main-paper historical atlas:    {historical_atlas_representatives} representative n-values")
+print("    Scope note: this script verifies Coxeter-pure chamber-union families;")
+print("    it is not a count of the historical atlas representatives.")
 
-# ══════════════════════════════════════════════════════════════
+# ------------------------------------------------------------------------
 #  9. CONTACT VECTORS (independent of legacy labels)
 # ══════════════════════════════════════════════════════════════
 
@@ -416,4 +417,7 @@ print(f"  VERDICT")
 print(f"{'═'*72}")
 print(f"\n  True S₄-orbit families:              {len(tiling_families)}")
 print(f"  Extended families (mod w₀-duality):   {len(self_dual) + len(dual_pairs)}")
-print(f"  Paper claims:                         12")
+print(f"  Coxeter-pure companion target:        15")
+print(f"  Main-paper historical atlas values:   8")
+if len(tiling_families) != expected_coxeter_pure:
+    sys.exit(1)

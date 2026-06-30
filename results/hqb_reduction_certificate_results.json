@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "name": "V_T = 8/3 for this regular tetrahedron",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Vol = 16*s*u*sa/3 on the convex branch (u = (s+d)/2, d>0)",
+      "passed": true,
+      "detail": "Vol = 8*s*sa*(d + s)/3"
+    },
+    {
+      "name": "A_base = 4*sqrt(3)*s*u on the convex branch",
+      "passed": true,
+      "detail": "A_base = 2*sqrt(3)*s*(d + s)"
+    },
+    {
+      "name": "A_F1 = A_F2 = 2*sqrt(3)*s*sa",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "A_sum = 4*sqrt(3)*s*(u + sa) on the convex branch",
+      "passed": true,
+      "detail": "A_sum = 2*sqrt(3)*s*(d + s + 2*sa)"
+    },
+    {
+      "name": "N1 reduces to  s*u*sa = 1/10",
+      "passed": true,
+      "detail": "u*sa = 1/(10*s)"
+    },
+    {
+      "name": "N2 reduces to  s*(u+sa) = 2/5",
+      "passed": true,
+      "detail": "u+sa = 2/(5*s)"
+    },
+    {
+      "name": "u, sa real  <=>  s <= 2/5 (discriminant vanishes at s = 2/5)",
+      "passed": true,
+      "detail": "disc = -2*(5*s - 2)/(25*s**2), roots s = [2/5]"
+    },
+    {
+      "name": "witness (s,u,sa) = (1/3, (6-sqrt6)/10, (6+sqrt6)/10): s*u*sa = 1/10",
+      "passed": true,
+      "detail": "s*u*sa = 1/10"
+    },
+    {
+      "name": "witness: s*(u+sa) = 2/5",
+      "passed": true,
+      "detail": "s*(u+sa) = 2/5"
+    },
+    {
+      "name": "witness is convex & inside: s/2 < u < 1/2 and 0 < sa < 1",
+      "passed": true,
+      "detail": "u=3/5 - sqrt(6)/10~0.3551, sa~0.8449"
+    },
+    {
+      "name": "=> N1..N4 leave a NON-EMPTY 1-parameter Qb-adj family: (H-Qb) is NOT closed by single-piece + first-order global constraints",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "passed": 12,
+  "failed": 0,
+  "reduction": {
+    "volume_constraint": "s*u*sa = 1/10",
+    "boundary_area_constraint": "s*(u+sa) = 2/5",
+    "residual_locus": "1-parameter family, s in (0, 2/5]",
+    "witness": "(s,u,sa) = (1/3, (6-sqrt6)/10, (6+sqrt6)/10)",
+    "status": "intermediate reduction only: this script reduces H-Qb to the 5-piece assembly problem (per-face tiling + solid-angle closure at v0).  The current public H-Qb ledger is closed by the downstream hqb_perface, hqb_asymmetric_caseI/II, and hqb_opp certificates.",
+    "closed_here": false,
+    "closed_by_downstream_certificates": true
+  }
+}

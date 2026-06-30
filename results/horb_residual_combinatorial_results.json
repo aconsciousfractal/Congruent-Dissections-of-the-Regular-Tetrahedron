@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "name": "even interior edge-count multisets of size 4 are exactly the (k,k,k,k) and (a,a,b,b) shapes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "f=7 face-degree enumeration yields candidate sequences",
+      "passed": true,
+      "detail": "45 candidate face-degree multisets"
+    },
+    {
+      "name": "NINE distinct even interior patterns are arithmetically consistent with f=7 (residual not killed by counting)",
+      "passed": true,
+      "detail": "[(3, 3, 3, 3), (3, 3, 4, 4), (3, 3, 5, 5), (3, 3, 6, 6), (3, 3, 7, 7), (4, 4, 4, 4), (4, 4, 5, 5), (4, 4, 6, 6), (5, 5, 5, 5)]"
+    },
+    {
+      "name": "corner-truncated cube is a convex 3-polytope with f = 7",
+      "passed": true,
+      "detail": "face-degree sequence [3, 4, 4, 4, 5, 5, 5]"
+    },
+    {
+      "name": "it contains an even interior 4-subset (so even patterns are REALIZABLE, not just arithmetic)",
+      "passed": true,
+      "detail": "even 4-subset (4, 4, 5, 5)"
+    },
+    {
+      "name": "CONCLUSION: edge-count parity NARROWS the residual to interior patterns (k,k,k,k)/(a,a,b,b), but they survive combinatorially => the residual is genuinely METRIC (developing-map / rigidity)",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "result": {
+    "edge_count_parity": "even metric pattern => interior edge-counts (k,k,k,k) or (a,a,b,b)",
+    "even_interior_patterns": [
+      [
+        3,
+        3,
+        3,
+        3
+      ],
+      [
+        3,
+        3,
+        4,
+        4
+      ],
+      [
+        3,
+        3,
+        5,
+        5
+      ],
+      [
+        3,
+        3,
+        6,
+        6
+      ],
+      [
+        3,
+        3,
+        7,
+        7
+      ],
+      [
+        4,
+        4,
+        4,
+        4
+      ],
+      [
+        4,
+        4,
+        5,
+        5
+      ],
+      [
+        4,
+        4,
+        6,
+        6
+      ],
+      [
+        5,
+        5,
+        5,
+        5
+      ]
+    ],
+    "realizable_witness": {
+      "polytope": "corner-truncated cube",
+      "face_degrees": [
+        3,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5
+      ],
+      "even_4subset": [
+        4,
+        4,
+        5,
+        5
+      ]
+    },
+    "status": "residual NOT combinatorially excluded; narrowed to the above edge-count families; remaining obstacle is metric (f=7 interior developing-map / rigidity)."
+  }
+}

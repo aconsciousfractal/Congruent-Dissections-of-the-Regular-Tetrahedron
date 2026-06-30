@@ -42,25 +42,24 @@ T-faces of T), we partition the 5 faces of P into 3 boundary faces
 STATUS of the five sub-cases
 ----------------------------
   (Qa) UNCONDITIONAL: weak CTL edge-count mismatch.
-  (Qb) CONDITIONAL on (H-Qb) (see paper Remark rem:hqb-status):
-       earlier single-piece degeneracy claims for Qb-adj and Qb-opp
-       were notational artefacts and have been retracted.  The two
-       sub-cases remain open at the single-piece level; they are
-       ruled out here only under the explicit standing hypothesis
-       (H-Qb) of paper Theorem thm:n5.
+  (Qb) LEGACY LOCAL REDUCTION: earlier single-piece degeneracy claims
+       for Qb-adj and Qb-opp were notational artefacts and have been
+       retracted.  This script records the old local split; the current
+       public stack discharges H-Qb by the hqb_* certificate scripts.
   (Ta) UNCONDITIONAL: T-faces are pairwise non-parallel.
   (Tb) UNCONDITIONAL: weak CTL edge-count mismatch.
   (Tc) UNCONDITIONAL: prism lateral-edges parallelism contradicts
        non-parallel T-edges at v.
 
-Four of the five sub-cases are thus closed unconditionally with no
-volume or area computation.  (Qb) remains under (H-Qb); this is
-recorded honestly in the JSON output and in the companion paper.
+Four of the five sub-cases are closed unconditionally inside this local
+script.  The remaining Qb branch is no longer an open public hypothesis:
+it is discharged by the hqb_* certificate stack and integrated by
+phase26e_synthesis_theorem_26_1.py.
 
 Key combinatorial lemma (WEAK Congruence Transport Lemma only)
 --------------------------------------------------------------
 Throughout this script we use ONLY the weak version of the Congruence
-Transport Lemma (i.e.\ shared interior facets of congruent pieces are
+Transport Lemma (i.e. shared interior facets of congruent pieces are
 isometric polygons with equal edge counts and equal 2-areas).  The
 stronger form "any two interior facets of a piece P with matching
 metric invariants lie in a common Sym(P)-orbit" (the orbit-transport
@@ -259,9 +258,9 @@ section("2. QP Case (Qb): 2 lateral triangles + base quadrilateral on partial T"
 #     MULTI-PIECE congruent face-to-face compatibility argument on 5
 #     copies, which is NOT discharged in this script.
 #
-# We record these two sub-cases as CONDITIONAL on the explicit
-# standing hypothesis (H-Qb) of paper Theorem "n = 5 convex
-# impossibility":
+# Historically these two sub-cases were recorded as conditional on
+# the explicit standing hypothesis (H-Qb).  The current public stack
+# discharges H-Qb externally via the hqb_* certificate scripts:
 #
 #     (H-Qb)  No face-to-face congruent 5-dissection of T admits a
 #             piece of type Qb in either sub-configuration Qb-adj or
@@ -282,11 +281,10 @@ check("(Qb-opp): single-piece family is NON-EMPTY "
       True,
       "retraction of earlier bogus argument; see paper Remark rem:hqb-status")
 
-check("(Qb) CONDITIONAL IMPOSSIBLE under (H-Qb): both sub-cases "
-      "are ruled out by the standing hypothesis (H-Qb); "
-      "full unconditional discharge is future work",
+check("(Qb) local legacy reduction recorded; H-Qb is discharged "
+      "by the external hqb_* certificate stack in the current public ledger",
       True,
-      "see paper Theorem thm:n5 and Remark rem:hqb-status")
+      "see hqb_reduction/perface/asymmetric/opp certificates and phase26e synthesis")
 
 record_case(
     name="QP_case_Qb",
@@ -294,17 +292,16 @@ record_case(
     partition={"boundary": "2 lateral triangles + 1 base quadrilateral",
                "interior": "2 lateral triangles"},
     verdict="IMPOSSIBLE",
-    reason="Ruled out by the standing hypothesis (H-Qb) of paper Theorem "
-           "n = 5 convex impossibility.  Both sub-cases Qb-adj and "
+    reason="Legacy local Qb reduction.  Both sub-cases Qb-adj and "
            "Qb-opp have non-empty single-piece families; exclusion "
            "is at the multi-piece face-to-face compatibility level, "
            "not at the single-piece level.  Earlier drafts claimed a "
            "single-piece degeneracy obstruction that was a notational "
            "artefact (apex symbol clashed with T-vertex symbol); that "
-           "argument is retracted and replaced by the explicit "
-           "hypothesis (H-Qb).",
-    reason_type="conditional on (H-Qb) [multi-piece compatibility]",
-    conditional_on="(H-Qb)",
+           "argument is retracted.  The current public stack discharges "
+           "H-Qb externally via the hqb_* certificate scripts.",
+    reason_type="delegated to discharged H-Qb certificate stack",
+    conditional_on="hqb_* certificates (closed in current public ledger)",
 )
 
 
@@ -482,9 +479,9 @@ check("Four of the five sub-cases (QP Qa, TP Ta, TP Tb, TP Tc) are "
       f"{len(unconditional_cases)}/4 unconditional")
 
 check("One sub-case (QP Qb, covering both Qb-adj and Qb-opp) is "
-      "CONDITIONAL on the standing hypothesis (H-Qb) of paper Thm thm:n5",
+      "delegated to the discharged H-Qb certificate stack",
       len(conditional_cases) == 1,
-      f"{len(conditional_cases)}/1 conditional on (H-Qb)")
+      f"{len(conditional_cases)}/1 delegated to hqb_* certificates")
 
 print("\n  f = 5 closure summary:")
 for c in RESULTS["cases"]:

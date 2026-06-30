@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "name": "phiF1 = ta*(t2-t1)",
+      "passed": true,
+      "detail": "d21*ta"
+    },
+    {
+      "name": "phiF3 = ta*(t3-t4)",
+      "passed": true,
+      "detail": "d34*ta"
+    },
+    {
+      "name": "beta = t2*t3 - t1*t4",
+      "passed": true,
+      "detail": "d21*d34 + d21*t4 + d34*t1"
+    },
+    {
+      "name": "Vol = (8/3)*ta*beta",
+      "passed": true,
+      "detail": "Vol = 8*ta*(d21*(d34 + t4) + d34*t1)/3"
+    },
+    {
+      "name": "rank-2 -> 89 candidate (phiF1,phiF3) points",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "rank-1 -> 12 consistent solution lines",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "rank-0 -> 56 distributions, all forcing b_j=5/4 (impossible)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "rank-2: 0 survivors of (E1, e1-diff) linear solve + e2/e3 consistency + validity",
+      "passed": true,
+      "detail": "checked 73 assignments, 0 survivors"
+    },
+    {
+      "name": "all 12 rank-1 lines infeasible (phiF1, phiF3, or their sum outside (0,4/5))",
+      "passed": true,
+      "detail": "12/12"
+    },
+    {
+      "name": "CONCLUSION: Qb-opp EXCLUDED  =>  (H-Qb) is FULLY discharged (Qb-adj + Qb-opp)",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "passed": 10,
+  "failed": 0,
+  "result": {
+    "rank2_checked": 73,
+    "rank2_survivors": 0,
+    "rank1_lines": 12,
+    "rank1_infeasible": 12,
+    "rank0": 56,
+    "status": "Qb-opp DISCHARGED exactly; (H-Qb) FULLY discharged. Only the (H-orb) accidental-congruence residual remains."
+  }
+}

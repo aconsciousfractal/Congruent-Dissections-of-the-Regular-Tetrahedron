@@ -36,7 +36,7 @@
       ]
     },
     {
-      "title": "2. Four multisets with distinct boundary areas -> Sym(P) trivial",
+      "title": "2. Four multisets with distinct boundary areas -> Sym(P) trivial; active accidental-even residual remains",
       "tests": [
         {
           "name": "Number of multisets with 3 distinct boundary areas: 4",
@@ -54,22 +54,22 @@
           "detail": "3 non-parallel planes intersect only at v_P, and the only rigid motion fixing each of 3 such planes as a set is identity"
         },
         {
-          "name": "Multiset (6, 12, 30): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "name": "Multiset (6, 12, 30): Sym(P) = trivial; legacy blanket H-orb gives orbit structure (1,1,1,1), while active accidental-even metric coincidences remain residual",
           "passed": true,
           "detail": ""
         },
         {
-          "name": "Multiset (6, 15, 27): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "name": "Multiset (6, 15, 27): Sym(P) = trivial; legacy blanket H-orb gives orbit structure (1,1,1,1), while active accidental-even metric coincidences remain residual",
           "passed": true,
           "detail": ""
         },
         {
-          "name": "Multiset (6, 18, 24): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "name": "Multiset (6, 18, 24): Sym(P) = trivial; legacy blanket H-orb gives orbit structure (1,1,1,1), while active accidental-even metric coincidences remain residual",
           "passed": true,
           "detail": ""
         },
         {
-          "name": "Multiset (12, 16, 20): Sym(P) = trivial  =>  orbit structure (1,1,1,1)  =>  KILLED by matching argument (Section 1)",
+          "name": "Multiset (12, 16, 20): Sym(P) = trivial; legacy blanket H-orb gives orbit structure (1,1,1,1), while active accidental-even metric coincidences remain residual",
           "passed": true,
           "detail": ""
         }
@@ -186,15 +186,15 @@
       ]
     },
     {
-      "title": "6. Synthesis: f = 7 case is fully excluded",
+      "title": "6. Synthesis: legacy f = 7 closure under blanket H-orb/H-coc",
       "tests": [
         {
-          "name": "All 5 surviving multisets are IMPOSSIBLE for f = 7",
+          "name": "All 5 surviving multisets are impossible only in the legacy blanket-H-orb/H-coc closure",
           "passed": true,
-          "detail": "5/5"
+          "detail": "5/5 legacy cases"
         },
         {
-          "name": "The f = 7 closure holds UNIFORMLY over the 5 surviving multisets: weak CTL + orbit transport + matching (for 4 multisets, UNCONDITIONAL); weak CTL + orbit transport + triangle cycle-consistency (for (12,12,24), CONDITIONAL on (H-trip) via the paper's \"Reduction of (H-coc) to (H-trip)\" lemma)",
+          "name": "This script is legacy: active public synthesis supersedes blanket H-orb/H-coc closure and leaves only the accidental-even H-orb residual open",
           "passed": true,
           "detail": ""
         }
@@ -211,9 +211,11 @@
         12,
         30
       ],
-      "verdict": "IMPOSSIBLE",
-      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
-      "reason_type": "CTL + matching (odd vertex count)"
+      "legacy_verdict": "IMPOSSIBLE_UNDER_BLANKET_H_ORB",
+      "active_public_verdict": "OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL",
+      "reason": "Three distinct boundary areas force Sym(P) = 1.  Under the old blanket H-orb upgrade, congruent interior facets would have to lie in singleton Sym(P)-orbits, producing a perfect matching on 5 pieces, impossible on an odd vertex set.  The current ledger does not make that upgrade for accidental even metric coincidences, so this multiset remains within the single H-orb residual scope.",
+      "reason_type": "legacy blanket H-orb + CTL matching; active residual open",
+      "conditional_on": "legacy blanket H-orb/orbit-detection assumption; active public stack leaves accidental even H-orb residual open"
     },
     {
       "name": "multiset_(6, 15, 27)",
@@ -222,9 +224,11 @@
         15,
         27
       ],
-      "verdict": "IMPOSSIBLE",
-      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
-      "reason_type": "CTL + matching (odd vertex count)"
+      "legacy_verdict": "IMPOSSIBLE_UNDER_BLANKET_H_ORB",
+      "active_public_verdict": "OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL",
+      "reason": "Three distinct boundary areas force Sym(P) = 1.  Under the old blanket H-orb upgrade, congruent interior facets would have to lie in singleton Sym(P)-orbits, producing a perfect matching on 5 pieces, impossible on an odd vertex set.  The current ledger does not make that upgrade for accidental even metric coincidences, so this multiset remains within the single H-orb residual scope.",
+      "reason_type": "legacy blanket H-orb + CTL matching; active residual open",
+      "conditional_on": "legacy blanket H-orb/orbit-detection assumption; active public stack leaves accidental even H-orb residual open"
     },
     {
       "name": "multiset_(6, 18, 24)",
@@ -233,9 +237,11 @@
         18,
         24
       ],
-      "verdict": "IMPOSSIBLE",
-      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
-      "reason_type": "CTL + matching (odd vertex count)"
+      "legacy_verdict": "IMPOSSIBLE_UNDER_BLANKET_H_ORB",
+      "active_public_verdict": "OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL",
+      "reason": "Three distinct boundary areas force Sym(P) = 1.  Under the old blanket H-orb upgrade, congruent interior facets would have to lie in singleton Sym(P)-orbits, producing a perfect matching on 5 pieces, impossible on an odd vertex set.  The current ledger does not make that upgrade for accidental even metric coincidences, so this multiset remains within the single H-orb residual scope.",
+      "reason_type": "legacy blanket H-orb + CTL matching; active residual open",
+      "conditional_on": "legacy blanket H-orb/orbit-detection assumption; active public stack leaves accidental even H-orb residual open"
     },
     {
       "name": "multiset_(12, 16, 20)",
@@ -244,9 +250,11 @@
         16,
         20
       ],
-      "verdict": "IMPOSSIBLE",
-      "reason": "Three distinct boundary areas force Sym(P) = 1, which forces the Sym(P)-orbit structure on the 4 interior faces to be (1,1,1,1).  Singleton orbits produce a perfect matching on 5 pieces via their shared label, impossible on an odd vertex set.",
-      "reason_type": "CTL + matching (odd vertex count)"
+      "legacy_verdict": "IMPOSSIBLE_UNDER_BLANKET_H_ORB",
+      "active_public_verdict": "OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL",
+      "reason": "Three distinct boundary areas force Sym(P) = 1.  Under the old blanket H-orb upgrade, congruent interior facets would have to lie in singleton Sym(P)-orbits, producing a perfect matching on 5 pieces, impossible on an odd vertex set.  The current ledger does not make that upgrade for accidental even metric coincidences, so this multiset remains within the single H-orb residual scope.",
+      "reason_type": "legacy blanket H-orb + CTL matching; active residual open",
+      "conditional_on": "legacy blanket H-orb/orbit-detection assumption; active public stack leaves accidental even H-orb residual open"
     },
     {
       "name": "multiset_(12, 12, 24)",
@@ -255,10 +263,11 @@
         12,
         24
       ],
-      "verdict": "IMPOSSIBLE",
-      "reason": "Sym(P) <= C_2, ruling out orbit (4).  Singleton-orbit structures (1,1,1,1), (2,1,1) are killed UNCONDITIONALLY by the matching argument.  Orbit (2,2) is killed UNDER (H-trip): the paper's \"Reduction of (H-coc) to (H-trip)\" lemma yields (H-coc), and then the K_5-triangle cycle-consistency argument reduces the 10 triangle constraints to z_i + z_j == 1 (mod 2) for all 10 pairs, which forces 5 pairwise-distinct binary values -- impossible.",
-      "reason_type": "weak CTL + orbit transport + triangle cycle-consistency on K_5 (conditional on (H-trip))",
-      "conditional_on": "(H-trip) for orbit (2,2) sub-case; other orbit structures UNCONDITIONAL"
+      "legacy_verdict": "IMPOSSIBLE_UNDER_BLANKET_H_ORB",
+      "active_public_verdict": "OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL",
+      "reason": "Sym(P) <= C_2 rules out a genuine symmetry orbit (4), and the genuine (2,2) orbit branch is killed by the H-coc orientation obstruction.  Singleton/odd metric classes are killed by parity. What is not excluded here is the current active accidental-even H-orb residual, where metric congruences are not supplied by a Sym(P)-orbit transport.",
+      "reason_type": "legacy blanket H-orb + H-coc; active residual open",
+      "conditional_on": "legacy blanket H-orb/orbit-transport assumption; active public stack leaves accidental even H-orb residual open"
     }
   ],
   "multisets": [
@@ -289,8 +298,13 @@
     ]
   ],
   "conclusion": {
-    "f7_fully_excluded": true,
-    "multisets_killed_by_distinct_boundary": [
+    "f7_fully_excluded": false,
+    "active_public_status": "not fully excluded; accidental-even H-orb residual remains open in phase26e synthesis",
+    "legacy_blanket_horb_hcoc_f7_fully_excluded": true,
+    "active_public_all_cases_in_residual_scope": true,
+    "legacy_scope": "closure under blanket orbit-transport/H-coc assumptions only",
+    "active_public_scope": "accidental-even H-orb residual remains open for these f=7 multisets",
+    "multisets_legacy_closed_by_distinct_boundary_horb": [
       [
         6,
         12,
@@ -312,11 +326,38 @@
         20
       ]
     ],
-    "multiset_killed_by_triangle_consistency": [
+    "multiset_legacy_closed_by_triangle_consistency": [
       [
         12,
         12,
         24
+      ]
+    ],
+    "active_residual_multisets": [
+      [
+        6,
+        12,
+        30
+      ],
+      [
+        6,
+        15,
+        27
+      ],
+      [
+        6,
+        18,
+        24
+      ],
+      [
+        12,
+        12,
+        24
+      ],
+      [
+        12,
+        16,
+        20
       ]
     ],
     "number_of_multisets": 5
