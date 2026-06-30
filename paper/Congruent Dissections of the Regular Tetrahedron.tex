@@ -180,50 +180,26 @@
 \maketitle
 
 \begin{abstract}
-We present a computational atlas and algebraic synthesis of the eight
-historically known congruent dissections of the regular tetrahedron $T$ into
+We give an exact computational atlas for the eight known congruent dissections
+of the regular tetrahedron $T$ into
 $n \in \{1,2,3,4,6,8,12,24\}$ pieces.  Each representative is reconstructed
-from canonical coordinates, its Dehn invariant verified symbolically
-($D(S_n) = D(T)/n$), and the refinement poset on the eight is determined,
-including the $S_{4} \to S_{8}$ lineage bridging Alexanderson--Wetzel (1971)
-and Padr\'on--Plaza--Su\'arez (2023) and the unique heterogeneous bridge
-$S_{2} = S_{3} + S_{6}$.
+from canonical coordinates, its Dehn invariant is verified symbolically, and
+its refinement relations are recorded.
 
-We prove that every such dissection is $G_{\mathrm{diss}}$-transitive
-(\Cref{def:gdiss-transitive}): the pieces form a single orbit under
-$G_{\mathrm{diss}}(S_{n}) \leq \Td$, and Lagrange forces $n \mid 24$.  Full
-$\Td$-invariance (\Cref{def:td-invariance}) holds only for
-$n \in \{1,12,24\}$.  Three obstruction frameworks -- the Burnside ring
-$\Burn(\Td)$, the $24$-cell / binary tetrahedral correspondence, and an IFS
-affine grammar -- realise every divisor and, on the non-divisor side,
-yield an \emph{obstruction stack} filtering all tested $\Td$-invariant
-orbit decompositions for $n \leq 16$, $n \nmid 24$: four of nine values
-unconditionally, five via a plausible but not yet rigorous $\Td$-maximality
-step (\textsf{L1+}).  This is a screening tool, not a theorem-level
-resolution of the non-$G_{\mathrm{diss}}$-transitive case of
-\cref{conj:divisor}.
+Every atlas dissection is $G_{\mathrm{diss}}$-transitive, so Lagrange forces
+$n \mid 24$ for the known transitive family; full $\Td$-invariance occurs only
+for $n\in\{1,12,24\}$.  Burnside-ring, $24$-cell, and IFS-grammar models
+realise every divisor and provide a tested screening stack for related
+$\Td$-invariant orbit decompositions.
 
-Two certificate-backed reductions extend the programme.
-\textbf{(A)}  Under two finite hypotheses $(\Hroles) + (\Hslot)$ from an
-auxiliary MILP, no face-to-face convex congruent $16$-dissection of $T$
-places one boundary face of each piece on a single common $T$-face
-(\Cref{thm:n16-aof-conditional}); in the Coxeter-pure instance the
-hypotheses are automatic (\Cref{thm:n16-aof-coxeter}, \textsf{L3}).
-\textbf{(B)}  The public $n=5$ stack has been sharpened beyond the earlier
-four-hypothesis formulation.  Exact certificates discharge \textup{(H-coc)}
-and \textup{(H-Qb)}, \textup{(H-trip)} is retired as a formal hypothesis,
-and parity kills the singleton/odd \textup{(H-orb)} patterns.  The remaining
-open case is the accidental even \textup{(H-orb)} residual: $f(P)=7$, $t=3$,
-$\Sym(P)=1$, with the four interior facets accidentally congruent in an even
-metric pattern $(4)$ or $(2,2)$.  Thus \Cref{thm:n5} is a reduction to this
-single residual, not an unconditional $n=5$ closure.
-
-All computational branches are certified by exact rational arithmetic
-(Python \texttt{Fractions}).  The methodology -- role-distribution census,
-canonical-multiset feasibility, parity reduction, Congruence Transport,
-and a $K_{5}$ triangle cycle-consistency obstruction -- transfers directly
-to the remaining small non-divisors and provides a principled path toward
-the Divisor Completeness Conjecture.
+Beyond the atlas, we record two certificate-backed reductions.  For $n=16$ an
+all-one-face case is excluded under two finite MILP hypotheses, automatic in
+the Coxeter-pure instance.  For $n=5$, exact public certificates reduce any
+putative face-to-face convex congruent $5$-dissection to one explicit open
+metric residual: $f(P)=7$, $t=3$, $\Sym(P)=1$, and an accidental even congruence
+pattern among the four interior facets.  No unconditional $n=5$ impossibility
+is claimed.  All computations use exact rational arithmetic and are
+reproducible from the repository scripts.
 \end{abstract}
 
 \smallskip
@@ -308,7 +284,7 @@ non-tetrahedral ones, e.g.\ a pentahedral H-shape at $n=8$), whereas the
 present paper fixes the eight historical divisor representatives and
 develops obstruction frameworks for non-Coxeter / non-transitive
 dissections.  The naming crosswalk
-$T_{i} \leftrightarrow S_{j}^{\textup{legacy}}$ of~\cite{CoxeterPure2026}
+$T_{i} \leftrightarrow S_{j}$ of~\cite{CoxeterPure2026}
 is compatible with the atlas labels $S_{n}$ used here; see
 \cref{ssec:atlas-table}.
 
@@ -321,18 +297,16 @@ $5$ convex pieces is reduced to the following single residual case:
 $f(P)=7$, $t=3$, $\Sym(P)=1$, and the four interior facets of $P$ are
 accidentally congruent in an even metric pattern $(4)$ or $(2,2)$.
 All other branches of the role-distribution census are closed either
-unconditionally or by the exact public certificates discharging
-\textup{(H-coc)} and \textup{(H-Qb)}.  \textup{(H-trip)} is retired, and the
-singleton/odd \textup{(H-orb)} branches are killed by parity.  See
-\Cref{thm:n5,sec:prog-n5} for the precise ledger.
+unconditionally or by exact public certificates.  See
+\Cref{thm:n5,sec:prog-n5} for the certificate ledger.
 \end{conditionaltheorem}
 
 This is the first certificate-backed reduction of a non-divisor of~$24$ in
 the convex category to a single named residual.  The methodology --
 role-distribution census, canonical-multiset feasibility, topological parity
-reduction $f(P) \in \{5, 7\}$, weak Congruence Transport, direct H-coc and
-H-Qb certificates, and H-orb parity/scope ledgers -- transfers directly to
-the remaining small non-divisors.
+reduction $f(P) \in \{5, 7\}$, weak Congruence Transport, orientation and
+quadrilateral-pyramid certificates, and metric parity/scope ledgers --
+transfers directly to the remaining small non-divisors.
 
 \begin{conditionaltheorem}[$n=16$ all-one-face, preview]\label{thm:n16-intro}
 Under the medial-role and slot-separation hypotheses $(\Hroles) + (\Hslot)$,
@@ -1497,7 +1471,7 @@ Step & Statement & Status \\
 
 We now describe the programme that attacks \cref{conj:transitivity} and
 contains the two principal new configurational reductions of the paper:
-\cref{thm:n5} ($n = 5$ reduction to a single H-orb residual) and
+\cref{thm:n5} ($n = 5$ reduction to a single metric residual) and
 \cref{thm:n16-aof-conditional} ($n = 16$ all-one-face conditional
 impossibility).
 
@@ -1831,28 +1805,15 @@ configurational attack on GAP~B.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Certificate reduction at
 \texorpdfstring{$n = 5$}{n=5}: the first non-divisor
-reduced to one \textup{(H-orb)} residual}\label{sec:prog-n5}
+reduced to one metric residual}\label{sec:prog-n5}
 
 The C24-chain of \Cref{sec:prog-n16} reduced the largest role-distribution
 residual at $n = 16$ to a conditional statement.  The current $n=5$ public
-stack is sharper than the earlier four-hypothesis formulation.  The active
-ledger is:
-\begin{itemize}
-  \item \textup{(H-trip)} is retired: it is no longer a formal input to the
-        public theorem.
-  \item \textup{(H-coc)} is discharged directly by the orientation-bit
-        certificate \texttt{hcoc\_orientation\_certificate.py}.
-  \item \textup{(H-Qb)} is discharged by the Qb certificate stack
-        \texttt{hqb\_*\_certificate.py}.
-  \item \textup{(H-orb)} is not discharged in blanket form.  Its singleton
-        and odd-multiplicity branches are killed by parity, and its only
-        remaining branch is the accidental even metric residual described in
-        \Cref{thm:n5}.
-\end{itemize}
-Thus the correct theorem-level claim is not an unconditional impossibility of
-$n=5$, but a reduction of every putative dissection to one explicitly scoped
-H-orb residual.  Throughout this subsection the standing embedding
-is~\eqref{eq:16-embedding}.
+stack is sharper: every branch of the role-distribution census is closed
+except one explicitly scoped metric residual.  The script-level H-labels are
+kept only as reproducibility/audit labels; the theorem-level claim is the
+residual reduction stated in \Cref{thm:n5}.  Throughout this subsection the
+standing embedding is~\eqref{eq:16-embedding}.
 
 Volume, face area, height of $T$ and per-piece totals in the $n = 5$ case:
 \[
@@ -1872,7 +1833,7 @@ by congruence), and $k = (k_{0}, k_{1}, k_{2}, k_{3})$ with
 $k_{j} \coloneqq \#\{P : j \in I(P)\}$, so $\sum_{j} k_{j} = 5t$.
 \end{definition}
 
-\begin{conditionaltheorem}[$n=5$ convex reduction to the accidental-even \textup{(H-orb)} residual]\label{thm:n5}
+\begin{conditionaltheorem}[$n=5$ convex reduction to the accidental-even metric residual]\label{thm:n5}
 Let $\mathcal{D}$ be a putative face-to-face congruent dissection of the
 regular tetrahedron $T$ into $5$ convex pieces.  Then the public certificate
 stack eliminates every branch of the $n=5$ role-distribution census except
@@ -1884,35 +1845,29 @@ and the four interior facets of the reference piece $P$ are accidentally
 congruent in an even metric pattern $(4)$ or $(2,2)$, without being promoted
 to genuine $\Sym(P)$-orbits by orbit transport.
 
-Equivalently, $n=5$ is reduced to the single H-orb accidental-even residual.
-No unconditional impossibility of a $5$-piece convex dissection is claimed at
-this stage.  The certificate ledger is:
+Equivalently, $n=5$ is reduced to one accidental-even metric residual.  No
+unconditional impossibility of a $5$-piece convex dissection is claimed at
+this stage.  For auditability, the exact scripts behind the reduction are:
 \begin{itemize}
-  \item \textup{(H-trip)} is retired and is not used as a formal hypothesis;
-  \item \textup{(H-coc)} is closed by
-        \texttt{hcoc\_orientation\_certificate.py}, which fixes the
-        orientation bit in the $K_{5}$ triangle system;
-  \item \textup{(H-Qb)} is closed by
-        \texttt{hqb\_reduction\_certificate.py},
-        \texttt{hqb\_perface\_tiling\_certificate.py},
-        \texttt{hqb\_asymmetric\_caseI\_certificate.py},
-        \texttt{hqb\_asymmetric\_caseII\_certificate.py}, and
-        \texttt{hqb\_opp\_certificate.py};
-  \item the singleton and odd-multiplicity \textup{(H-orb)} branches are
-        closed by \texttt{horb\_parity\_certificate.py};
+  \item \texttt{hcoc\_orientation\_certificate.py}, closing the orientation
+        branch in the $K_{5}$ triangle system;
+  \item the five-script \texttt{hqb\_*\_certificate.py} stack, closing the
+        quadrilateral-pyramid branch;
+  \item \texttt{horb\_parity\_certificate.py}, closing singleton and
+        odd-multiplicity metric patterns;
   \item \texttt{horb\_residual\_scope.py} and
-        \texttt{horb\_residual\_combinatorial.py} identify the remaining
+        \texttt{horb\_residual\_combinatorial.py}, identifying the remaining
         branch as genuinely metric rather than a bookkeeping artefact.
 \end{itemize}
 The synthesis certificate is
 \texttt{phase26e\_synthesis\_theorem\_26\_1.py}, whose active outcome is
-``$n=5$ reduced to a single H-orb accidental even residual.''
+``$n=5$ reduced to a single accidental-even metric residual.''
 \end{conditionaltheorem}
 
 The proof of the reduction occupies the remainder of \Cref{sec:prog-n5}.
 It proceeds by a role-distribution census (Step~1 below), exact eliminations
 for $t=1,2,4$ and the canonical $t=3$ residual, and then the $f=5$ and $f=7$
-ledgers that isolate the single accidental-even H-orb branch.
+ledgers that isolate the single accidental-even metric branch.
 
 \subsubsection*{Step 1: role-distribution census}
 
@@ -2355,18 +2310,16 @@ interior-angle multisets; \textup{(H-orb)} gives the orbit claim, and
 the transitive action on the orbit supplies $g_{ij}$.
 \end{proof}
 
-\begin{remark}[Current status of \textup{(H-orb)}]\label{rem:h-orb-auto}
-The blanket orbit-detection statement \textup{(H-orb)} is no longer used as an
-undischarged standing hypothesis.  The weak Congruence Transport Lemma gives
-metric equality of paired facets.  The certificate
-\texttt{horb\_parity\_certificate.py} then kills every odd-multiplicity
-interior-facet pattern, including the singleton patterns that earlier drafts
-handled through \textup{(H-orb)}.  The only surviving patterns are the even
-ones, $(4)$ and $(2,2)$.  When these are genuine $\Sym(P)$-orbits, the
-orientation certificate and \Cref{lem:k5-cyc} close the branch.  What remains
-is precisely the accidental case with $\Sym(P)=1$, where equal facet metrics
-do not come from a symmetry of $P$; this is the open H-orb residual recorded
-in \texttt{horb\_residual\_scope.py}.
+\begin{remark}[Metric orbit-transport status]\label{rem:h-orb-auto}
+The weak Congruence Transport Lemma gives metric equality of paired facets.
+The parity certificate \texttt{horb\_parity\_certificate.py} kills every
+odd-multiplicity interior-facet pattern, including singleton patterns.  The
+only surviving metric patterns are the even ones, $(4)$ and $(2,2)$.  When
+these are genuine $\Sym(P)$-orbits, the orientation certificate and
+\Cref{lem:k5-cyc} close the branch.  What remains is precisely the accidental
+case with $\Sym(P)=1$, where equal facet metrics do not come from a symmetry
+of $P$; this is the open residual recorded in
+\texttt{horb\_residual\_scope.py}.
 \end{remark}
 
 \begin{lemma}[$K_{5}$ triangle cycle-consistency]\label{lem:k5-cyc}
@@ -2388,26 +2341,13 @@ structure $(2, 2)$.  Assume also hypotheses \textup{(H-orb)} of
 Then no such dissection exists.
 \end{lemma}
 
-\begin{remark}[Historical \textup{(H-trip)} route to \textup{(H-coc)}]\label{rem:hcoc-from-htrip}
-Earlier drafts recorded a developing-map route intended to derive
-\textup{(H-coc)} from the topological statement \textup{(H-trip)}.  That route
-is no longer an active dependency of \Cref{thm:n5}: the orientation-bit
-certificate \texttt{hcoc\_orientation\_certificate.py} discharges
-\textup{(H-coc)} directly.  We retain the label \textup{(H-trip)} only as
-historical motivation for why the cocycle condition was isolated; it is
-retired from the formal public ledger.
-\end{remark}
-
-\begin{remark}[Current logical chain]\label{rem:htrip-status}
-The active $f=7$ chain no longer depends on four standing hypotheses.  The
-orientation-bit certificate fixes the H-coc sign obstruction directly; H-trip
-is retired.  Parity closes the singleton and odd H-orb branches.  The genuine
-$(2,2)$ orbit branch is closed by the H-coc orientation obstruction, while
-\texttt{horb\_residual\_scope.py} records the one branch not closed by these
-soft tools: accidental even metric congruence with $\Sym(P)=1$.  The synthesis
-result file \path{phase26e_synthesis_theorem_26_1_results.json} records this
-split via \path{closed_modules}, \path{retired_modules}, and
-\path{remaining_modules}.
+\begin{remark}[Audit note on the orientation certificate]\label{rem:hcoc-from-htrip}
+Earlier drafts motivated the triangle cocycle through a developing-map route.
+That route is not a dependency of \Cref{thm:n5}: the orientation-bit
+certificate \texttt{hcoc\_orientation\_certificate.py} proves the needed
+$K_{5}$ sign obstruction directly.  The synthesis result file
+\path{phase26e_synthesis_theorem_26_1_results.json} records the closed modules
+and the remaining accidental-even metric residual.
 \end{remark}
 
 \begin{proof}[Proof of \Cref{lem:k5-cyc}]
@@ -2483,7 +2423,7 @@ mixed and $0$ otherwise.  Thus
   z_{r} \coloneqq x_{r} + y_{r} \pmod 2.
 \]
 
-\emph{Step 4: cocycle $\Rightarrow$ pigeon-hole.}  \textup{(H-coc)}
+\emph{Step 4: cocycle $\Rightarrow$ pigeon-hole.}  The triangle cocycle condition
 forces the left-hand side to vanish for every triangle, i.e.\
 $z_{i'} + z_{j'} \equiv 1 \pmod{2}$ for every mixed pair.  An
 elementary check (carried out in
@@ -2515,7 +2455,7 @@ touched $T$-faces receives positive $2$-area from the piece), giving
 the five combinatorial sub-cases enumerated below.  Three of the five
 are excluded unconditionally by elementary metric arguments.  Earlier
 versions isolated the remaining two sub-cases~-- \textsf{Qb-adj} and
-\textsf{Qb-opp}~-- as the explicit geometric bridge \textup{(H-Qb)}.
+\textsf{Qb-opp}~-- as the quadrilateral-pyramid bridge.
 The current public certificate stack discharges that bridge, as recorded
 below and in \texttt{hqb\_\*\_certificate.py}.
 
@@ -2541,8 +2481,8 @@ below and in \texttt{hqb\_\*\_certificate.py}.
         around the quadrilateral on a $T$-face plane $T_{\alpha}$ and
         $\mathsf{a}$ the apex.  The two remaining lateral triangles may be
         adjacent (\textsf{Qb-adj}) or opposite (\textsf{Qb-opp}).  Earlier
-        versions treated their exclusion as the standing hypothesis
-        \textup{(H-Qb)}.  The present public stack discharges this branch by
+        versions treated their exclusion as a separate auxiliary hypothesis.
+        The present public stack discharges this branch by
         the exact certificates
         \texttt{hqb\_reduction\_certificate.py},
         \texttt{hqb\_perface\_tiling\_certificate.py},
@@ -2570,14 +2510,12 @@ below and in \texttt{hqb\_\*\_certificate.py}.
         parallel-lateral-edges property.
 \end{itemize}
 
-\begin{remark}[Status of \textup{(H-Qb)}]\label{rem:hqb-status}
+\begin{remark}[Quadrilateral-pyramid certificate status]\label{rem:hqb-status}
 The \textsf{Qb-adj} and \textsf{Qb-opp} families are non-empty at the
-single-piece level, so the old single-piece degeneracy argument remains
-retracted.  Their exclusion is now supplied by the multi-script H-Qb
-certificate stack listed in \Cref{thm:n5}.  Consequently \textup{(H-Qb)} is
-not an open standing hypothesis in the current public ledger; it is a closed
-module whose local decomposition is still visible in
-\texttt{phase26c\_t3\_f5\_exclusion.py}.
+single-piece level, so the earlier single-piece degeneracy argument is not
+used.  Their exclusion is supplied by the multi-script quadrilateral-pyramid
+certificate stack listed in \Cref{thm:n5}.  The local decomposition remains
+visible in \texttt{phase26c\_t3\_f5\_exclusion.py} for auditability.
 \end{remark}
 
 The five-sub-case closure is certified uniformly in $\mathcal{M}$ by
@@ -2585,20 +2523,18 @@ The five-sub-case closure is certified uniformly in $\mathcal{M}$ by
 
 \paragraph{Closing the $f = 7$ sub-case.}
 If $f(P)=7$, each piece has four interior facets and the interior adjacency
-graph is $K_{5}$.  The old analysis closed this branch under a blanket
-\textup{(H-orb)} assumption plus \textup{(H-coc)}.  The current ledger is more
-precise:
+graph is $K_{5}$.  The active ledger splits the branch as follows:
 \begin{itemize}
   \item odd or singleton interior-facet multiplicity patterns are impossible
-        by the parity certificate, without invoking blanket \textup{(H-orb)};
-  \item genuine $(2,2)$ orbit transport is closed by the direct H-coc
-        orientation certificate together with \Cref{lem:k5-cyc};
+        by the parity certificate;
+  \item genuine $(2,2)$ orbit transport is closed by the orientation
+        certificate together with \Cref{lem:k5-cyc};
   \item the remaining case is accidental even metric congruence with
         $\Sym(P)=1$, in pattern $(4)$ or $(2,2)$.
 \end{itemize}
-The legacy script \path{phase26c_t3_f7_exclusion.py} records the older
-conditional closure under blanket orbit-detection assumptions.  The active
-public synthesis is instead \path{phase26e_synthesis_theorem_26_1.py}
+The audit script \path{phase26c_t3_f7_exclusion.py} keeps the older
+branch accounting separate from the active theorem statement.  The active
+public synthesis is \path{phase26e_synthesis_theorem_26_1.py}
 ($46$/$46$ passing tests), supported by
 \path{horb_parity_certificate.py}, \path{horb_residual_scope.py}, and
 \path{horb_residual_combinatorial.py}.
@@ -2606,8 +2542,9 @@ public synthesis is instead \path{phase26e_synthesis_theorem_26_1.py}
 \paragraph{Synthesis of the $t = 3$ step.}
 The four $t=3$ residuals now split as follows.  The residual $(5,5,3,2)$ is
 UNSAT at the canonical-multiset level.  In the other three $t=3$ residuals,
-the $f=5$ branch is closed by the H-Qb certificates, and the $f=7$ branch is
-closed except for the accidental even H-orb residual with $\Sym(P)=1$.
+the $f=5$ branch is closed by the quadrilateral-pyramid certificates, and the
+$f=7$ branch is closed except for the accidental-even metric residual with
+$\Sym(P)=1$.
 
 \subsubsection*{Conclusion of Step 3 and proof of \cref{thm:n5}}
 
@@ -2615,7 +2552,7 @@ Steps~1, 2 and 3 eliminate the $t=1$ case, both $t=2$ residuals, the
 canonical $t=3$ residual $(5,5,3,2)$, the $t=4$ residual, all $f=5$ branches,
 and every non-accidental $f=7$ branch.  Therefore any putative face-to-face
 congruent dissection of $T$ into $5$ convex pieces must lie in the single
-H-orb accidental-even residual stated in \Cref{thm:n5}.  This proves the
+accidental-even metric residual stated in \Cref{thm:n5}.  This proves the
 reduction theorem; no unconditional $n=5$ impossibility is asserted here.\qed
 
 \begin{remark}[Convexity hypothesis for $n = 5$]
@@ -2632,7 +2569,7 @@ $t=3$ residual close by integer footprint arithmetic, and the $t=4$ residual
 closes by the full-incidence volume argument.  The only surviving difficulty
 is not combinatorial but metric: accidental even congruence among the four
 interior facets of an $f=7$ piece with trivial symmetry.  This identifies a
-much narrower target than the earlier four-hypothesis stack.
+much narrower target than the earlier auxiliary-hypothesis stack.
 \end{remark}
 
 \subsection{Summary of the programme}\label{ssec:prog-summary}
@@ -2655,13 +2592,11 @@ by
         (\cref{thm:n16-aof-coxeter,thm:n16-aof-conditional}), \textsf{L3} in the
         Coxeter-pure case and \textsf{L2} (conditional on
         $(\Hroles)+(\Hslot)$) in the general convex case;
-  \item and the $n = 5$ convex reduction to one H-orb accidental-even
+  \item and the $n = 5$ convex reduction to one accidental-even metric
         residual (\cref{thm:n5}), the first non-divisor of $24$ reduced in the
-        convex category to a single named open branch.  The current public
-        stack discharges \textup{(H-coc)} and \textup{(H-Qb)}, retires
-        \textup{(H-trip)}, and kills H-orb singleton/odd patterns by parity;
-        the remaining task is the metric accidental-even branch with
-        $f(P)=7$, $t=3$, and $\Sym(P)=1$.
+        convex category to a single named open branch.  The remaining task is
+        the metric accidental-even branch with $f(P)=7$, $t=3$, and
+        $\Sym(P)=1$.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

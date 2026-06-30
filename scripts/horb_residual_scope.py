@@ -134,7 +134,7 @@ check("boundary per-face tiling is FEASIBLE for ALL five multisets "
 
 
 # ---------------------------------------------------------------------------
-check("RESIDUAL correctly scoped: the only open (H-orb) case is the "
+check("RESIDUAL correctly scoped: the only open metric case is the "
       "accidental even interior-facet pattern of an f=7, Sym(P)=1 piece; "
       "it needs the interior f=7 geometry, not a bookkeeping trick",
       sorted(even_patterns) == sorted([(2, 2), (4,)])

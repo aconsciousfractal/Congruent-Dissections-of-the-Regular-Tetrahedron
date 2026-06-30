@@ -91,7 +91,7 @@
       ]
     },
     {
-      "title": "2. Legacy Phase 26 structural checks",
+      "title": "2. Phase 26 structural and audit checks",
       "tests": [
         {
           "name": "26-A: 45/45 checks passed",
@@ -119,12 +119,12 @@
           "detail": "got passed=27, failed=0"
         },
         {
-          "name": "26-C-T3-F5-legacy: 21/21 checks passed",
+          "name": "26-C-T3-F5-audit: 21/21 checks passed",
           "passed": true,
           "detail": "got passed=21, failed=0"
         },
         {
-          "name": "26-C-T3-F7-legacy: 33/33 checks passed",
+          "name": "26-C-T3-F7-audit: 33/33 checks passed",
           "passed": true,
           "detail": "got passed=33, failed=0"
         },
@@ -144,92 +144,92 @@
           "detail": "got t1 survivors=0"
         },
         {
-          "name": "f=7 legacy JSON does not claim active full exclusion",
+          "name": "f=7 audit JSON does not claim active full exclusion",
           "passed": true,
           "detail": "got f7_fully_excluded=False"
         },
         {
-          "name": "f=7 active ledger keeps all five multisets in the H-orb residual scope",
+          "name": "f=7 active ledger keeps all five multisets in the accidental-even residual scope",
           "passed": true,
           "detail": "got active_public_all_cases_in_residual_scope=True"
         },
         {
-          "name": "f=7 case entries separate legacy verdict from active public verdict",
+          "name": "f=7 case entries separate previous auxiliary verdict from active public verdict",
           "passed": true,
           "detail": "cases=5"
         }
       ]
     },
     {
-      "title": "3. Newly discharged hypotheses",
+      "title": "3. Certificate modules",
       "tests": [
         {
-          "name": "H-coc: 15/15 checks passed",
+          "name": "orientation certificate: 15/15 checks passed",
           "passed": true,
           "detail": "got passed=15, failed=0"
         },
         {
-          "name": "H-orb-parity: 19/19 checks passed",
+          "name": "metric parity certificate: 19/19 checks passed",
           "passed": true,
           "detail": "got passed=19, failed=0"
         },
         {
-          "name": "H-orb-scope: 4/4 checks passed",
+          "name": "metric residual scope certificate: 4/4 checks passed",
           "passed": true,
           "detail": "got passed=4, failed=0"
         },
         {
-          "name": "H-orb-combinatorial: 6/6 checks passed",
+          "name": "metric residual combinatorial audit: 6/6 checks passed",
           "passed": true,
           "detail": "got passed=6, failed=0"
         },
         {
-          "name": "H-Qb-reduction: 12/12 checks passed",
+          "name": "quadrilateral-pyramid reduction certificate: 12/12 checks passed",
           "passed": true,
           "detail": "got passed=12, failed=0"
         },
         {
-          "name": "H-Qb-perface: 15/15 checks passed",
+          "name": "quadrilateral-pyramid per-face certificate: 15/15 checks passed",
           "passed": true,
           "detail": "got passed=15, failed=0"
         },
         {
-          "name": "H-Qb-caseI: 11/11 checks passed",
+          "name": "quadrilateral-pyramid asymmetric case I certificate: 11/11 checks passed",
           "passed": true,
           "detail": "got passed=11, failed=0"
         },
         {
-          "name": "H-Qb-caseII: 20/20 checks passed",
+          "name": "quadrilateral-pyramid asymmetric case II certificate: 20/20 checks passed",
           "passed": true,
           "detail": "got passed=20, failed=0"
         },
         {
-          "name": "H-Qb-opp: 10/10 checks passed",
+          "name": "quadrilateral-pyramid opposite-edge certificate: 10/10 checks passed",
           "passed": true,
           "detail": "got passed=10, failed=0"
         },
         {
-          "name": "H-Qb reduction script is marked as an intermediate reduction, not final closure",
+          "name": "Quadrilateral-pyramid reduction script is marked as an intermediate reduction, not final closure",
           "passed": true,
           "detail": "closed_here=False, downstream=True"
         },
         {
-          "name": "H-Qb is fully discharged by reduction, per-face, Qb-adj symmetric/asymmetric, and Qb-opp certificates",
+          "name": "Quadrilateral-pyramid branch is fully closed by reduction, per-face, symmetric/asymmetric, and opposite-edge certificates",
           "passed": true,
           "detail": ""
         },
         {
-          "name": "H-coc is discharged directly; H-trip is retired as a formal hypothesis",
+          "name": "Orientation-cocycle branch is closed directly; the topological route is not a dependency",
           "passed": true,
           "detail": ""
         },
         {
-          "name": "H-orb singleton metric patterns are killed unconditionally by parity",
+          "name": "Singleton and odd metric patterns are killed unconditionally by parity",
           "passed": true,
           "detail": ""
         },
         {
-          "name": "Remaining H-orb residual is exactly the accidental even-congruence case",
+          "name": "Remaining residual is exactly the accidental even-congruence case",
           "passed": true,
           "detail": ""
         }
@@ -239,14 +239,14 @@
       "title": "4. Updated n=5 synthesis",
       "tests": [
         {
-          "name": "The old four-hypothesis formulation is no longer the active state",
+          "name": "The active statement is the single-residual reduction",
           "passed": true,
           "detail": ""
         },
         {
           "name": "Full unconditional n=5 closure is NOT claimed",
           "passed": true,
-          "detail": "the H-orb accidental even residual remains open"
+          "detail": "the accidental-even metric residual remains open"
         }
       ]
     },
@@ -258,7 +258,7 @@
   "passed": 46,
   "failed": 0,
   "theorem": "26.1 (n=5 reduction, convex case)",
-  "outcome": "N=5 REDUCED TO SINGLE H-ORB ACCIDENTAL EVEN RESIDUAL",
+  "outcome": "N=5 REDUCED TO SINGLE ACCIDENTAL-EVEN METRIC RESIDUAL",
   "evidence": {
     "26-A": {
       "file": "phase26a_chamber_skeleton_results.json",
@@ -332,7 +332,7 @@
       "summary": null,
       "conclusion": null
     },
-    "26-C-T3-F5-legacy": {
+    "26-C-T3-F5-audit": {
       "file": "phase26c_t3_f5_exclusion_results.json",
       "passed": 21,
       "failed": 0,
@@ -349,7 +349,7 @@
         ]
       }
     },
-    "26-C-T3-F7-legacy": {
+    "26-C-T3-F7-audit": {
       "file": "phase26c_t3_f7_exclusion_results.json",
       "passed": 33,
       "failed": 0,
@@ -357,12 +357,12 @@
       "summary": null,
       "conclusion": {
         "f7_fully_excluded": false,
-        "active_public_status": "not fully excluded; accidental-even H-orb residual remains open in phase26e synthesis",
-        "legacy_blanket_horb_hcoc_f7_fully_excluded": true,
+        "active_public_status": "not fully excluded; accidental-even metric residual remains open in phase26e synthesis",
+        "previous_auxiliary_f7_fully_excluded": true,
         "active_public_all_cases_in_residual_scope": true,
-        "legacy_scope": "closure under blanket orbit-transport/H-coc assumptions only",
-        "active_public_scope": "accidental-even H-orb residual remains open for these f=7 multisets",
-        "multisets_legacy_closed_by_distinct_boundary_horb": [
+        "previous_auxiliary_scope": "closure under previous auxiliary orbit-transport assumptions only",
+        "active_public_scope": "accidental-even metric residual remains open for these f=7 multisets",
+        "multisets_previous_auxiliary_closed_by_distinct_boundary": [
           [
             6,
             12,
@@ -384,7 +384,7 @@
             20
           ]
         ],
-        "multiset_legacy_closed_by_triangle_consistency": [
+        "multiset_previous_auxiliary_closed_by_triangle_consistency": [
           [
             12,
             12,
@@ -438,7 +438,7 @@
       "conclusion": {
         "hcoc_discharged": true,
         "mechanism": "orientation character eps=sgn(det) forces bit(g_ij)=1+s(i)+s(j); K_5 non-bipartite => UNSAT",
-        "residual": "none for genuine (2,2) H-coc branch; H-Qb is discharged separately, and only the H-orb accidental-even residual remains in the global synthesis"
+        "residual": "none for genuine (2,2) orientation branch; the quadrilateral-pyramid branch is discharged separately, and only the accidental-even metric residual remains in the global synthesis"
       }
     },
     "H-orb-parity": {
@@ -450,12 +450,12 @@
       "conclusion": {
         "horb_singleton_cases_discharged_unconditionally": true,
         "mechanism": "weak-CTL parity: metric-class multiplicity must be even; odd patterns (incl. all singleton orbits) die without (H-orb)",
-        "closed_even_subcase": "(2,2) orbit via (H-coc) orientation cocycle",
+        "closed_even_subcase": "(2,2) orbit via the orientation certificate",
         "open_residual": [
           "(4)-pattern: all 4 interior facets congruent (one metric class).",
           "accidental (2,2) with Sym(P)=1: two congruent interior-facet pairs not realised by any symmetry of P."
         ],
-        "residual_route": "real-algebraic / SMT exclusion of accidental interior-facet congruences (with (H-Qb))"
+        "residual_route": "real-algebraic / SMT exclusion of accidental interior-facet congruences, using the quadrilateral-pyramid tooling"
       }
     },
     "H-orb-scope": {
@@ -554,22 +554,22 @@
     ]
   ],
   "closed_modules": [
-    "H-coc",
-    "H-Qb",
-    "H-orb-singleton-parity",
+    "orientation-cocycle branch",
+    "quadrilateral-pyramid branch",
+    "singleton/odd metric patterns by parity",
     "t=1 F4 elimination",
     "t=2 residuals",
     "t=3 canonical residual (5,5,3,2)",
     "t=4 residual"
   ],
   "retired_modules": [
-    "H-trip"
+    "retired topological route"
   ],
   "remaining_modules": [
-    "H-orb-accidental-even"
+    "accidental-even metric residual"
   ],
   "remaining_residual": {
-    "name": "H-orb accidental even-congruence residual",
+    "name": "accidental-even metric residual",
     "scope": "f(P)=7, t=3, Sym(P)=1, accidental even interior metric pattern (4) or (2,2)",
     "status": "open",
     "source": [
@@ -578,6 +578,6 @@
     ]
   },
   "fully_unconditional_n5": false,
-  "legacy_status_replaced": "Old outcome 'proved modulo H-trip + H-coc + H-orb + H-Qb' is superseded by the reduced single-residual statement.",
-  "public_claim": "n=5 is reduced to the single H-orb accidental even-congruence residual; H-coc and H-Qb are discharged, H-trip is retired, and H-orb singleton patterns are killed by parity."
+  "previous_status_replaced": "The earlier auxiliary-hypothesis statement is superseded by the reduced single-residual statement.",
+  "public_claim": "n=5 is reduced to the single accidental-even metric residual; full unconditional n=5 closure is not claimed."
 }

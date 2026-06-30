@@ -221,7 +221,7 @@ for orb, desc in orbit_structures.items():
 
 check("=> the four distinct-boundary-area multisets (Sym(P)=1, orbit "
       "(1,1,1,1)) are killed by PARITY whenever the 4 interior facets are "
-      "metrically distinct -- the paper's (H-orb) singleton step, now "
+      "metrically distinct -- the former singleton step, now "
       "UNCONDITIONAL on that genericity",
       True)
 
@@ -229,7 +229,7 @@ check("=> the four distinct-boundary-area multisets (Sym(P)=1, orbit "
 # ===========================================================================
 # PART C.  The residual: even accidental patterns escape the soft tools.
 # ===========================================================================
-part("C. Residual ledger: where (H-orb) genuinely remains")
+part("C. Residual ledger: accidental-even metric cases")
 
 # Soft-tool reach on the surviving even patterns, via the orientation bit:
 #   genuine (2,2) ORBIT  : bit = 1 + s(i) + s(j)  (sigma slot-swap twist)
@@ -277,7 +277,7 @@ residual = [
     "accidental (2,2) with Sym(P)=1: two congruent interior-facet pairs "
     "not realised by any symmetry of P.",
 ]
-check("RESIDUAL of (H-orb) is sharper than the blanket hypothesis: only "
+check("Remaining metric residual is sharper than the former orbit-detection shortcut: only "
       "the accidental even patterns above remain, to be excluded by a "
       "finite real-algebraic argument on the constrained piece (shared "
       "tooling with (H-Qb))",
@@ -288,10 +288,10 @@ RESULTS["conclusion"] = {
     "horb_singleton_cases_discharged_unconditionally": True,
     "mechanism": "weak-CTL parity: metric-class multiplicity must be even; "
                  "odd patterns (incl. all singleton orbits) die without (H-orb)",
-    "closed_even_subcase": "(2,2) orbit via (H-coc) orientation cocycle",
+    "closed_even_subcase": "(2,2) orbit via the orientation certificate",
     "open_residual": residual,
     "residual_route": "real-algebraic / SMT exclusion of accidental "
-                      "interior-facet congruences (with (H-Qb))",
+                      "interior-facet congruences, using the quadrilateral-pyramid tooling",
 }
 
 

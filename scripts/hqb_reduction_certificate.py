@@ -200,7 +200,7 @@ RESULTS["reduction"] = {
     "witness": "(s,u,sa) = (1/3, (6-sqrt6)/10, (6+sqrt6)/10)",
     "status": "intermediate reduction only: this script reduces H-Qb to the "
               "5-piece assembly problem (per-face tiling + solid-angle "
-              "closure at v0).  The current public H-Qb ledger is closed by "
+              "closure at v0).  The current public quadrilateral-pyramid ledger is closed by "
               "the downstream hqb_perface, hqb_asymmetric_caseI/II, and "
               "hqb_opp certificates.",
     "closed_here": False,

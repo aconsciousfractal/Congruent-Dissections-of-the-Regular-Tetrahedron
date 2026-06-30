@@ -68,7 +68,7 @@
     "boundary_area_constraint": "s*(u+sa) = 2/5",
     "residual_locus": "1-parameter family, s in (0, 2/5]",
     "witness": "(s,u,sa) = (1/3, (6-sqrt6)/10, (6+sqrt6)/10)",
-    "status": "intermediate reduction only: this script reduces H-Qb to the 5-piece assembly problem (per-face tiling + solid-angle closure at v0).  The current public H-Qb ledger is closed by the downstream hqb_perface, hqb_asymmetric_caseI/II, and hqb_opp certificates.",
+    "status": "intermediate reduction only: this script reduces H-Qb to the 5-piece assembly problem (per-face tiling + solid-angle closure at v0).  The current public quadrilateral-pyramid ledger is closed by the downstream hqb_perface, hqb_asymmetric_caseI/II, and hqb_opp certificates.",
     "closed_here": false,
     "closed_by_downstream_certificates": true
   }

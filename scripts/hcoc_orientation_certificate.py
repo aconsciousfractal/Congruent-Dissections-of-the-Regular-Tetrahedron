@@ -2,7 +2,7 @@
 (H-coc) DISCHARGE CERTIFICATE  --  orientation-character reduction.
 ===================================================================
 
-Target.  The earlier four-hypothesis formulation isolated the
+Target.  The earlier auxiliary-hypothesis formulation isolated the
  t = 3, f = 7, boundary multiset (12, 12, 24), Sym(P)-orbit structure
 (2, 2) sub-case behind the algebraic condition
 
@@ -345,7 +345,7 @@ RESULTS["conclusion"] = {
                             and forced_contradiction),
     "mechanism": "orientation character eps=sgn(det) forces "
                  "bit(g_ij)=1+s(i)+s(j); K_5 non-bipartite => UNSAT",
-    "residual": "none for genuine (2,2) H-coc branch; H-Qb is discharged separately, and only the H-orb accidental-even residual remains in the global synthesis",
+    "residual": "none for genuine (2,2) orientation branch; the quadrilateral-pyramid branch is discharged separately, and only the accidental-even metric residual remains in the global synthesis",
 }
 
 

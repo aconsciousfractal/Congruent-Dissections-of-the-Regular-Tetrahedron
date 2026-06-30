@@ -240,7 +240,7 @@ RESULTS["result"] = {
     "rank2_checked": checked, "rank2_survivors": len(survivors),
     "rank1_lines": 12, "rank1_infeasible": len(bad), "rank0": rank0,
     "status": "Qb-opp DISCHARGED exactly; (H-Qb) FULLY discharged. "
-              "Only the (H-orb) accidental-congruence residual remains.",
+              "Only the accidental-even metric residual remains.",
 }
 print(f"\n{'=' * 70}\nTotal passed: {PASSED}   failed: {FAILED}\n{'=' * 70}")
 

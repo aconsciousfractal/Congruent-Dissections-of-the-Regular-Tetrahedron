@@ -3,7 +3,7 @@
 INDEPENDENT VERIFIER — Congruent Coxeter-pure partitions of the regular tetrahedron
 ===================================================================================
 
-Zero-dependency on legacy labels (S0..S16), merge maps, or identify() functions.
+Zero-dependency on historical labels (S0..S16), merge maps, or identify() functions.
 Only uses: chambers, adjacency, convexity, S₄ action, tiling test.
 
 Question: how many S₄-orbit families of congruent-tiling-admissible convex 
@@ -150,7 +150,7 @@ def is_convex(subset):
     return closure == s
 
 # ══════════════════════════════════════════════════════════════
-#  5. S₄-ORBIT COMPUTATION (pure, no legacy labels)
+#  5. S₄-ORBIT COMPUTATION (pure, no historical labels)
 # ══════════════════════════════════════════════════════════════
 
 def s4_orbit(subset_frozenset):
@@ -225,7 +225,7 @@ def tiles_tetrahedron(subset_frozenset):
 
 print("=" * 72)
 print("  INDEPENDENT VERIFIER — S₄-orbit families of Coxeter partitions")
-print("  No legacy labels. Pure computation from chambers + S₄ action.")
+print("  No historical labels. Pure computation from chambers + S₄ action.")
 print("=" * 72)
 
 # Enumerate all convex connected k-subsets for each divisor of 24
@@ -320,7 +320,7 @@ print("    Scope note: this script verifies Coxeter-pure chamber-union families;
 print("    it is not a count of the historical atlas representatives.")
 
 # ------------------------------------------------------------------------
-#  9. CONTACT VECTORS (independent of legacy labels)
+#  9. CONTACT VECTORS (independent of historical labels)
 # ══════════════════════════════════════════════════════════════
 
 print(f"\n{'═'*72}")

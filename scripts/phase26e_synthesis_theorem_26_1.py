@@ -2,16 +2,13 @@
 Phase 26-E: updated synthesis for the n = 5 convex reduction.
 
 This script aggregates the public certificate JSONs and records the current
-logical state of the n = 5 programme:
+logical state of the n = 5 programme: every branch of the role-distribution
+census is closed except the accidental-even metric residual
 
-  * H-trip is retired: it was motivational for H-coc and is not used as a
-    formal hypothesis once H-coc is proved directly.
-  * H-coc is discharged by the exact orientation-cocycle certificate.
-  * H-Qb is fully discharged by the Qb-adj/Qb-opp certificate stack.
-  * The singleton H-orb patterns are discharged by parity.
-  * The only remaining obstruction is the H-orb accidental even-congruence
-    residual: f(P)=7, t=3, Sym(P)=1, and the four interior facets of P have
-    accidental even metric pattern (4) or (2,2).
+    f(P)=7, t=3, Sym(P)=1,
+
+with the four interior facets of P accidentally congruent in an even metric
+pattern (4) or (2,2).
 
 The script intentionally does not claim unconditional n = 5 closure.
 """
@@ -76,8 +73,8 @@ FILES = {
     "26-C-T2": "phase26c_t2_residuals_results.json",
     "26-C-T3": "phase26c_t3_residuals_results.json",
     "26-C-T3-TET": "phase26c_t3_tetrahedral_exclusion_results.json",
-    "26-C-T3-F5-legacy": "phase26c_t3_f5_exclusion_results.json",
-    "26-C-T3-F7-legacy": "phase26c_t3_f7_exclusion_results.json",
+    "26-C-T3-F5-audit": "phase26c_t3_f5_exclusion_results.json",
+    "26-C-T3-F7-audit": "phase26c_t3_f7_exclusion_results.json",
     "26-C-T4": "phase26c_t4_full_incidence_residual_results.json",
     "H-coc": "hcoc_orientation_certificate_results.json",
     "H-orb-parity": "horb_parity_certificate_results.json",
@@ -91,6 +88,17 @@ FILES = {
 }
 
 evidence = {tag: load_json(RESULTS_DIR, fname) for tag, fname in FILES.items()}
+DISPLAY_NAMES = {
+    "H-coc": "orientation certificate",
+    "H-orb-parity": "metric parity certificate",
+    "H-orb-scope": "metric residual scope certificate",
+    "H-orb-combinatorial": "metric residual combinatorial audit",
+    "H-Qb-reduction": "quadrilateral-pyramid reduction certificate",
+    "H-Qb-perface": "quadrilateral-pyramid per-face certificate",
+    "H-Qb-caseI": "quadrilateral-pyramid asymmetric case I certificate",
+    "H-Qb-caseII": "quadrilateral-pyramid asymmetric case II certificate",
+    "H-Qb-opp": "quadrilateral-pyramid opposite-edge certificate",
+}
 RESULTS["evidence"] = {
     tag: {
         "file": FILES[tag],
@@ -103,7 +111,7 @@ RESULTS["evidence"] = {
     for tag, data in evidence.items()
 }
 
-section("2. Legacy Phase 26 structural checks")
+section("2. Phase 26 structural and audit checks")
 
 expected_counts = {
     "26-A": 45,
@@ -111,13 +119,14 @@ expected_counts = {
     "26-C-T2": 10,
     "26-C-T3": 17,
     "26-C-T3-TET": 27,
-    "26-C-T3-F5-legacy": 21,
-    "26-C-T3-F7-legacy": 33,
+    "26-C-T3-F5-audit": 21,
+    "26-C-T3-F7-audit": 33,
     "26-C-T4": 30,
 }
 for tag, expected in expected_counts.items():
     data = evidence.get(tag, {})
-    check(f"{tag}: {expected}/{expected} checks passed",
+    display = DISPLAY_NAMES.get(tag, tag)
+    check(f"{display}: {expected}/{expected} checks passed",
           data.get("passed") == expected and data.get("failed") == 0,
           f"got passed={data.get('passed')}, failed={data.get('failed')}")
 
@@ -143,23 +152,23 @@ check("t=1 all-one-face analogue eliminated by F4",
       t1_survivors == 0,
       f"got t1 survivors={t1_survivors}")
 
-f7_conclusion = evidence.get("26-C-T3-F7-legacy", {}).get("conclusion", {})
-f7_cases = evidence.get("26-C-T3-F7-legacy", {}).get("cases", [])
-check("f=7 legacy JSON does not claim active full exclusion",
+f7_conclusion = evidence.get("26-C-T3-F7-audit", {}).get("conclusion", {})
+f7_cases = evidence.get("26-C-T3-F7-audit", {}).get("cases", [])
+check("f=7 audit JSON does not claim active full exclusion",
       f7_conclusion.get("f7_fully_excluded") is False,
       f"got f7_fully_excluded={f7_conclusion.get('f7_fully_excluded')}")
-check("f=7 active ledger keeps all five multisets in the H-orb residual scope",
+check("f=7 active ledger keeps all five multisets in the accidental-even residual scope",
       f7_conclusion.get("active_public_all_cases_in_residual_scope") is True,
       f"got active_public_all_cases_in_residual_scope={f7_conclusion.get('active_public_all_cases_in_residual_scope')}")
-check("f=7 case entries separate legacy verdict from active public verdict",
+check("f=7 case entries separate previous auxiliary verdict from active public verdict",
       len(f7_cases) == 5 and all(
-          c.get("legacy_verdict") == "IMPOSSIBLE_UNDER_BLANKET_H_ORB"
-          and c.get("active_public_verdict") == "OPEN_ACCIDENTAL_EVEN_H_ORB_RESIDUAL"
+          c.get("previous_auxiliary_verdict") == "IMPOSSIBLE_UNDER_PREVIOUS_ORBIT_TRANSPORT"
+          and c.get("active_public_verdict") == "OPEN_ACCIDENTAL_EVEN_METRIC_RESIDUAL"
           for c in f7_cases
       ),
       f"cases={len(f7_cases)}")
 
-section("3. Newly discharged hypotheses")
+section("3. Certificate modules")
 
 new_counts = {
     "H-coc": 15,
@@ -174,7 +183,8 @@ new_counts = {
 }
 for tag, expected in new_counts.items():
     data = evidence.get(tag, {})
-    check(f"{tag}: {expected}/{expected} checks passed",
+    display = DISPLAY_NAMES.get(tag, tag)
+    check(f"{display}: {expected}/{expected} checks passed",
           data.get("passed") == expected and data.get("failed") == 0,
           f"got passed={data.get('passed')}, failed={data.get('failed')}")
 
@@ -184,23 +194,23 @@ hqb_closed = all(
     for tag in hqb_tags
 )
 hqb_reduction_status = evidence.get("H-Qb-reduction", {}).get("reduction", {})
-check("H-Qb reduction script is marked as an intermediate reduction, not final closure",
+check("Quadrilateral-pyramid reduction script is marked as an intermediate reduction, not final closure",
       hqb_reduction_status.get("closed_here") is False
       and hqb_reduction_status.get("closed_by_downstream_certificates") is True,
       f"closed_here={hqb_reduction_status.get('closed_here')}, downstream={hqb_reduction_status.get('closed_by_downstream_certificates')}")
-check("H-Qb is fully discharged by reduction, per-face, Qb-adj symmetric/asymmetric, and Qb-opp certificates",
+check("Quadrilateral-pyramid branch is fully closed by reduction, per-face, symmetric/asymmetric, and opposite-edge certificates",
       hqb_closed)
 
 hcoc_closed = evidence["H-coc"].get("passed") == 15 and evidence["H-coc"].get("failed") == 0
-check("H-coc is discharged directly; H-trip is retired as a formal hypothesis",
+check("Orientation-cocycle branch is closed directly; the topological route is not a dependency",
       hcoc_closed)
 
 horb_singleton_closed = evidence["H-orb-parity"].get("passed") == 19 and evidence["H-orb-parity"].get("failed") == 0
-check("H-orb singleton metric patterns are killed unconditionally by parity",
+check("Singleton and odd metric patterns are killed unconditionally by parity",
       horb_singleton_closed)
 
 horb_scope_exact = evidence["H-orb-scope"].get("passed") == 4 and evidence["H-orb-scope"].get("failed") == 0
-check("Remaining H-orb residual is exactly the accidental even-congruence case",
+check("Remaining residual is exactly the accidental even-congruence case",
       horb_scope_exact)
 
 section("4. Updated n=5 synthesis")
@@ -212,45 +222,44 @@ closed_unconditional_residuals = {
     (4, (5, 5, 5, 5)),
 }
 remaining_residual_description = {
-    "name": "H-orb accidental even-congruence residual",
+    "name": "accidental-even metric residual",
     "scope": "f(P)=7, t=3, Sym(P)=1, accidental even interior metric pattern (4) or (2,2)",
     "status": "open",
     "source": ["horb_residual_scope.py", "horb_residual_combinatorial.py"],
 }
 
-check("The old four-hypothesis formulation is no longer the active state",
+check("The active statement is the single-residual reduction",
       hqb_closed and hcoc_closed and horb_singleton_closed and horb_scope_exact)
 check("Full unconditional n=5 closure is NOT claimed",
       True,
-      "the H-orb accidental even residual remains open")
+      "the accidental-even metric residual remains open")
 
 RESULTS["closed_unconditional_residuals"] = sorted(list(closed_unconditional_residuals))
 RESULTS["closed_modules"] = [
-    "H-coc",
-    "H-Qb",
-    "H-orb-singleton-parity",
+    "orientation-cocycle branch",
+    "quadrilateral-pyramid branch",
+    "singleton/odd metric patterns by parity",
     "t=1 F4 elimination",
     "t=2 residuals",
     "t=3 canonical residual (5,5,3,2)",
     "t=4 residual",
 ]
-RESULTS["retired_modules"] = ["H-trip"]
-RESULTS["remaining_modules"] = ["H-orb-accidental-even"]
+RESULTS["retired_modules"] = ["retired topological route"]
+RESULTS["remaining_modules"] = ["accidental-even metric residual"]
 RESULTS["remaining_residual"] = remaining_residual_description
 RESULTS["fully_unconditional_n5"] = False
-RESULTS["legacy_status_replaced"] = (
-    "Old outcome 'proved modulo H-trip + H-coc + H-orb + H-Qb' is superseded "
-    "by the reduced single-residual statement."
+RESULTS["previous_status_replaced"] = (
+    "The earlier auxiliary-hypothesis statement is superseded by the reduced "
+    "single-residual statement."
 )
 
 synthesis_ok = FAILED == 0
 if synthesis_ok:
     RESULTS["public_claim"] = (
-        "n=5 is reduced to the single H-orb accidental even-congruence residual; "
-        "H-coc and H-Qb are discharged, H-trip is retired, and H-orb singleton "
-        "patterns are killed by parity."
+        "n=5 is reduced to the single accidental-even metric residual; "
+        "full unconditional n=5 closure is not claimed."
     )
-    RESULTS["outcome"] = "N=5 REDUCED TO SINGLE H-ORB ACCIDENTAL EVEN RESIDUAL"
+    RESULTS["outcome"] = "N=5 REDUCED TO SINGLE ACCIDENTAL-EVEN METRIC RESIDUAL"
 else:
     RESULTS["public_claim"] = "not certified: one or more synthesis checks failed"
     RESULTS["outcome"] = "INVALID SYNTHESIS: CHECKS FAILED"
@@ -261,10 +270,8 @@ print()
 if synthesis_ok:
     print("  --- UPDATED THEOREM 26.1 STATUS ---")
     print()
-    print("    The n=5 obstruction stack is no longer modulo four active")
-    print("    standing hypotheses. H-coc and H-Qb are discharged by exact")
-    print("    public certificates, H-trip is retired, and H-orb singleton")
-    print("    metric patterns are killed by parity.")
+    print("    The n=5 obstruction stack reduces every branch of the")
+    print("    role-distribution census except one explicit metric residual.")
     print()
     print("    Remaining open case:")
     print("      f(P)=7, t=3, Sym(P)=1, and the four interior facets of P")
@@ -272,7 +279,7 @@ if synthesis_ok:
     print("      or (2,2).")
     print()
     print("    Therefore the correct public claim is reduction to this single")
-    print("    H-orb accidental residual, not unconditional n=5 closure.")
+    print("    accidental-even metric residual, not unconditional n=5 closure.")
 else:
     print("  --- SYNTHESIS INVALID ---")
     print()

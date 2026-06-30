@@ -84,14 +84,14 @@
           "detail": ""
         },
         {
-          "name": "=> the four distinct-boundary-area multisets (Sym(P)=1, orbit (1,1,1,1)) are killed by PARITY whenever the 4 interior facets are metrically distinct -- the paper's (H-orb) singleton step, now UNCONDITIONAL on that genericity",
+          "name": "=> the four distinct-boundary-area multisets (Sym(P)=1, orbit (1,1,1,1)) are killed by PARITY whenever the 4 interior facets are metrically distinct -- the former singleton step, now UNCONDITIONAL on that genericity",
           "passed": true,
           "detail": ""
         }
       ]
     },
     {
-      "title": "C. Residual ledger: where (H-orb) genuinely remains",
+      "title": "C. Residual ledger: accidental-even metric cases",
       "checks": [
         {
           "name": "genuine (2,2) ORBIT (sigma twist=1): orientation system UNSAT -> closed by (H-coc)",
@@ -104,7 +104,7 @@
           "detail": ""
         },
         {
-          "name": "RESIDUAL of (H-orb) is sharper than the blanket hypothesis: only the accidental even patterns above remain, to be excluded by a finite real-algebraic argument on the constrained piece (shared tooling with (H-Qb))",
+          "name": "Remaining metric residual is sharper than the former orbit-detection shortcut: only the accidental even patterns above remain, to be excluded by a finite real-algebraic argument on the constrained piece (shared tooling with (H-Qb))",
           "passed": true,
           "detail": ""
         }
@@ -148,11 +148,11 @@
   "conclusion": {
     "horb_singleton_cases_discharged_unconditionally": true,
     "mechanism": "weak-CTL parity: metric-class multiplicity must be even; odd patterns (incl. all singleton orbits) die without (H-orb)",
-    "closed_even_subcase": "(2,2) orbit via (H-coc) orientation cocycle",
+    "closed_even_subcase": "(2,2) orbit via the orientation certificate",
     "open_residual": [
       "(4)-pattern: all 4 interior facets congruent (one metric class).",
       "accidental (2,2) with Sym(P)=1: two congruent interior-facet pairs not realised by any symmetry of P."
     ],
-    "residual_route": "real-algebraic / SMT exclusion of accidental interior-facet congruences (with (H-Qb))"
+    "residual_route": "real-algebraic / SMT exclusion of accidental interior-facet congruences, using the quadrilateral-pyramid tooling"
   }
 }

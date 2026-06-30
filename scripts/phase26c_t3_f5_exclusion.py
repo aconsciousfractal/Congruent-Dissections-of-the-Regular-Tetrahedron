@@ -77,7 +77,7 @@ Each piece has 2 interior faces, namely F_fwd and F_bwd.  If the shared
 face between P_i and P_{i+1} is S, then S = gamma_i(F_fwd) as a face
 of P_i and S = gamma_{i+1}(F_bwd) as a face of P_{i+1}; the two preimages
 gamma_i^{-1}(S) = F_fwd and gamma_{i+1}^{-1}(S) = F_bwd are both faces
-of P, and applying the isometry gamma_i^{-1} Ôêÿ gamma_{i+1} (which is a
+of P, and applying the isometry gamma_i^{-1} Ã”ÃªÃ¿ gamma_{i+1} (which is a
 rigid motion of R^3, NOT necessarily an element of Sym(P)) to F_bwd
 yields F_fwd as a subset of R^3.  In particular F_fwd and F_bwd are
 isometric polygons, with the same edge-lengths and interior-angle
@@ -86,7 +86,7 @@ multisets (WEAK CTL; paper Lemma lem:ctl).
 If F_fwd and F_bwd have DIFFERENT combinatorial types (different
 numbers of edges, say), no rigid motion can map one to the other,
 giving an immediate contradiction.  NOTE: we deliberately do NOT claim
-that tau = gamma_i^{-1} Ôêÿ gamma_{i+1} restricts to an element of
+that tau = gamma_i^{-1} Ã”ÃªÃ¿ gamma_{i+1} restricts to an element of
 Sym(P); that is the stronger orbit-transport assertion which requires
 the hypothesis (H-orb) and is NOT invoked in this script.
 
@@ -281,7 +281,7 @@ check("(Qb-opp): single-piece family is NON-EMPTY "
       True,
       "retraction of earlier bogus argument; see paper Remark rem:hqb-status")
 
-check("(Qb) local legacy reduction recorded; H-Qb is discharged "
+check("(Qb) local audit reduction recorded; H-Qb is discharged "
       "by the external hqb_* certificate stack in the current public ledger",
       True,
       "see hqb_reduction/perface/asymmetric/opp certificates and phase26e synthesis")
@@ -292,7 +292,7 @@ record_case(
     partition={"boundary": "2 lateral triangles + 1 base quadrilateral",
                "interior": "2 lateral triangles"},
     verdict="IMPOSSIBLE",
-    reason="Legacy local Qb reduction.  Both sub-cases Qb-adj and "
+    reason="Local Qb audit reduction.  Both sub-cases Qb-adj and "
            "Qb-opp have non-empty single-piece families; exclusion "
            "is at the multi-piece face-to-face compatibility level, "
            "not at the single-piece level.  Earlier drafts claimed a "
@@ -413,11 +413,11 @@ section("5. TP Case (Tc): 3 quadrilaterals on partial T, 2 triangles interior")
 # All 3 lateral quadrilaterals Q1, Q2, Q3 lie on T_alpha, T_beta, T_gamma
 # respectively.  Any two adjacent quadrilaterals share a lateral edge
 # a_i-c_i; this edge lies on Q_i and Q_{i-1}'s intersection, which is
-# T_alpha Ôê® T_beta (or another pair), an edge of T emanating from v.
+# T_alpha Ã”ÃªÂ® T_beta (or another pair), an edge of T emanating from v.
 # Explicitly:
-#   a_1, c_1 Ôêê Q1 Ôê® Q3 = T_alpha Ôê® T_gamma = edge (v, u_beta).
-#   a_2, c_2 Ôêê Q1 Ôê® Q2 = T_alpha Ôê® T_beta  = edge (v, u_gamma).
-#   a_3, c_3 Ôêê Q2 Ôê® Q3 = T_beta  Ôê® T_gamma = edge (v, u_alpha).
+#   a_1, c_1 Ã”ÃªÃª Q1 Ã”ÃªÂ® Q3 = T_alpha Ã”ÃªÂ® T_gamma = edge (v, u_beta).
+#   a_2, c_2 Ã”ÃªÃª Q1 Ã”ÃªÂ® Q2 = T_alpha Ã”ÃªÂ® T_beta  = edge (v, u_gamma).
+#   a_3, c_3 Ã”ÃªÃª Q2 Ã”ÃªÂ® Q3 = T_beta  Ã”ÃªÂ® T_gamma = edge (v, u_alpha).
 # Hence each of the 3 lateral edges a_i-c_i is a sub-segment of a
 # DIFFERENT edge of T emanating from v.  The 3 edges (v, u_alpha),
 # (v, u_beta), (v, u_gamma) are pairwise non-parallel (they meet at

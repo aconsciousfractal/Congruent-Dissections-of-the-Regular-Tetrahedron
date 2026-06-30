@@ -54,7 +54,7 @@
           "detail": "retraction of earlier bogus argument; see paper Remark rem:hqb-status"
         },
         {
-          "name": "(Qb) local legacy reduction recorded; H-Qb is discharged by the external hqb_* certificate stack in the current public ledger",
+          "name": "(Qb) local audit reduction recorded; H-Qb is discharged by the external hqb_* certificate stack in the current public ledger",
           "passed": true,
           "detail": "see hqb_reduction/perface/asymmetric/opp certificates and phase26e synthesis"
         }
@@ -163,7 +163,7 @@
         "interior": "2 lateral triangles"
       },
       "verdict": "IMPOSSIBLE",
-      "reason": "Legacy local Qb reduction.  Both sub-cases Qb-adj and Qb-opp have non-empty single-piece families; exclusion is at the multi-piece face-to-face compatibility level, not at the single-piece level.  Earlier drafts claimed a single-piece degeneracy obstruction that was a notational artefact (apex symbol clashed with T-vertex symbol); that argument is retracted.  The current public stack discharges H-Qb externally via the hqb_* certificate scripts.",
+      "reason": "Local Qb audit reduction.  Both sub-cases Qb-adj and Qb-opp have non-empty single-piece families; exclusion is at the multi-piece face-to-face compatibility level, not at the single-piece level.  Earlier drafts claimed a single-piece degeneracy obstruction that was a notational artefact (apex symbol clashed with T-vertex symbol); that argument is retracted.  The current public stack discharges H-Qb externally via the hqb_* certificate scripts.",
       "reason_type": "delegated to discharged H-Qb certificate stack",
       "conditional_on": "hqb_* certificates (closed in current public ledger)"
     },
