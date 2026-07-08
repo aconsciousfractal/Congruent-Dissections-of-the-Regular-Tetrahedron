@@ -137,6 +137,20 @@ pytest scripts/tests/                       # geometric primitives sanity
 
 The updated n = 5 status is in the TeX source `paper/Congruent Dissections of the Regular Tetrahedron.tex`, the regenerated checked-in PDF, and `docs/n5_residual_status.md`. If the TeX changes again, regenerate the PDF before merging or publishing this branch.
 
+## Claim Boundary
+
+Companion claim-discipline docs were added on 2026-07-08 (after
+publication; the paper is unchanged):
+
+- `CLAIM_LEDGER.md` — every claim with its level (theorem-in-paper,
+  certified-finite, conditional, open) and paper locator.
+- `PUBLIC_CLAIM_BOUNDARY.md` — what may and may not be quoted; in
+  particular, n=5 is a certificate-backed REDUCTION to one open metric
+  residual, never an impossibility claim.
+- `README_REVIEWER.md` — 10/30-minute reviewer paths.
+- `REPRODUCE.md` — one-command replay (`scripts/run_all.py`, ~40 s,
+  46 tests, byte-identical certificate regeneration verified 2026-07-08).
+
 ## Citation
 
 Babanskyy, O. (2026). *Congruent Dissections of the Regular Tetrahedron*.

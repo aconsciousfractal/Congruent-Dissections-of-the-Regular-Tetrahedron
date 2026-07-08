@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software or the accompanying paper, please cite it as below."
+title: "Congruent Dissections of the Regular Tetrahedron"
+authors:
+  - family-names: "Babanskyy"
+    given-names: "Oleksiy"
+type: software
+license: MIT
+repository-code: "https://github.com/aconsciousfractal/Congruent-Dissections-of-the-Regular-Tetrahedron"
+date-released: "2026-06-30"
+keywords:
+  - regular tetrahedron
+  - congruent dissections
+  - Dehn invariant
+  - exact certificates
+  - scissors congruence
