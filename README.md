@@ -128,8 +128,8 @@ pytest scripts/tests/                       # geometric primitives sanity
 
 ## Key paper results
 
-- **Theorem 4.2** (edge spectrum) - the squared-edge multisets of the eight canonical pieces S_n fully determine n up to congruence.
-- **Theorem 5.5** (transitivity of known dissections) - each S_n admits a congruence group acting transitively on pieces.
+- **Dehn-invariant certificate** (Section 4, `thm:dehn-values`) - explicit nonzero Dehn invariants for all eight canonical pieces S_n (so none is scissors-congruent to a cube); the squared-edge-multiset congruence invariant is applied inside the S_6 -> S_12 disproof (`thm:s6-s12-fail`).
+- **Transitivity certificate** (Section 7, `thm:transitivity`) - each S_n is G_diss-transitive (a congruence subgroup acts transitively on its pieces), with |G_diss(S_n)| = n * |Stab_0|.
 - **Conditional theorem 12.8** (n = 16 all-one-face) - L3 in the Coxeter-pure case; L2 under (H_roles) + (H_slot) in the general convex case.
 - **Computational Certificate 12.16 (`thm:n5`) / phase26e synthesis status** (n = 5) - the public certificate stack reduces the first non-divisor of 24 to one open accidental-even metric residual. Full unconditional n = 5 closure is not claimed; see `docs/n5_residual_status.md`.
 - **Lemma 12.2** (Stabiliser Transport, L2) - rigorous implication under a named auxiliary hypothesis.
