@@ -1,7 +1,7 @@
 """
 Phase 26-B: Boundary role-distribution enumeration for n = 5.
 
-Goal: generalise the Phase 25 P25-C' facet-role MILP (n = 16) to n = 5.
+Goal: enumerate the boundary role distributions relevant to n = 5.
 Enumerate every combinatorially-admissible "T-face distribution" of the
 5 congruent pieces, classified by the multiset of T-faces touched, and
 apply the *necessary* feasibility filters (volume, surface area, T_d
@@ -9,7 +9,7 @@ symmetry, T-face cover, congruence).  The output is a residual table:
 each surviving distribution is a candidate that Phase 26-C must attack
 SAT/ILP-style with the full geometric constraint set.
 
-Embedding (Phase 25-consistent):
+Embedding (matching Equation (12.1) of the public manuscript):
     v_0 = ( 1,  1,  1)        |v_i v_j|^2 = 8, edge length = 2 sqrt 2
     v_1 = ( 1, -1, -1)        V_T = 8/3
     v_2 = (-1,  1, -1)        Each T-face is an equilateral triangle
@@ -67,10 +67,10 @@ the surviving combinatorial type and the necessary geometric data
 (per-piece exposed area, per-T-face incidence, etc.).
 
 References:
-  - PHASE_26_PLAN.md, sub-phase 26-B.
   - phase26a_chamber_skeleton.py (chamber complex substrate).
-  - preprint.md, Section 11.3 (Phase 25 Theorem 11.3.1, parallel for
-    the n = 16 all-one-face residual = (t = 1, k = (16, 0, 0, 0))).
+  - paper/Congruent Dissections of the Regular Tetrahedron.tex,
+    Section 12.5.
+  - docs/n5_residual_status.md.
 """
 
 from __future__ import annotations

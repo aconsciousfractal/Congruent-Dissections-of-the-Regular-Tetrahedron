@@ -5,7 +5,7 @@ Goal: build the explicit A_3 Coxeter chamber complex of the regular
 tetrahedron T using EXACT RATIONAL arithmetic (Python Fractions), and
 validate it as the substrate for all subsequent Phase 26 sub-phases.
 
-Embedding (consistent with the entire Phase 25 chain):
+Embedding (matching Equation (12.1) of the public manuscript):
     v_0 = ( 1,  1,  1)        face_i = opposite to v_i
     v_1 = ( 1, -1, -1)        |v_i v_j|^2 = 8 for all i != j
     v_2 = (-1,  1, -1)        edge length = 2 sqrt 2
@@ -18,7 +18,8 @@ Each chamber (orthoscheme) is convex hull of one A_3 flag:
 There are exactly 4 * 3 * 2 = 24 such flags, hence 24 chambers
 (barycentric subdivision of T as a simplicial complex).
 
-This script delivers (per the Phase 26 plan, sub-phase 26-A):
+This script delivers the chamber-complex substrate used by the public n=5
+certificate stack:
 
   1. Exact rational construction of all 24 chambers.
   2. Volume / congruence verification (all 24 are A_3-isometric and
@@ -42,12 +43,11 @@ This script delivers (per the Phase 26 plan, sub-phase 26-A):
        - chamber adjacency graph (which chambers share a 2-face),
        - the 8 known divisor partitions of {0, ..., 23}.
 
-References (papers / chain):
-    - preprint.md, Section 11.3 (Theorem 11.3.1, Phase 25 closure).
-    - PHASE_26_PLAN.md, sub-phase 26-A.
-    - experiment_T_phase4A_coxeter_model.py (Phase 4A, prior
-      double-precision implementation -- this script supersedes it
-      with exact rational arithmetic).
+Public references:
+    - paper/Congruent Dissections of the Regular Tetrahedron.tex,
+      Section 12.5 and Equation (12.1).
+    - docs/n5_residual_status.md.
+    - results/phase26a_chamber_skeleton_results.json.
 """
 
 from __future__ import annotations
@@ -385,7 +385,7 @@ section("5. Validation on the 8 known dissections n in {1,2,3,4,6,8,12,24}")
 # a chosen flag-component.  This is enough to certify the chamber-union
 # *partition* exists; geometric realisability of the resulting pieces as
 # congruent (rather than just equal-volume) is a separate question handled
-# by the original Phase 25 atlas.
+# by the canonical atlas in the public manuscript.
 
 DIVISORS = [1, 2, 3, 4, 6, 8, 12, 24]
 

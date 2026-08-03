@@ -10,10 +10,10 @@ as L1+ and deferred the remaining assembly problem; the current public ledger
 closes that assembly problem with the downstream hqb_perface / hqb_asymmetric /
 hqb_opp certificates.
 
-Approach.  Instead of a heavy numeric / SAT search over the placement space
-(the dead end of the earlier Colab attempts), we set up the EXACT placement
-family and impose the clean NECESSARY conditions that any such piece must
-satisfy, then read off the residual locus in closed form.
+Approach.  Rather than relying on an unconstrained symbolic search over the
+placement space, we set up the EXACT placement family and impose the clean
+NECESSARY conditions that any such piece must satisfy, then read off the
+residual locus in closed form.
 
 The clean necessary conditions (all unconditional)
 --------------------------------------------------

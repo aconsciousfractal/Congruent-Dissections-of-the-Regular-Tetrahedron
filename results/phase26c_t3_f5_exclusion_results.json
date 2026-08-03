@@ -46,12 +46,12 @@
         {
           "name": "(Qb-adj): single-piece family is NON-EMPTY (e.g. b_2 = T-vertex, apex on a distinct T-edge); single-piece degeneracy claim retracted",
           "passed": true,
-          "detail": "retraction of earlier bogus argument; see paper Remark rem:hqb-status"
+          "detail": "superseded single-piece argument; see paper Remark rem:hqb-status"
         },
         {
           "name": "(Qb-opp): single-piece family is NON-EMPTY (3-parameter family on 3 concurrent T-edges); single-piece degeneracy claim retracted",
           "passed": true,
-          "detail": "retraction of earlier bogus argument; see paper Remark rem:hqb-status"
+          "detail": "superseded single-piece argument; see paper Remark rem:hqb-status"
         },
         {
           "name": "(Qb) local audit reduction recorded; H-Qb is discharged by the external hqb_* certificate stack in the current public ledger",

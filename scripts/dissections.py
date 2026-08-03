@@ -80,7 +80,7 @@ def dissect_n24(A, B, C, D):
     return pieces
 
 
-# Placeholder functions for cases not yet fully reconstructed
+# Additional exact constructors for the canonical atlas
 
 def dissect_n4(A, B, C, D):
     """
@@ -151,7 +151,16 @@ def dissect_n8(A, B, C, D):
 def dissect_n12(A, B, C, D):
     """
     n=12: Fundamental domain of A4 ⊂ Td.
-    Each piece = merge of 2 adjacent S24 orthoschemes with opposite flag parity.
+    Each piece is the union of the two S24 orthoschemes sharing an edge-face
+    flag, hence conv(edge endpoints, face centroid, tetrahedron centroid).
     """
-    from .tetra_axial import build_S12_pieces
-    return build_S12_pieces()
+    G = barycentre(A, B, C, D)
+    vertices = [A, B, C, D]
+    pieces = []
+    for i in range(4):
+        face = [vertices[j] for j in range(4) if j != i]
+        fc = face_centroid(*face)
+        for u in range(3):
+            for v in range(u + 1, 3):
+                pieces.append([face[u], face[v], fc, G])
+    return pieces

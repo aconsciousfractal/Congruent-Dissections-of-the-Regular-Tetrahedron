@@ -33,9 +33,9 @@ Both residuals fall to the contribution-multiset test alone, before any
 assignment-feasibility is even attempted.
 
 References:
-  - PHASE_26_PLAN.md, sub-phase 26-C, residuals t = 2.
-  - phase26b_role_distribution_n5_results.json (residual table).
+  - results/phase26b_role_distribution_n5_results.json (residual table).
   - phase26c_t3_residuals.py (analogous analysis for t = 3).
+  - docs/n5_residual_status.md (current public residual ledger).
 """
 
 from __future__ import annotations

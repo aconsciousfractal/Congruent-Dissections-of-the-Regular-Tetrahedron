@@ -1,7 +1,7 @@
 # Public Claim Boundary
 
-Companion documentation added 2026-07-08, after publication; it does not
-modify the paper.
+This boundary applies to the canonical public manuscript and companion
+artifacts as of 2026-08-03.
 
 ## Can Say
 

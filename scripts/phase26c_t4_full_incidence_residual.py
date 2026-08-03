@@ -41,14 +41,14 @@ Sub-sections:
        that such P has 5 vertices, but the boundary-area distribution
        constraint plus piece-volume V = 8/15 yields a contradiction.
 
-Output: UNSAT certificate for (t = 4, k = (5,5,5,5)) under the
-specified hypotheses, with explicit dependence on Hypothesis H of
-Phase 22 if used.
+Output: UNSAT certificate for (t = 4, k = (5,5,5,5)). The final
+unconditional contradiction is recorded explicitly by the script.
 
 References:
-  - PHASE_26_PLAN.md, sub-phase 26-C, residual t = 4.
   - phase26b_role_distribution_n5.py (residual table).
-  - preprint.md, Section 11.2 (Phase 22 Hypothesis H).
+  - docs/n5_residual_status.md.
+  - paper/Congruent Dissections of the Regular Tetrahedron.tex,
+    Section 12.5.
 """
 
 from __future__ import annotations

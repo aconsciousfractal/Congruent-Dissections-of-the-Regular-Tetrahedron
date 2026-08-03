@@ -1,34 +1,35 @@
 # Reproduce
 
-Companion documentation added 2026-07-08, after publication; it does not
-modify the paper.
+This guide describes the canonical public source, PDF, scripts, and results as
+of 2026-08-03.
 
 ## Environment
 
-- Python 3.11+ with `numpy`, `sympy` (`pip install -r requirements.txt`).
+- Python 3.10+ with `numpy`, `sympy`, `scipy`, and `pytest`
+  (`pip install -r requirements.txt`).
 - On Windows, set `PYTHONUTF8=1` (scripts print Unicode symbols).
 - Exact rational/symbolic arithmetic throughout; no floating-point
   tolerance decisions in certificates.
 
-## One-Command Replay (verified 2026-07-08)
+## One-Command Replay (verified 2026-08-03)
 
 ```bash
 PYTHONUTF8=1 python scripts/run_all.py
 ```
 
-Runs every public phase-26 / n=5 certificate script in dependency order and
+Runs every public n=5 certificate script in dependency order and
 regenerates the JSON certificates under `results/`. Observed output
-(2026-07-08, excerpt):
+(2026-08-03, excerpt):
 
 ```text
 Total tests passed: 46
 Total tests failed: 0
 Synthesis outcome: N=5 REDUCED TO SINGLE ACCIDENTAL-EVEN METRIC RESIDUAL
-All 18 scripts passed in 39.45s
+All 18 scripts passed
 ```
 
 The regenerated JSON certificates were byte-identical to the tracked files
-in `results/` on the 2026-07-08 run (deterministic reproducer; verified via
+in `results/` on the 2026-08-03 run (deterministic reproducer; verified via
 clean `git status` after the run).
 
 ## Selected Individual Checks
@@ -39,6 +40,6 @@ PYTHONUTF8=1 python scripts/independent_verifier.py   # Coxeter-pure S4-orbit ve
 PYTHONUTF8=1 python -m pytest scripts/tests -q        # unit tests for geometry primitives
 ```
 
-These three commands are NOT part of `run_all.py`'s pipeline (which
-covers the phase-26 / n=5 certificate set). All three were run separately
-and verified passing on 2026-07-08.
+These three commands are not part of `run_all.py`'s pipeline (which covers the
+n=5 certificate set). All three were run separately and passed on 2026-08-03;
+the Pytest suite reported 14 passing tests.

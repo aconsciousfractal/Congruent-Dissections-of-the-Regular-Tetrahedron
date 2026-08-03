@@ -13,8 +13,7 @@ area of T-face A_T = 60, per-piece boundary area E = 48, canonical
 per-piece area multiset (m_1, m_2, m_3) with m_1 + m_2 + m_3 = E.
 
 The 7 (residual, multiset) pairs that survive the canonical-multiset
-assignment-feasibility test (see phase26c_t3_residuals.py, after the
-T3-BUG-01 fix of 2026-04-16) are:
+assignment-feasibility test (see phase26c_t3_residuals.py) are:
 
     R_T3_2 : (6, 12, 30)
     R_T3_3 : (6, 15, 27), (6, 18, 24), (12, 12, 24)
@@ -88,16 +87,15 @@ for the two topological sub-cases:
     (K5)   f = 7: each piece has 4 interior faces; the interior-face
            adjacency graph is 4-regular on 5 vertices, i.e. K_5.
 
-Each of these sub-cases requires a separate geometric argument
-(Phase 26-C-T3 follow-up, not implemented in this script).  We
-record the case split as output for downstream consumption.
+Each of these sub-cases requires a separate geometric argument, implemented
+by the sibling f=5/f=7 and certificate-stack scripts. This script records the
+case split as output for downstream consumption.
 
 References
 ----------
-  - PHASE_26_PLAN.md, sub-phase 26-C, residuals t = 3.
   - phase26c_t3_residuals.py (fixed 2026-04-16).
-  - 09-papers/Congruent Dissections of the Regular Tetrahedron/
-    docs/n5_residual_status.md.
+  - docs/n5_residual_status.md.
+  - results/phase26e_synthesis_theorem_26_1_results.json.
 """
 
 from __future__ import annotations

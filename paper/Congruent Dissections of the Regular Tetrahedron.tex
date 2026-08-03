@@ -328,9 +328,9 @@ theorem), \textsf{L3} (unconditional theorem); see \Cref{sec:evidence-glossary}
 for the precise definitions.  Every claim in this paper is tagged with one
 of these six levels, and nothing else: hybrid tags such as \textsf{L2$^{-}$}
 or \textsf{L1+}/\textsf{L2$^{-}$} are \emph{not} used.  The associated
-computational artifacts (source code, test suites, JSON certificates) will
-be archived upon submission; see the \emph{Data and code availability}
-statement at the end of \Cref{sec:intro}.
+computational artifacts (source code, test suites, JSON certificates) are
+publicly available in the companion repository; see the \emph{Data and code
+availability} statement at the end of \Cref{sec:intro}.
 
 \medskip
 
@@ -356,13 +356,15 @@ Computational certificates were produced with Python \texttt{Fractions}
 \medskip
 
 \noindent\textbf{Data and code availability.}
-The source code, test suites, and JSON certificates cited in this paper
-(including \texttt{S6\_to\_S12\_edge\_spectrum.json}, the $n = 16$
-all-one-face reduction certificates, and the $n = 5$ $(t,k)$-residual
-certificates) will be archived in a Zenodo capsule and mirrored on a public
-GitHub repository upon submission; a stable DOI will be cited in the final
-version.  Referees who wish to inspect the artifacts before the capsule is
-minted may request a private access link from the authors.
+The manuscript source, test suites, scripts, and JSON certificates released
+with this paper are publicly available at
+\url{https://github.com/aconsciousfractal/Congruent-Dissections-of-the-Regular-Tetrahedron}.
+Executable artifacts are stored under \path{scripts/}, with deterministic
+outputs under \path{results/}; these include
+\path{results/S6_to_S12_edge_spectrum.json} and the $n=5$ residual-certificate
+stack.  The general-convex $n=16$ statement is explicitly conditional on
+$(\Hroles)+(\Hslot)$; no separate public computational discharge of those two
+hypotheses is claimed.  This release has no Zenodo DOI.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminaries: four notions of symmetry}\label{sec:prelim}
@@ -700,9 +702,9 @@ pairs and hence six candidate half-tetrahedra.
 
 \smallskip\noindent\emph{Exact enumeration in the embedding~\eqref{eq:atlas-coords}.}
 A direct computation in rational arithmetic (certificate
-\texttt{S6\_to\_S12\_edge\_spectrum.json} in the supplementary material
-that accompanies the submission; see the \emph{Data and code availability}
-statement in \Cref{sec:intro})
+\path{results/S6_to_S12_edge_spectrum.json} in the public companion
+repository; see the \emph{Data and code availability} statement in
+\Cref{sec:intro})
 gives the
 following squared-edge multisets for the six candidate halves, indexed
 by the edge $e$ preserved by the cut plane and the vertex $v$ of
@@ -1118,9 +1120,10 @@ $G_{\mathrm{diss}}(S_{n})$.  Items~(2) and~(3) are read off the
 table.  The orbit--stabiliser identity in~(1) is the usual one for the
 transitive action of $G_{\mathrm{diss}}(S_{n})$ on the $n$ pieces of
 $S_{n}$; transitivity within $G_{\mathrm{diss}}(S_{n})$ is verified case
-by case in the supplementary certificate.  Item~(4) is a restatement of
-the definitions once transitivity of the $G_{\mathrm{diss}}$-action is
-established.
+by case by the atlas computation.  The public script
+\path{scripts/independent_verifier.py} gives a separate check in the stated
+Coxeter-pure $15$-family scope.  Item~(4) is a restatement of the definitions
+once transitivity of the $G_{\mathrm{diss}}$-action is established.
 \end{proof}
 
 \begin{remark}[Summary]\label{rem:sym-summary}
@@ -1353,7 +1356,7 @@ case~(ii) the three mutually orthogonal $2$-folds and the $3$-fold
 permuting them generate the same rotation subgroup; case~(iii) is
 immediate since $A_{4} \leq S_{4}$.  A finite verification on all unordered
 pairs of conjugacy classes in $\Td$ (performed computationally; see
-\texttt{independent\_verifier.py} in the supplementary code capsule)
+\path{scripts/independent_verifier.py} in the public companion repository)
 confirms no other non-conjugate pair realises a smaller containing group.
 \end{proof}
 
@@ -1632,9 +1635,8 @@ Embed $T$ via the rational coordinates
 so $|v_{i} v_{j}|^{2} = 8$ and $V_{T} = 8/3$.  The medial triangle of each
 $T$-face decomposes that face into four sub-triangles (\emph{slots}): three
 corner slots (at the three $T$-vertices) and one central slot (the medial
-triangle itself).  Two auxiliary hypotheses derived from the preparatory
-MILP (see the \texttt{P25-C7} slot decomposition chain of the supplementary
-materials) cut the search space:
+triangle itself).  The conditional theorem uses the following two explicit
+finite hypotheses to cut the search space:
 
 \begin{description}
 \item[$(\Hroles)$] (Role-type assignment).
@@ -1776,9 +1778,8 @@ In the Coxeter-pure instance $(\Hroles) + (\Hslot)$ are automatic,
 so \cref{thm:n16-aof-coxeter} is the \textsf{L3} (unconditional)
 specialisation of the \textsf{L2} conditional statement
 \cref{thm:n16-aof-conditional}.  In the
-general convex instance $(\Hroles) + (\Hslot)$ are residual; their
-theorem-level discharge is the remaining isolated bridge lemma (the paired
-$\Starp$ transport lemma of the supplementary programme), so
+general convex instance $(\Hroles) + (\Hslot)$ remain hypotheses: an
+unconditional proof of them in that setting is not supplied here.  Thus
 \cref{thm:n16-aof-conditional} is at evidence level \textsf{L2}.
 \end{remark}
 
@@ -2639,13 +2640,15 @@ number-theoretic structure.
 
 \section{Computational reproduction sketch}\label{app:computational}
 
-All metric, Dehn, stabiliser, MILP and SAT-style certificates cited in the
-paper are produced by exact rational arithmetic using Python's built-in
-\texttt{Fractions} module.  We include below a minimal self-contained
-reference implementation for the Dehn-invariant verification at $n = 24$
-(orthoscheme).  The full test suites for \cref{thm:n16-aof-conditional} and
-\cref{thm:n5} are available in the public repository and are summarised by
-the data and code capsule described in \Cref{sec:intro}.
+The released metric, Dehn, stabiliser, and SAT-style certificates use exact
+rational arithmetic, including Python's built-in \texttt{Fractions} module.
+We include below a minimal self-contained reference implementation for the
+Dehn-invariant verification at $n = 24$ (orthoscheme).  The public replay suite
+for \cref{thm:n5}, together with the auxiliary atlas checks, is available in
+\path{scripts/} and \path{results/} of the companion repository identified in
+\Cref{sec:intro}.  As stated there, the two general-convex hypotheses of
+\cref{thm:n16-aof-conditional} are not computationally discharged by this
+public package.
 
 \Needspace*{22\baselineskip}
 \begin{lstlisting}[language=Python,caption={Minimal SymPy verification of

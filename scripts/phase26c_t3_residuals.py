@@ -52,7 +52,7 @@ canonical-multiset solutions and, when such multisets pass the
 per-T-face contribution test, the full set of per-piece ordered
 assignments with exact integer arithmetic.
 
-STATUS (2026-04-16, after T3-BUG-01 fix).
+STATUS (verified 2026-04-16).
   The earlier version of this script contained a guard that
   incorrectly identified all four residuals as UNSAT.  With the
   guard removed, the true combinatorial status of each residual is:
@@ -68,15 +68,13 @@ STATUS (2026-04-16, after T3-BUG-01 fix).
   NOT capture footprint-shape consistency across congruent pieces,
   nor geometric realisability on each T-face (packing of the
   footprint polygons).  A genuine UNSAT certificate for R_T3_2,
-  R_T3_3, R_T3_4 requires a strengthened abstraction (see the
-  Phase 26-C-T3 follow-up scripts phase26c_t3_residuals_shape.py
-  and/or phase26c_t3_residuals_packing.py, and the TODO file
-  09-papers/Congruent Dissections of the Regular Tetrahedron/
-  docs/n5_residual_status.md).
+  R_T3_3, R_T3_4 requires the downstream geometric and certificate checks
+  implemented by the sibling `phase26c_t3_*`, `hqb_*`, `hcoc_*`, and
+  `horb_*` scripts. The current boundary is recorded in
+  docs/n5_residual_status.md.
 
 References:
-  - PHASE_26_PLAN.md, sub-phase 26-C, residuals t = 3.
-  - phase26b_role_distribution_n5_results.json (residual table).
+  - results/phase26b_role_distribution_n5_results.json (residual table).
   - docs/n5_residual_status.md, for the current public residual ledger.
 """
 

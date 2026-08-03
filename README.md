@@ -5,9 +5,10 @@ Companion repository for the paper
 > **Congruent Dissections of the Regular Tetrahedron**
 > Oleksiy Babanskyy, 2026.
 
-Contains the manuscript source, the experimental scripts used to produce
-and cross-check every empirical claim, and the datasets those scripts
-generated during the research phase.
+Contains the canonical manuscript source and PDF, the public scripts used to
+produce and cross-check the released computational certificates, and their
+deterministic result files. Conditional claims are identified explicitly in
+the paper and in `PUBLIC_CLAIM_BOUNDARY.md`.
 
 ## Layout
 
@@ -70,7 +71,8 @@ generated during the research phase.
 
 ## Dependencies
 
-Python ≥ 3.10, `numpy ≥ 1.24`, `sympy ≥ 1.12`, `scipy ≥ 1.10`.
+Python >= 3.10, `numpy >= 1.24`, `sympy >= 1.12`, `scipy >= 1.10`,
+`pytest >= 8.0`.
 
 ```bash
 python -m venv .venv
@@ -81,10 +83,10 @@ pip install -r requirements.txt
 
 ## Reproducing the paper
 
-All scripts under `scripts/` are standalone (stdlib + numpy + sympy + scipy).
-Each phase-26 / n=5 certificate script writes a `*_results.json` certificate
-into `results/`, using exact rational arithmetic (`fractions.Fraction`) where
-applicable.
+The certificate scripts invoked by `scripts/run_all.py` use the standard
+library plus NumPy, SymPy, and SciPy. Each n=5 certificate script writes a
+`*_results.json` certificate into `results/`, using exact rational arithmetic
+(`fractions.Fraction`) where applicable.
 
 ### One-command reproduction
 
@@ -139,8 +141,8 @@ The updated n = 5 status is in the TeX source `paper/Congruent Dissections of th
 
 ## Claim Boundary
 
-Companion claim-discipline docs were added on 2026-07-08 (after
-publication; the paper is unchanged):
+The reader guides below agree with the canonical manuscript and checked-in PDF
+as of 2026-08-03:
 
 - `CLAIM_LEDGER.md` — every claim with its level (theorem-in-paper,
   certified-finite, conditional, open) and paper locator.
@@ -148,8 +150,9 @@ publication; the paper is unchanged):
   particular, n=5 is a certificate-backed REDUCTION to one open metric
   residual, never an impossibility claim.
 - `README_REVIEWER.md` — 10/30-minute reviewer paths.
-- `REPRODUCE.md` — one-command replay (`scripts/run_all.py`, ~40 s,
-  46 tests, byte-identical certificate regeneration verified 2026-07-08).
+- `REPRODUCE.md` — one-command replay (`scripts/run_all.py`, about 1–2
+  minutes, 46 synthesis checks, byte-identical certificate regeneration
+  verified 2026-08-03).
 
 ## Citation
 

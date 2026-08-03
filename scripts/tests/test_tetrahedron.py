@@ -11,7 +11,10 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from tetrahedron import (
     regular_tetrahedron, volume, tet_volume_from_vertices, distance_matrix
 )
-from dissections import dissect_n1, dissect_n2, dissect_n3, dissect_n24
+from dissections import (
+    dissect_n1, dissect_n2, dissect_n3, dissect_n4,
+    dissect_n6, dissect_n8, dissect_n12, dissect_n24,
+)
 
 
 def test_regular_tetrahedron_edge_lengths():
@@ -99,3 +102,19 @@ def test_dissect_n24_congruence():
         dm = distance_matrix(p)
         assert np.allclose(ref, dm, atol=1e-10), \
             f"Piece {i} not congruent to piece 0:\n{dm}\nvs\n{ref}"
+
+
+@pytest.mark.parametrize(
+    "n,constructor",
+    [(4, dissect_n4), (6, dissect_n6), (8, dissect_n8), (12, dissect_n12)],
+)
+def test_remaining_atlas_constructors(n, constructor):
+    """The remaining public constructors return congruent equal-volume pieces."""
+    A, B, C, D = regular_tetrahedron()
+    pieces = constructor(A, B, C, D)
+    assert len(pieces) == n
+    volumes = [tet_volume_from_vertices(*p) for p in pieces]
+    assert all(abs(v - volume() / n) < 1e-10 for v in volumes)
+    reference = distance_matrix(pieces[0])
+    for piece in pieces[1:]:
+        assert np.allclose(reference, distance_matrix(piece), atol=1e-10)

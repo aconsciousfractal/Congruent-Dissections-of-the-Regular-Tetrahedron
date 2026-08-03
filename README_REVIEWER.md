@@ -1,7 +1,7 @@
 # Reviewer Guide
 
-Companion documentation added 2026-07-08, after publication; it does not
-modify the paper.
+This guide applies to the canonical public manuscript and companion artifacts
+as of 2026-08-03.
 
 ## Ten-Minute Path
 
@@ -12,7 +12,8 @@ modify the paper.
 2. Read `CLAIM_LEDGER.md` (C1-C6 plus the two explicitly-open rows O1/O2).
 3. Run the one-command replay:
    `PYTHONUTF8=1 python scripts/run_all.py`
-   (~40 s; expects "Total tests passed: 46", "All 18 scripts passed").
+   (about 1–2 minutes; expects "Total tests passed: 46",
+   "All 18 scripts passed").
 
 ## Thirty-Minute Path
 
