@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "theorem_scope": "No five-piece partition satisfying BRH",
+  "conditional_on": [
+    "full-dimensional congruent convex pieces",
+    "a fixed exposed-facet subset B transported by every placement isometry"
+  ],
+  "not_claimed": [
+    "BRH for arbitrary congruent dissections",
+    "unconditional n=5 impossibility",
+    "a proof from finite arithmetic alone"
+  ],
+  "checks": [
+    {
+      "name": "BRH exposed-area identity",
+      "passed": true,
+      "detail": "E=4/5 after A=1"
+    },
+    {
+      "name": "t=0 fails boundary coverage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "t=1 fails boundary coverage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "t=2 forces (a,b)=(3/10,1/2)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "t=2 three-footprint sums miss one",
+      "passed": true,
+      "detail": "3/2, 13/10, 11/10, 9/10"
+    },
+    {
+      "name": "t=2 four-or-more lower bound",
+      "passed": true,
+      "detail": "4a=6/5"
+    },
+    {
+      "name": "three tetrahedral normals are independent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "centered tetrahedral symmetry group has order 24",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "generic orbit has 24 points",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "24 is not divisible by 5",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "passed": 10,
+  "failed": 0,
+  "group_order": 24,
+  "orbit_size": 24
+}

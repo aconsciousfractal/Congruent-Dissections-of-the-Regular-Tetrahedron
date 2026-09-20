@@ -192,14 +192,16 @@ for $n\in\{1,12,24\}$.  Burnside-ring, $24$-cell, and IFS-grammar models
 realise every divisor and provide a tested screening stack for related
 $\Td$-invariant orbit decompositions.
 
-Beyond the atlas, we record two certificate-backed reductions.  For $n=16$ an
+Beyond the atlas, we record two further scoped results.  For $n=16$ an
 all-one-face case is excluded under two finite MILP hypotheses, automatic in
-the Coxeter-pure instance.  For $n=5$, exact public certificates reduce any
-putative face-to-face convex congruent $5$-dissection to one explicit open
-metric residual: $f(P)=7$, $t=3$, $\Sym(P)=1$, and an accidental even congruence
-pattern among the four interior facets.  No unconditional $n=5$ impossibility
-is claimed.  All computations use exact rational arithmetic and are
-reproducible from the repository scripts.
+the Coxeter-pure instance.  For $n=5$, we prove a conditional obstruction under an explicit boundary-role
+homogeneity hypothesis (BRH): five congruent convex pieces cannot partition the
+regular tetrahedron when the same facets of the reference piece are exposed in
+every copy.  The unrestricted case with different boundary roles remains open.
+We also record exact real-area bookkeeping and a chart-level algebraic check;
+these are not promoted to a general impossibility theorem.  The new $n=5$
+computations use exact rational or symbolic arithmetic and are reproducible
+from the repository scripts.
 \end{abstract}
 
 \smallskip
@@ -291,22 +293,19 @@ is compatible with the atlas labels $S_{n}$ used here; see
 \noindent\emph{Fourth,} in \Cref{sec:programme} we attack the reverse
 direction via a structured programme whose two principal new results are:
 
-\begin{computationalcertificate}[$n=5$ convex residual reduction, preview]\label{thm:n5-intro}
-Every face-to-face congruent dissection of the regular tetrahedron $T$ into
-$5$ convex pieces is reduced to the following single residual case:
-$f(P)=7$, $t=3$, $\Sym(P)=1$, and the four interior facets of $P$ are
-accidentally congruent in an even metric pattern $(4)$ or $(2,2)$.
-All other branches of the role-distribution census are closed either
-unconditionally or by exact public certificates.  See
-\Cref{thm:n5,sec:prog-n5} for the certificate ledger.
-\end{computationalcertificate}
+\begin{conditionaltheorem}[$n=5$ boundary-role obstruction, preview]\label{thm:n5-intro}
+Under the explicit boundary-role homogeneity condition BRH, no partition of
+$T$ into $5$ full-dimensional congruent convex pieces exists.  BRH requires
+one fixed set of reference facets to be exposed in every copy; it is not a
+consequence of congruence alone.  The unrestricted mixed-role case remains
+open.  See \Cref{thm:n5,sec:prog-n5} for the precise statement and proof.
+\end{conditionaltheorem}
 
-This is the first certificate-backed reduction of a non-divisor of~$24$ in
-the convex category to a single named residual.  The methodology --
-role-distribution census, canonical-multiset feasibility, topological parity
-reduction $f(P) \in \{5, 7\}$, weak Congruence Transport, orientation and
-quadrilateral-pyramid certificates, and metric parity/scope ledgers --
-is designed to transfer to the remaining small non-divisors.
+The $n=5$ contribution is therefore a conditional theorem plus exact finite
+bookkeeping, rather than an unconditional residual reduction.  The corrected
+real-area enumeration and the local NN identity are included to make the
+remaining hypotheses visible; the historical phase-26 reduction scripts are
+retained as audit material but are not used as proof evidence.
 
 \begin{conditionaltheorem}[$n=16$ all-one-face, preview]\label{thm:n16-intro}
 Under the medial-role and slot-separation hypotheses $(\Hroles) + (\Hslot)$,
@@ -361,8 +360,8 @@ with this paper are publicly available at
 \url{https://github.com/aconsciousfractal/Congruent-Dissections-of-the-Regular-Tetrahedron}.
 Executable artifacts are stored under \path{scripts/}, with deterministic
 outputs under \path{results/}; these include
-\path{results/S6_to_S12_edge_spectrum.json} and the $n=5$ residual-certificate
-stack.  The general-convex $n=16$ statement is explicitly conditional on
+\path{results/S6_to_S12_edge_spectrum.json} and the active $n=5$ BRH,
+area, and local-identity certificates.  The general-convex $n=16$ statement is explicitly conditional on
 $(\Hroles)+(\Hslot)$; no separate public computational discharge of those two
 hypotheses is claimed.  This release has no Zenodo DOI.
 
@@ -1473,8 +1472,8 @@ Step & Statement & Status \\
 \section{The rigidity and configurational programme}\label{sec:programme}
 
 We now describe the programme that attacks \cref{conj:transitivity} and
-contains the two principal new configurational reductions of the paper:
-\cref{thm:n5} ($n = 5$ reduction to a single metric residual) and
+contains the two principal conditional configurational results of the paper:
+\cref{thm:n5} (the $n = 5$ BRH conditional obstruction) and
 \cref{thm:n16-aof-conditional} ($n = 16$ all-one-face conditional
 impossibility).
 
@@ -1804,776 +1803,204 @@ configurational attack on GAP~B.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Certificate reduction at
-\texorpdfstring{$n = 5$}{n=5}: the first non-divisor
-reduced to one metric residual}\label{sec:prog-n5}
+\subsection{The \texorpdfstring{$n=5$}{n=5} case: a conditional boundary-role obstruction}
+\label{sec:prog-n5}
 
-The C24-chain of \Cref{sec:prog-n16} reduced the largest role-distribution
-residual at $n = 16$ to a conditional statement.  The current $n=5$ public
-stack is sharper: every branch of the role-distribution census is closed
-except one explicitly scoped metric residual.  The script-level H-labels are
-kept only as reproducibility/audit labels; the theorem-level claim is the
-residual reduction stated in \Cref{thm:n5}.  Throughout this subsection the
-standing embedding is~\eqref{eq:16-embedding}.
+The previous public reduction of arbitrary convex face-to-face five-piece
+dissections to one accidental-even metric residual is not established.  Its
+boundary-role step requires an additional hypothesis: congruent copies need
+not expose the same facets of the common reference polytope.  We therefore
+replace that reduction by the conditional result below.  It is a complete
+obstruction under an explicit boundary-role homogeneity condition (BRH),
+while the unrestricted case with different boundary roles remains open.
 
-Volume, face area, height of $T$ and per-piece totals in the $n = 5$ case:
-\[
-V_{T} = \tfrac{8}{3},\qquad
-A_{T} = 2\sqrt 3,\qquad
-h_{T} = \tfrac{4}{\sqrt 3},\qquad
-V_{\mathrm{piece}} = \tfrac{8}{15},\qquad
-E = \tfrac{8\sqrt 3}{5},
-\]
-where $E$ is the per-piece total exposed (boundary) surface area, determined
-by the constraint $5E = 4A_{T} = $ total boundary area of $T$.
-
-\begin{definition}[Touch count and incidence vector]\label{def:tk}
-For each piece $P$ let $I(P) \subseteq \{0, 1, 2, 3\}$ be the set of
-$T$-faces on which $P$ has positive $2$-area, $t \coloneqq |I(P)|$ (constant
-by congruence), and $k = (k_{0}, k_{1}, k_{2}, k_{3})$ with
-$k_{j} \coloneqq \#\{P : j \in I(P)\}$, so $\sum_{j} k_{j} = 5t$.
+\begin{definition}[Boundary-role homogeneity (BRH)]\label{def:brh}
+Let $P_1,\ldots,P_5$ be full-dimensional congruent convex polytopes with
+union $T$ and pairwise disjoint interiors.  BRH holds if there are a
+reference copy $P$, Euclidean isometries $\gamma_i$ with
+$\gamma_i(P)=P_i$, and a fixed subset $B$ of facets of $P$ such that
+$\gamma_i(B)$ is exactly the set of facets of $P_i$ contained in
+$\partial T$.  The set $B$ is the common boundary-role set.  BRH requires
+congruences preserving these designated facets; ordinary congruence or
+equality of touch counts does not by itself provide such congruences.
 \end{definition}
 
-\begin{computationalcertificate}[$n=5$ convex reduction to the accidental-even metric residual]\label{thm:n5}
-Let $\mathcal{D}$ be a putative face-to-face congruent dissection of the
-regular tetrahedron $T$ into $5$ convex pieces.  Then the public certificate
-stack eliminates every branch of the $n=5$ role-distribution census except
-possibly the following residual:
-\[
-  f(P)=7,\qquad t=3,\qquad \Sym(P)=1,
-\]
-and the four interior facets of the reference piece $P$ are accidentally
-congruent in an even metric pattern $(4)$ or $(2,2)$, without being promoted
-to genuine $\Sym(P)$-orbits by orbit transport.
+\begin{conditionaltheorem}[$n=5$ under BRH]\label{thm:n5}
+No partition of a regular tetrahedron into five full-dimensional congruent
+convex polytopes satisfies BRH.  In particular, five-piece impossibility is
+proved conditionally on BRH, but no unconditional $n=5$ impossibility is
+claimed for congruent copies with different boundary roles.
+\end{conditionaltheorem}
 
-Equivalently, $n=5$ is reduced to one accidental-even metric residual.  No
-unconditional impossibility of a $5$-piece convex dissection is claimed at
-this stage.  For auditability, the exact scripts behind the reduction are:
-\begin{itemize}
-  \item \texttt{hcoc\_orientation\_certificate.py}, closing the orientation
-        branch in the $K_{5}$ triangle system;
-  \item the five-script \texttt{hqb\_*\_certificate.py} stack, closing the
-        quadrilateral-pyramid branch;
-  \item \texttt{horb\_parity\_certificate.py}, closing singleton and
-        odd-multiplicity metric patterns;
-  \item \texttt{horb\_residual\_scope.py} and
-        \texttt{horb\_residual\_combinatorial.py}, identifying the remaining
-        branch as genuinely metric rather than a bookkeeping artefact.
-\end{itemize}
-The synthesis certificate is
-\texttt{phase26e\_synthesis\_theorem\_26\_1.py}, whose active outcome is
-``$n=5$ reduced to a single accidental-even metric residual.''
-This is a certificate-backed residual reduction, not a conditional claim on the
-script-level H-labels.  Those H-labels are audit labels for the certificate stack,
-not additional public hypotheses.
-\end{computationalcertificate}
-
-The proof of the reduction occupies the remainder of \Cref{sec:prog-n5}.
-It proceeds by a role-distribution census (Step~1 below), exact eliminations
-for $t=1,2,4$ and the canonical $t=3$ residual, and then the $f=5$ and $f=7$
-ledgers that isolate the single accidental-even metric branch.
-
-\subsubsection*{Step 1: role-distribution census}
-
-Since each $T$-face must be covered by the boundary of the dissection,
-$k_{j} \geq 1$ for every $j$.  Each piece contributes area at most $E$ to
-any single $T$-face, so $A_{T} \leq k_{j} \cdot E$, i.e.
-\begin{equation}\label{eq:F4}
-  k_{j} \;\geq\; \left\lceil \frac{A_{T}}{E} \right\rceil
-     \;=\; \left\lceil \tfrac{5}{4} \right\rceil \;=\; 2.
+\begin{proof}
+Let $A$ be the area of one face of $T$, and let $t=|B|$.  The boundary
+footprints cover the four faces of $T$ up to sets of area zero.  Indeed, two
+full-dimensional convex pieces contained in $T$ cannot share a relatively
+open subset of an ambient face without overlapping interiors, so their
+boundary footprints can overlap only in area-zero sets.  Since BRH identifies
+the exposed facets in every copy, their total area is the same in each piece;
+hence the common exposed area is
+\begin{equation}\label{eq:brh-exposed-area}
+ E=\frac{4A}{5}.
 \end{equation}
-Combined with $\sum_{j} k_{j} = 5t$ the lower bound~\eqref{eq:F4} forces
-$5t \geq 8$, hence $t \geq 2$ (and $t \leq 4$ trivially).  In particular,
-the $n = 5$ analogue of the $n = 16$ all-one-face residual
-($t = 1$, $k = (5, 0, 0, 0)$) is \emph{combinatorially} impossible for two
-independent reasons: three $T$-faces would be uncovered (contradicting
-$\partial T$-coverage), and $5E = 8\sqrt 3 = 4 A_{T}$, four times the
-single-face capacity.
+Every exposed facet has area at most $E$, because it is a positive summand of
+that total.  Thus every face of $T$ needs at least two boundary footprints.
+Convexity gives at most one exposed facet on each ambient face, so $t\le4$.
 
-After quotienting by $S_{4}$ acting on $T$-faces exactly \emph{seven}
-residuals survive the filter~\eqref{eq:F4}:
-\begin{center}\footnotesize
-\begin{tabular}{@{}cccc@{}}
+If $t=0$, there is no boundary coverage.  If $t=1$, there are only five
+footprints in total, whereas four faces require at least eight.  Suppose
+$t=2$, and write the two facet areas as $a\le b$.  Normalize $A=1$, so
+$a+b=4/5$.  There are ten footprints, so at least one face has exactly two
+footprints and another has at least three.  A two-footprint face has area
+$2a$, $a+b$, or $2b$.  The first two are less than $1$, so $2b=1$ and
+$(a,b)=(3/10,1/2)$.  Three footprints then have one of the four sums
+$9/10,11/10,13/10,15/10$, while four or more have area at least
+$4a=6/5$.  No face with at least three footprints can therefore have area
+$1$, a contradiction.
+
+It remains to consider $t=3$ or $t=4$.  Center $T$ at the origin, let
+$\nu_0,\ldots,\nu_3$ be its outward unit face normals, and let $h>0$ be
+the common support number, so that
+\[
+ T=\{x\in\mathbb R^3:\nu_j\cdot x\le h\text{ for }j=0,\ldots,3\}.
+\]
+They satisfy
+$\nu_0+\nu_1+\nu_2+\nu_3=0$, and every three are linearly independent.
+Replace the reference tile by $P_1$ and set
+$\phi_i=\gamma_i\gamma_1^{-1}$ for $i=1,\ldots,5$.  Write
+$\phi_i(x)=Q_i x+u_i$.  The map $\phi_i$ sends three exposed facets of
+$P_1$ to exposed facets of $P_i$.  At an exposed facet the piece's outward
+normal is the \emph{positive} ambient outward normal $+\nu_j$ (not $-\nu_j$),
+and isometries transport outward normals.  Thus $Q_i$ sends three distinct tetrahedral face normals to three
+distinct tetrahedral face normals.  The zero-sum identity
+forces the fourth normal to be sent to the fourth one as well.  Hence $Q_i$
+permutes the four normals.
+
+For a matched facet on $\nu_j\cdot x=h$, the image facet lies on the
+corresponding ambient support plane.  For $x$ on that facet,
+\[
+ h=(Q_i\nu_j)\cdot(Q_i x+u_i)=h+(Q_i\nu_j)\cdot u_i.
+\]
+This makes $u_i$ perpendicular to three independent normals, so $u_i=0$.
+Every $\phi_i$ is consequently an element of the full tetrahedral symmetry
+group $H$.  Its order is $24$: each permutation of the four vertices of a
+regular tetrahedron extends uniquely to an orthogonal symmetry.
+
+For completeness, the required orbit count does not assume that $H$ permutes
+the partition.  Choose a point $x$ in the interior of $T$ outside the finite
+union of all fixed-point sets of nonidentity elements of $H$ and all inverse
+images under $H$ of the piece boundaries.  Such a point exists because this
+finite union has three-dimensional measure zero.  Then $O=Hx$ has $24$ points and
+meets no piece boundary.  Since $P_i=\phi_i(P_1)$ and $\phi_i\in H$,
+$|O\cap P_i|=|O\cap P_1|$ for every $i$.  If this common number is $m$,
+partitioning $O$ gives $24=5m$, impossible.  This proves the conditional
+theorem.
+\end{proof}
+
+The proof does not require the partition to be face-to-face.  Its restriction
+is BRH: it does not establish a common boundary-role set for arbitrary
+congruent copies.  Establishing that property for a specified class, or
+excluding mixed boundary roles directly, remains a separate problem.
+
+\begin{observation}[Exact bookkeeping for a common exposed-area list]
+\label{obs:n5-area}
+Assume only that each piece has the same list of positive exposed-facet areas
+$m=(m_1,\ldots,m_t)$, without requiring the facet identifications to be
+induced by congruences.  Boundary coverage again gives $\sum m_r=4A/5$.
+Normalize $A=60$, hence $E=48$; this does not require individual areas to be
+integers.  Label equal-area occurrences arbitrarily.  Let $N_{jr}$ count
+occurrences of label $r$ on ambient face $j$.  Necessary equations are
+\[
+ N m=60(1,1,1,1)^\mathsf{T},\qquad m_r>0,
+\]
+with row sums $k_j$ and column sums $5$.  Each $k_j$ lies between $2$ and
+$5$, and $\sum k_j=5t$.  For $t=2,3$ the table lists every possible sorted
+$k$ and every positive area solution of these count equations.  The script
+\path{scripts/n5_real_area_certificate.py} enumerates all $3461$ matrices
+with these margins and solves the rational linear systems exactly.  No
+consistent rank-deficient system occurs, so no real solution family is lost
+by listing isolated rational solutions.
+\begin{center}
+\begin{tabular}{c c l}
 \toprule
-$t$ & $k$-orbit representative (sorted desc) & $\sum k_{j}$ & Per-$T$-face uniform-share $a^{2}$ \\
+$t$ & $k$ & positive sorted area multisets\\
 \midrule
-$2$ & $(4, 2, 2, 2)$ & $10$ & $3/4,\ 3,\ 3,\ 3$ \\
-$2$ & $(3, 3, 2, 2)$ & $10$ & $4/3,\ 4/3,\ 3,\ 3$ \\
-$3$ & $(5, 5, 3, 2)$ & $15$ & $12/25,\ 12/25,\ 4/3,\ 3$ \\
-$3$ & $(5, 4, 4, 2)$ & $15$ & $12/25,\ 3/4,\ 3/4,\ 3$ \\
-$3$ & $(5, 4, 3, 3)$ & $15$ & $12/25,\ 3/4,\ 4/3,\ 4/3$ \\
-$3$ & $(4, 4, 4, 3)$ & $15$ & $3/4,\ 3/4,\ 3/4,\ 4/3$ \\
-$4$ & $(5, 5, 5, 5)$ & $20$ & $12/25,\ 12/25,\ 12/25,\ 12/25$ \\
+2 & $(4,2,2,2)$ & none\\
+2 & $(3,3,2,2)$ & none\\
+3 & $(5,5,3,2)$ & none\\
+3 & $(5,4,4,2)$ & $(6,12,30)$\\
+3 & $(5,4,3,3)$ & $(6,15,27)$, $(6,18,24)$, $(48/5,84/5,108/5)$, $(12,12,24)$\\
+3 & $(4,4,4,3)$ & $(6,18,24)$, $(12,12,24)$, $(12,16,20)$\\
 \bottomrule
 \end{tabular}
 \end{center}
-
-\subsubsection*{Step 2: the \texorpdfstring{$t = 4$}{t=4} residual
-\texorpdfstring{$(5, 5, 5, 5)$}{(5,5,5,5)}}
-
-In this residual every piece touches all four $T$-faces ($t = 4$).
-Write $(m_{1}, m_{2}, m_{3}, m_{4})$ for the canonical boundary-area
-multiset of the common piece shape; by congruence
-$M \coloneqq \sum_{j} m_{j}$ is the same for every piece and
-$5M = 4 A_{T}$, so $M = 4 A_{T}/5$.
-We make \emph{no} assumption that the $m_{j}$ are equal.
-
-\begin{lemma}[Regular-tetrahedron barycentric distance sum]\label{lem:bc-dist}
-For any point $p \in T$,
+There are six distinct positive multisets and eight residual occurrences.  The
+rational multiset $(48/5,84/5,108/5)$ is genuine at the incidence level; one
+aligned witness is
 \[
-  \sum_{j = 0}^{3} d\bigl(p,\aff(F_{j})\bigr) \;=\; h_{T},
+ N=\begin{pmatrix}4&0&1\\1&3&0\\0&1&2\\0&1&2\end{pmatrix},
+ \qquad
+ m=\left(\frac{48}{5},\frac{84}{5},\frac{108}{5}\right)^\mathsf{T}.
 \]
-where $F_{0}, \ldots, F_{3}$ are the four faces of $T$.
-\end{lemma}
+Its row sums are $(5,4,3,3)$ and every weighted row sum is $60$.  The
+calculation concerns areas and incidence only; no matrix here is a geometric
+dissection certificate.
+\end{observation}
 
-\begin{proof}
-Standard application of $V_{T} = (1/3)\sum_{j} \mathrm{area}(F_{j}) \cdot
-d(p, \aff(F_{j}))$ with all $\mathrm{area}(F_{j}) = A_{T}$ and
-$V_{T} = (1/3) A_{T} h_{T}$.
-\end{proof}
-
-\begin{lemma}[Centroid pyramid decomposition on the closure]\label{lem:cpd-closure}
-For any convex polytope $P \subset \R^{3}$ and any point
-$q \in P$ \textup{(}closure, not just interior\textup{)},
+\begin{observation}[A local algebraic area model]\label{obs:n5-nn}
+The following identity retains a local calculation from the NN first-factor
+model, with all algebraic assumptions explicit.  For real $x,y,z,L$ with
+$L\ne0$, define
+\begin{align*}
+ Q_p&=x^2-xy+y^2, & Q_r&=z^2-z+1,\\
+ B&=x^2+xy+y^2-(z^2+z+1), & D&=xy-z,\\
+ E_\lambda&=Q_r-12L^2Q_p, &
+ E_{\rm axis}&=Q_p\bigl(4-(6L-1)^2\bigr)-12B,\\
+ A_{\rm floor}&=D+2LQ_p+\frac{Q_r}{6L}, &
+ A_{\rm total}&=A_{\rm floor}+B+D.
+\end{align*}
+Then the identity
 \[
-  \Vol(P) \;=\; \frac{1}{3}
-  \sum_{F \in \mathcal{F}(P)}
-    \mathrm{area}(F)\;\! d\bigl(q, \aff(F)\bigr).
+ 24L\left(A_{\rm floor}-\frac34A_{\rm total}\right)
+ =2L E_{\rm axis}+(1-6L)E_\lambda
 \]
-Every summand is nonnegative; it vanishes if and only if
-$q \in \aff(F)$.
-\end{lemma}
+holds identically; substituting $B=Q_p-Q_r+2D$ verifies it directly.
+If $E_\lambda=E_{\rm axis}=0$ and $A_{\rm total}>0$, it follows that
+$A_{\rm floor}/A_{\rm total}=3/4$.  The identity is checked symbolically by
+\path{scripts/n5_nn_identity_certificate.py}.
+If these quantities describe one exposed facet and the total exposed area
+of a piece in the $t=3$ common-area model of \cref{obs:n5-area}, they are
+incompatible with its maximum facet-area ratio $30/48=5/8$.
+This last conclusion requires that geometric identification.  No assertion
+that arbitrary pieces, all NN branches, or mixed boundary roles enter this
+algebraic model is made.
+\end{observation}
 
-\begin{proof}
-Apply the divergence theorem to $v(x) = (x - q)/3$ on $P$.
-Since $\operatorname{div} v = 1$,
+\begin{remark}[Withdrawn metric shortcuts]
+The earlier $f=5$ triangular-prism exclusions are not used here.  A triangular-
+prism face lattice does not imply parallelism of the two triangular faces.
+In affine coordinates with $T=\{x_i\ge0,\ \sum_i x_i\le1\}$, take
+$0<a<\min_i b_i$ and $\max_i b_i\le1$.  The polytope
 \[
-  \Vol(P)
-  = \int_{P} 1\, dx
-  = \int_{\partial P} v \cdot \hat{n}\, dA
-  = \frac{1}{3}\sum_{F \in \mathcal{F}(P)}
-    \mathrm{area}(F)\;\! d_{\mathrm{signed}}\bigl(q, \aff(F)\bigr),
+ x_i\ge0,\qquad x_1+x_2+x_3\ge a,\qquad
+ \sum_i x_i/b_i\le1
 \]
-where $d_{\mathrm{signed}}$ is the signed distance
-(positive on the side of the outward normal).
-For $q \in P$ (convex), every supporting hyperplane has $q$
-on its inner side, so all signed distances are nonnegative
-and equal to the ordinary distance.
-\end{proof}
-
-Let $q_{T}$ be the incenter of $T$, the unique interior point with
-$d(q_{T}, \aff(F_{j})) = h_{T}/4$ for $j = 0, \ldots, 3$.
-Since the five closed pieces cover $T$ and $q_{T} \in \mathrm{int}(T)$,
-at least one piece $P^{*}$ satisfies $q_{T} \in P^{*}$.
-Apply \cref{lem:cpd-closure} at $q = q_{T}$:
-\begin{equation}\label{eq:t4-saturation}
-  V_{\mathrm{piece}}
-  \;=\; \underbrace{\frac{1}{3}\sum_{j = 0}^{3}
-      m_{\sigma^{*}\!(j)}\,d(q_{T}, F_{j})}_{B}
-    \;+\;\underbrace{\frac{1}{3}\!\sum_{G \in \mathcal{F}_{\mathrm{int}}(P^{*})}
-      \!\!\mathrm{area}(G)\,d(q_{T}, G)}_{I\;\ge\;0}.
-\end{equation}
-The boundary term depends only on the total $M$:
-\[
-  B \;=\; \frac{h_{T}}{12}\sum_{j} m_{\sigma^{*}\!(j)}
-    \;=\; \frac{h_{T}\,M}{12}
-    \;=\; \frac{h_{T}}{12} \cdot \frac{4 A_{T}}{5}
-    \;=\; \frac{A_{T}\, h_{T}}{15}
-    \;=\; \frac{V_{T}}{5}
-    \;=\; V_{\mathrm{piece}}.
-\]
-Hence $I = 0$: every interior facet $G$ of $P^{*}$ satisfies
-$d(q_{T}, \aff(G)) = 0$, i.e.\ $q_{T} \in \aff(G)$.
-
-\medskip
-\noindent\emph{Non-degenerate case.}
-If $q_{T} \in \mathrm{int}(P^{*})$ then
-$d(q_{T}, \aff(G)) > 0$ for every facet $G$, so $P^{*}$ has no
-interior facets: $f(P^{*}) = 4$.  By congruence every piece has
-$f = 4$, contradicting face-to-face (no shared interior facet).
-
-\medskip
-It remains to exclude the degenerate case $q_{T} \in \partial P^{*}$.
-Every point of a convex polytope belongs to the relative interior
-of a unique face $\sigma$; write $q_{T} \in \mathrm{relint}(\sigma)$.
-The four boundary facets of $P^{*}$ lie on $T$-face planes at
-distance $h_{T}/4 > 0$ from $q_{T}$, so $\sigma$ is not a boundary
-facet and lies in the interior skeleton.  We distinguish three cases
-by $\dim \sigma$.
-
-\begin{lemma}[Degenerate face case]\label{lem:deg-face}
-$\sigma$ cannot be an interior facet of $P^{*}$.
-\end{lemma}
-
-\begin{proof}
-Suppose $q_{T} \in \mathrm{relint}(G)$ for an interior facet $G$.
-Then $\aff(G)$ is the supporting hyperplane of $P^{*}$ at $q_{T}$.
-For any other facet $G' \ne G$, $q_{T} \in \aff(G')$ forces
-$q_{T} \in G'$ (since $\aff(G')$ supports $P^{*}$ and
-$q_{T} \in P^{*}$), placing $q_{T} \in G \cap G'$---a proper face
-of $G$, contradicting $q_{T} \in \mathrm{relint}(G)$.
-Thus $P^{*}$ has exactly one interior facet: $f - 4 = 1$.
-Double-counting interior facet-instances gives $5(f - 4)$ even,
-so $f - 4$ is even.  Contradiction.
-\end{proof}
-
-\begin{lemma}[Degenerate edge case]\label{lem:deg-edge}
-$\sigma$ cannot be an interior edge of $P^{*}$.
-\end{lemma}
-
-\begin{proof}
-Suppose $q_{T} \in \mathrm{relint}(e)$ for an interior edge $e$
-of $P^{*}$.  From $I = 0$, every interior facet $G$ satisfies
-$q_{T} \in \aff(G)$; since $\aff(G)$ is a supporting hyperplane
-of $P^{*}$ and $q_{T} \in P^{*}$, we obtain $q_{T} \in G$.
-In the face lattice of a convex polytope,
-$\mathrm{relint}(e) \cap G \ne \emptyset$ forces $e \subseteq G$,
-so every interior facet contains~$e$.  An edge of a $3$-polytope
-is contained in exactly two facets, giving exactly two interior
-facets; the four boundary facet-planes, at distance $h_{T}/4 > 0$
-from $q_{T}$, confirm that neither facet containing $e$ is
-boundary.  Hence $f = 6$; by congruence every piece has $f = 6$.
-
-Each interior facet is shared with a unique neighbour, so the
-adjacency graph is $2$-regular on $5$ vertices, hence the
-$5$-cycle $C_{5}$.  The facet $G$ shared between $P^{*}$ and a
-neighbour $P'$ satisfies $q_{T} \in e \subset G$, so
-$q_{T} \in P'$.  Iterating around $C_{5}$ shows
-$q_{T} \in P_{k}$ for all $k$.
-
-Applying the $I = 0$ argument to each piece, all
-$10 = 5 \times 2$ interior facets lie in planes through $q_{T}$.
-The spherical link at $q_{T}$ is a tiling of $S^{2}$ by five
-congruent digons (each piece contributes two interior-facet arcs).
-A digon is bounded by two great-circle arcs sharing the same pair
-of antipodal vertices; each spherical digon is therefore determined
-by a unique such pair.  Adjacent digons sharing an edge share that
-pair, and since the edge-adjacency graph of the tiling is
-connected, all five digons share the same antipodal pair;
-hence the tiling is a hosohedron.  Equivalently, all interior-facet
-planes contain a single line $L$ through $q_{T}$.
-
-Let $E = L \cap T$ and let $H$ be the plane through the midpoint
-$m$ of $E$ perpendicular to $L$.  Set $K = T \cap H$ (a convex
-polygon with at most four sides).
-Since $L$ is contained in every interior-facet plane, the segment
-$E$ lies in every piece and is the intersection of the two
-interior facets of each~$P_{k}$.
-We claim that any isometry $\phi_{k} \colon P^{*} \to P_{k}$
-maps boundary facets to boundary facets (and hence interior facets
-to interior facets).  The four boundary facets of $P^{*}$ lie on
-the four face-planes of $T$, whose six pairwise dihedral angles
-all equal $\arccos(1/3)$.  An isometry preserves dihedral angles,
-so the images form four facets of $P_{k}$ whose supporting planes
-also have all pairwise angles $\arccos(1/3)$.  Among the six
-facet-planes of $P_{k}$, the two interior planes meet at
-$360^{\circ}/5 = 72^{\circ} \ne \arccos(1/3)$, so both interior
-planes cannot appear in such a quadruple.  If exactly one interior
-plane were included, it would make angle $\arccos(1/3)$ with the
-remaining three face-planes of $T$; but the four face-normals of a
-regular tetrahedron satisfy $n_{i} \cdot n_{j} = -\tfrac{1}{3}$
-for $i \ne j$, so a unit vector $u$ with
-$|u \cdot n_{i}| = \tfrac{1}{3}$ for $i = 1, 2, 3$ satisfies
-$u = \pm n_{4}$, forcing the
-interior plane to coincide with a face-plane of $T$---impossible
-since interior-facet planes pass through $q_{T} \in \mathrm{int}(T)$.
-Thus $\phi_{k}$ maps boundary facets to boundary facets.
-
-Consequently $\phi_{k}$ sends the two interior facets of $P^{*}$
-to those of $P_{k}$ and their common edge $E$ to the
-corresponding edge of $P_{k}$, which is again~$E$.
-In particular $\phi_{k}$ fixes the midpoint $m$ and preserves
-$H$, so the five cross-sections $S_{k} = P_{k} \cap H$ are
-congruent convex regions, each a sector with apex $m$ and angular
-width $72^{\circ}$.
-
-By congruence the five radial edges from $m$ to the division
-points $d_{1}, \ldots, d_{5} \in \partial K$ all have a common
-length $r$, so the $d_{k}$ lie on a circle $C$ of radius $r$
-centred at $m$.  The points $d_{1}, \ldots, d_{5}$ split
-$\partial K$ into five arcs with pairwise disjoint interiors.
-Each vertex of $K$ lies in the interior of at most one arc, and
-$K$ has at most four vertices, so at least one arc contains no
-vertex of $K$; that arc is a single straight segment.  Since all
-five outer arcs are congruent (as images of one another under
-the~$\phi_{k}$), every arc is a straight segment lying on one
-edge of $K$.  With five straight arcs and at most four edges, two
-consecutive arcs share the same edge, placing three of the
-$d_{k}$ on one line.  But a line meets a circle in at most two
-points.  Contradiction.
-\end{proof}
-
-\begin{lemma}[Degenerate vertex case]\label{lem:deg-vertex}
-$\sigma$ cannot be a vertex of $P^{*}$.
-\end{lemma}
-
-\begin{proof}
-If $q_{T}$ is a vertex of $P^{*}$, at least three facets meet
-there.  Since the four boundary facet-planes are at distance
-$h_{T}/4 > 0$, all facets at $q_{T}$ are interior.
-Each interior facet is shared with exactly one of the other four
-pieces, and two convex pieces in a face-to-face dissection share
-at most one facet (their intersection is convex, hence a single
-face), so $P^{*}$ has at most four interior facets.  Combined
-with at least three and the parity constraint $f - 4$ even,
-exactly four interior facets remain, giving $f = 8$.
-By congruence every piece has $f = 8$.
-
-Each piece has four interior facets, giving a $4$-regular adjacency
-graph on five vertices, i.e.\ $K_{5}$.  Every pair shares an
-interior facet through $q_{T}$, so all five pieces meet at $q_{T}$.
-Reapplying the $I = 0$ argument to each piece, every interior
-facet of every piece passes through $q_{T}$.
-
-Intersect with a small sphere $S_{\varepsilon}$ centred at $q_{T}$.
-The five links $\Lambda_{k} = P_{k} \cap S_{\varepsilon}$ are
-congruent spherical quadrilaterals ($4$ edges each) tiling $S^{2}$
-edge-to-edge.  By Euler's formula $F_{s} = 5$,
-$E_{s} = \tfrac{1}{2} \cdot 4 \cdot 5 = 10$,
-$V_{s} = 2 + E_{s} - F_{s} = 7$.  In a face-to-face dissection
-every interior edge of the cell complex is shared by at least three
-cells (distinct neighbours in $K_{5}$), so every vertex of this
-spherical tiling has degree $\ge 3$, giving $2 E_{s} \ge 3 V_{s}$.
-But $20 < 21$.  Contradiction.
-\end{proof}
-
-\Cref{lem:deg-face,lem:deg-edge,lem:deg-vertex} exhaust every
-degenerate position of $q_{T}$ on $\partial P^{*}$.  Together with
-the non-degenerate case, the $(5, 5, 5, 5)$ residual is UNSAT.
-
-\subsubsection*{Step 3: the \texorpdfstring{$t \in \{2, 3\}$}{t in {2,3}}
-residuals}
-
-Rescale areas to integer units, $A_{T} = 60$, $E = 48$ (natural units of
-$\sqrt 3/30$).  By piece congruence every piece carries the \emph{same}
-canonical footprint multiset
-$(m_{1}, \ldots, m_{t})$ with $\sum m_{i} = E = 48$; for each $T$-face $j$
-with $k_{j} > 0$ there must exist a $k_{j}$-multisubset of the multiset
-summing to $A_{T} = 60$.
-
-\paragraph{$t = 2$ residuals.}
-Both $(4, 2, 2, 2)$ and $(3, 3, 2, 2)$ contain a face with $k_{j} = 2$;
-the pair-sum requirement $m_{a} + m_{b} = 60$ combined with
-$m_{1} + m_{2} = 48$ forces $(m_{1}, m_{2}) = (18, 30)$ uniquely (taking
-$2 \cdot 30 = 60$).  Then:
-\begin{itemize}
-  \item for $(4, 2, 2, 2)$ the $k_{0} = 4$ face needs a $4$-multisubset of
-        $\{18, 30\}$ summing to $60$, but the achievable sums are
-        $\{72, 84, 96, 108, 120\}$, missing $60$;
-  \item for $(3, 3, 2, 2)$ the $k_{0} = 3$ face needs a $3$-multisubset
-        summing to $60$, but the achievable sums are
-        $\{54, 66, 78, 90\}$, missing $60$.
-\end{itemize}
-Both residuals are UNSAT at the canonical-multiset level.
-
-\paragraph{$t = 3$ residuals.}
-Exhaustive enumeration over ordered triples
-$(m_{1}, m_{2}, m_{3})$ with $\sum m_{i} = 48$ and $m_{i} \geq 1$, combined
-with the per-$T$-face contribution-sum test and a brute-force search for
-per-piece assignments, gives:
-\begin{center}\small
-\begin{tabular}{@{}cccc@{}}
-\toprule
-Residual & Multisets passing contribution test & Consistent assignments & Status \\
-\midrule
-$(5, 5, 3, 2)$ & $0$                         & --   & UNSAT at canonical-multiset level \\
-$(5, 4, 4, 2)$ & $1$ (namely $(6, 12, 30)$)  & $24$ & combinatorially SAT \\
-$(5, 4, 3, 3)$ & $5$                         & $20$ & combinatorially SAT \\
-$(4, 4, 4, 3)$ & $8$                         & $54$ & combinatorially SAT \\
-\bottomrule
-\end{tabular}
-\end{center}
-Only $(5, 5, 3, 2)$ closes at the canonical-multiset level.  Pooling the
-contribution-sum-feasible area multisets of the other three residuals yields
-the finite set
-\begin{equation}\label{eq:t3-five-multisets}
-\mathcal{M} \;=\; \bigl\{\,(6, 12, 30),\ (6, 15, 27),\ (6, 18, 24),\ (12, 12, 24),\ (12, 16, 20)\,\bigr\}
-\end{equation}
-of five integer triples of distinct $T$-face footprints (units of
-$\sqrt 3/30$).  We close each of them by a topological reduction.
-
-\begin{lemma}[Topological parity for $t = 3$ pieces]\label{lem:t3-parity}
-Let $P_{1}, \ldots, P_{5}$ be a face-to-face congruent dissection of $T$
-with $t(P) = 3$ for every piece.  Then each piece has
-$f(P) \in \{5, 7\}$ facets.
-\end{lemma}
-
-\begin{proof}
-Let $f = f(P)$.  We first count boundary facets.  A convex polytope has
-\emph{at most} one facet per supporting hyperplane (two coplanar facets
-would either coincide, contradicting the definition of a facet, or leave a
-lower-dimensional gap between them, contradicting convexity).  Hence
-$P$ has at most one facet on each of the $t = 3$ touched $T$-faces.  On
-the other hand, $t(P) = 3$ means $P$ has positive $2$-area on three
-$T$-faces, so it contributes at least one facet to each of them.  Thus
-$P$ has exactly $3$ boundary facets and $f - 3$ interior facets.
-
-Next we count interior incidences.  Two distinct convex pieces $P_{i},
-P_{j}$ can share at most one facet: in a face-to-face dissection any two
-pieces have convex intersection equal to a (possibly empty) face of each,
-and a single convex face cannot equal two different facets of either
-piece.  Consequently each interior facet of $P_{i}$ is shared with a
-\emph{unique} other piece, and is counted twice in the total piece--facet
-incidence count on interior facets.  The total is $5(f - 3)$, hence
-even.  Since $5$ is odd, $f - 3$ is even, i.e.\ $f$ is odd.
-
-Finally, convexity forces $f \geq 4$, and the one-facet-per-neighbour
-bound from the previous paragraph gives $f - 3 \leq n - 1 = 4$, so
-$f \in \{5, 7\}$.
-\end{proof}
-
-\begin{remark}[Tetrahedral sanity check]\label{rem:t3-tetrahedral-product}
-The excluded $f = 4$ case can be ruled out a second time by elementary
-arithmetic, which we record as an independent consistency check.  A
-tetrahedral piece $P$ with $t = 3$ must have all three boundary facets
-meeting at a single vertex $v_{P}$ of $T$ (the three $T$-face planes
-meet only at the four vertices of $T$); the three edges of $P$ issuing
-from $v_{P}$ therefore lie along the three edges of $T$ at $v_{P}$, with
-pairwise angles $60^{\circ}$.  Writing $a, b, c$ for the three edge
-lengths, the boundary triangles at $v_{P}$ have areas
-\[
-m_{1} = \tfrac{bc\sqrt{3}}{4},\quad
-m_{2} = \tfrac{ac\sqrt{3}}{4},\quad
-m_{3} = \tfrac{ab\sqrt{3}}{4},
-\]
-and the volume of the resulting tetrahedron evaluates (Gram determinant)
-to $V(P) = abc/(6\sqrt{2})$.  Eliminating $a, b, c$ yields
-\begin{equation}\label{eq:t3-tetprod}
-m_{1}\, m_{2}\, m_{3}
-  \;=\; \frac{3\sqrt{3}}{64}\,(abc)^{2}
-  \;=\; \frac{27\sqrt{3}}{8}\,V(P)^{2}
-  \;=\; \frac{27\sqrt{3}}{8}\cdot\frac{V_{T}^{2}}{25}
-  \;=\; \frac{A_{T}^{3}}{25}
-  \;=\; 8640
-\end{equation}
-in the integer units of \eqref{eq:t3-five-multisets} (with $A_{T} = 60$,
-using $V_{T} = (1/3)A_{T} h_{T}$ and $h_{T}^{2} = 2 A_{T}/3$).  On the
-other hand, by AM--GM any triple $(m_{1}, m_{2}, m_{3})$ with
-$m_{1} + m_{2} + m_{3} = 48$ satisfies
-$m_{1} m_{2} m_{3} \leq (48/3)^{3} = 4096 < 8640$.  The tetrahedral
-case is therefore arithmetically infeasible, confirming the topological
-exclusion of \Cref{lem:t3-parity}.
+has vertices $ae_i,b_ie_i$ and the triangular-prism face lattice; its two
+triangular facets are nonparallel when the $b_i$ are not all equal.
+Likewise, a setwise facet correspondence does
+not by itself imply pointwise fixing or an orientation-reversing reflection.
+The old $H$-cocycle closure is therefore not imported into the present theorem.
 \end{remark}
 
-\begin{lemma}[Weak Congruence Transport]\label{lem:ctl}
-Let $P_{1} = \gamma_{1}(P), \ldots, P_{5} = \gamma_{5}(P)$ be congruent
-copies of a reference polytope $P$ under rigid motions
-$\gamma_{i} \in \mathrm{Isom}(\R^{3})$, and suppose pieces $P_{i}$ and
-$P_{j}$ share a facet $S_{ij}$ which is the image
-$\gamma_{i}(F_{a})$ of abstract facet $F_{a}$ of $P$ and also the image
-$\gamma_{j}(F_{b})$ of abstract facet $F_{b}$ of $P$.  Then the composition
-$\tau_{ij} \coloneqq \gamma_{j}^{-1}\gamma_{i} \in \mathrm{Isom}(\R^{3})$
-restricts to an isometry $\tau_{ij}|_{F_{a}} \colon F_{a} \to F_{b}$ of
-polygons.  In particular $F_{a}$ and $F_{b}$ share
-\begin{enumerate}[label=(\roman*)]
-  \item combinatorial type: same vertex count, same edge count;
-  \item metric invariants: same multiset of edge lengths, same multiset
-        of interior angles, and the same $2$-area.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-$\gamma_{i}(F_{a}) = S_{ij} = \gamma_{j}(F_{b})$ yields
-$\tau_{ij}(F_{a}) = \gamma_{j}^{-1}(S_{ij}) = F_{b}$.  Restricted to
-$F_{a}$, the rigid motion $\tau_{ij}$ of $\R^{3}$ is an isometry of
-polygons $F_{a} \to F_{b}$; combinatorial data and metric invariants of
-$F_{a}$ are thereby transferred to $F_{b}$.
-\end{proof}
-
-\begin{remark}[The strong claim $\tau_{ij} \in \operatorname{Sym}(P)$
-does not hold in general]\label{rem:ctl-strong-fails}
-It is \emph{incorrect} to conclude that $\tau_{ij}$ belongs to
-$\operatorname{Sym}(P)$: while $\tau_{ij}(F_{a}) = F_{b}$ as polygons,
-one has $\tau_{ij}(P) = \gamma_{j}^{-1}(P_{i})$, i.e.\ the image of $P$
-lies on the side of $F_{b}$ opposite $P$, so $\tau_{ij}(P) = P$ would
-force $P$ to be reflection-symmetric across the plane of $F_{b}$, a
-rare accident.  (Equivalently, $\tau_{ij} \in \operatorname{Sym}(P)$
-would require $P_{i} = P_{j}$ as subsets of $\R^{3}$, impossible for
-distinct pieces.)  The correct statement is \Cref{lem:ctl} above, which
-we refer to as the \emph{weak} Congruence Transport Lemma; it already
-suffices to close the $f = 5$ case.  The $f = 7$ argument below uses the
-following orbit-level corollary.
-\end{remark}
-
-\begin{lemma}[Orbit transport]\label{lem:orbit-transport}
-Keep the hypotheses of \Cref{lem:ctl} and assume moreover the following
-\emph{orbit-detection} property of the reference tile $P$:
-\begin{itemize}
-  \item[\textup{(H\protect\nobreakdash-orb)}] Any two facets of $P$ with
-        equal edge-length and interior-angle multisets
-        lie in a common $\operatorname{Sym}(P)$-orbit.
-\end{itemize}
-Then $F_{a}$ and $F_{b}$ lie in a common $\operatorname{Sym}(P)$-orbit
-on the facet set of $P$, and there exists $g_{ij} \in \operatorname{Sym}(P)$
-with $g_{ij}(F_{a}) = F_{b}$.
-\end{lemma}
-
-\begin{proof}
-By \Cref{lem:ctl}, $F_{a}$ and $F_{b}$ have equal edge-length and
-interior-angle multisets; \textup{(H-orb)} gives the orbit claim, and
-the transitive action on the orbit supplies $g_{ij}$.
-\end{proof}
-
-\begin{remark}[Metric orbit-transport status]\label{rem:h-orb-auto}
-The weak Congruence Transport Lemma gives metric equality of paired facets.
-The parity certificate \texttt{horb\_parity\_certificate.py} kills every
-odd-multiplicity interior-facet pattern, including singleton patterns.  The
-only surviving metric patterns are the even ones, $(4)$ and $(2,2)$.  When
-these are genuine $\Sym(P)$-orbits, the orientation certificate and
-\Cref{lem:k5-cyc} close the branch.  What remains is precisely the accidental
-case with $\Sym(P)=1$, where equal facet metrics do not come from a symmetry
-of $P$; this is the open residual recorded in
-\texttt{horb\_residual\_scope.py}.
-\end{remark}
-
-\begin{lemma}[$K_{5}$ triangle cycle-consistency]\label{lem:k5-cyc}
-Let $P_{1} = \gamma_{1}(P), \ldots, P_{5} = \gamma_{5}(P)$ be a
-face-to-face congruent dissection with $f(P) = 7$, and assume the
-reference tile $P$ has
-$\operatorname{Sym}(P) = \langle\sigma\rangle \cong C_{2}$
-whose induced action on the four interior facets of $P$ has orbit
-structure $(2, 2)$.  Assume also hypotheses \textup{(H-orb)} of
-\Cref{lem:orbit-transport} and the following triangle cocycle:
-\begin{itemize}
-  \item[\textup{(H\protect\nobreakdash-coc)}] For every triple
-        $\{i, j, k\} \subset \{1, \ldots, 5\}$, the chosen orbit-transport
-        elements $g_{ij}, g_{jk}, g_{ki} \in \operatorname{Sym}(P)$ from
-        \Cref{lem:orbit-transport} satisfy
-        $g_{ij} \cdot g_{jk} \cdot g_{ki} = \mathrm{id}$
-        in $\operatorname{Sym}(P)$.
-\end{itemize}
-Then no such dissection exists.
-\end{lemma}
-
-\begin{remark}[Audit note on the orientation certificate]\label{rem:hcoc-from-htrip}
-Earlier drafts motivated the triangle cocycle through a developing-map route.
-That route is not a dependency of \Cref{thm:n5}: the orientation-bit
-certificate \texttt{hcoc\_orientation\_certificate.py} proves the needed
-$K_{5}$ sign obstruction directly.  The synthesis result file
-\path{phase26e_synthesis_theorem_26_1_results.json} records the closed modules
-and the remaining accidental-even metric residual.
-\end{remark}
-
-\begin{proof}[Proof of \Cref{lem:k5-cyc}]
-By \Cref{lem:orbit-transport} applied edgewise (using \textup{(H-orb)}),
-each shared interior facet $S_{ij}$ determines an element
-$g_{ij} \in \operatorname{Sym}(P)$; by the $C_{2}$ assumption we have
-$g_{ij} \in \{\mathrm{id}, \sigma\}$, encoded by a bit
-$b_{ij} \coloneqq \mathrm{bit}(g_{ij}) \in \{0, 1\}$.
-
-\emph{Step 1: $K_{5}$ decomposes into two edge-disjoint $5$-cycles.}
-Let $A$ be the set of $K_{5}$-edges whose shared facet lies in the
-first $\operatorname{Sym}(P)$-orbit (size $2$) of interior facets of
-$P$, and $B$ the set of edges in the second.  Each piece $P_{i}$ has
-$4$ interior facets, two per orbit; therefore $i$ has $A$-degree $2$
-and $B$-degree $2$.  Hence $A$ and $B$ are two $2$-regular graphs on
-$5$ vertices, edge-disjoint, with $|A| = |B| = 5$.  The unique
-$2$-regular simple graph on $5$ vertices is the $5$-cycle $C_{5}$
-(any $2$-regular graph is a disjoint union of cycles, and $5$ is
-prime so it must be a single cycle), so $A = B = C_{5}$ as graphs
-and $A \sqcup B = K_{5}$.
-
-\emph{Step 2: bit parametrisation.}  At each piece $P_{i}$ the
-two $A$-slots carry the two $A$-orbit elements $\{F_{A}, \sigma F_{A}\}$
-of $P$ \emph{exactly once each} (distinct facets carry distinct abstract
-labels).  Orient the $A$-cycle by a fixed cyclic order on
-$\{1, \ldots, 5\}$ and, at each $i$, call ``forward $A$-slot'' the
-slot pointing along this orientation and ``backward $A$-slot'' the
-remaining $A$-slot; let $x_{i} \in \{0, 1\}$ record whether the forward
-slot at $i$ carries $F_{A}$ ($x_{i} = 0$) or $\sigma F_{A}$ ($x_{i} = 1$).
-Since each $P_{i}$ uses each $A$-orbit element exactly once, the
-backward $A$-slot at $i$ then necessarily carries the \emph{complementary}
-element $\sigma^{1 + x_{i}} F_{A}$.  On the directed $A$-edge
-$i \to j$ the shared interior facet $S_{ij}$ is the forward $A$-slot of
-$i$ and the backward $A$-slot of $j$, yielding
-\begin{itemize}
-  \item forward label at $i$: $\sigma^{x_{i}} F_{A}$;
-  \item backward label at $j$ (same physical facet $S_{ij}$, viewed from
-        $j$): $\sigma^{1 + x_{j}} F_{A}$, by the complementarity
-        observation above applied at $j$.
-\end{itemize}
-The orbit-transport equation
-$g_{ij}(\sigma^{x_{i}} F_{A}) = \sigma^{1 + x_{j}} F_{A}$ in
-$\operatorname{Sym}(P) = C_{2}$ gives
-\[
-  g_{ij} = \sigma^{1 + x_{i} + x_{j}},
-  \qquad\text{i.e.}\qquad
-  b_{ij} \equiv 1 + x_{i} + x_{j} \pmod 2
-  \quad\text{on $A$-edges},
-\]
-and analogously $b_{ij} \equiv 1 + y_{i} + y_{j} \pmod 2$ on $B$-edges
-using $y_{i}$ for the forward $B$-slot.  (The ``$+1$'' records that the
-forward slot at $i$ and the backward slot at $j$ necessarily use
-\emph{different} orbit elements, since each piece uses each orbit
-element exactly once per orbit.)
-
-\emph{Step 3: triangle reduction.}  Recall from Step~1 that $A$ and
-$B$ are each isomorphic to $C_{5}$ (the $5$-cycle on $5$ vertices).
-A $5$-cycle is \emph{triangle-free} (its girth equals $5$): no three
-vertices of $C_{5}$ form a triangle in $A$ alone, and likewise in
-$B$ alone.  Hence every triangle of $K_{5} = A \sqcup B$ has at
-least one $A$-edge and at least one $B$-edge; the two admissible
-$A/B$-splits are therefore $(|A|, |B|) = (1, 2)$ or $(2, 1)$.  In
-either case exactly two of its three vertices are incident to
-\emph{both} an $A$-edge and a $B$-edge within the triangle -- call
-them the \emph{mixed} vertices $\{i', j'\}$.  Summing
-$b_{ij} + b_{jk} + b_{ki} \pmod 2$ collapses the three ``$+1$'' terms
-to $1$ and the six ``$x_{r}$ and $y_{r}$'' terms telescope, each vertex
-$r \in \{i, j, k\}$ contributing $x_{r} + y_{r} = z_{r}$ iff $r$ is
-mixed and $0$ otherwise.  Thus
-\[
-  b_{ij} + b_{jk} + b_{ki}
-  \;\equiv\; 1 + z_{i'} + z_{j'} \pmod{2},\quad
-  z_{r} \coloneqq x_{r} + y_{r} \pmod 2.
-\]
-
-\emph{Step 4: cocycle $\Rightarrow$ pigeon-hole.}  The triangle cocycle condition
-forces the left-hand side to vanish for every triangle, i.e.\
-$z_{i'} + z_{j'} \equiv 1 \pmod{2}$ for every mixed pair.  An
-elementary check (carried out in
-\texttt{phase26c\_t3\_f7\_exclusion.py}) shows that as $\{i, j, k\}$
-ranges over the ten triangles of $K_{5}$, the mixed-pair
-$\{i', j'\}$ ranges over every unordered pair of
-$\{1, \ldots, 5\}$; consequently $z_{r} \neq z_{s}$ for every
-$r \neq s$, forcing the five bits $z_{r}$ to be pairwise distinct --
-impossible in the two-element set $\{0, 1\}$.  This contradicts the
-existence of the dissection.
-
-Finally, a brute-force enumeration over all $2^{10} = 1024$
-parametric assignments $((x_i)_{i=1}^{5}, (y_i)_{i=1}^{5})$
-(see \path{phase26c_t3_f7_exclusion.py}) confirms that no
-$(x, y)$ produces a bit vector $b$ satisfying all ten triangle
-cocycle equations.
-\end{proof}
-
-\paragraph{Closing the $f = 5$ sub-case.}
-A convex $3$-polytope with $f = 5$ is either a quadrilateral pyramid
-(four triangles + one quadrilateral) or a triangular prism (two
-triangles + three quadrilaterals).  A convex polygonal facet of a
-convex $3$-polytope contained in $T$ that lies on $\partial T$
-necessarily lies on a \emph{single} $T$-face plane (by convex support
-of $T$).  Each $t = 3$ piece must place \emph{three} of its five
-facets on $\partial T$ distributed over three distinct $T$-face planes
-(three by the hypothesis $t = 3$; distinct because each of the three
-touched $T$-faces receives positive $2$-area from the piece), giving
-the five combinatorial sub-cases enumerated below.  Three of the five
-are excluded unconditionally by elementary metric arguments.  Earlier
-versions isolated the remaining two sub-cases~-- \textsf{Qb-adj} and
-\textsf{Qb-opp}~-- as the quadrilateral-pyramid bridge.
-The current public certificate stack discharges that bridge, as recorded
-below and in \texttt{hqb\_\*\_certificate.py}.
-
-\begin{itemize}
-  \item \emph{Pyramid with three lateral triangles on $\partial T$;
-        prism with one triangle and two quadrilaterals on $\partial T$
-        \textup{(unconditional closure)}.}
-        In both configurations the two interior facets have
-        \emph{mismatched} edge-counts: one of them is a triangle and
-        the other is a quadrilateral.  By the weak \Cref{lem:ctl}, at
-        each shared interior facet the two incident pieces carry
-        congruent abstract polygons, hence in particular equal
-        edge-count.  Thus the five triangle-slot interior facets (one
-        per piece) pair among the five pieces into a perfect matching
-        on the $5$ vertex-labels $\{1, \ldots, 5\}$, as do the five
-        quadrilateral-slot interior facets; a perfect matching on an
-        odd number of vertices is impossible, so these two sub-cases
-        are excluded.
-  \item \emph{Pyramid with its quadrilateral base on $\partial T$
-        \textup{(case \textsf{Qb}; closed by certificates)}.}
-        Label the pyramid as $(b_{1}, b_{2}, b_{3}, b_{4}; \mathsf{a})$
-        with $b_{1}, \ldots, b_{4}$ the four base vertices cyclically
-        around the quadrilateral on a $T$-face plane $T_{\alpha}$ and
-        $\mathsf{a}$ the apex.  The two remaining lateral triangles may be
-        adjacent (\textsf{Qb-adj}) or opposite (\textsf{Qb-opp}).  Earlier
-        versions treated their exclusion as a separate auxiliary hypothesis.
-        The present public stack discharges this branch by
-        the exact certificates
-        \texttt{hqb\_reduction\_certificate.py},
-        \texttt{hqb\_perface\_tiling\_certificate.py},
-        \texttt{hqb\_asymmetric\_caseI\_certificate.py},
-        \texttt{hqb\_asymmetric\_caseII\_certificate.py}, and
-        \texttt{hqb\_opp\_certificate.py}.  Thus no $f=5$ sub-case remains
-        open.
-  \item \emph{Prism with its two triangular faces on $\partial T$
-        \textup{(unconditional closure)}.}
-        The two triangular faces of a prism are parallel.  If both
-        sit on $T$-faces, those two $T$-face planes must be parallel;
-        but the four $T$-face planes are pairwise incident with
-        dihedral $\arccos(1/3) \neq \pi$, so no two are parallel.
-        Sub-case excluded.
-  \item \emph{Prism with its three quadrilateral faces on $\partial T$
-        \textup{(unconditional closure)}.}
-        The three lateral edges of a prism are pairwise parallel; if
-        each lateral quadrilateral sits on a distinct $T$-face, each
-        lateral edge lies in the intersection of two $T$-face planes,
-        i.e.\ on a $T$-edge.  The three $T$-edges containing lateral
-        edges are pairwise incident (they meet at a common $T$-vertex,
-        being the three edges issuing from the $T$-vertex opposite the
-        fourth unused $T$-face); in particular no two of the three
-        chosen $T$-edges are parallel, contradicting the prism's
-        parallel-lateral-edges property.
-\end{itemize}
-
-\begin{remark}[Quadrilateral-pyramid certificate status]\label{rem:hqb-status}
-The \textsf{Qb-adj} and \textsf{Qb-opp} families are non-empty at the
-single-piece level, so the earlier single-piece degeneracy argument is not
-used.  Their exclusion is supplied by the multi-script quadrilateral-pyramid
-certificate stack listed in \Cref{thm:n5}.  The local decomposition remains
-visible in \texttt{phase26c\_t3\_f5\_exclusion.py} for auditability.
-\end{remark}
-
-The five-sub-case closure is certified uniformly in $\mathcal{M}$ by
-\path{phase26c_t3_f5_exclusion.py} ($21$/$21$ passing tests).
-
-\paragraph{Closing the $f = 7$ sub-case.}
-If $f(P)=7$, each piece has four interior facets and the interior adjacency
-graph is $K_{5}$.  The active ledger splits the branch as follows:
-\begin{itemize}
-  \item odd or singleton interior-facet multiplicity patterns are impossible
-        by the parity certificate;
-  \item genuine $(2,2)$ orbit transport is closed by the orientation
-        certificate together with \Cref{lem:k5-cyc};
-  \item the remaining case is accidental even metric congruence with
-        $\Sym(P)=1$, in pattern $(4)$ or $(2,2)$.
-\end{itemize}
-The audit script \path{phase26c_t3_f7_exclusion.py} keeps the older
-branch accounting separate from the active theorem statement.  The active
-public synthesis is \path{phase26e_synthesis_theorem_26_1.py}
-($46$/$46$ passing tests), supported by
-\path{horb_parity_certificate.py}, \path{horb_residual_scope.py}, and
-\path{horb_residual_combinatorial.py}.
-
-\paragraph{Synthesis of the $t = 3$ step.}
-The four $t=3$ residuals now split as follows.  The residual $(5,5,3,2)$ is
-UNSAT at the canonical-multiset level.  In the other three $t=3$ residuals,
-the $f=5$ branch is closed by the quadrilateral-pyramid certificates, and the
-$f=7$ branch is closed except for the accidental-even metric residual with
-$\Sym(P)=1$.
-
-\subsubsection*{Conclusion of Step 3 and proof of \cref{thm:n5}}
-
-Steps~1, 2 and 3 eliminate the $t=1$ case, both $t=2$ residuals, the
-canonical $t=3$ residual $(5,5,3,2)$, the $t=4$ residual, all $f=5$ branches,
-and every non-accidental $f=7$ branch.  Therefore any putative face-to-face
-congruent dissection of $T$ into $5$ convex pieces must lie in the single
-accidental-even metric residual stated in \Cref{thm:n5}.  This proves the
-reduction theorem; no unconditional $n=5$ impossibility is asserted here.\qed
-
-\begin{remark}[Convexity hypothesis for $n = 5$]
-Convexity is essential to the canonical-multiset argument: a non-convex
-piece could touch a single $T$-face with multiple disjoint footprints,
-breaking the structural claim ``footprint-multiset = $t$ nonzero values''
-which underlies Step~3 above.
-\end{remark}
-
-\begin{remark}[Comparison with $n = 16$]
-The $n=5$ reduction is structurally smaller than the C24-chain at $n=16$.
-At $n=5$ the per-$T$-face filter kills $t=1$ outright, the $t=2$ and one
-$t=3$ residual close by integer footprint arithmetic, and the $t=4$ residual
-closes by the full-incidence volume argument.  The only surviving difficulty
-is not combinatorial but metric: accidental even congruence among the four
-interior facets of an $f=7$ piece with trivial symmetry.  This identifies a
-much narrower target than the earlier auxiliary-hypothesis stack.
+\begin{remark}[Current $n=5$ boundary]
+The active result is exactly \Cref{thm:n5}, the conditional BRH obstruction,
+together with the finite area and local-chart observations above.  The
+unrestricted convex face-to-face five-piece question remains open.  The
+historical phase-26 scripts and result files are retained for auditability but
+are no longer an active proof chain.  The reproducer runs the BRH arithmetic
+checks, the area enumeration, the local algebraic identity, and the auxiliary
+atlas checks described in the repository README.  The BRH proof is a written
+geometric argument, not an inference from passing test counts.
 \end{remark}
 
 \subsection{Summary of the programme}\label{ssec:prog-summary}
@@ -2596,11 +2023,10 @@ by
         (\cref{thm:n16-aof-coxeter,thm:n16-aof-conditional}), \textsf{L3} in the
         Coxeter-pure case and \textsf{L2} (conditional on
         $(\Hroles)+(\Hslot)$) in the general convex case;
-  \item and the $n = 5$ convex reduction to one accidental-even metric
-        residual (\cref{thm:n5}), the first non-divisor of $24$ reduced in the
-        convex category to a single named open branch.  The remaining task is
-        the metric accidental-even branch with $f(P)=7$, $t=3$, and
-        $\Sym(P)=1$.
+  \item and the conditional $n = 5$ BRH obstruction
+        (\cref{thm:n5}).  The unrestricted case with different boundary roles
+        remains open; exact area enumeration and the local NN identity provide
+        diagnostics but do not close that gap.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2646,7 +2072,9 @@ We include below a minimal self-contained reference implementation for the
 Dehn-invariant verification at $n = 24$ (orthoscheme).  The public replay suite
 for \cref{thm:n5}, together with the auxiliary atlas checks, is available in
 \path{scripts/} and \path{results/} of the companion repository identified in
-\Cref{sec:intro}.  As stated there, the two general-convex hypotheses of
+\Cref{sec:intro}.  The active $n=5$ script certifies only the finite arithmetic
+checks used by the BRH proof; historical phase-26 reduction scripts are not
+part of that active chain.  As stated there, the two general-convex hypotheses of
 \cref{thm:n16-aof-conditional} are not computationally discharged by this
 public package.
 

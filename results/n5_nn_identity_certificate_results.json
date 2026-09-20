@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "identity_zero": true,
+  "identity_remainder": "0",
+  "scope": "class-6 NN 012/021 coordinate chart only",
+  "not_claimed": [
+    "global n=5 closure",
+    "all class-6 branches",
+    "mixed boundary roles"
+  ]
+}

@@ -1,60 +1,56 @@
-# n = 5 Residual Status
+# n = 5 status
 
-## Active Public Claim
+## Active public result
 
-The public certificate stack reduces any putative face-to-face congruent dissection of the regular tetrahedron into 5 convex pieces to one open metric residual:
+The previous public claim that every arbitrary five-piece congruent dissection
+reduces to one accidental-even metric residual is withdrawn.  Its first step
+quietly required the same exposed facet roles in every congruent copy, and its
+triangular-prism and setwise-facet shortcuts did not establish the needed
+metric statements.
 
-- `f(P) = 7`
-- `t = 3`
-- `Sym(P) = 1`
-- the four interior facets of `P` are accidentally congruent in an even metric pattern `(4)` or `(2,2)`
+The active theorem is instead conditional:
 
-This is not a full unconditional n = 5 impossibility theorem. The current theorem-level statement is exactly the reduction to this residual.
+> If a reference polytope has a fixed facet subset `B` whose images are exactly
+the boundary facets of every one of the five copies (BRH), then no such
+partition exists.
 
-## Closed Branches
+The proof uses:
 
-Closed unconditionally or by exact public certificates:
+- boundary area to exclude `t=0,1,2` exposed facets;
+- transport of three tetrahedral face normals and zero translation for `t=3,4`;
+- a generic 24-point orbit of the centered tetrahedral symmetry group, giving
+  `24 = 5m`, a contradiction.
 
-- `t = 1`: eliminated by the per-face area filter.
-- `t = 2`: both residuals closed by canonical-multiset arithmetic.
-- `t = 3`, residual `(5,5,3,2)`: closed by canonical-multiset arithmetic.
-- `t = 3`, `f = 5`: closed by the quadrilateral-pyramid certificate stack.
-- `t = 3`, `f = 7`, odd/singleton metric branches: closed by parity.
-- `t = 3`, `f = 7`, genuine `(2,2)` orbit-transport branch: closed by the orientation certificate.
-- `t = 4`: full-incidence residual closed unconditionally.
+No face-to-face hypothesis is needed for this conditional obstruction, although
+face-to-face remains part of the ambient programme elsewhere.
 
-Still open:
+## Corrected finite bookkeeping
 
-- `t = 3`, `f = 7`, `Sym(P) = 1`, accidental even interior-facet congruence pattern `(4)` or `(2,2)`.
+Under the weaker common-role area model (`A=60`, `E=48`), exact rational
+enumeration gives six distinct positive multisets:
 
-## Certificate Audit Map
+- `t=2`: none for `(4,2,2,2)` and `(3,3,2,2)`;
+- `t=3`, `(5,5,3,2)`: none;
+- `t=3`, `(5,4,4,2)`: `(6,12,30)`;
+- `t=3`, `(5,4,3,3)`: `(6,15,27)`, `(6,18,24)`,
+  `(48/5,84/5,108/5)`, `(12,12,24)`;
+- `t=3`, `(4,4,4,3)`: `(6,18,24)`, `(12,12,24)`, `(12,16,20)`.
 
-The old H-labels are retained only as script/result audit labels. They are not the headline theorem statement.
+The rational list is valid at the incidence level.  The aligned matrix in the
+paper is a bookkeeping witness, not a geometric tiling.
 
-| Audit label | Current status | Script(s) | Result JSON |
-|---|---|---|---|
-| H-trip | Retired; not a dependency of the public theorem | `phase26e_synthesis_theorem_26_1.py` | `results/phase26e_synthesis_theorem_26_1_results.json` |
-| H-coc | Closed by the orientation-bit certificate | `hcoc_orientation_certificate.py` | `results/hcoc_orientation_certificate_results.json` |
-| H-Qb | Closed by the quadrilateral-pyramid certificate stack | `hqb_reduction_certificate.py`, `hqb_perface_tiling_certificate.py`, `hqb_asymmetric_caseI_certificate.py`, `hqb_asymmetric_caseII_certificate.py`, `hqb_opp_certificate.py` | `results/hqb_*_results.json` |
-| H-orb singleton/odd patterns | Closed by parity; no blanket orbit-detection assumption is used there | `horb_parity_certificate.py` | `results/horb_parity_certificate_results.json` |
-| Metric residual scope (H-orb audit) | Narrowed to accidental even metric congruence | `horb_residual_scope.py`, `horb_residual_combinatorial.py` | `results/horb_residual_scope_results.json`, `results/horb_residual_combinatorial_results.json` |
+## Local result
 
-## Reproduction
+The class-6 NN 012/021 chart satisfies an exact polynomial identity forcing
+`A_floor/A_total=3/4` for positive-area solutions.  Since the common-role list
+has maximum ratio `30/48=5/8`, that chart is locally excluded.  The chart does
+not cover all class-6 branches or mixed boundary roles.
 
-Run:
+## Open frontier
 
-```bash
-python scripts/run_all.py
-```
-
-Expected current synthesis outcome:
-
-```text
-N=5 REDUCED TO SINGLE ACCIDENTAL-EVEN METRIC RESIDUAL
-```
-
-The synthesis result is written to:
-
-```text
-results/phase26e_synthesis_theorem_26_1_results.json
-```
+The unrestricted convex five-piece problem, including the face-to-face case,
+remains open.  The
+next structural task is to classify variable boundary-role subsets `B_i` and
+show either that a class of mixed roles is impossible or that some class
+forces BRH.  The historical phase-26 scripts and JSON files are retained as
+an audit trail but are not active evidence for this frontier.
