@@ -6,7 +6,7 @@ as of 2026-09-20.  Levels are `theorem-in-paper`, `certified-finite`,
 
 | ID | Level | Statement (scoped) | Source locator | Evidence in repo |
 | --- | --- | --- | --- | --- |
-| C1 | theorem-in-paper + certified-finite | Exact atlas of the eight known congruent dissections of the regular tetrahedron, with canonical reconstruction, symbolic Dehn checks, and refinement relations. | Abstract; `thm:univ-tet` | `scripts/dissections.py`, `scripts/dehn_verify_n24.py` |
+| C1 | theorem-in-paper + certified-finite | Exact atlas of the eight known congruent dissections, with canonical reconstruction, Dehn values from additivity and congruence, and refinement relations. No classification of every individual dihedral angle is asserted. | Abstract; `thm:univ-tet`; `thm:dehn-values` | `scripts/dissections.py`; `scripts/dehn_verify_n24.py` checks the n=24 geometric skeleton, not an all-angle census |
 | C2 | theorem-in-paper | Every atlas dissection is `G_diss`-transitive; the Lagrange and full-`Td` statements have the scope stated in the paper. | Abstract; `cor:forward`, `lem:geom-vs-alg-stab` | Paper proof and atlas scripts |
 | C3 | theorem-in-paper | The S6 -> S12 refinement is disproved, with the stated component structure. | `thm:s6-s12-fail`, `thm:s2-bridge`, `prop:components` | Paper proof and certificates |
 | C4 | theorem-in-paper | Burnside-ring, 24-cell, and IFS models give the stated divisor/screening results within their declared scopes. | Abstract; `prop:slab`, `cor:cube-fail` | Paper proof and model scripts |

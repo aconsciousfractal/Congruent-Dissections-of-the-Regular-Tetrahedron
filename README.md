@@ -102,8 +102,9 @@ PYTHONUTF8=1 python -m pytest scripts/tests -q
 
 ## Main paper results
 
-- **Dehn-invariant certificate** (Section 4, `thm:dehn-values`) for the eight
-  historical pieces.
+- **Dehn-invariant values** (Section 4, `thm:dehn-values`) for the eight
+  historical pieces, derived from additivity and congruence. No classification
+  of all individual dihedral angles is claimed.
 - **Transitivity certificate** (Section 7, `thm:transitivity`) for the atlas
   family, with its stated scope.
 - **S6 -> S12 disproof** and the refinement relations in the atlas.

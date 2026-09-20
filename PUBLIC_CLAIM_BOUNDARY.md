@@ -6,7 +6,8 @@ This boundary applies to the revised manuscript and companion repository as of
 ## Can Say
 
 - The eight historical congruent dissections are reconstructed with the
-  stated exact atlas and Dehn/refinement checks.
+  stated exact atlas and refinement checks. Their Dehn values follow from
+  additivity and congruence.
 - The Lagrange, Burnside, 24-cell, and S6 -> S12 statements hold within the
   scopes written in the paper.
 - The n=16 all-one-face result is conditional on its two hypotheses and
@@ -25,6 +26,9 @@ This boundary applies to the revised manuscript and companion repository as of
 - That an area-incidence matrix is a geometric dissection.
 - That the NN identity covers all class-6 branches or mixed boundary roles.
 - That any replay is an independent specialist review or formal verification.
+- That every individual dihedral angle is alpha, beta, or a rational multiple
+  of pi. That stronger classification is withdrawn; the total Dehn values
+  do not require it.
 - That n | 24 holds for all congruent dissections; use the scope in C2.
 
 ## Scope Notes
